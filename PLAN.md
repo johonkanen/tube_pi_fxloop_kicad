@@ -12,28 +12,51 @@ STATUS.md for how each step was done.
 
 **Order:** Run after the power amp pilot has finished Phase 1 (or at least Phase 0), and read its STATUS.md findings first: same 2010 / Proteus 7 export, same kinds of fly-lead pads.
 
-## 1. Inventory (pre-check 2026-11-20; Phase 0 confirms and corrects it)
+## 1. Inventory (measured in Phase 0, 2026-11-20)
 
 | Item | Value |
 |---|---|
 | Proteus project | `source/poweri.pdsprj` (values, devices, packages, pin names via `p2k.pdsprj`) |
-| Schematic PDF | `source/schematic_pdf/pi_fx_loop.PDF`, 4 pages |
-| CADCAM export | `source/cadcam/` (Gerber X2, metric, with the IPC-D-356A netlist) |
+| Schematic PDF | `source/schematic_pdf/pi_fx_loop.PDF`, 4 pages, **no title blocks** (sheet names from the content, `p2k_config.py` SHEETS) |
+| CADCAM export | `source/cadcam/` (Gerber X2, metric `FSLAX45Y45`, one `SameCoordinates` id, no arcs), with the IPC-D-356A netlist |
 | IPC netlist (the reference) | `source/cadcam/pi_fx_loop - CADCAM Netlist.IPC` |
-| Copper layers | 2 (Top, Bottom) |
-| Outline | 225.43 x 71.76 mm (Mechanical 1) |
-| Parts (IPC refdes) | 124 |
-| Nets (IPC) | 67 |
+| Copper layers | 2 (Top, Bottom); **no pours** (no `G36` regions, no `%LPC%`) |
+| Drill | only `Drill TOP-BOT Plated` (261 plated hits), no NonPlated file; the 2010 Excellon `source/fab_2010/poweri - CADCAM Drill.TXT` (inch, 261 hits, same frame) for the Phase 4 `DRILL_EXCELLON` cross-check |
+| Outline | 225.425 x 71.755 mm at (-123.825, -78.105) (Mechanical 1) |
+| IPC records | 261, all THT: 247 component pads + 4 vias + 10 holes; 0 SMD |
+| IPC refdes fields | 124 (+ the blank one of vias / holes) → **126 parts** (`RETURN` is three terminals) |
+| Parts | 87 components (R 42, C 16, D 12, Q 11, U4/U5, SW4-SW6, relay SERIES/MIX) + 39 single-pad terminals |
+| Nets (IPC) | 66; no `=POWER` nets; 5 N/C pads (U4-9, U5-9, SERIES/MIX 6-8) |
+| Vias | 4 (0.508 mm drill, 1.27 mm pad; nets #00057, PWR-GND x2, SWLOOP) |
+| Mounting holes | 10 (3.0 mm plated, 6.35 mm pad on both layers; positions in README.md "Mechanical baseline") |
 | Technology | through-hole only |
-| Mounting holes | 10 (3.0 mm plated; positions in README.md "Mechanical baseline") |
+
+Pre-check corrections: 66 nets (not 67); 14 blank-refdes records = **4 vias + 10 holes** (not
+14 vias); 126 parts = 87 components + 39 terminals (the PDF shows all 126; the pre-check's
+"89 parts / 37 fly-lead pads" counted `RETURN` once and `SERIES` as a pad: `SERIES` is the
+8-pin relay `SERIES/MIX`).
 
 ## 2. Board-specific notes and expected pitfalls
 
 - Built about 2010; the export in `source/cadcam/` matches the June 2010 fab Gerbers exactly. The schematic `poweri.DSN` was saved in October 2010, after the layout. The PDF is named `pi_fx_loop.PDF`, the project `poweri.pdsprj`, the CADCAM export `pi_fx_loop`.
-- 2 noval sockets (U4, U5, 9 pins): PI and FX loop (12AX7 / 12AT7).
-- The IPC has 124 refdes; the PDF shows 89 board parts. The rest are 37 single-pad fly-lead pads: FX sends/returns (`SEND`, `SEND1`-`SEND3`, `SEND1W`-`SEND3W`, `RETURN`, `FX`, `FX'`), series/mix (`SERIES`, `SW1`-`SW3` pads), master (`MV0`, `MVW`, `MVX`), feedback `FB`, EQ (`EQOUT`, `EQGND`), power (`PIPOWE`, `PIRETU`, `PREPOW`, `PRERET`, `PGND`, `CHASSI`), heaters (`+6`, `-6`, `PRE-H4`, `PRE-H5`), outputs to the power amp (`V6+V7`, `V8+V9`), `VREF`, `SIGNAL`, `SUKKA`, `A`, `C'`, `D'`. Names are truncated (`PIPOWE`, `PIRETU`, `CHASSI`) or contain `+`, `'`: truncated-refdes table and KiCad refdes map.
-- Known from the 2010 review: `J112` and `J04` in the PDF are net labels, not parts.
-- 14 IPC records without refdes (vias).
+- 2 noval sockets (U4 12AT7 FX loop driver, U5 12AX7 phase inverter, 9 pins; pin 9 N/C on both).
+- Pages (no title blocks): 1 FX loop driver (U4, SERIES/MIX relay), 2 PI supply and FX
+  switching (Q4 IRF820, 2N3906 drivers), 3 Phase inverter (U5), 4 FX send and return (J112
+  JFET switches, SW4-SW6).
+- The 39 terminals (single pad, Proteus TERMINAL): `+6`, `-6`, `A`, `C'`, `D'`, `CHASSIS`,
+  `EQGND`, `EQOUT`, `FB`, `FX`, `FX'`, `MV0`, `MVW`, `MVX`, `PGND`, `PIPOWER`, `PIRETURN`,
+  `PREPOWER`, `PRERETURN`, `PRE-H4`, `PRE-H5`, `RETURN1`-`RETURN3`, `SEND`, `SEND1`-`SEND3`,
+  `SEND1W`-`SEND3W`, `SIGNALGND`, `SUKKA`, `SW1`-`SW3`, `V6+V7`, `V8+V9`, `VREF`.
+  Truncated in the IPC: `PIPOWE`, `PIRETU`, `PREPOW`, `PRERET`, `CHASSI`, `SIGNAL`, `SERIES`
+  (relay `SERIES/MIX`), `RETURN` (3 parts, keyed by coordinate). KiCad refdes map for `+`, `-`,
+  `'`, `/` names (`p2k_config.py`).
+- `J112` in the PDF is the device of the JFETs Q1-Q3, Q5-Q7 and `J04` belongs to the capacitor
+  value `MMK J04 5MM` (C4, C6, C7, C32): neither is a part (the 2010 review's "net labels" is
+  inaccurate, same conclusion: not parts).
+- `A`, `C'`, `D'` are both terminals (page 2, at R28 / R27 / R29) and net labels (pages 2, 4);
+  the terminals are **not** on the nets `A`, `C'`, `D'` (terminal refdes are not net names).
+- The PDF writes the nets `send` and `nolla` in lower case; IPC: `SEND`, `NOLLA` (Proteus
+  net names ignore case: use the IPC spelling).
 
 ## 3. Phases
 
