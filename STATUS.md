@@ -6,7 +6,7 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 |---|---|
 | 0 Skeleton and inventory | **done** 2026-11-20 (Opus 5.5) |
 | 1 Schematic | **done** 2026-11-20 (preparation Opus 5.5, transcription Fable 5.2) |
-| 2 Footprints | **done** 2026-11-20 (Opus 5.5); pad sizes / drills vs Proteus open for the user (not blocking Phase 3) |
+| 2 Footprints | **done** 2026-11-20 (Opus 5.5); drills decided by the user 2026-11-20 (KiCad drills kept, `DRILL_SMALLER`) |
 | 3 PCB | not started; next (next_prompt.md) |
 | 4 Verification | not started |
 | 5 Clean-up | not started |
@@ -386,7 +386,7 @@ New in this repo (all generated, in check_all.sh); the pilot's Phase 2 pieces
 mm; every part on the top side (60 at 0°, 37 at 270°, 21 at 90°, 8 at 180°); `reports/footprint_fit.csv`
 (placement for Phase 3) and `reports/footprint_pads.csv` written.
 
-### Pad size / drill differences vs Proteus (open: user decision, Phase 3 / 4)
+### Pad size / drill differences vs Proteus (drills decided by the user 2026-11-20: KiCad drills kept, `DRILL_SMALLER`)
 
 With `FOOTPRINT_PAD_SIZES = "kicad"` the KiCad library pads and drills replace the Proteus ones on the
 footprints taken or derived from KiCad (the IPC-built ones keep the Proteus pads). **Not decided here**;
@@ -603,7 +603,8 @@ ALL CHECKS PASSED
    here, but not confirmed for U4 / U5. A PCB socket mounted tube-up on the top side would
    put tube pin k on Proteus pad 10 − k (gap aligned): heater 4 / 5 on pads 6 / 5, anode 1 on the N/C pad 9,
    i.e. wrong. **Confirm the mounting on the real amplifier** before the redesign reuses the footprint.
-   Copper reproduced as is.
+   Copper reproduced as is. **User 2026-11-20: U4 / U5 are on the bottom (solder) side** (Decisions);
+   the footprints move to B with the standard noval numbering in Phase 5.
 17. **The "9-PIN BELTON NOVAL" pattern has a 21.0 mm pitch circle** (4.318 mm pads, 1.727 mm drill, no
    centre hole), not the 11.9 mm-class circle of a PCB noval socket, and each socket has three plated
    3.0 mm holes around it at about 17-18 mm from its centre (U4: H at (60, -14), (29, -18.5), (51, -41);
@@ -612,7 +613,7 @@ ALL CHECKS PASSED
    holes (Phase 3). Relevant for the redesign.
 18. **Drill sizes of the 2010 library are larger than the KiCad library's for the relay and small film
    caps** (SERIES_MIX 1.143 vs KiCad 0.7 mm, C2 1.143 vs 1.0, MMK caps 0.762 vs 0.75): the 2010 board was
-   drilled with the larger holes. Recorded as the open pad / drill decision (Phase 2 table).
+   drilled with the larger holes. **User 2026-11-20: the KiCad drills stay** (`DRILL_SMALLER`, Decisions).
 
 ## p2k candidates
 
@@ -720,11 +721,14 @@ ALL CHECKS PASSED
   built from the IPC pads (Proteus pads) with the Proteus silk / assembly outline as body; 47N XICON and
   MMK J04 from unchanged KiCad boxes that match the Proteus silk; the relay footprint renumbered by
   physical position (Finding 15), the symbol unchanged; `tools/erc.sh` fails on footprint link issues.
-- **Open for the user (not blocking Phase 3): pad sizes and drills that differ from Proteus** (Phase 2
-  table "Pad size / drill differences"): keep the KiCad pads / drills (default now) or take the Proteus
-  ones per footprint. Drills smaller than Proteus on SERIES_MIX (0.7 vs 1.143, all 8 pads), C2 (1.0 vs
-  1.143), C4 / C6 / C7 / C32 (0.75 vs 0.762); larger pads on the 2 W resistors (2.4 vs 2.286). Phase 3 DRC
-  shows whether a pad matters; Phase 4 needs either `DRILL_SMALLER` entries or Proteus drills.
-- Open question for the user (hardware, no effect on the copper): are U4 / U5 on the solder side like the
-  power amp's octal sockets (Findings 16, 17)? If yes, Phase 5 can move them to B with the standard
-  noval numbering, as planned for the power amp.
+- **User decisions 2026-11-20** (given through the coordinating session):
+  1. **The noval sockets U4 / U5 are mounted on the bottom (solder) side** (Findings 16, 17). As on the
+     power amp, moving the socket footprints to B with the standard noval numbering is **Phase 5** work
+     (not done in Phase 3; the copper is identical either way).
+  2. **Drills: the KiCad drills stay everywhere** (and the KiCad pads with them): relay SERIES_MIX 0.70
+     vs Proteus 1.143 mm (all 8 pads, KiCad 1.4 mm pads kept), C2 1.0 vs 1.143, C4 / C6 / C7 / C32 0.75
+     vs 0.762. Recorded as `DRILL_SMALLER` in `p2k_config.py` (reason "user decision 2026-11-20") so
+     that Phase 4's `ipc356_diff` / `gerber_roundtrip` accept exactly these pairs.
+  3. **Pad sizes**: `FOOTPRINT_PAD_SIZES = "kicad"` stays; only if the Phase 3 DRC forces a change, stop
+     and ask (unchanged rule).
+- Open for the user: nothing blocking.

@@ -22,7 +22,7 @@ board is in `p2k_config.py`.
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
 Phase 0 (skeleton and inventory) done: `p2k_config.py` complete, `reference/` cheat sheets
-written from the IPC netlist, `tools/check_all.sh` passes. Phase 1 (schematic, 4 sheets, 126 parts) is done and matches the IPC netlist. Phase 2 (footprints) is done: every part fits the IPC pads (`lib/tube_pi_fxloop.pretty`, `lib/footprint_map.csv`); pad sizes / drills that differ from Proteus are an open user decision (STATUS.md). Next: Phase 3 (PCB).
+written from the IPC netlist, `tools/check_all.sh` passes. Phase 1 (schematic, 4 sheets, 126 parts) is done and matches the IPC netlist. Phase 2 (footprints) is done: every part fits the IPC pads (`lib/tube_pi_fxloop.pretty`, `lib/footprint_map.csv`). User decisions 2026-11-20: the KiCad drills stay where they are smaller than Proteus (`DRILL_SMALLER`), and the noval sockets U4 / U5 are on the bottom side (moved to B in Phase 5). Next: Phase 3 (PCB).
 
 Built in about 2010. The export in `source/cadcam/` matches the June 2010 fab Gerbers (`source/fab_2010/`) exactly: every hole and track. The schematic (`poweri.DSN`) was saved in October 2010, after the layout; all 126 board parts (87 components, 39 terminals) are in the PDF.
 

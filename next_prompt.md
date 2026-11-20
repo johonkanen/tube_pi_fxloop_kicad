@@ -9,7 +9,7 @@ footprints (126/126 parts fit the IPC pads, worst 0.001 mm, reports/footprint_fi
 checked (tools/check_pin_order.py).
 
 Read, in this order: PLAN.md, STATUS.md (Phase 2: footprint table, "Pad size / drill differences vs
-Proteus" (open user decision), pin order; Findings 15-18; p2k candidates), tools/p2k/CONVERSION_PLAYBOOK.md
+Proteus", pin order; Decisions; Findings 15-18; p2k candidates), tools/p2k/CONVERSION_PLAYBOOK.md
 (section 3 "Phase 3" and section 5), tools/p2k/README.md (build_pcb, gerber_to_tracks, assign_nets,
 check_board, drc, PCB_RULES, DRC_ACCEPTED). Run tools/check_all.sh first and compare with STATUS.md
 "Last check output".
@@ -30,10 +30,10 @@ Do:
 2. check_board, assign_nets --check (0 shorts / 0 orphans / 0 opens), p2k drc (0 shorts, 0 unconnected,
    0 parity); remaining DRC types in DRC_ACCEPTED with reasons (expect courtyard overlaps: the 21 mm
    noval courtyards, 100N rows 6.35 mm apart).
-3. Pad sizes: FOOTPRINT_PAD_SIZES = "kicad" stays unless DRC forces a change; report the smallest gaps
-   with the KiCad pads (the 2 W resistors have pads 2.4 vs Proteus 2.286). The drill differences (relay
-   0.7 vs 1.143, C2 1.0 vs 1.143, MMK caps 0.75 vs 0.762) are the user's decision for Phase 4: do not
-   decide them, keep them listed.
+3. Pad sizes: FOOTPRINT_PAD_SIZES = "kicad" stays unless DRC forces a change (then stop and ask); report
+   the smallest gaps with the KiCad pads (the 2 W resistors have pads 2.4 vs Proteus 2.286). Drills are
+   decided (user 2026-11-20): the KiCad drills stay (DRILL_SMALLER in p2k_config.py). U4 / U5 are on the
+   bottom side (user 2026-11-20): moving them to B is Phase 5, not now.
 4. Negative tests (track moved, pad net edited, footprint moved, a via removed) and record them.
 
 Rules (PLAN.md section 5): don't change tools/p2k or its pin (board-local workarounds, noted in STATUS.md

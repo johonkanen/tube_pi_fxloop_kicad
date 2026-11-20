@@ -134,3 +134,15 @@ OFF_BOARD_PARTS = {}
 # The 10 IPC 'hole' records: plated 3.0 mm holes with a 6.35 mm pad on both layers, no net.
 HOLE_FOOTPRINT = "tube_pi_fxloop:MountingHole_3.0mm_PTH_Pad6.35mm"
 HOLE_VALUE = "MountingHole_3.0mm"
+
+# --- Phase 4 checks (p2k.gerber_roundtrip, p2k.ipc356_diff) ---------------------------
+
+# KiCad footprint drills smaller than the Proteus drill, accepted by the user (2026-11-20,
+# STATUS.md "Decisions"): the KiCad drills and pads stay. 18 holes (reports/footprint_pads.csv).
+DRILL_SMALLER = {
+    (1.143, 0.7): "SERIES_MIX (all 8 pads): KiCad G5V-2 land pattern, 0.70 mm drill / 1.4 mm pad kept "
+                  "(Proteus 1.143 = 45 mil); user decision 2026-11-20",
+    (1.143, 1.0): "C2: KiCad C_Rect 1.0 mm drill kept (Proteus 1.143 = 45 mil); user decision 2026-11-20",
+    (0.762, 0.75): "C4 C6 C7 C32: KiCad C_Rect_L7.2mm_W5.0mm_P5.00mm 0.75 mm drill kept (Proteus 0.762 = "
+                   "30 mil); user decision 2026-11-20",
+}
