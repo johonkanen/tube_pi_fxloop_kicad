@@ -88,14 +88,42 @@ def place_mirrored(sh, name, ref, x, y, axis="x", **kw):
 
 
 # --- noval dual triodes (U4, U5) ----------------------------------------------------------------
-def noval(sh, ref, a, b, heater):
+def noval(sh, ref, a, b, heater, mirror_b=False):
     """Place the three units of a 12AX7 symbol: unit 1 = triode 2 (pins 6 A2, 7 G2, 8 K2) at `a`,
     unit 2 = triode 1 (pins 1 A1, 2 G1, 3 K1) at `b`, unit 3 = heater (4 H1, 5 H2, 9 HCT) at `heater`
-    (points (x, y) in mm), with a no-connect flag on pin 9 (N/C in Proteus). Returns the three
-    placed units (u1, u2, u3); wire the pins with u.pin(n)."""
+    (points (x, y) in mm), with a no-connect flag on pin 9 (N/C in Proteus). mirror_b draws unit 2
+    mirrored about the Y axis (grid and cathode on the right, as the Proteus symbol's right triode).
+    Returns the three placed units (u1, u2, u3); wire the pins with u.pin(n)."""
     val = sh_value(ref)
     u1 = sh.place(sym(ref), ref, *a, unit=1, value=val)
-    u2 = sh.place(sym(ref), ref, *b, unit=2, value=val)
+    if mirror_b:
+        bx, by = b
+        u2 = place_mirrored(sh, sym(ref), ref, bx, by, axis="y", unit=2, value=val,
+                            ref_at=(round(bx + 3.81, 4), round(by - 7.62, 4), 0, "right"),
+                            value_at=(round(bx + 3.81, 4), round(by - 5.715, 4), 0, "right"))
+    else:
+        u2 = sh.place(sym(ref), ref, *b, unit=2, value=val)
     u3 = sh.place(sym(ref), ref, *heater, unit=3, value=val)
     sh.no_connect(*u3.pin("9"))
     return u1, u2, u3
+
+
+# --- two-pin parts from the part map, junctions ---------------------------------------------------
+def pv(sh, ref, x, y, top, **kw):
+    """Vertical two-pin part `ref` (symbol and value from the part map) centred on PDF position
+    (x, y), pin `top` at the top. Returns (top_point, bottom_point)."""
+    _, t, b = vert2(sh, sym(ref), ref, *P(x, y), sh_value(ref), top=top, **kw)
+    return t, b
+
+
+def ph(sh, ref, x, y, left, **kw):
+    """Horizontal two-pin part `ref` centred on PDF position (x, y), pin `left` on the left.
+    Returns (left_point, right_point)."""
+    kw.setdefault("text", "above")
+    _, l, r = horiz2(sh, sym(ref), ref, *P(x, y), sh_value(ref), left=left, **kw)
+    return l, r
+
+
+def junctions(sh, *pts):
+    for p in pts:
+        sh.junction(*p)
