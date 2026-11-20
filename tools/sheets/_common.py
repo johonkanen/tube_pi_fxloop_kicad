@@ -191,3 +191,31 @@ def return_block(sh, x, y, ret, r_ret, sw, r_nolla, xbus):
     sh.wire(s.pin(2), (s.pin(2)[0], P(0, y - 12)[1]), P(x + 10, y - 12), P(x + 10, y))
     sh.wire(s.pin(1), (s.pin(1)[0], P(0, y - 12)[1]), P(xbus, y - 12))
     junctions(sh, P(x + 10, y), P(x + 26, y))
+
+
+def diode_input(sh, y, d, t, xbus):
+    """Sheet 2: one input of the diode OR onto the bus column xbus (cathode on the bus, terminal on
+    the anode)."""
+    k, a = ph(sh, d, xbus + 5, y, left="K")
+    sh.wire(P(xbus, y), k)
+    term(sh, t, *P(xbus + 18, y), "right")
+    sh.wire(a, P(xbus + 18, y))
+
+
+def place_rot90_mirrored(sh, name, ref, x, y, **kw):
+    """sh.place() at rotation 90 with a (mirror y) entry, as KiCad writes a symbol that is rotated and
+    then flipped left-right: the returned pin points are those of rotation 90 mirrored about the
+    vertical line through the symbol origin. (place_mirrored() covers rotation 0 only.)"""
+    from p2k.sexpr import Sym
+    p = sh.place(name, ref, x, y, 90, **kw)
+    for node in sh.tree:
+        if (isinstance(node, list) and node and str(node[0]) == "symbol"
+                and any(c[1:3] == ["Reference", ref] for c in node if isinstance(c, list) and str(c[0]) == "property")):
+            node.insert(next(i for i, c in enumerate(node) if isinstance(c, list) and str(c[0]) == "at") + 1,
+                        [Sym("mirror"), Sym("y")])
+            break
+    else:
+        raise KeyError(ref)
+    for num, (px, py) in list(p.pins.items()):
+        p.pins[num] = (round(2 * x - px, 4), py)
+    return p

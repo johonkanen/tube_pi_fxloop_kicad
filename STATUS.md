@@ -5,8 +5,8 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | Phase | State |
 |---|---|
 | 0 Skeleton and inventory | **done** 2026-11-20 (Opus 5.5) |
-| 1 Schematic | preparation **done** 2026-11-20 (Opus 5.5); next: transcription (next_prompt.md) |
-| 2 Footprints | not started |
+| 1 Schematic | **done** 2026-11-20 (preparation Opus 5.5, transcription Fable 5.2) |
+| 2 Footprints | not started; next (next_prompt.md) |
 | 3 PCB | not started |
 | 4 Verification | not started |
 | 5 Clean-up | not started |
@@ -265,9 +265,72 @@ New in this repo (all generated, `--check` in check_all.sh); copied from the pow
   return (32: J112 channels, SW4-SW6, A / C' / D') → 2 PI supply and FX switching (46, the
   largest; closes F, G, H, SWLOOP, A, C', D').
 
+## Phase 1 transcription – done (Fable 5.2, 2026-11-20)
+
+One script per sheet (`tools/sheets/sheet03.py`, `sheet01.py`, `sheet04.py`, `sheet02.py`, drawn in
+that order), each rebuilding its `kicad/NN_*.kicad_sch` from scratch; two runs are byte-identical
+(`tools/check_sheets.sh`, now a step of check_all.sh). Renders in `reports/render/NN_*.png`, compared
+with the PDF pages by eye.
+
+| Sheet | Parts | compare (`--sheet N`, when drawn) | ERC (when drawn) |
+|---|---|---|---|
+| 3 Phase inverter | 24/24 | 0 missing, 45 pins, 0 wrong-net | 0 errors, 0 warnings |
+| 1 FX loop driver | 24/24 | 0 missing, 101 pins (cumulative), 0 wrong-net | 0 errors, 1 warning (global label `G` on one pin until sheet 2) |
+| 4 FX send and return | 32/32 | 0 missing, 163 pins (cumulative), 0 wrong-net | 3 `pin_not_driven` errors on the J112 gates (Q1, Q3, Q6) + the `G` warning: **interim only**, the gate nets A / C' / D' had no driver until sheet 2 was drawn |
+| 2 PI supply and FX switching | 46/46 | 0 missing, 0 wrong-net | 0 errors, 0 warnings |
+| **Total** | **126/126** | 247 pins compared, 0 wrong-net; nets 71 touched / 71 complete (66 IPC nets + the 5 N/C pads) | **0 errors, 0 warnings** |
+
+`tools/check_all.sh` now runs the comparison **without** `--allow-missing` (through
+`tools/compare.py`, p2k candidate 9), plus the sheet reproducibility check and a grep that no symbol
+pin has the type `no_connect`.
+
+**N/C pins and pin types (coordinator's reminder).** KiCad 10 keeps a pin of type `no_connect` in a
+net of its own even when a wire is drawn on it, so compare_netlists could not see a wired N/C pad.
+**No symbol in `lib/tube_pi_fxloop.kicad_sym` uses the `no_connect` pin type**: 39 pins are
+`passive`, 3 are `input` (2N3906 base, J112 gate, IRF820 gate); check_all.sh greps for it. All five
+N/C pads (U4-9, U5-9, SERIES_MIX 6, 7, 8) are `passive` pins with a no-connect **flag**
+(1 flag on sheet 3, 4 on sheet 1). Negative test 2 below shows a wire on such a pin is caught.
+
+Negative tests (each on the finished schematic; restored afterwards → all checks pass):
+
+1. Global label `A` on the terminal `A` (sheet 2) → compare exit 1: "KiCad net A merges IPC nets
+   [A: C4-2 D12-K Q3-3 Q5-3 Q90-3 R270-1] [#00033: A-1 R28-2]", 2 wrong-net pins.
+2. SERIES_MIX pin 6 wired to PWRH4 (flag removed) → compare exit 1: "N/C mismatch: SERIES_MIX-6 is
+   N/C in IPC but on KiCad net PWRH4".
+3. No flag on SERIES_MIX pin 6 → ERC 1 error `pin_not_connected` (compare alone still passes: the
+   pin is unconnected either way).
+4. `send` (lower case) global label on sheet 4 → compare exit 1: "IPC net SEND split over KiCad nets
+   [SEND: C30-2 SERIES_MIX-1] [send: SEND-1]".
+
+How the sheets were drawn:
+
+- **Coordinates from the PDF** (`_common.P(x, y)`, render position in 10 px units → A3 sheet on the
+  1.27 mm grid). Sheets 2 and 4 follow the PDF closely; differences (same nets, noted on the sheets):
+  - **Valves (sheets 1, 3):** KiCad's ECC83 is three units. The two triodes stand side by side
+    (anode columns 16 grid units apart instead of 8), unit 2 (pins 1-3) **mirrored** so its grid and
+    cathode are on the right as in the Proteus symbol (`noval(..., mirror_b=True)`); the heater unit
+    is below the tube (U4) or to its right (U5) with the PWRH4 / PWRH5 rows and the heater terminals.
+  - **Relay SERIES_MIX (sheet 1):** one symbol with both poles and the coil, rotated 180° so the
+    common contact (2) faces R26; contacts 1 (SEND) / 3 (PWR-GND) below, coil 4 / 5 with D1 at the
+    right, flags on 6-8. The PDF draws the contacts and the coil as separate graphics.
+  - **Q4 (sheet 2):** rotated 90° and mirrored (gate down, source left on H, drain right on PIPOWER)
+    as in the PDF: `_common.place_rot90_mirrored()`; the pin positions are asserted in the script.
+  - Sheet 2: the rows of the nets A / D' / C' are 6 grid units apart (PDF: D' and C' 2 apart);
+    sheet 4: ground row and the channel-2 gate row a little lower, RETURN blocks 16 units to the right.
+  - The PDF's stray junction dot on the ground row of page 2 (at x = 950 px, nothing attached) is
+    not drawn.
+- New helpers in `tools/sheets/_common.py`: `pv()` / `ph()` (vertical / horizontal two-pin part with
+  symbol and value from the part map; capacitor texts clear of the plates), `junctions()`,
+  `q_right()` (2N3906 / J112 mirrored, base / gate on the right), `send_channel()`,
+  `return_block()` (sheet 4), `diode_input()` (sheet 2), `place_rot90_mirrored()`,
+  `noval(mirror_b=)`.
+- Labels: global `PWR-GND`, `F`, `G`, `H`, `PWRH4`, `PWRH5`, `SEND`, `NOLLA`, `SWLOOP`, `A`, `C'`,
+  `D'`; local `HYPPY2` (twice on sheet 1). No label on the terminals A, C', D' (sheet 2).
+- ERC warnings at the end: none.
+
 ## Last check output
 
-`tools/check_all.sh` (2026-11-20, end of Phase 1 preparation):
+`tools/check_all.sh` (2026-11-20, end of Phase 1):
 
 ```
 == KiCad environment
@@ -304,11 +367,13 @@ symbols: 13 part types, 126 refdes, 0 power symbols
 symbols: OK
 == ERC
 erc: 0 errors, 0 warnings (reports/erc.rpt)
+== Sheet scripts reproduce kicad/*.kicad_sch
+sheets: 4 scripts reproduce kicad/0?_*.kicad_sch
 == Netlist comparison vs IPC
-compare: parts 0/126 present, 126 missing, 0 extra; pins compared 0, wrong-net pins 0; IPC nets touched 0, complete 0
-compare: per sheet (drawn/total) 1:0/24 2:0/46 3:0/24 4:0/32
-WARNING: missing parts (126): (see --verbose or --sheet N)
+compare: parts 126/126 present, 0 missing, 0 extra; pins compared 247, wrong-net pins 0; IPC nets touched 71, complete 71
+compare: per sheet (drawn/total) 1:24/24 2:46/46 3:24/24 4:32/32
 compare: OK
+== No symbol pin of type no_connect
 
 ALL CHECKS PASSED
 ```
@@ -350,6 +415,24 @@ ALL CHECKS PASSED
 10. **Relay G5V-2(HI) and SW-SPDT use Proteus' own pin numbers** (relay 1-8 in package order with
    AC = normally open, not the Omron 1/4/6/8/9/11/13/16; switch NO=1 NC=2 COM=3). Numbering only;
    Phase 2 checks the pad positions.
+
+11. **Phase 1 transcription: every PDF connection agrees with the IPC netlist** (247 pins, 0
+   wrong-net pins, no net alias needed). The PDF values equal the part map. No pin is drawn
+   unconnected except U4-9, U5-9 and relay pole 2 (pins 6-8).
+12. **The FX switch drivers are PNP transistors with the emitter on ground** (sheet 2): Q8, Q10, Q20,
+   Q90 (2N3906) have the emitter on PWR-GND and the collector on the gate nets (pull-ups R100 / R110 /
+   R270 100k to the VREF terminal, 10k base resistors from the terminals A / C' / D'). That only
+   works with **VREF and the control inputs negative** against PWR-GND (VREF = the power amp board's
+   negative reference, which also gives the J112 gates their pinch-off voltage): a control input
+   pulled negative turns its driver on and lifts the gate net to ground (JFET on, send shunted).
+   Q8 (input FX') lifts all three gate nets through D10-D12. Consistent as drawn; reproduced.
+   Worth knowing for the redesign and for simulation (the polarity is not visible from this board
+   alone).
+13. **SW4-SW6 short the 1M series resistor of a return input** (sheet 4): common on the R19/R20 node,
+   NC contact on the RETURN terminal (1M bypassed in the rest position), NO contact on NOLLA (node
+   shorted to NOLLA, i.e. the 100k bypassed and the 1M left in series). Reproduced as drawn.
+14. **A stray junction dot** on page 2's ground row (no wire attached), and the page 1 hand note
+   (Finding 5): drawing leftovers only.
 
 ## p2k candidates
 
@@ -394,6 +477,27 @@ ALL CHECKS PASSED
    `Transistor_FET:IRF740` (same TO-220 G D S) renamed. Not a tool limitation; noted for the
    symbol list of later boards (the preamp has J112s too?).
 
+9. **`compare_netlists` crashes on refdes pairs like `SEND` / `SEND1`** (found when sheet 4 was
+   drawn): `natkey()` returns mixed str / int lists and `pinkey()` appends `"-"` and the pin, so
+   `['SEND', '-', 1]` against `['SEND', 1, '', '-', 1]` compares `'-'` with `1` →
+   `TypeError: '<' not supported between instances of 'int' and 'str'` in `sorted(common, key=pinkey)`.
+   Any board with a number-less refdes that is the prefix of a numbered one hits it. Workaround:
+   `tools/compare.py` replaces `natkey` / `pinkey` with keys of `(kind, int, str)` tuples and calls
+   the tool's `main()` (same arguments and output); check_all.sh uses it. The shared tool would
+   need: the same type-safe key.
+10. **`place_mirrored()` covers rotation 0 only** (and is itself a board-local helper, candidate 7):
+   Q4 needed rotation 90 + mirror → board-local `place_rot90_mirrored()`. The shared
+   `Sheet.place` would need `mirror=` with correct pin points for every rotation, and mirror-aware
+   field placement (multi-pin symbols at rotation 90 / 270 also keep the library field offsets, so
+   SW4-SW6 and the rotated relay needed `ref_at` / `value_at`).
+11. `sch_builder.place` puts the texts of a horizontal two-pin part with `text="above"` 3.81 / 2.03 mm
+   above the centre: fine for resistors, the value overlaps the plates of a horizontal capacitor.
+   Workaround: `_common.ph()` passes `ref_at` / `value_at` for capacitors. Cosmetic.
+12. A sheet drawn before the sheet that drives its nets shows interim ERC errors (`pin_not_driven`
+   on the J112 gates until the drivers of sheet 2 exist). Not a tool problem; noted so the
+   per-sheet target "0 ERC errors" is read as "none that the missing sheets do not explain". An
+   order drivers-first (2 before 4) avoids it.
+
 ## Decisions
 
 - Sheet names (no title blocks in the PDF): FX loop driver / PI supply and FX switching /
@@ -407,3 +511,9 @@ ALL CHECKS PASSED
   units (heater separate, pin 9 flagged; see the valve decision above); valve pins passive;
   J112 / IRF820 from generic / same-pinout KiCad symbols; PWR-GND as a global label (no power
   symbols, IPC has no =POWER net); named nets in IPC spelling (`SEND`, `NOLLA` upper case).
+- Phase 1 transcription (agent's choices, no user decision needed): valve triodes side by side with
+  unit 2 mirrored, heater unit beside / below the tube; relay as one symbol rotated 180°; Q4 rotated
+  and mirrored as the PDF; `SEND` drawn as wires plus a global label where the PDF has one; A3 sheets
+  with the PDF geometry on the 1.27 mm grid; renders committed in `reports/render/`.
+- **Open for the user: nothing blocking.** (Sheet names and the KiCad refdes of the signed names can
+  still be changed in `p2k_config.py` / by re-running the generators.)

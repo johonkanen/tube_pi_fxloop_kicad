@@ -21,8 +21,10 @@ step "Part map up to date" python3 tools/make_part_map.py --check
 step "Symbol library up to date" python3 tools/gen_symbols.py --check
 step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
 step "ERC" tools/erc.sh
-# --allow-missing until all 4 sheets are drawn, then drop it
-step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists --allow-missing
+step "Sheet scripts reproduce kicad/*.kicad_sch" tools/check_sheets.sh
+# tools/compare.py = p2k compare_netlists with a type-safe sort key (STATUS.md p2k candidate 9)
+step "Netlist comparison vs IPC" python3 tools/compare.py
+step "No symbol pin of type no_connect" bash -c '! grep -n "(pin no_connect" lib/tube_pi_fxloop.kicad_sym kicad/*.kicad_sch'
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"
