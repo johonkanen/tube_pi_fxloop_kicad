@@ -25,6 +25,10 @@ step "Sheet scripts reproduce kicad/*.kicad_sch" tools/check_sheets.sh
 # tools/compare.py = p2k compare_netlists with a type-safe sort key (STATUS.md p2k candidate 9)
 step "Netlist comparison vs IPC" python3 tools/compare.py
 step "No symbol pin of type no_connect" bash -c '! grep -n "(pin no_connect" lib/tube_pi_fxloop.kicad_sym kicad/*.kicad_sch'
+# Phase 2: footprints
+step "Footprint library, map and fp-lib-table up to date" python3 tools/gen_footprints.py --check
+step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
+step "Pin order vs unmoved KiCad base footprints" tools/p2k/bin/kipy tools/check_pin_order.py
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

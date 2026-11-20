@@ -1490,7 +1490,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 57.15 52.07 0)
 			(effects
 				(font
@@ -1554,7 +1554,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal"
 			(at 86.36 55.372 0)
 			(effects
 				(font
@@ -1621,7 +1621,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal"
 			(at 106.68 58.928 0)
 			(effects
 				(font
@@ -1730,7 +1730,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:CP_Radial_D16.0mm_P7.50mm_21"
 			(at 75.8952 76.2 0)
 			(effects
 				(font
@@ -1851,7 +1851,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:CP_Radial_D16.0mm_P7.50mm_21"
 			(at 98.7552 76.2 0)
 			(effects
 				(font
@@ -1972,7 +1972,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:CP_Radial_D16.0mm_P7.50mm_21"
 			(at 116.5352 101.6 0)
 			(effects
 				(font
@@ -2072,7 +2072,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 			(at 186.055 54.61 0)
 			(effects
 				(font
@@ -2156,7 +2156,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 212.09 62.23 0)
 			(effects
 				(font
@@ -2230,7 +2230,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal"
 			(at 201.168 71.12 0)
 			(effects
 				(font
@@ -2307,7 +2307,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-41_SOD81_P10.16mm_Horizontal_AK"
 			(at 166.37 71.12 0)
 			(effects
 				(font
@@ -2426,7 +2426,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:C_Rect_L13.0mm_W6.0mm_P9.70mm"
 			(at 183.1848 93.98 0)
 			(effects
 				(font
@@ -2513,7 +2513,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-41_SOD81_P10.16mm_Horizontal_AK"
 			(at 199.39 88.9 0)
 			(effects
 				(font
@@ -2590,7 +2590,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-41_SOD81_P10.16mm_Horizontal_AK"
 			(at 199.39 99.06 0)
 			(effects
 				(font
@@ -2667,7 +2667,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-41_SOD81_P10.16mm_Horizontal_AK"
 			(at 199.39 109.22 0)
 			(effects
 				(font
@@ -2768,7 +2768,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 57.15 113.03 0)
 			(effects
 				(font
@@ -2834,7 +2834,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 227.33 123.19 0)
 			(effects
 				(font
@@ -3048,7 +3048,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W5.0mm_P5.00mm"
 			(at 144.4752 139.7 0)
 			(effects
 				(font
@@ -3135,7 +3135,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W5.0mm_P5.00mm"
 			(at 159.7152 132.08 0)
 			(effects
 				(font
@@ -3242,7 +3242,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W5.0mm_P5.00mm"
 			(at 172.4152 149.86 0)
 			(effects
 				(font
@@ -3387,7 +3387,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 191.77 130.81 0)
 			(effects
 				(font
@@ -3461,7 +3461,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 239.268 144.78 0)
 			(effects
 				(font
@@ -3541,7 +3541,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:TO-92_Inline_P2.03mm"
 			(at 245.11 165.735 0)
 			(effects
 				(font
@@ -3639,7 +3639,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 256.54 160.528 0)
 			(effects
 				(font
@@ -3738,7 +3738,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 273.05 163.83 0)
 			(effects
 				(font
@@ -3812,7 +3812,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 216.408 144.78 0)
 			(effects
 				(font
@@ -3892,7 +3892,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:TO-92_Inline_P2.03mm"
 			(at 222.25 178.435 0)
 			(effects
 				(font
@@ -3990,7 +3990,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 256.54 178.308 0)
 			(effects
 				(font
@@ -4069,7 +4069,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 273.05 181.61 0)
 			(effects
 				(font
@@ -4143,7 +4143,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 203.708 144.78 0)
 			(effects
 				(font
@@ -4223,7 +4223,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:TO-92_Inline_P2.03mm"
 			(at 209.55 198.755 0)
 			(effects
 				(font
@@ -4321,7 +4321,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 223.52 198.628 0)
 			(effects
 				(font
@@ -4400,7 +4400,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 273.05 201.93 0)
 			(effects
 				(font
@@ -4486,7 +4486,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 156.21 175.26 0)
 			(effects
 				(font
@@ -4579,7 +4579,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 171.45 175.26 0)
 			(effects
 				(font
@@ -4666,7 +4666,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 189.23 175.26 0)
 			(effects
 				(font
@@ -4771,7 +4771,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:TO-92_Inline_P2.03mm"
 			(at 173.99 198.755 0)
 			(effects
 				(font
@@ -4871,7 +4871,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 120.65 191.77 0)
 			(effects
 				(font
@@ -4935,7 +4935,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 149.86 195.072 0)
 			(effects
 				(font
@@ -5072,7 +5072,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 76.2 158.75 0)
 			(effects
 				(font
@@ -5151,7 +5151,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 92.71 163.83 0)
 			(effects
 				(font
@@ -5225,7 +5225,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 76.2 173.99 0)
 			(effects
 				(font
@@ -5304,7 +5304,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 92.71 179.07 0)
 			(effects
 				(font
@@ -5378,7 +5378,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 76.2 189.23 0)
 			(effects
 				(font
@@ -5457,7 +5457,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 92.71 194.31 0)
 			(effects
 				(font
@@ -5531,7 +5531,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:D_DO-35_SOD27_P10.16mm_Horizontal_AK"
 			(at 76.2 204.47 0)
 			(effects
 				(font
@@ -5610,7 +5610,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm"
 			(at 92.71 209.55 0)
 			(effects
 				(font

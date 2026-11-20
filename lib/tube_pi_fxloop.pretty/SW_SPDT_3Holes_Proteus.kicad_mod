@@ -1,0 +1,159 @@
+(footprint "SW_SPDT_3Holes_Proteus"
+	(version 20260206)
+	(generator "tube_pi_fxloop_gen_footprints")
+	(layer "F.Cu")
+	(descr "SPDT switch connection, three 3.048 mm pads / drill 1.524 (Proteus SPDT HOLES): 1 NO, 2 NC, 3 COM; body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A SW4)")
+	(property "Reference" "REF**"
+		(at 0 -5.0665 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "SW_SPDT_3Holes_Proteus"
+		(at 0 5.0665 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_poly
+		(pts
+			(xy -4.064 3.7465) (xy 4.064 3.7465) (xy 4.064 -3.7465) (xy -4.064 -3.7465)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -4.064 3.7465)
+		(end -0.806 3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 0.806 3.7465)
+		(end 4.064 3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 4.064 3.7465)
+		(end 4.064 -1.4165)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 4.064 -3.0285)
+		(end 4.064 -3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 4.064 -3.7465)
+		(end 3.346 -3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 1.734 -3.7465)
+		(end -1.734 -3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -3.346 -3.7465)
+		(end -4.064 -3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -4.064 -3.7465)
+		(end -4.064 -3.0285)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -4.064 -1.4165)
+		(end -4.064 3.7465)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_poly
+		(pts
+			(xy -4.3439 -2.1189) (xy -4.314 3.8501) (xy -4.1676 3.9965) (xy -0.1036 4.0264) (xy 0.1036 4.0264) (xy 4.1676 3.9965) (xy 4.314 3.8501) (xy 4.3439 -2.1189) (xy 4.3439 -2.3261) (xy 4.314 -3.8501) (xy 4.1676 -3.9965) (xy 2.6436 -4.0264) (xy -2.6436 -4.0264) (xy -4.1676 -3.9965) (xy -4.314 -3.8501) (xy -4.3439 -2.3261)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -2.54 -2.2225)
+		(size 3.048 3.048)
+		(drill 1.524)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "2" thru_hole circle
+		(at 2.54 -2.2225)
+		(size 3.048 3.048)
+		(drill 1.524)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "3" thru_hole circle
+		(at 0 2.2225)
+		(size 3.048 3.048)
+		(drill 1.524)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+)

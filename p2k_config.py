@@ -118,3 +118,19 @@ DRILL_PLATED = "Drill TOP-BOT Plated"
 DRILL_NONPLATED = None    # no NonPlated drill file: the mounting holes are plated
 OUTLINE = "Mechanical 1"
 OUTLINE_RECT = (-123.825, -78.105, 225.425, 71.755)  # x, y, width, height
+
+# --- Footprints (Phase 2, tools/gen_footprints.py) ------------------------------------
+
+# Pad sizes: "kicad" (KiCad library pad sizes and drills, pad centres on the Proteus positions;
+# the IPC-built footprints - noval socket, SW-SPDT, 100n Xicon, Solen, fly-lead terminal - have
+# the Proteus pads). Changing it, or Proteus pads / drills per footprint, is a user decision
+# (STATUS.md "Phase 2", pad / drill differences; Phase 3 DRC, Phase 4 drill checks).
+FOOTPRINT_PAD_SIZES = "kicad"
+# Every part of lib/part_map.csv has IPC pads: no off-board parts.
+OFF_BOARD_PARTS = {}
+
+# --- PCB (Phase 3, build_pcb) ----------------------------------------------------------
+
+# The 10 IPC 'hole' records: plated 3.0 mm holes with a 6.35 mm pad on both layers, no net.
+HOLE_FOOTPRINT = "tube_pi_fxloop:MountingHole_3.0mm_PTH_Pad6.35mm"
+HOLE_VALUE = "MountingHole_3.0mm"
