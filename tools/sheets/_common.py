@@ -130,3 +130,64 @@ def ph(sh, ref, x, y, left, **kw):
 def junctions(sh, *pts):
     for p in pts:
         sh.junction(*p)
+
+
+# --- transistors with the base / gate on the right (2N3906, J112 as the PDF draws them) ----------
+def q_right(sh, ref, x, y, axis="y"):
+    """Transistor `ref` centred on PDF position (x, y), mirrored about the Y axis (base / gate on the
+    right), texts right of the body above / below the base lead. Returns the placed symbol."""
+    px, py = P(x, y)
+    return place_mirrored(sh, sym(ref), ref, px, py, axis=axis, value=sh_value(ref),
+                          ref_at=(round(px + 1.27, 4), round(py - 3.81, 4), 0, "right"),
+                          value_at=(round(px + 1.27, 4), round(py + 3.81, 4), 0, "right"))
+
+
+# --- sheet 4: JFET send channel, RETURN switch block -------------------------------------------------
+def send_channel(sh, x0, y, rw, rs, qa, qb, gate, wiper, send, xg, yg, yl, gnd):
+    """One FX send channel: wiper terminal - rw - node 1 (drain of qa) - rs - node 2 (drain of qb,
+    send terminal); both J112 sources on the ground row `gnd`, both gates on the global net `gate`
+    (label at (xg, yl), the gate of qa joins the gate column at row yg). x0 = column of node 1,
+    y = resistor row; wiper / send = (refdes, x, y, direction) of the terminals (PDF positions)."""
+    l1, r1 = ph(sh, rw, x0 - 7, y, left=2)
+    l2, r2 = ph(sh, rs, x0 + 7, y, left=2)
+    sh.wire(r1, l2)
+    x1 = x0 + 16
+    wref, wx, wy, wdir = wiper
+    term(sh, wref, *P(wx, wy), wdir)
+    sh.wire(P(wx, wy), P(wx, y), l1)
+    sref, sx, sy, sdir = send
+    term(sh, sref, *P(sx, sy), sdir)
+    sh.wire(r2, P(x1, y)) if (sx, sy) == (x1, y) else sh.wire(r2, P(sx, y), P(sx, sy))
+    a = q_right(sh, qa, x0 + 2, y + 16)
+    b = q_right(sh, qb, x1 + 2, y + 16)
+    sh.wire(P(x0, y), a.pin(1))
+    sh.wire(P(x1, y), b.pin(1))
+    sh.junction(*P(x0, y))
+    if sx != x1 or sdir != "up":
+        sh.junction(*P(x1, y))
+    sh.wire(a.pin(2), P(x0, gnd))
+    sh.wire(b.pin(2), P(x1, gnd))
+    sh.wire(a.pin(3), P(x0 + 12, y + 16), P(x0 + 12, yg), P(xg, yg))
+    sh.wire(b.pin(3), P(xg, y + 16), P(xg, yl))
+    sh.junction(*P(xg, yg))
+    sh.glabel(gate, *P(xg, yl), 270)
+
+
+def return_block(sh, x, y, ret, r_ret, sw, r_nolla, xbus):
+    """One FX return input: terminal `ret` at PDF position (x, y) - r_ret - node (switch common,
+    pin 3) - r_nolla - NOLLA bus column xbus; the switch's NC contact (pin 2) on the terminal, the NO
+    contact (pin 1) on the bus."""
+    term(sh, ret, *P(x, y), "left")
+    l1, r1 = ph(sh, r_ret, x + 17, y, left=2)
+    l2, r2 = ph(sh, r_nolla, x + 33, y, left=2)
+    sh.wire(P(x, y), l1)
+    sh.wire(r1, l2)
+    sh.wire(r2, P(xbus, y))
+    sx, sy = P(x + 26, y - 4)
+    s = sh.place(sym(sw), sw, sx, sy, 90, value=sh_value(sw),
+                 ref_at=(round(sx + 3.81, 4), round(sy - 6.35, 4), 270, "left"),
+                 value_at=(round(sx + 3.81, 4), round(sy - 4.445, 4), 270, "left"))
+    assert s.pin(3) == P(x + 26, y), s.pins
+    sh.wire(s.pin(2), (s.pin(2)[0], P(0, y - 12)[1]), P(x + 10, y - 12), P(x + 10, y))
+    sh.wire(s.pin(1), (s.pin(1)[0], P(0, y - 12)[1]), P(xbus, y - 12))
+    junctions(sh, P(x + 10, y), P(x + 26, y))
