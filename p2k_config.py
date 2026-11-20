@@ -50,7 +50,7 @@ TRUNCATED_REFDES = {
 # Expected net per restored refdes. ipc356 looks the key up by the KiCad refdes (p2k
 # candidate 2). SERIES_MIX has several nets and is not listed.
 TRUNCATED_NETS = {
-    "PIPOWER": "#00028",     # Q4-2, R9-1, R66... (PI supply output)
+    "PIPOWER": "#00028",     # Q4-2 (drain), R9-2 (PI supply input)
     "PIRETURN": "PWR-GND",
     "PREPOWER": "F",
     "PRERETURN": "PWR-GND",
@@ -177,3 +177,7 @@ DRILL_SMALLER = {
     (0.762, 0.75): "C4 C6 C7 C32: KiCad C_Rect_L7.2mm_W5.0mm_P5.00mm 0.75 mm drill kept (Proteus 0.762 = "
                    "30 mil); user decision 2026-11-20",
 }
+# The June 2010 fab Excellon drill file (source/fab_2010/poweri - CADCAM Drill.TXT, inch) converted to
+# metric by tools/excellon_metric.py (the shared reader is metric-only): cross-checked 1:1 with the
+# 2026 X2 drill gerber by gerber_roundtrip.
+DRILL_EXCELLON = "reference/fab_2010_drill_metric.drl"
