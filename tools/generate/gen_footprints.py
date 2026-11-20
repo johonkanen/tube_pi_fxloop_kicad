@@ -26,7 +26,7 @@ drill differences (STATUS.md "Phase 2").
 import os
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # tools/generate/ -> repo
 sys.path.insert(0, os.path.join(ROOT, "tools", "p2k"))  # proteus2kicad
 from p2k import footprints  # noqa: E402
 

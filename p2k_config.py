@@ -139,7 +139,7 @@ DRILL_NONPLATED = None    # no NonPlated drill file: the mounting holes are plat
 OUTLINE = "Mechanical 1"
 OUTLINE_RECT = (-123.825, -78.105, 225.425, 71.755)  # x, y, width, height
 
-# --- Footprints (Phase 2, tools/gen_footprints.py) ------------------------------------
+# --- Footprints (Phase 2, tools/generate/gen_footprints.py, frozen) ------------------------------------
 
 # Pad sizes: "kicad" (KiCad library pad sizes and drills, pad centres on the Proteus positions;
 # the IPC-built footprints - noval socket, SW-SPDT, 100n Xicon, Solen, fly-lead terminal - have
@@ -225,6 +225,10 @@ DRILL_SMALLER = {
 DRILL_EXCELLON = "source/fab_2010/poweri - CADCAM Drill.TXT"
 
 # --- Pin order (p2k check_pin_order; was tools/check_pin_order.py, STATUS.md "Phase 2 - pin order") ----
+
+# The frozen footprint generator (RULES / PROJECT for spec= / rule= / PIN_ORDER_MAX_MOVE), moved to
+# tools/generate/ when generation stopped (2026-11-20); imported, never run.
+FOOTPRINT_SCRIPT = "tools/generate/gen_footprints.py"
 
 # The UNMOVED KiCad base footprints with the Proteus renumbering, fitted onto the IPC pads: a small
 # residual on the expected side confirms that the Proteus pin ids sit on the pads the renumbering

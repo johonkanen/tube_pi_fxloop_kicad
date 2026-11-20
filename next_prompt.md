@@ -1,25 +1,29 @@
 # Next prompt
 
-**The conversion is complete** (Phases 0-5 done 2026-11-20) and the **design fixes 2026-11-20** are done
-(user decisions after the conversion; STATUS.md "Design fixes 2026-11-20"): relay SERIES_MIX on the Omron
-G5V-2 pin numbers (Finding 15, `IPC_PIN_IDS`, copper unchanged), the three dangling
-Proteus stubs removed (Finding 19, `REMOVED_TRACKS`), component values unchanged. `tools/check_all.sh`
-prints ALL CHECKS PASSED (STATUS.md "Last check output"). The **shared-tool migration 2026-11-20** is done
-(STATUS.md "Shared-tool migration 2026-11-20"): `tools/p2k` at proteus2kicad a9a286c, every board-local
-workaround replaced by a shared tool / config key, re-baselines D-R / D-K2 / R1 only, strict opt-outs none.
+**The conversion is complete** (Phases 0-5 done 2026-11-20), the **design fixes 2026-11-20** and the
+**shared-tool migration 2026-11-20** are done, and **generation stopped 2026-11-20** (user decision;
+STATUS.md "Generation stopped 2026-11-20"): the board is no longer generated from the Proteus data (last
+generated commit 116d923). The committed KiCad files (`kicad/`, `lib/`) are the source, edited in KiCad -
+the clean starting point for the redesign. The generators are frozen history in `tools/generate/` (do not
+run them; `make_pcb.sh` refuses without `--force-regenerate`). `tools/check_all.sh` (13 steps, no
+regeneration) prints ALL CHECKS PASSED (STATUS.md "Last check output").
+
+## Working on the board
+
+Edit in KiCad, then run `tools/check_all.sh`. Copper-neutral edits pass. An intended change of copper or
+netlist fails a check on purpose: record it as a deviation with a reason in `p2k_config.py`
+(`REMOVED_TRACKS` / `REMOVED_VIAS`, round-trip deviation hooks `in_area` / `added` / `extra_vias`,
+`PHASE4_EXPECTED`, `DRC_ACCEPTED`, `STRICT_CHECKS_OFF`) and in STATUS.md - never by removing a check.
 
 ## What remains
 
-1. **Stop generating the board** - the user's call (Phase 5 decision: at the first manual layout change in
-   KiCad, after the migration). Not done; nothing to do until the user says so. Then: remove the
-   `make_pcb.sh --check` step from `tools/check_all.sh`, say so in STATUS.md (Phase 5 "Left open / when the
-   board stops being generated"); check_board / assign_nets / DRC (`DRC_EXPECTED_WARNINGS`) / ipc356_diff /
-   gerber_roundtrip (`DRILL_SMALLER` pad sets) keep working on the hand-edited board and show the intended
-   differences (record them as deviations, e.g. `REMOVED_TRACKS` / `REMOVED_VIAS` or the deviation hooks).
-2. The meta repo `tube_amplifier_kicad` bumps this submodule (coordinating session, after all boards).
+1. The redesign (ribbon cables, PCB-mount pots, the new power section) - the user's plan, from this board.
+2. The meta repo `tube_amplifier_kicad` bumps this submodule (coordinating session).
+3. proteus2kicad's `tools/regress.sh` regenerates board files with the board's own scripts; for this board
+   pin it at 116d923 (last generated commit) or add a check-only mode in proteus2kicad (not done here).
 
 Do not bump `tools/p2k` from this repo on your own; a later bump follows proteus2kicad's README "Changes
-(upgrade notes)" and must leave `~/dev/proteus2kicad/tools/regress.sh <pin> tube_pi_fxloop_kicad` passing.
+(upgrade notes)" and must leave `tools/check_all.sh` passing (and `~/dev/proteus2kicad/tools/regress.sh <pin> tube_pi_fxloop_kicad@116d923`).
 
 ## Report-only design findings (for the redesign; STATUS.md "Findings about the original design")
 
