@@ -120,6 +120,9 @@ def ph(sh, ref, x, y, left, **kw):
     """Horizontal two-pin part `ref` centred on PDF position (x, y), pin `left` on the left.
     Returns (left_point, right_point)."""
     kw.setdefault("text", "above")
+    if sym(ref).startswith("C") and "ref_at" not in kw:      # capacitor plates are taller than a resistor body
+        px, py = P(x, y)
+        kw.update(ref_at=(px, round(py - 5.08, 4), 0, None), value_at=(px, round(py - 3.175, 4), 0, None))
     _, l, r = horiz2(sh, sym(ref), ref, *P(x, y), sh_value(ref), left=left, **kw)
     return l, r
 

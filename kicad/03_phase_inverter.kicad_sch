@@ -2382,7 +2382,7 @@
 		(dnp no)
 		(uuid "aaf1ca00-0302-5371-b41b-35f7fd566276")
 		(property "Reference" "C3"
-			(at 224.79 175.26 90)
+			(at 224.79 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2390,7 +2390,7 @@
 			)
 		)
 		(property "Value" "100N XICON"
-			(at 224.79 177.04 90)
+			(at 224.79 175.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
