@@ -121,8 +121,8 @@ SW3,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60
 SW4,tube_pi_fxloop:SW_SPDT,tube_pi_fxloop:SW_SPDT_3Holes_Proteus,"SPDT HOLES: three solder holes for a wired switch, NO=1 NC=2 COM=3"
 SW5,tube_pi_fxloop:SW_SPDT,tube_pi_fxloop:SW_SPDT_3Holes_Proteus,"SPDT HOLES: three solder holes for a wired switch, NO=1 NC=2 COM=3"
 SW6,tube_pi_fxloop:SW_SPDT,tube_pi_fxloop:SW_SPDT_3Holes_Proteus,"SPDT HOLES: three solder holes for a wired switch, NO=1 NC=2 COM=3"
-U4,tube_pi_fxloop:12AX7,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,"9-PIN BELTON NOVAL: noval socket, Proteus pads and pin ids"
-U5,tube_pi_fxloop:12AX7,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,"9-PIN BELTON NOVAL: noval socket, Proteus pads and pin ids"
+U4,tube_pi_fxloop:12AX7,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,"9-PIN BELTON NOVAL: noval socket, Proteus pads and pin ids, standard noval numbering, bottom side"
+U5,tube_pi_fxloop:12AX7,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,"9-PIN BELTON NOVAL: noval socket, Proteus pads and pin ids, standard noval numbering, bottom side"
 V6_V7,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
 V8_V9,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
 VREF,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad

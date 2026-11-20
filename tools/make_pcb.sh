@@ -2,12 +2,13 @@
 # Phase 3: rebuild kicad/tube_pi_fxloop.kicad_pcb from the schematic and the Proteus gerbers
 # (shared tools in tools/p2k, board values in p2k_config.py). Re-runnable; two runs give a
 # byte-identical board (UUIDs seeded per step). As the power amp pilot's tools/make_pcb.sh
-# (~/dev/tube_power_amp_kicad), without its Phase 5 place_refdes step (reference positions are a
-# Phase 5 choice here); this board has 4 vias (gerber_to_tracks builds them from the ViaPad flashes
-# + drills) and no pours:
+# (~/dev/tube_power_amp_kicad), with its Phase 5 place_refdes step (user decision 2026-11-20);
+# this board has 4 vias (gerber_to_tracks builds them from the ViaPad flashes + drills) and no
+# pours:
 #   1 build_pcb         footprints with nets at the Proteus positions, rules, outline, holes H1-H10
 #   2 gerber_to_tracks  copper gerbers -> tracks and the 4 vias (no pours on this board)
 #   3 assign_nets       nets of the tracks / vias by copper connectivity (shorts / orphans / opens)
+#   4 place_refdes      references clear of pads / silk / edge (else smaller, else Fab only; Phase 5)
 # Board-only footprints (holes) and the footprint fit come from tools/gen_footprints.py and
 # p2k.check_footprints (reports/footprint_fit.csv) - run those first after footprint changes.
 #
@@ -23,6 +24,7 @@ run() {
     $K -m p2k.build_pcb
     $K -m p2k.gerber_to_tracks
     $K -m p2k.assign_nets
+    $K -m p2k.place_refdes
 }
 if [ "${1:-}" = "--check" ]; then
     tmp="$PWD/build/tmp/make_pcb_check"
@@ -37,7 +39,7 @@ if [ "${1:-}" = "--check" ]; then
     stages() { sed '/^== after zone fill/,$d' "$1"; }
     [ "$(stages "$tmp/reports/assign_nets.txt")" = "$(stages reports/assign_nets.txt)" ] || { echo "make_pcb: reports/assign_nets.txt is not up to date"; ok=0; }
     cmp -s "$tmp/reports/pour_nets.json" reports/pour_nets.json || { echo "make_pcb: reports/pour_nets.json is not up to date"; ok=0; }
-    grep -E "^(build_pcb|gerber_to_tracks: [0-9]|assign_nets: stage)" "$tmp/log" | sed "/^build_pcb/s/ -> .*//"
+    grep -E "^(build_pcb|gerber_to_tracks: [0-9]|assign_nets: stage|place_refdes)" "$tmp/log" | sed "/^build_pcb/s/ -> .*//"
     [ $ok -eq 1 ] && echo "make_pcb: board rebuilt from scratch, byte-identical" || exit 1
 else
     run

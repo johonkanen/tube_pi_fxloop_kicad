@@ -9,7 +9,7 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 2 Footprints | **done** 2026-11-20 (Opus 5.5); drills decided by the user 2026-11-20 (KiCad drills kept, `DRILL_SMALLER`) |
 | 3 PCB | **done** 2026-11-20 (Opus 5.5); TO-92 pad 1 round decided by the user 2026-11-20 (option (a)) |
 | 4 Verification | **done** 2026-11-20 (Fable 5.2, clean context): `ipc356_diff`, `gerber_roundtrip --check` (with the 2010 Excellon) pass; the board is unchanged |
-| 5 Clean-up | not started |
+| 5 Clean-up | **done** 2026-11-20 (Opus 5.5, clean context): U4 / U5 on the bottom side (standard noval numbering), `place_refdes` in `make_pcb.sh`; the rest kept as the user decided. **The conversion is complete.** |
 
 ## Phase 0 – done (Opus 5.5, 2026-11-20)
 
@@ -782,9 +782,104 @@ Every change is caught by at least one check now in `check_all.sh`, except a pur
 (review item 3). Tracks are seen only by the round trip, nets only by `ipc356_diff`, "which pad has
 the smaller drill" only by `check_drill_smaller`.
 
+## Phase 5 – clean-up – done (Opus 5.5, clean context, 2026-11-20)
+
+Verified state first: `tools/check_all.sh` printed exactly the Phase 4 "Last check output" (ALL CHECKS
+PASSED). The user's answers (Decisions, "User decisions for Phase 5") were recorded before any change.
+Model: the power amp pilot `~/dev/tube_power_amp_kicad` (read only), its Phase 5.
+
+### User decisions (2026-11-20, through the coordinating session)
+
+1. U4 / U5 on the bottom side with the standard noval numbering, footprint built mirrored – **done** (below).
+2. `p2k place_refdes` as a `make_pcb.sh` step – **done** (below).
+3. The three dangling Proteus stubs (Finding 19) – **kept as drawn**, no `REMOVED_TRACKS`; the 3
+   `track_dangling` warnings stay.
+4. TO-92 pin-1 dot (`PIN1_DOT`) – **kept**.
+5. Body graphics (KiCad library), KiCad pad sizes, sheet names, KiCad refdes of the signed names, 1.6 mm
+   – **kept**, nothing changed.
+6. The board **stays generated** (`tools/make_pcb.sh`); see "When the board stops being generated".
+
+### Noval sockets on the bottom side (decision 1)
+
+- `tools/gen_footprints.py`: the spec `Valve_Noval_Belton_PCD21.00mm` gets the board-local key
+  `bottom=True`; a wrapper around `footprints.build_library` (the pilot's, unchanged) marks the IPC pads
+  of the spec's `ipc` part (U4) as bottom side, so the shared `from_ipc` builds the footprint
+  **mirrored** (the shared tool mirrors only bottom SMD parts; THT pads are `both` in the IPC file;
+  p2k candidate 23). Footprint name, pad numbers (= IPC pin ids), pad sizes, drills unchanged; the pad x
+  coordinates and the body (Proteus Top Assembly square, mirrored with the pads) are mirrored. In the
+  footprint's own view pins 1 → 9 now run in the **standard noval direction** (counter-clockwise seen
+  from the component side = clockwise seen from the pins). No 3D model (none before; KiCad has no noval
+  socket model).
+- `p2k.check_footprints` finds the pattern fits **only mirrored** and writes U4 / U5 as `bottom`
+  (orientation 180) into `reports/footprint_fit.csv`; `build_pcb` flips them: footprint layer B.Cu, silk
+  / Fab / courtyard on B.SilkS / B.Fab / B.CrtYd, reference on B.SilkS. (A plain pcbnew `Flip` of the old
+  top footprint would mirror the pads: Phase 4 negative test, and test 3 below.)
+- Copper unchanged: every pad lands on the same IPC pad (check_footprints worst 0.001 mm, check_board,
+  assign_nets, **ipc356_diff 261/261, 66 nets 1:1; gerber_roundtrip and check_drill_smaller: output
+  identical to Phase 4**, `reports/roundtrip/` unchanged).
+- `tools/check_pin_order.py` keeps the Phase 2 facts (unmoved KiCad `Valve_Noval_P` and the ideal noval
+  fit the Proteus ids only mirrored) and adds `bottom_side_noval()` (the pilot's `bottom_side_octal()`
+  with free-rotation fits, the noval steps are 36°): (a) project footprint vs an ideal standard noval in
+  the footprint frame: unmirrored **0.006**, mirrored 19.318 → standard numbering; (b) project footprint
+  vs the IPC pads of U4 / U5: unmirrored 19.314, mirrored **0.001** → bottom side; (c)
+  `reports/footprint_fit.csv`: bottom = exactly U4, U5; (d) the board (`pcb.board_file()`, `P2K_PCB`
+  overrides): U4 / U5 on B.Cu, the other 134 footprints on F.Cu.
+
+### References (decision 2)
+
+`tools/make_pcb.sh` step 4 `kipy -m p2k.place_refdes` (defaults, no `REFDES_PLACEMENT`), also in the
+`--check` rebuild: **68 kept, 67 moved, 1 moved with 0.8 mm text, 0 on the Fab layer**; a second run on
+the finished board keeps all 136 and leaves it byte-identical. No remaining silk warning involves a
+reference (the 4 overlaps of the TO-92 pin-1 dots with neighbour references are gone too).
+
+### DRC before / after Phase 5 (accepted error types in `p2k_config.py` `DRC_ACCEPTED`, reasons updated)
+
+| Type | Phase 4 | sockets on B only | Phase 5 (sockets + place_refdes) |
+|---|---|---|---|
+| shorts / unconnected / parity / clearance / hole clearance / mask bridge | 0 | 0 | 0 |
+| courtyards_overlap (error, accepted) | 47 | 40 | **40**, all between top-side parts (100N rows, TO-92 rows with R11 / R16 / R18, Q20 / R270, resistor / terminal rows, C30 with R24 / R26, ...); the U4 / U5 courtyards (B.CrtYd) no longer meet any part |
+| pth_inside_courtyard (error, accepted) | 7 | 7 | **7**: H3 / H4 and V8_V9-1 in the B-side U5 / U4 courtyards, C8 + / − in U4's (a THT pad is on both sides; Finding 17), R24-1 / R26-1 in C30's |
+| silk_overlap (warning) | 138 | 120 | **28**: KiCad library silk of neighbouring parts (TO-92 outlines over R11 / R16 / R18 / R270 boxes, C3 / C5 / C9 rows, R19-R24 boxes, C4 / C7 / R50, C29 / C6, SW4 / C37) and D3's library "K" text over Q4 |
+| silk_over_copper (warning) | 55 | 55 | **27**: 2 W resistor (DIN0414) silk over their own / neighbour pads (R1 R2 R9 R45 R46 R48 R66 R67), 9 × socket body silk on B.SilkS over C8, H3 / H4 / H7, V8_V9 pads |
+| track_dangling (warning) | 3 | 3 | **3** (Finding 19, kept: decision 3) |
+| silk_edge_clearance (warning) | 2 | 2 | **0** |
+| total | 252 | 227 | **105** |
+
+The remaining 55 silk warnings are KiCad library footprint graphics and the Proteus socket body on the
+Proteus placement (decision 5: library graphics kept). `p2k drc` fails only on unaccepted errors; the
+warning counts are not enforced – a board change is caught by the `make_pcb --check` byte compare.
+
+### Negative tests (all restored; `check_all.sh` afterwards: ALL CHECKS PASSED)
+
+Scratch boards in `build/tmp/neg5/<case>` (pcbnew from the generated board, run with `P2K_PCB` /
+`P2K_REPORTS`; the repo board untouched, md5 equal before and after).
+
+| Change | Caught by |
+|---|---|
+| none (control scratch board) | all OK (check_pin_order, check_board, ipc356_diff, check_drill_smaller, roundtrip) |
+| `bottom=True` removed from the noval spec | `gen_footprints --check` out of date; after regenerating: check_footprints OK (fits unmirrored, top) but **check_pin_order FAILED** (no standard numbering, not mirrored-only, footprint_fit.csv sides) and **make_pcb --check** not up to date |
+| socket back on top: scratch board, U4 flipped to F (pcbnew `Flip`) | **check_pin_order** "wrong layer for ['U4']"; **check_board** U4 pads 6.5-21 mm off; **ipc356_diff** FAILED; **roundtrip** FAILED (2 drill mismatches) |
+| socket on B with mirrored ids: scratch board, U4 pads mirrored in the footprint frame (stays B.Cu) | check_pin_order OK (it checks the library, the fit file and the layer); **check_board**, **ipc356_diff**, **roundtrip** FAILED (U4 pads 6.5-21 mm off the IPC pads) |
+| footprint with mirrored ids in the library (pad x negated in the `.kicad_mod`) | **gen_footprints --check** out of date; **check_pin_order FAILED** (not the standard numbering, fits unmirrored, sides); check_footprints OK (it fits either way) |
+| another part on B: scratch board, R13 flipped | **check_pin_order** "wrong layer for ['R13']"; check_board, ipc356_diff, roundtrip FAILED |
+| `place_refdes` line removed from make_pcb.sh | **make_pcb --check** not up to date |
+| place_refdes run again on the generated board | 136 kept, file byte-identical (idempotent) |
+
+### Left open / when the board stops being generated
+
+- Everything in "Findings about the original design" is report-only (the conversion reproduces
+  Proteus); nothing there needs a decision for the conversion.
+- Per the playbook (section 3, Phase 5) and decision 6: the board stops being generated at the **first
+  manual layout change in KiCad – the user's call**, not done here. Until then `tools/make_pcb.sh` stays
+  the only way to change the board. When the user edits the board by hand: remove the
+  `make_pcb.sh --check` step from `tools/check_all.sh` and say so here; check_board / assign_nets / DRC /
+  ipc356_diff / gerber_roundtrip / check_drill_smaller keep working on the edited board and show the
+  intended differences (record them as deviations).
+- Courtyard / silk items above (library graphics on the Proteus placement), as decided.
+
 ## Last check output
 
-`tools/check_all.sh` (2026-11-20, Phase 4 done):
+`tools/check_all.sh` (2026-11-20, Phase 5 done; ipc356_diff, check_drill_smaller and gerber_roundtrip print exactly the Phase 4 lines):
 
 ```
 == KiCad environment
@@ -832,6 +927,8 @@ compare: OK
 gen_footprints: 126 parts, 17 footprints (14 project), up to date
 == Footprints vs IPC pad geometry
 check_footprints: pcbnew placement of 126 parts, worst pad offset 0.001 mm
+check_footprints: note: U4: THT pad pattern fits only mirrored -> bottom side
+check_footprints: note: U5: THT pad pattern fits only mirrored -> bottom side
 check_footprints: 126/126 parts fitted, 247 pads, 17 footprints, worst residual 0.001 mm (limit 0.05)
 check_footprints: OK
 == Pin order vs unmoved KiCad base footprints
@@ -850,12 +947,16 @@ U4 U5            ideal standard noval, PCD 21.00 mm (free rot.)  19.318         
 U4: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-clockwise from the top)
 U5: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-clockwise from the top)
 SW4 SW5 SW6: 1 (NO) and 2 (NC) 5.08 mm apart, 3 (COM) the offset hole 5.12 mm from both
+(footprint)      Valve_Noval_Belton_PCD21.00mm vs ideal noval   0.006             19.318             unmirrored
+U4 U5            Valve_Noval_Belton_PCD21.00mm (project)       19.314              0.001             mirrored = bottom side
+                 footprint_fit.csv and board: U4 U5 bottom (B.Cu), the other 134 footprints top
 check_pin_order: OK (results as recorded in STATUS.md)
 == PCB rebuilt from schematic + gerbers, up to date
 build_pcb: 126 footprints placed (0 excluded from board), 10 mounting holes, 71 nets, 4 outline segments
 gerber_to_tracks: 515 tracks, 4 vias (IPC 4), 0 pour outlines on User.1-4
 assign_nets: stage A (no pours): 81 groups, 0 shorts, 0 orphans, 0 opens
 assign_nets: stage B (with pours): 81 groups, 0 shorts, 0 orphans, 0 opens
+place_refdes: 68 kept, 67 moved, 1 moved, 0.8 mm text (sizes 1.0, 0.8 mm)
 make_pcb: board rebuilt from scratch, byte-identical
 == Board pads, holes, vias vs IPC (position, size, nets 1:1)
 check_board: 136 footprints, 247 pads, worst pad offset 0.001 mm (limit 0.05), 66 IPC nets mapped 1:1, 10 mounting holes
@@ -865,13 +966,12 @@ check_board: OK
 assign_nets: after zone fill: 81 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
 == DRC with schematic parity
-drc: 252 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
-drc:     47 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement (47 pairs, parts exactly at the Proteus positions): the 21 mm noval courtyards of U4 / U5 with the mounting holes H3 H4 H7 H8, C8, R54, V8_V9; the 100N rows C3/C5/C9 6.35 mm apart; the TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18 R270, SEND2W SEND3W; resistors / film caps / terminals packed closer than the KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with R24 R26, ...); U4 / U5 go to the bottom side in Phase 5 (user 2026-11-20)
-drc:      7 error    pth_inside_courtyard  accepted: Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's, R24-1 and R26-1 inside the large C30 Solen box courtyard
-drc:    138 warning  silk_overlap
-drc:     55 warning  silk_over_copper
+drc: 105 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc:     40 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement (40 pairs, parts exactly at the Proteus positions, all on the top side): the 100N rows C3/C5/C9 6.35 mm apart; the TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18, Q20 / R270, SEND2W SEND3W; resistors / film caps / terminals packed closer than the KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with R24 R26, ...). The noval sockets U4 / U5 are on the bottom side since Phase 5 (user 2026-11-20): their courtyards (B.CrtYd) no longer meet the top-side parts
+drc:      7 error    pth_inside_courtyard  accepted: Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's (a THT pad is on both sides, so the bottom-side socket courtyards still contain them), R24-1 and R26-1 inside the large C30 Solen box courtyard
+drc:     28 warning  silk_overlap
+drc:     27 warning  silk_over_copper
 drc:      3 warning  track_dangling
-drc:      2 warning  silk_edge_clearance
 drc: OK
 == 2010 Excellon drill file converted to metric, up to date
 excellon_metric: reference/fab_2010_drill_metric.drl up to date (7 tools, 261 holes)
@@ -970,7 +1070,8 @@ ALL CHECKS PASSED
    put tube pin k on Proteus pad 10 − k (gap aligned): heater 4 / 5 on pads 6 / 5, anode 1 on the N/C pad 9,
    i.e. wrong. **Confirm the mounting on the real amplifier** before the redesign reuses the footprint.
    Copper reproduced as is. **User 2026-11-20: U4 / U5 are on the bottom (solder) side** (Decisions);
-   the footprints move to B with the standard noval numbering in Phase 5.
+   done in Phase 5: the footprint is built mirrored and placed on B, standard noval numbering in its own
+   view.
 17. **The "9-PIN BELTON NOVAL" pattern has a 21.0 mm pitch circle** (4.318 mm pads, 1.727 mm drill, no
    centre hole), not the 11.9 mm-class circle of a PCB noval socket, and each socket has three plated
    3.0 mm holes around it at about 17-18 mm from its centre (U4: H at (60, -14), (29, -18.5), (51, -41);
@@ -986,7 +1087,7 @@ ALL CHECKS PASSED
    the D8-K → D9-K track (redundant); a 0.635 mm F.Cu Net-(Q90-B) stub from the junction at (-20.003, 43.18)
    to (-19.368, 43.18); a 1.905 mm F.Cu H stub from R67-2 to (-58.42, 67.945). The free ends touch nothing
    (checked against every pad and track end). No net effect; leftovers of the 2010 routing. Reproduced
-   (`REMOVED_TRACKS` could drop them in Phase 5 if wanted).
+   (`REMOVED_TRACKS` could drop them in Phase 5 if wanted). **User 2026-11-20: kept as drawn.**
 20. **The Proteus clearance is tight at the TO-92 rows**: 0.421 mm between a TO-92 pad and the 45° tracks
    that leave the neighbouring pad (Q1, Q3, Q6, Q20), the smallest gap on the board (otherwise ≥ 0.508).
    Fine for the 2010 board; relevant for the redesign's rules.
@@ -1126,6 +1227,14 @@ ALL CHECKS PASSED
    `--netlist` but ignores `P2K_SCHEMATIC` (the PCB tools honour `P2K_PCB`): a scratch-copy run needs the
    argument.
 
+23. **`footprints.from_ipc` mirrors only bottom SMD parts** (pilot candidate 24): a THT part mounted on
+   the bottom side (here the noval sockets U4 / U5, Phase 5) has IPC side `both`, so the shared tool builds
+   it unmirrored. Board-local: `bottom=True` spec key + a `build_library` wrapper in
+   `tools/gen_footprints.py` (the pilot's code); `tools/check_pin_order.py` `bottom_side_noval()` checks
+   the result. The shared tool would need a `bottom` spec key (or a side override per refdes). Also as
+   on the pilot (candidate 25): `p2k drc` does not enforce warning counts; only the byte compare sees a
+   new silk warning while the board is generated.
+
 ## Decisions
 
 - Sheet names (no title blocks in the PDF): FX loop driver / PI supply and FX switching /
@@ -1184,3 +1293,20 @@ ALL CHECKS PASSED
   `tools/compare.py` (no `unconnected-(…)` net with more than one pin), `tools/erc.sh` (fails on
   `no_connect_connected`). U4 / U5 were not moved (Phase 5). **Open for the user: nothing blocking**;
   Phase 5 needs the user's choices (next_prompt.md).
+- **User decisions for Phase 5, 2026-11-20** (given through the coordinating session, recorded before
+  the Phase 5 work):
+  1. **U4 / U5 on the bottom (solder) side with the standard noval numbering** (already decided above):
+     the footprint is **built mirrored**, as the power amp pilot did for its octal sockets (a plain pcbnew
+     `Flip` mirrors the pads and fails the checks, Phase 4 negative test).
+  2. **Yes, `p2k place_refdes` as a `make_pcb.sh` step** (as the pilot).
+  3. **The three dangling Proteus copper stubs (Finding 19) stay as drawn**; no `REMOVED_TRACKS`.
+  4. **The TO-92 pin-1 dot (`PIN1_DOT`) stays** as it is.
+  5. **Kept**: footprint body graphics (KiCad library graphics), KiCad pad sizes, the sheet names, the
+     KiCad refdes of the signed names, board thickness 1.6 mm.
+  6. **The board stays generated** (`tools/make_pcb.sh`); stopping generation is the user's call at the
+     first hand edit of the layout.
+- Phase 5 (agent's choices, no user decision needed): the pilot's `bottom` spec key and `build_library`
+  wrapper copied unchanged; `check_pin_order` checks the bottom side with free-rotation fits (noval 36°
+  steps); `place_refdes` with its defaults (no `REFDES_PLACEMENT`); `DRC_ACCEPTED` reasons and counts
+  updated (40 courtyards_overlap, 7 pth_inside_courtyard). **Open for the user: nothing blocking.** The
+  conversion is complete; the first hand edit of the board (which ends generation) is the user's call.

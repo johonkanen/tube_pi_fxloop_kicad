@@ -121,8 +121,8 @@ SW3,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,97.7900,-42.5450,97.7
 SW4,tube_pi_fxloop:SW_SPDT_3Holes_Proteus,top,0,-21.5900,-63.1825,-21.5900,63.1825,0,0.0000,0.000,0.000,0
 SW5,tube_pi_fxloop:SW_SPDT_3Holes_Proteus,top,0,-12.0650,-63.1825,-12.0650,63.1825,0,0.0000,0.000,0.000,0
 SW6,tube_pi_fxloop:SW_SPDT_3Holes_Proteus,top,0,-3.1750,-63.1825,-3.1750,63.1825,0,0.0000,0.000,0.000,0
-U4,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,top,0,45.9560,-24.9445,45.9560,24.9445,0,0.0000,0.000,0.000,0
-U5,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,top,0,-76.5899,-25.2158,-76.5899,25.2158,0,0.0011,0.000,0.000,0
+U4,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,bottom,0,45.9560,-24.9445,45.9560,24.9445,180,0.0000,0.000,0.000,0
+U5,tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm,bottom,0,-76.5899,-25.2158,-76.5899,25.2158,180,0.0011,0.000,0.000,0
 V6_V7,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-93.9800,-27.9400,-93.9800,27.9400,0,0.0000,0.000,0.000,0
 V8_V9,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-88.2650,-36.8300,-88.2650,36.8300,0,0.0000,0.000,0.000,0
 VREF,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-1.9050,-51.4350,-1.9050,51.4350,0,0.0000,0.000,0.000,0

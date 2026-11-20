@@ -152,18 +152,19 @@ PCB_RULES = dict(
     via=1.27,             # Default netclass = the Proteus vias
     via_drill=0.508,
 )
-# DRC error types that remain by design (p2k drc; STATUS.md "Phase 3", remaining DRC items).
+# DRC error types that remain by design (p2k drc; STATUS.md "Phase 3" / "Phase 5", remaining DRC items).
 DRC_ACCEPTED = {
-    "courtyards_overlap": "KiCad courtyards vs the Proteus placement (47 pairs, parts exactly at the "
-                          "Proteus positions): the 21 mm noval courtyards of U4 / U5 with the mounting "
-                          "holes H3 H4 H7 H8, C8, R54, V8_V9; the 100N rows C3/C5/C9 6.35 mm apart; the "
-                          "TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18 R270, "
-                          "SEND2W SEND3W; resistors / film caps / terminals packed closer than the "
-                          "KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with "
-                          "R24 R26, ...); U4 / U5 go to the bottom side in Phase 5 (user 2026-11-20)",
+    "courtyards_overlap": "KiCad courtyards vs the Proteus placement (40 pairs, parts exactly at the "
+                          "Proteus positions, all on the top side): the 100N rows C3/C5/C9 6.35 mm apart; "
+                          "the TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18, Q20 / "
+                          "R270, SEND2W SEND3W; resistors / film caps / terminals packed closer than the "
+                          "KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with R24 "
+                          "R26, ...). The noval sockets U4 / U5 are on the bottom side since Phase 5 (user "
+                          "2026-11-20): their courtyards (B.CrtYd) no longer meet the top-side parts",
     "pth_inside_courtyard": "Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes "
-                            "around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's, "
-                            "R24-1 and R26-1 inside the large C30 Solen box courtyard",
+                            "around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's (a "
+                            "THT pad is on both sides, so the bottom-side socket courtyards still contain "
+                            "them), R24-1 and R26-1 inside the large C30 Solen box courtyard",
 }
 
 # --- Phase 4 checks (p2k.gerber_roundtrip, p2k.ipc356_diff) ---------------------------

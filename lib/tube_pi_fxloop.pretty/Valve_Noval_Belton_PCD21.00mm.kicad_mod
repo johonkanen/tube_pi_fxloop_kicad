@@ -2,7 +2,7 @@
 	(version 20260206)
 	(generator "tube_pi_fxloop_gen_footprints")
 	(layer "F.Cu")
-	(descr "Noval tube socket (Proteus 9-PIN BELTON NOVAL): 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A U4)")
+	(descr "Noval tube socket (Proteus 9-PIN BELTON NOVAL), standard noval numbering, mounted on the solder side: 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A U4)")
 	(property "Reference" "REF**"
 		(at 0 -14.0235 0)
 		(layer "F.SilkS")
@@ -26,7 +26,7 @@
 	(attr through_hole)
 	(fp_poly
 		(pts
-			(xy -13.222 12.7045) (xy 13.223 12.7045) (xy 13.223 -12.7035) (xy -13.222 -12.7035)
+			(xy 13.222 12.7045) (xy -13.223 12.7045) (xy -13.223 -12.7035) (xy 13.222 -12.7035)
 		)
 		(stroke
 			(width 0.1)
@@ -36,8 +36,8 @@
 		(layer "F.Fab")
 	)
 	(fp_line
-		(start -13.222 12.7045)
-		(end 13.223 12.7045)
+		(start 13.222 12.7045)
+		(end -13.223 12.7045)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -45,8 +45,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 13.223 12.7045)
-		(end 13.223 -12.7035)
+		(start -13.223 12.7045)
+		(end -13.223 -12.7035)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -54,8 +54,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 13.223 -12.7035)
-		(end -13.222 -12.7035)
+		(start -13.223 -12.7035)
+		(end 13.222 -12.7035)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -63,8 +63,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start -13.222 -12.7035)
-		(end -13.222 12.7045)
+		(start 13.222 -12.7035)
+		(end 13.222 12.7045)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -73,7 +73,7 @@
 	)
 	(fp_poly
 		(pts
-			(xy -13.472 12.8081) (xy -13.3256 12.9545) (xy 13.3266 12.9545) (xy 13.473 12.8081) (xy 13.473 -12.8071) (xy 13.3266 -12.9535) (xy -13.3256 -12.9535) (xy -13.472 -12.8071)
+			(xy -13.473 12.8081) (xy -13.3266 12.9545) (xy 13.3256 12.9545) (xy 13.472 12.8081) (xy 13.472 -12.8071) (xy 13.3256 -12.9535) (xy -13.3266 -12.9535) (xy -13.473 -12.8071)
 		)
 		(stroke
 			(width 0.05)
@@ -93,55 +93,55 @@
 		)
 	)
 	(pad "1" thru_hole circle
-		(at -8.491 6.1705)
+		(at 8.491 6.1705)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "2" thru_hole circle
-		(at -10.502 -0.0035)
+		(at 10.502 -0.0035)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "3" thru_hole circle
-		(at -8.5 -6.1665)
+		(at 8.5 -6.1665)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "4" thru_hole circle
-		(at -3.244 -9.9785)
+		(at 3.244 -9.9785)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "5" thru_hole circle
-		(at 3.245 -9.9835)
+		(at -3.245 -9.9835)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "6" thru_hole circle
-		(at 8.492 -6.1655)
+		(at -8.492 -6.1655)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "7" thru_hole circle
-		(at 10.502 0.0075)
+		(at -10.502 0.0075)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "8" thru_hole circle
-		(at 8.5 6.1705)
+		(at -8.5 6.1705)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")
 	)
 	(pad "9" thru_hole circle
-		(at 3.245 9.9835)
+		(at -3.245 9.9835)
 		(size 4.318 4.318)
 		(drill 1.727)
 		(layers "*.Cu" "*.Mask")

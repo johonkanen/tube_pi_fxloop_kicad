@@ -93,7 +93,7 @@
 		(at -1.27 36.639)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "SEND1W"
-			(at 0 -2.844 0)
+			(at 0.001239 2.546471 0)
 			(layer "F.SilkS")
 			(uuid "a6ecf974-5784-4d59-82d4-c2c365737730")
 			(effects
@@ -286,7 +286,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R29"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "f1576474-ada5-428e-b821-fbfa2a5eba7e")
 			(effects
@@ -981,7 +981,7 @@
 		(at -112.395 15.875)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "PRE_H5"
-			(at 0 -2.844 0)
+			(at 0.00124 -2.594092 0)
 			(layer "F.SilkS")
 			(uuid "be783893-3aa8-4790-80f1-881abf40b201")
 			(effects
@@ -1796,7 +1796,7 @@
 		(descr "TO-220-3, Vertical, RM 2.54mm, see https://www.vishay.com/docs/66542/to-220-1.pdf")
 		(tags "TO-220-3 Vertical RM 2.54mm")
 		(property "Reference" "Q4"
-			(at 2.54 -4.1 90)
+			(at 8.631428 -0.95 0)
 			(layer "F.SilkS")
 			(uuid "097d375d-ba94-40bf-a67a-8b8d61a0ce51")
 			(effects
@@ -2036,7 +2036,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R24"
-			(at 5.08 -2.37 270)
+			(at 12.003809 0 0)
 			(layer "F.SilkS")
 			(uuid "18e088b5-9db8-4a40-8527-7476694c321d")
 			(effects
@@ -2981,7 +2981,7 @@
 		(at 95.885 62.23)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "EQOUT"
-			(at 0 -2.844 0)
+			(at -4.279615 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "e4f7b042-921b-4db8-bb3f-a812a0c8a7c3")
 			(effects
@@ -3091,7 +3091,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R110"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "41566ea2-5e54-4e3f-9115-362694fccbc5")
 			(effects
@@ -3978,7 +3978,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R15"
-			(at 5.08 -2.37 90)
+			(at 11.98 0 0)
 			(layer "F.SilkS")
 			(uuid "c34a5b77-5934-4202-a4c3-2cbcfdd7beea")
 			(effects
@@ -4160,7 +4160,7 @@
 		(descr "2 W axial metal film resistor DIN0414, Proteus pads 19.05 mm apart (tube_pi_fxloop, derived from Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P20.32mm_Horizontal)")
 		(tags "Resistor Axial_DIN0414 series Axial Horizontal pin pitch 20.32mm 2W length 11.9mm diameter 4.5mm")
 		(property "Reference" "R2"
-			(at 10.16 -3.37 270)
+			(at -2.22 0 0)
 			(layer "F.SilkS")
 			(uuid "47576fb0-139f-4ed9-aa13-73b907d447ca")
 			(effects
@@ -4342,7 +4342,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R14"
-			(at 5.08 -2.37 270)
+			(at 12.003809 0 0)
 			(layer "F.SilkS")
 			(uuid "995e7a02-1248-46b3-b25e-fe53567fecb5")
 			(effects
@@ -5179,7 +5179,7 @@
 		(at -119 11)
 		(descr "Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net (tube_pi_fxloop, board-only)")
 		(property "Reference" "H1"
-			(at 0 -4.375 0)
+			(at 0.001256 4.197506 0)
 			(layer "F.SilkS")
 			(uuid "f7d5b247-89ca-4112-9a9c-1732090948f8")
 			(effects
@@ -5438,219 +5438,6 @@
 			)
 		)
 	)
-	(footprint "tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm"
-		(layer "F.Cu")
-		(uuid "3799c4fb-dfe4-49df-9f79-d5761af2d5a4")
-		(at 45.956 24.9445)
-		(descr "Noval tube socket (Proteus 9-PIN BELTON NOVAL): 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A U4)")
-		(property "Reference" "U4"
-			(at 0 -14.0235 0)
-			(layer "F.SilkS")
-			(uuid "3cdd893d-2822-47aa-b077-93304402f8a7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "12AT7"
-			(at 0 14.0245 0)
-			(layer "F.Fab")
-			(uuid "f2a753b1-0a0c-426e-8bfa-52da1797992d")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b85c095c-5ecb-4bb9-ae8f-1a6814c19170")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "12AX7 / 12AT7 noval dual triode; Proteus pin ids A1=1 G1=2 K1=3 H1=4 H2=5 A2=6 G2=7 K2=8 HCT=9; unit 1 = triode 2 (6 7 8), unit 2 = triode 1 (1 2 3), unit 3 = heater (4 5 9)"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e0093cee-c908-4c4c-ad8c-41e64a581241")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(path "/6d2054c3-a101-4ddb-b7e6-76c429c33c44/7360fe71-3c75-54ac-aef0-e541920d76b6")
-		(sheetname "01 FX loop driver")
-		(sheetfile "01_fx_loop_driver.kicad_sch")
-		(attr through_hole)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -13.222 -12.7035)
-			(end -13.222 12.7045)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "dac74303-455e-4203-8fe1-8ab279da961d")
-		)
-		(fp_line
-			(start -13.222 12.7045)
-			(end 13.223 12.7045)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "5d45cf91-e01b-437a-a565-64d83d608782")
-		)
-		(fp_line
-			(start 13.223 -12.7035)
-			(end -13.222 -12.7035)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "c5c4bf86-e871-4cf8-9353-bff9f19463e3")
-		)
-		(fp_line
-			(start 13.223 12.7045)
-			(end 13.223 -12.7035)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "575e4b11-4c7c-421f-a0da-a4c9432a6572")
-		)
-		(fp_poly
-			(pts
-				(xy -13.472 12.8081) (xy -13.3256 12.9545) (xy 13.3266 12.9545) (xy 13.473 12.8081) (xy 13.473 -12.8071)
-				(xy 13.3266 -12.9535) (xy -13.3256 -12.9535) (xy -13.472 -12.8071)
-			)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "06488dee-7a23-4ec0-8c06-2ab70a9c5dc9")
-		)
-		(fp_poly
-			(pts
-				(xy -13.222 12.7045) (xy 13.223 12.7045) (xy 13.223 -12.7035) (xy -13.222 -12.7035)
-			)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.Fab")
-			(uuid "6c8f40a2-c6ce-41aa-8a48-fc397b880b7b")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "ac81b4bf-6f71-4c51-8d16-df2f9a76e6cd")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" thru_hole circle
-			(at -8.491 6.1705)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U4B-A1)")
-			(uuid "f876128e-f95a-43a0-8a9b-0b9d4c6f074d")
-		)
-		(pad "2" thru_hole circle
-			(at -10.502 -0.0035)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U4B-G1)")
-			(uuid "ea6633ff-7a95-460c-822a-b7f9f2e19f16")
-		)
-		(pad "3" thru_hole circle
-			(at -8.5 -6.1665)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "/01 FX loop driver/HYPPY2")
-			(uuid "c91cb6bb-a211-439a-aa80-fe75e944afee")
-		)
-		(pad "4" thru_hole circle
-			(at -3.244 -9.9785)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "PWRH4")
-			(uuid "7c654d51-61cd-4dac-bce4-23e8484c7b32")
-		)
-		(pad "5" thru_hole circle
-			(at 3.245 -9.9835)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "PWRH5")
-			(uuid "0f717167-1381-4bee-a272-34b57d49eeb9")
-		)
-		(pad "6" thru_hole circle
-			(at 8.492 -6.1655)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "F")
-			(uuid "6a323b74-bfc9-4a96-8112-6af8fc60efe6")
-		)
-		(pad "7" thru_hole circle
-			(at 10.502 0.0075)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U4A-G2)")
-			(uuid "5c28971f-792c-420f-89bd-6060080c24af")
-		)
-		(pad "8" thru_hole circle
-			(at 8.5 6.1705)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U4A-K2)")
-			(uuid "793ce772-f5f7-4577-aec1-201f769bdc4d")
-		)
-		(pad "9" thru_hole circle
-			(at 3.245 9.9835)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "unconnected-(U4C-HCT-Pad9)")
-			(uuid "fab6d9eb-5243-49fa-b091-3654e843cc86")
-		)
-		(embedded_fonts no)
-	)
 	(footprint "tube_pi_fxloop:CP_Radial_D16.0mm_P7.50mm_21"
 		(layer "F.Cu")
 		(uuid "381b4ac3-12ce-41fb-a411-851a6d0ade68")
@@ -5658,7 +5445,7 @@
 		(descr "16 mm radial electrolytic P7.50, pads 2 = + (KiCad pad 1) / 1 = - (Proteus ELEC D16 R7.5) (tube_pi_fxloop, derived from Capacitor_THT:CP_Radial_D16.0mm_P7.50mm)")
 		(tags "CP Radial series Radial pin pitch 7.50mm diameter 16mm height 25mm Electrolytic Capacitor")
 		(property "Reference" "C36"
-			(at 3.75 -9.25 270)
+			(at -5.272511 -0.001256 0)
 			(layer "F.SilkS")
 			(uuid "5a7603f8-e943-4105-b377-f55ee1e828d4")
 			(effects
@@ -8590,13 +8377,13 @@
 		(at 85.725 74.93)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "PRERETURN"
-			(at 0 -2.844 0)
+			(at 0.001239 -2.431473 0)
 			(layer "F.SilkS")
 			(uuid "7165381b-0b09-46bd-a414-01aa8ce734e4")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.12)
 				)
 			)
 		)
@@ -8882,7 +8669,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R54"
-			(at 5.08 -2.37 90)
+			(at -1.843809 0 0)
 			(layer "F.SilkS")
 			(uuid "38ab345d-b6d0-47d5-b065-7d1e4a315231")
 			(effects
@@ -9173,7 +8960,7 @@
 		(descr "TO-92 inline, pads 1-3 2.032 mm apart (Proteus TO92) (tube_pi_fxloop, derived from Package_TO_SOT_THT:TO-92_Inline_Wide)")
 		(tags "to-92 sc-43 sc-43a sot54 PA33 transistor")
 		(property "Reference" "Q1"
-			(at 2.54 -3.56 270)
+			(at 6.907619 -0.36 0)
 			(layer "F.SilkS")
 			(uuid "550220c9-7115-4f17-8353-5eb7503b1dec")
 			(effects
@@ -9431,7 +9218,7 @@
 		(descr "DO-35 diode P10.16, pads K (KiCad pad 1, band) / A (tube_pi_fxloop, derived from Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal)")
 		(tags "Diode DO-35_SOD27 series Axial Horizontal pin pitch 10.16mm  length 4mm diameter 2mm")
 		(property "Reference" "D11"
-			(at 5.08 -2.12 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "c8ad00d6-10cb-456c-ae22-8b5c21b0650a")
 			(effects
@@ -9695,7 +9482,7 @@
 		(at -16.573 18.796)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "SEND2"
-			(at 0 -2.844 0)
+			(at -4.279615 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "3fd38875-e7ff-47ab-865e-459824578cac")
 			(effects
@@ -9804,7 +9591,7 @@
 		(at -27.368 36.004)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "SEND3W"
-			(at 0 -2.844 0)
+			(at 0.00124 2.546471 0)
 			(layer "F.SilkS")
 			(uuid "8b9644f6-afe2-4e57-b2c1-254090c6b13e")
 			(effects
@@ -9913,7 +9700,7 @@
 		(at -21.59 63.1825)
 		(descr "SPDT switch connection, three 3.048 mm pads / drill 1.524 (Proteus SPDT HOLES): 1 NO, 2 NC, 3 COM; body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A SW4)")
 		(property "Reference" "SW4"
-			(at 0 -5.0665 0)
+			(at 0 4.820209 0)
 			(layer "F.SilkS")
 			(uuid "814fb370-b319-436d-be86-179fc9ca4da4")
 			(effects
@@ -10233,7 +10020,7 @@
 		(at 85.725 67.945)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "PREPOWER"
-			(at 0 -2.844 0)
+			(at 2.543998 -0.000001 90)
 			(layer "F.SilkS")
 			(uuid "7b51c747-e0e3-45a8-badb-8cd9361e9e99")
 			(effects
@@ -10452,7 +10239,7 @@
 		(descr "DO-41 diode P10.16, pads K (KiCad pad 1, band) / A (tube_pi_fxloop, derived from Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal)")
 		(tags "Diode DO-41_SOD81 series Axial Horizontal pin pitch 10.16mm  length 5.2mm diameter 2.7mm")
 		(property "Reference" "D4"
-			(at 5.08 -2.47 270)
+			(at -2.143809 0 0)
 			(layer "F.SilkS")
 			(uuid "7de1856e-9765-448e-a1ad-e77f98c90a70")
 			(effects
@@ -12080,7 +11867,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R13"
-			(at 5.08 -2.37 180)
+			(at 12.718095 0 0)
 			(layer "F.SilkS")
 			(uuid "140a14e1-857a-43a4-b99b-9cd0022df53b")
 			(effects
@@ -12527,7 +12314,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R270"
-			(at 5.08 -2.37 270)
+			(at 5.08 -3.24 90)
 			(layer "F.SilkS")
 			(uuid "2cc36312-af5e-43d9-ab97-3e5086425962")
 			(effects
@@ -12708,7 +12495,7 @@
 		(at -22.225 55.245)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "D_PRIME"
-			(at 0 -2.844 0)
+			(at 0.00124 2.59409 0)
 			(layer "F.SilkS")
 			(uuid "3a6bf15d-6716-4951-8a1c-3d35bb6b698e")
 			(effects
@@ -13184,7 +12971,7 @@
 		(at -97.79 68.58)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "PIRETURN"
-			(at 0 -2.844 0)
+			(at 5.424952 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "8c7d1557-31b4-4cff-be25-bbe099e7d166")
 			(effects
@@ -13293,7 +13080,7 @@
 		(at 40.64 53.34)
 		(descr "Axial film capacitor 26.7 x 15.2 mm (Solen 1 uF, Proteus SOLEN 1U), pads 30.48 mm apart (tube_pi_fxloop, pads from IPC-D-356A C30)")
 		(property "Reference" "C30"
-			(at 0 -8.94 0)
+			(at 18.291904 0 0)
 			(layer "F.SilkS")
 			(uuid "09e13a4f-b238-4852-9ff3-3a04ba35bcb5")
 			(effects
@@ -13412,7 +13199,7 @@
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*5.0mm^2, Capacitor, R82, https://content.kemet.com/datasheets/KEM_F3101_R82.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 5.0mm Capacitor R82")
 		(property "Reference" "C32"
-			(at 2.5 -3.75 90)
+			(at -2.12 0 0)
 			(layer "F.SilkS")
 			(uuid "b8c116c6-974e-440b-b57b-0264559eebf6")
 			(effects
@@ -13582,7 +13369,7 @@
 		(at -12.065 63.1825)
 		(descr "SPDT switch connection, three 3.048 mm pads / drill 1.524 (Proteus SPDT HOLES): 1 NO, 2 NC, 3 COM; body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A SW4)")
 		(property "Reference" "SW5"
-			(at 0 -5.0665 0)
+			(at 0 4.7964 0)
 			(layer "F.SilkS")
 			(uuid "3d1dea5a-51b6-4145-92b1-0ba1ff767589")
 			(effects
@@ -13903,7 +13690,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R11"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "bd640c0f-6a61-4d5a-9ffa-a147fcfbd4eb")
 			(effects
@@ -14194,7 +13981,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R6"
-			(at 5.08 -2.37 90)
+			(at 11.98 0 0)
 			(layer "F.SilkS")
 			(uuid "e69e4851-5697-46a7-b255-7fae927eca50")
 			(effects
@@ -14376,7 +14163,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R19"
-			(at 5.08 -2.37 90)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "a2a29951-6208-4d0c-a77a-0dbd1beca579")
 			(effects
@@ -14816,7 +14603,7 @@
 		(descr "DO-41 diode P10.16, pads K (KiCad pad 1, band) / A (tube_pi_fxloop, derived from Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal)")
 		(tags "Diode DO-41_SOD81 series Axial Horizontal pin pitch 10.16mm  length 5.2mm diameter 2.7mm")
 		(property "Reference" "D3"
-			(at 5.08 -2.47 90)
+			(at 12.28 0 0)
 			(layer "F.SilkS")
 			(uuid "7e4362cc-caec-4f03-bbcb-08b56fc2dec6")
 			(effects
@@ -15345,7 +15132,7 @@
 		(at -64.135 60.325)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "FB"
-			(at 0 -2.844 0)
+			(at 0.00124 2.546471 0)
 			(layer "F.SilkS")
 			(uuid "e69fa80e-d7b5-4dcf-8e9d-187106c7e744")
 			(effects
@@ -15454,7 +15241,7 @@
 		(at -13.335 36.004)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "SEND2W"
-			(at 0 -2.844 0)
+			(at 0.00124 2.546471 0)
 			(layer "F.SilkS")
 			(uuid "541c09fd-882a-45c5-922f-894a6d37d869")
 			(effects
@@ -15564,7 +15351,7 @@
 		(descr "5 mm radial electrolytic, pads + (KiCad pad 1) / -, Proteus pads 2.54 mm apart (tube_pi_fxloop, derived from Capacitor_THT:CP_Radial_D5.0mm_P2.50mm)")
 		(tags "CP Radial series Radial pin pitch 2.50mm diameter 5mm height 7mm Electrolytic Capacitor")
 		(property "Reference" "C8"
-			(at 1.25 -3.75 180)
+			(at 1.248746 3.517491 0)
 			(layer "F.SilkS")
 			(uuid "b572442d-baea-4a86-8afe-6cbb98494ffc")
 			(effects
@@ -17185,7 +16972,7 @@
 		(descr "DO-41 diode P10.16, pads K (KiCad pad 1, band) / A (tube_pi_fxloop, derived from Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal)")
 		(tags "Diode DO-41_SOD81 series Axial Horizontal pin pitch 10.16mm  length 5.2mm diameter 2.7mm")
 		(property "Reference" "D6"
-			(at 5.08 -2.47 270)
+			(at -2.12 0 0)
 			(layer "F.SilkS")
 			(uuid "8eaec4b7-6b63-4f3a-98d4-a0856fb19355")
 			(effects
@@ -17450,7 +17237,7 @@
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*5.0mm^2, Capacitor, R82, https://content.kemet.com/datasheets/KEM_F3101_R82.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 5.0mm Capacitor R82")
 		(property "Reference" "C4"
-			(at 2.5 -3.75 90)
+			(at 2.5 3.829523 0)
 			(layer "F.SilkS")
 			(uuid "3e428bb8-9d7a-4669-9fd5-4b265595008c")
 			(effects
@@ -17802,7 +17589,7 @@
 		(at -1.905 51.435)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "VREF"
-			(at 0 -2.844 0)
+			(at 3.734476 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "d1c2d151-6f72-4142-9fb4-d0668072678a")
 			(effects
@@ -17912,7 +17699,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R18"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "f52cdec7-dae7-4f63-9c8e-b210267a662a")
 			(effects
@@ -18202,7 +17989,7 @@
 		(at -119 73)
 		(descr "Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net (tube_pi_fxloop, board-only)")
 		(property "Reference" "H9"
-			(at 0 -4.375 0)
+			(at 0.001256 -4.197508 0)
 			(layer "F.SilkS")
 			(uuid "8bddfd34-c4c3-42a3-a010-d3b47315331f")
 			(effects
@@ -18285,7 +18072,7 @@
 		(at 97.79 24.13)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "FX_PRIME"
-			(at 0 -2.844 0)
+			(at -5.374853 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "1849a0cb-f980-46b7-84b1-98fb1ae21ed2")
 			(effects
@@ -18394,7 +18181,7 @@
 		(at -50.64 41.275 180)
 		(descr "Film capacitor box 23.1 x 6.0 mm (100n Xicon, Proteus 100N XICON), pads 20.00 mm apart (tube_pi_fxloop, pads from IPC-D-356A C5)")
 		(property "Reference" "C9"
-			(at 0 -4.32 180)
+			(at 0 4.02 0)
 			(layer "F.SilkS")
 			(uuid "a69a5cda-53bc-4dc9-912a-69369f74eb5f")
 			(effects
@@ -21621,219 +21408,6 @@
 			)
 		)
 	)
-	(footprint "tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm"
-		(layer "F.Cu")
-		(uuid "9abda573-c28f-45e1-a044-835e906260c1")
-		(at -76.5899 25.2158)
-		(descr "Noval tube socket (Proteus 9-PIN BELTON NOVAL): 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A U4)")
-		(property "Reference" "U5"
-			(at 0 -14.0235 0)
-			(layer "F.SilkS")
-			(uuid "e235df30-970e-47d5-8028-e575420392a6")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "12AX7"
-			(at 0 14.0245 0)
-			(layer "F.Fab")
-			(uuid "e4ede4a1-dcb2-473c-a969-020bfb5d75e5")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "dc5d6dc5-98b7-4b5a-9ba4-4d56a7d1e9db")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "12AX7 / 12AT7 noval dual triode; Proteus pin ids A1=1 G1=2 K1=3 H1=4 H2=5 A2=6 G2=7 K2=8 HCT=9; unit 1 = triode 2 (6 7 8), unit 2 = triode 1 (1 2 3), unit 3 = heater (4 5 9)"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bbf06ade-59b8-41ad-9dfa-68e42eec7fa6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(path "/5a154276-1a0b-4f78-89be-5b2661bee824/dc4c69ec-247b-54e6-a79b-b064c9e7e374")
-		(sheetname "03 Phase inverter")
-		(sheetfile "03_phase_inverter.kicad_sch")
-		(attr through_hole)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -13.222 -12.7035)
-			(end -13.222 12.7045)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "989e4a9d-3830-4d0e-9a7e-70ebc18b32f2")
-		)
-		(fp_line
-			(start -13.222 12.7045)
-			(end 13.223 12.7045)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "9e49a607-46f2-4095-923b-ff900a1cf825")
-		)
-		(fp_line
-			(start 13.223 -12.7035)
-			(end -13.222 -12.7035)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "70a48757-bb1d-4536-9553-928d5b537c1d")
-		)
-		(fp_line
-			(start 13.223 12.7045)
-			(end 13.223 -12.7035)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "3cab3b81-d08e-4774-9194-6421a1af4809")
-		)
-		(fp_poly
-			(pts
-				(xy -13.472 12.8081) (xy -13.3256 12.9545) (xy 13.3266 12.9545) (xy 13.473 12.8081) (xy 13.473 -12.8071)
-				(xy 13.3266 -12.9535) (xy -13.3256 -12.9535) (xy -13.472 -12.8071)
-			)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "71220538-2711-44d7-9786-2dfb5188e379")
-		)
-		(fp_poly
-			(pts
-				(xy -13.222 12.7045) (xy 13.223 12.7045) (xy 13.223 -12.7035) (xy -13.222 -12.7035)
-			)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.Fab")
-			(uuid "13b4d6c7-a30e-4215-9eda-ba7fa7ffc64d")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "b86e7a9c-e407-45f8-b30c-79b34935177d")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" thru_hole circle
-			(at -8.491 6.1705)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U5B-A1)")
-			(uuid "f82830f2-de3f-494c-bb34-156226247785")
-		)
-		(pad "2" thru_hole circle
-			(at -10.502 -0.0035)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U5B-G1)")
-			(uuid "7edeacbf-67ff-4be1-bd5a-272dcec6fef5")
-		)
-		(pad "3" thru_hole circle
-			(at -8.5 -6.1665)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U5A-K2)")
-			(uuid "9c8927d9-1dc1-410b-bdd0-4bca102fb83e")
-		)
-		(pad "4" thru_hole circle
-			(at -3.244 -9.9785)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "PWRH4")
-			(uuid "0e7b95d7-477d-4855-a362-86816f88c74e")
-		)
-		(pad "5" thru_hole circle
-			(at 3.245 -9.9835)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "PWRH5")
-			(uuid "469a7713-e53a-4ce6-9aee-f92d330b7a3e")
-		)
-		(pad "6" thru_hole circle
-			(at 8.492 -6.1655)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U5A-A2)")
-			(uuid "01d9b118-e77c-4a6a-a51c-623334d9fd2a")
-		)
-		(pad "7" thru_hole circle
-			(at 10.502 0.0075)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U5A-G2)")
-			(uuid "357c9cf4-b406-4895-a485-1ce852c571da")
-		)
-		(pad "8" thru_hole circle
-			(at 8.5 6.1705)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "Net-(U5A-K2)")
-			(uuid "c026f2ef-ba9a-495d-a441-9d80a61861d7")
-		)
-		(pad "9" thru_hole circle
-			(at 3.245 9.9835)
-			(size 4.318 4.318)
-			(drill 1.727)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(net "unconnected-(U5C-HCT-Pad9)")
-			(uuid "a35b2513-dd36-49fa-95fb-e6c9de7ae55a")
-		)
-		(embedded_fonts no)
-	)
 	(footprint "tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "9c78b8ba-ab8b-4dc0-9d69-90fecb8288ef")
@@ -21841,7 +21415,7 @@
 		(descr "2 W axial metal film resistor DIN0414, Proteus pads 19.05 mm apart (tube_pi_fxloop, derived from Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P20.32mm_Horizontal)")
 		(tags "Resistor Axial_DIN0414 series Axial Horizontal pin pitch 20.32mm 2W length 11.9mm diameter 4.5mm")
 		(property "Reference" "R45"
-			(at 10.16 -3.37 180)
+			(at 10.16 3.293809 0)
 			(layer "F.SilkS")
 			(uuid "e2cf16a3-d60f-47ed-936a-601f4ece96a3")
 			(effects
@@ -22022,7 +21596,7 @@
 		(at -50.64 28.575)
 		(descr "Film capacitor box 23.1 x 6.0 mm (100n Xicon, Proteus 100N XICON), pads 20.00 mm apart (tube_pi_fxloop, pads from IPC-D-356A C5)")
 		(property "Reference" "C5"
-			(at 0 -4.32 0)
+			(at 0 4.02 0)
 			(layer "F.SilkS")
 			(uuid "8e777046-f050-4f3c-8cbb-2a594bb24a60")
 			(effects
@@ -22751,7 +22325,7 @@
 		(at 95.885 67.31)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "EQGND"
-			(at 0 -2.844 0)
+			(at 0.001239 -2.594092 0)
 			(layer "F.SilkS")
 			(uuid "de74e58d-3221-4231-b79b-be2db02ce4e2")
 			(effects
@@ -23270,7 +22844,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R50"
-			(at 5.08 -2.37 0)
+			(at 5.08 2.27 0)
 			(layer "F.SilkS")
 			(uuid "0eb47e7d-df77-4dc9-acfe-6bbb6ba90b8f")
 			(effects
@@ -23451,7 +23025,7 @@
 		(at -106.045 15.875)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "P6"
-			(at 0 -2.844 0)
+			(at 0.00124 -2.546473 0)
 			(layer "F.SilkS")
 			(uuid "cc78d036-51d3-45f7-aa16-3bbaa3bcfb26")
 			(effects
@@ -23560,7 +23134,7 @@
 		(at 97 73)
 		(descr "Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net (tube_pi_fxloop, board-only)")
 		(property "Reference" "H10"
-			(at 0 -4.375 0)
+			(at -4.954392 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "66b77f1e-ab2d-499d-93ff-5cfd22698918")
 			(effects
@@ -23753,7 +23327,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R5"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "6a052fb5-cd35-45eb-ba97-d99054184def")
 			(effects
@@ -23934,7 +23508,7 @@
 		(at -15.875 55.245)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "A"
-			(at 0 -2.844 0)
+			(at 0.00124 2.546471 0)
 			(layer "F.SilkS")
 			(uuid "6cf161df-37c5-46b0-9d6c-4e2931ad3498")
 			(effects
@@ -24226,7 +23800,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R12"
-			(at 5.08 -2.37 270)
+			(at 11.98 0 0)
 			(layer "F.SilkS")
 			(uuid "eb20f199-4b90-4578-90f7-3671a638c6a0")
 			(effects
@@ -24590,7 +24164,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R17"
-			(at 5.08 -2.37 270)
+			(at 11.98 0 0)
 			(layer "F.SilkS")
 			(uuid "198b93fb-6782-446b-b96b-8680035deafc")
 			(effects
@@ -25146,7 +24720,7 @@
 		(descr "DO-41 diode P10.16, pads K (KiCad pad 1, band) / A (tube_pi_fxloop, derived from Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal)")
 		(tags "Diode DO-41_SOD81 series Axial Horizontal pin pitch 10.16mm  length 5.2mm diameter 2.7mm")
 		(property "Reference" "D5"
-			(at 5.08 -2.47 270)
+			(at -2.12 0 0)
 			(layer "F.SilkS")
 			(uuid "aaebff0f-0d7a-4d15-b363-cd444be480be")
 			(effects
@@ -25702,7 +25276,7 @@
 		(descr "C, Rect series, Radial, pin pitch=5.00mm, length*width=7.2*5.0mm^2, Capacitor, R82, https://content.kemet.com/datasheets/KEM_F3101_R82.pdf")
 		(tags "C Rect series Radial pin pitch 5.00mm length 7.2mm width 5.0mm Capacitor R82")
 		(property "Reference" "C7"
-			(at 2.5 -3.75 90)
+			(at -2.12 1.910477 0)
 			(layer "F.SilkS")
 			(uuid "9bd5e552-895b-438a-baf6-46c8247e6c9a")
 			(effects
@@ -26247,7 +25821,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R25"
-			(at 5.08 -2.37 0)
+			(at 5.08 2.27 0)
 			(layer "F.SilkS")
 			(uuid "502a742d-4c1d-436b-9c5b-7c10e995714f")
 			(effects
@@ -26428,7 +26002,7 @@
 		(at 97.79 42.545)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "SW3"
-			(at 0 -2.844 0)
+			(at -3.374853 -2.546473 0)
 			(layer "F.SilkS")
 			(uuid "0ad345c2-80b9-492a-bfe2-f67a2212b572")
 			(effects
@@ -26994,7 +26568,7 @@
 		(at 97.79 47.625)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "FX"
-			(at 0 -2.844 0)
+			(at 0.001239 -2.546473 0)
 			(layer "F.SilkS")
 			(uuid "6d071bb2-fa66-451f-9deb-bbd62cc22d76")
 			(effects
@@ -27104,7 +26678,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R28"
-			(at 5.08 -2.37 0)
+			(at -2.558095 0 0)
 			(layer "F.SilkS")
 			(uuid "cb15c5e8-3e0f-450e-8d54-bd9e9eaee085")
 			(effects
@@ -27286,7 +26860,7 @@
 		(descr "DO-41 diode P10.16, pads K (KiCad pad 1, band) / A (tube_pi_fxloop, derived from Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal)")
 		(tags "Diode DO-41_SOD81 series Axial Horizontal pin pitch 10.16mm  length 5.2mm diameter 2.7mm")
 		(property "Reference" "D1"
-			(at 5.08 -2.47 90)
+			(at 12.28 0 0)
 			(layer "F.SilkS")
 			(uuid "be5e8193-33a5-4ca9-9829-d7b909e1a07f")
 			(effects
@@ -27551,7 +27125,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R27"
-			(at 5.08 -2.37 0)
+			(at -2.581904 0 0)
 			(layer "F.SilkS")
 			(uuid "0e00d286-a98e-4639-8c00-eaa4deacab7f")
 			(effects
@@ -27732,7 +27306,7 @@
 		(at 97.79 38.1)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "SW2"
-			(at 0 -2.844 0)
+			(at 0.001239 -2.546473 0)
 			(layer "F.SilkS")
 			(uuid "7b7d13f5-23e4-43dc-9501-dc142c8b38b0")
 			(effects
@@ -27841,7 +27415,7 @@
 		(at -9.525 55.245)
 		(descr "Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524 (tube_pi_fxloop, pads from IPC-D-356A EQOUT)")
 		(property "Reference" "C_PRIME"
-			(at 0 -2.844 0)
+			(at 0.00124 2.59409 0)
 			(layer "F.SilkS")
 			(uuid "9c3c31f8-9d98-44d3-b0ba-53023d07aca1")
 			(effects
@@ -28230,7 +27804,7 @@
 		(at 97 11)
 		(descr "Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net (tube_pi_fxloop, board-only)")
 		(property "Reference" "H2"
-			(at 0 -4.375 0)
+			(at 0.001255 4.197506 0)
 			(layer "F.SilkS")
 			(uuid "b82b6306-0151-4fa8-b2a4-eb8980e5c15f")
 			(effects
@@ -28754,7 +28328,7 @@
 		(descr "TO-92 inline, pads 1-3 2.032 mm apart (Proteus TO92) (tube_pi_fxloop, derived from Package_TO_SOT_THT:TO-92_Inline_Wide)")
 		(tags "to-92 sc-43 sc-43a sot54 PA33 transistor")
 		(property "Reference" "Q3"
-			(at 2.54 -3.56 270)
+			(at 6.907619 -0.36 0)
 			(layer "F.SilkS")
 			(uuid "ba964a22-d4d3-4f36-8044-45a93e034870")
 			(effects
@@ -29012,7 +28586,7 @@
 		(descr "16 mm radial electrolytic P7.50, pads 2 = + (KiCad pad 1) / 1 = - (Proteus ELEC D16 R7.5) (tube_pi_fxloop, derived from Capacitor_THT:CP_Radial_D16.0mm_P7.50mm)")
 		(tags "CP Radial series Radial pin pitch 7.50mm diameter 16mm height 25mm Electrolytic Capacitor")
 		(property "Reference" "C37"
-			(at 3.75 -9.25 270)
+			(at -5.272511 -0.001256 0)
 			(layer "F.SilkS")
 			(uuid "df929dc0-9c35-4dd4-b4c5-862c423d5339")
 			(effects
@@ -32156,7 +31730,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R3"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "6f5ea3d7-37a4-4114-bc3a-8107d01eabd1")
 			(effects
@@ -32894,7 +32468,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R16"
-			(at 5.08 -2.37 270)
+			(at -1.82 0 0)
 			(layer "F.SilkS")
 			(uuid "015e79c1-21d7-45a9-8998-f8c5debfe1ef")
 			(effects
@@ -33340,7 +32914,7 @@
 		(at 51 41)
 		(descr "Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net (tube_pi_fxloop, board-only)")
 		(property "Reference" "H8"
-			(at 0 -4.375 0)
+			(at -4.478202 -0.000001 0)
 			(layer "F.SilkS")
 			(uuid "6f95591f-3d72-4e2c-bde0-80e49ff0836b")
 			(effects
@@ -33414,6 +32988,442 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(uuid "0bc6fbf6-90cf-4aa0-8312-bf38e0b5bd8a")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm"
+		(layer "B.Cu")
+		(uuid "3799c4fb-dfe4-49df-9f79-d5761af2d5a4")
+		(at 45.956 24.9445 180)
+		(descr "Noval tube socket (Proteus 9-PIN BELTON NOVAL), standard noval numbering, mounted on the solder side: 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A U4)")
+		(property "Reference" "U4"
+			(at 0 14.0235 0)
+			(layer "B.SilkS")
+			(uuid "3cdd893d-2822-47aa-b077-93304402f8a7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "12AT7"
+			(at 0 -14.0245 0)
+			(layer "B.Fab")
+			(uuid "f2a753b1-0a0c-426e-8bfa-52da1797992d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b85c095c-5ecb-4bb9-ae8f-1a6814c19170")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" "12AX7 / 12AT7 noval dual triode; Proteus pin ids A1=1 G1=2 K1=3 H1=4 H2=5 A2=6 G2=7 K2=8 HCT=9; unit 1 = triode 2 (6 7 8), unit 2 = triode 1 (1 2 3), unit 3 = heater (4 5 9)"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e0093cee-c908-4c4c-ad8c-41e64a581241")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(path "/6d2054c3-a101-4ddb-b7e6-76c429c33c44/7360fe71-3c75-54ac-aef0-e541920d76b6")
+		(sheetname "01 FX loop driver")
+		(sheetfile "01_fx_loop_driver.kicad_sch")
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start 13.222 12.7035)
+			(end 13.222 -12.7045)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "dac74303-455e-4203-8fe1-8ab279da961d")
+		)
+		(fp_line
+			(start 13.222 -12.7045)
+			(end -13.223 -12.7045)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "5d45cf91-e01b-437a-a565-64d83d608782")
+		)
+		(fp_line
+			(start -13.223 12.7035)
+			(end 13.222 12.7035)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "c5c4bf86-e871-4cf8-9353-bff9f19463e3")
+		)
+		(fp_line
+			(start -13.223 -12.7045)
+			(end -13.223 12.7035)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "575e4b11-4c7c-421f-a0da-a4c9432a6572")
+		)
+		(fp_poly
+			(pts
+				(xy -13.473 -12.8081) (xy -13.3266 -12.9545) (xy 13.3256 -12.9545) (xy 13.472 -12.8081) (xy 13.472 12.8071)
+				(xy 13.3256 12.9535) (xy -13.3266 12.9535) (xy -13.473 12.8071)
+			)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "06488dee-7a23-4ec0-8c06-2ab70a9c5dc9")
+		)
+		(fp_poly
+			(pts
+				(xy 13.222 -12.7045) (xy -13.223 -12.7045) (xy -13.223 12.7035) (xy 13.222 12.7035)
+			)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.Fab")
+			(uuid "6c8f40a2-c6ce-41aa-8a48-fc397b880b7b")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(uuid "ac81b4bf-6f71-4c51-8d16-df2f9a76e6cd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(pad "1" thru_hole circle
+			(at 8.491 -6.1705 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U4B-A1)")
+			(uuid "f876128e-f95a-43a0-8a9b-0b9d4c6f074d")
+		)
+		(pad "2" thru_hole circle
+			(at 10.502 0.0035 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U4B-G1)")
+			(uuid "ea6633ff-7a95-460c-822a-b7f9f2e19f16")
+		)
+		(pad "3" thru_hole circle
+			(at 8.5 6.1665 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "/01 FX loop driver/HYPPY2")
+			(uuid "c91cb6bb-a211-439a-aa80-fe75e944afee")
+		)
+		(pad "4" thru_hole circle
+			(at 3.244 9.9785 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "PWRH4")
+			(uuid "7c654d51-61cd-4dac-bce4-23e8484c7b32")
+		)
+		(pad "5" thru_hole circle
+			(at -3.245 9.9835 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "PWRH5")
+			(uuid "0f717167-1381-4bee-a272-34b57d49eeb9")
+		)
+		(pad "6" thru_hole circle
+			(at -8.492 6.1655 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "F")
+			(uuid "6a323b74-bfc9-4a96-8112-6af8fc60efe6")
+		)
+		(pad "7" thru_hole circle
+			(at -10.502 -0.0075 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U4A-G2)")
+			(uuid "5c28971f-792c-420f-89bd-6060080c24af")
+		)
+		(pad "8" thru_hole circle
+			(at -8.5 -6.1705 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U4A-K2)")
+			(uuid "793ce772-f5f7-4577-aec1-201f769bdc4d")
+		)
+		(pad "9" thru_hole circle
+			(at -3.245 -9.9835 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "unconnected-(U4C-HCT-Pad9)")
+			(uuid "fab6d9eb-5243-49fa-b091-3654e843cc86")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm"
+		(layer "B.Cu")
+		(uuid "9abda573-c28f-45e1-a044-835e906260c1")
+		(at -76.5899 25.2158 180)
+		(descr "Noval tube socket (Proteus 9-PIN BELTON NOVAL), standard noval numbering, mounted on the solder side: 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, body = the Proteus assembly outline (tube_pi_fxloop, pads from IPC-D-356A U4)")
+		(property "Reference" "U5"
+			(at 0 14.0235 0)
+			(layer "B.SilkS")
+			(uuid "e235df30-970e-47d5-8028-e575420392a6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "12AX7"
+			(at 0 -14.0245 0)
+			(layer "B.Fab")
+			(uuid "e4ede4a1-dcb2-473c-a969-020bfb5d75e5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "dc5d6dc5-98b7-4b5a-9ba4-4d56a7d1e9db")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" "12AX7 / 12AT7 noval dual triode; Proteus pin ids A1=1 G1=2 K1=3 H1=4 H2=5 A2=6 G2=7 K2=8 HCT=9; unit 1 = triode 2 (6 7 8), unit 2 = triode 1 (1 2 3), unit 3 = heater (4 5 9)"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "bbf06ade-59b8-41ad-9dfa-68e42eec7fa6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(path "/5a154276-1a0b-4f78-89be-5b2661bee824/dc4c69ec-247b-54e6-a79b-b064c9e7e374")
+		(sheetname "03 Phase inverter")
+		(sheetfile "03_phase_inverter.kicad_sch")
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start 13.222 12.7035)
+			(end 13.222 -12.7045)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "989e4a9d-3830-4d0e-9a7e-70ebc18b32f2")
+		)
+		(fp_line
+			(start 13.222 -12.7045)
+			(end -13.223 -12.7045)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "9e49a607-46f2-4095-923b-ff900a1cf825")
+		)
+		(fp_line
+			(start -13.223 12.7035)
+			(end 13.222 12.7035)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "70a48757-bb1d-4536-9553-928d5b537c1d")
+		)
+		(fp_line
+			(start -13.223 -12.7045)
+			(end -13.223 12.7035)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "3cab3b81-d08e-4774-9194-6421a1af4809")
+		)
+		(fp_poly
+			(pts
+				(xy -13.473 -12.8081) (xy -13.3266 -12.9545) (xy 13.3256 -12.9545) (xy 13.472 -12.8081) (xy 13.472 12.8071)
+				(xy 13.3256 12.9535) (xy -13.3266 12.9535) (xy -13.473 12.8071)
+			)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "71220538-2711-44d7-9786-2dfb5188e379")
+		)
+		(fp_poly
+			(pts
+				(xy 13.222 -12.7045) (xy -13.223 -12.7045) (xy -13.223 12.7035) (xy 13.222 12.7035)
+			)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.Fab")
+			(uuid "13b4d6c7-a30e-4215-9eda-ba7fa7ffc64d")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(uuid "b86e7a9c-e407-45f8-b30c-79b34935177d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(pad "1" thru_hole circle
+			(at 8.491 -6.1705 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U5B-A1)")
+			(uuid "f82830f2-de3f-494c-bb34-156226247785")
+		)
+		(pad "2" thru_hole circle
+			(at 10.502 0.0035 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U5B-G1)")
+			(uuid "7edeacbf-67ff-4be1-bd5a-272dcec6fef5")
+		)
+		(pad "3" thru_hole circle
+			(at 8.5 6.1665 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U5A-K2)")
+			(uuid "9c8927d9-1dc1-410b-bdd0-4bca102fb83e")
+		)
+		(pad "4" thru_hole circle
+			(at 3.244 9.9785 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "PWRH4")
+			(uuid "0e7b95d7-477d-4855-a362-86816f88c74e")
+		)
+		(pad "5" thru_hole circle
+			(at -3.245 9.9835 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "PWRH5")
+			(uuid "469a7713-e53a-4ce6-9aee-f92d330b7a3e")
+		)
+		(pad "6" thru_hole circle
+			(at -8.492 6.1655 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U5A-A2)")
+			(uuid "01d9b118-e77c-4a6a-a51c-623334d9fd2a")
+		)
+		(pad "7" thru_hole circle
+			(at -10.502 -0.0075 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U5A-G2)")
+			(uuid "357c9cf4-b406-4895-a485-1ce852c571da")
+		)
+		(pad "8" thru_hole circle
+			(at -8.5 -6.1705 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "Net-(U5A-K2)")
+			(uuid "c026f2ef-ba9a-495d-a441-9d80a61861d7")
+		)
+		(pad "9" thru_hole circle
+			(at -3.245 -9.9835 180)
+			(size 4.318 4.318)
+			(drill 1.727)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(net "unconnected-(U5C-HCT-Pad9)")
+			(uuid "a35b2513-dd36-49fa-95fb-e6c9de7ae55a")
 		)
 		(embedded_fonts no)
 	)
@@ -36578,134 +36588,6 @@
 		(uuid "f1904d8e-e090-4aef-b1e1-7bf27d174c75")
 	)
 	(segment
-		(start 5.08 10.16)
-		(end 20.24921 10.16)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "2796d995-61b7-4cd6-ae4c-ed0bd6649e8b")
-	)
-	(segment
-		(start 21.59 11.43)
-		(end 21.59 19.05)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "822f4f34-7662-41d8-ba94-52c79c7d1db3")
-	)
-	(segment
-		(start 20.24921 10.16)
-		(end 21.59 11.43)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "970088cc-d71b-44cf-9e66-406547af896e")
-	)
-	(segment
-		(start 1.905 13.335)
-		(end -5.08 13.335)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "b63b84d3-d228-4422-9c9d-f8b3498fc868")
-	)
-	(segment
-		(start 33.655 31.115)
-		(end 37.465 31.115)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "ba39fbc3-4526-45ea-a3eb-a968a783655c")
-	)
-	(segment
-		(start 21.59 19.05)
-		(end 33.655 31.115)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "f0f95d70-0588-446f-b307-fbe623aadcd1")
-	)
-	(segment
-		(start 1.905 13.335)
-		(end 5.08 10.16)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U4B-A1)")
-		(uuid "ffd112dc-162a-42c1-80bd-39d5fa3dd00a")
-	)
-	(segment
-		(start 31.395 23.84)
-		(end 31.395 27.58)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U4B-G1)")
-		(uuid "1861a20a-9963-4a94-887c-6e0c76a7cb23")
-	)
-	(segment
-		(start 31.395 27.58)
-		(end 26.035 32.939999)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U4B-G1)")
-		(uuid "22ccddca-c03d-4bf0-8178-d2404c15f631")
-	)
-	(segment
-		(start 31.395 23.84)
-		(end 34.35278 23.84)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U4B-G1)")
-		(uuid "3837c155-98b1-4cf9-ad5f-791ded71c0a2")
-	)
-	(segment
-		(start 34.35278 23.84)
-		(end 35.45431 24.94153)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U4B-G1)")
-		(uuid "9c727fda-5a51-45a2-8728-441dddc16f9b")
-	)
-	(segment
-		(start 43.18 43.18)
-		(end 45.085 43.18)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "/01 FX loop driver/HYPPY2")
-		(uuid "04005e29-971b-4a43-baeb-18d7da844706")
-	)
-	(segment
-		(start 41.275 38.1)
-		(end 41.275 41.275)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "/01 FX loop driver/HYPPY2")
-		(uuid "06c87b3e-7931-4e90-bc88-7d6d31f72cd7")
-	)
-	(segment
-		(start 41.275 38.1)
-		(end 41.275 22.59693)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "/01 FX loop driver/HYPPY2")
-		(uuid "0d448cec-3022-4908-9bff-d89d7cb3e5c1")
-	)
-	(segment
-		(start 41.275 41.275)
-		(end 43.18 43.18)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "/01 FX loop driver/HYPPY2")
-		(uuid "2e0caf2b-b0d9-42a3-a7d1-d6f39253ab13")
-	)
-	(segment
-		(start 41.275 22.59693)
-		(end 37.45674 18.77867)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "/01 FX loop driver/HYPPY2")
-		(uuid "30d64179-c6ea-46b6-83d4-4b21a0b9f040")
-	)
-	(segment
 		(start 67.395 54.685)
 		(end 68.378 53.542)
 		(width 0.508)
@@ -36834,44 +36716,36 @@
 		(uuid "f8df94aa-cc12-4a40-8661-39d2fc5acf9f")
 	)
 	(segment
-		(start 58.42 65.405)
-		(end 60.325 65.405)
+		(start 31.395 23.84)
+		(end 31.395 27.58)
 		(width 0.508)
 		(layer "F.Cu")
-		(net "Net-(U4A-K2)")
-		(uuid "44f711d6-146e-4f35-b382-bd291f6163d2")
+		(net "Net-(U4B-G1)")
+		(uuid "1861a20a-9963-4a94-887c-6e0c76a7cb23")
 	)
 	(segment
-		(start 55.88 32.53926)
-		(end 54.45642 31.11568)
+		(start 31.395 27.58)
+		(end 26.035 32.939999)
 		(width 0.508)
 		(layer "F.Cu")
-		(net "Net-(U4A-K2)")
-		(uuid "679bc56d-43c3-4c49-8d25-e8fbe42a7c46")
+		(net "Net-(U4B-G1)")
+		(uuid "22ccddca-c03d-4bf0-8178-d2404c15f631")
 	)
 	(segment
-		(start 55.88 53.34)
-		(end 55.88 62.865)
+		(start 31.395 23.84)
+		(end 34.35278 23.84)
 		(width 0.508)
 		(layer "F.Cu")
-		(net "Net-(U4A-K2)")
-		(uuid "71d14120-20e8-4f20-890a-356632e04434")
+		(net "Net-(U4B-G1)")
+		(uuid "3837c155-98b1-4cf9-ad5f-791ded71c0a2")
 	)
 	(segment
-		(start 55.88 53.34)
-		(end 55.88 32.53926)
+		(start 34.35278 23.84)
+		(end 35.45431 24.94153)
 		(width 0.508)
 		(layer "F.Cu")
-		(net "Net-(U4A-K2)")
-		(uuid "b7bc9423-cf9e-4e95-a71c-ff6c99ac5e65")
-	)
-	(segment
-		(start 55.88 62.865)
-		(end 58.42 65.405)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U4A-K2)")
-		(uuid "f6c0cd80-41ee-4941-a81f-f24d7e9f1a48")
+		(net "Net-(U4B-G1)")
+		(uuid "9c727fda-5a51-45a2-8728-441dddc16f9b")
 	)
 	(segment
 		(start 13.97 16.27)
@@ -37162,6 +37036,46 @@
 		(uuid "d8ec3c2c-1023-466b-84fc-42f9919f4218")
 	)
 	(segment
+		(start 43.18 43.18)
+		(end 45.085 43.18)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "/01 FX loop driver/HYPPY2")
+		(uuid "04005e29-971b-4a43-baeb-18d7da844706")
+	)
+	(segment
+		(start 41.275 38.1)
+		(end 41.275 41.275)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "/01 FX loop driver/HYPPY2")
+		(uuid "06c87b3e-7931-4e90-bc88-7d6d31f72cd7")
+	)
+	(segment
+		(start 41.275 38.1)
+		(end 41.275 22.59693)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "/01 FX loop driver/HYPPY2")
+		(uuid "0d448cec-3022-4908-9bff-d89d7cb3e5c1")
+	)
+	(segment
+		(start 41.275 41.275)
+		(end 43.18 43.18)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "/01 FX loop driver/HYPPY2")
+		(uuid "2e0caf2b-b0d9-42a3-a7d1-d6f39253ab13")
+	)
+	(segment
+		(start 41.275 22.59693)
+		(end 37.45674 18.77867)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "/01 FX loop driver/HYPPY2")
+		(uuid "30d64179-c6ea-46b6-83d4-4b21a0b9f040")
+	)
+	(segment
 		(start -4.5085 19.431)
 		(end -4.5085 23.241)
 		(width 0.508)
@@ -37184,6 +37098,46 @@
 		(layer "F.Cu")
 		(net "Net-(Q2-D)")
 		(uuid "dd58ac56-e795-49fa-b3be-ccec03188d0a")
+	)
+	(segment
+		(start 58.42 65.405)
+		(end 60.325 65.405)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U4A-K2)")
+		(uuid "44f711d6-146e-4f35-b382-bd291f6163d2")
+	)
+	(segment
+		(start 55.88 32.53926)
+		(end 54.45642 31.11568)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U4A-K2)")
+		(uuid "679bc56d-43c3-4c49-8d25-e8fbe42a7c46")
+	)
+	(segment
+		(start 55.88 53.34)
+		(end 55.88 62.865)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U4A-K2)")
+		(uuid "71d14120-20e8-4f20-890a-356632e04434")
+	)
+	(segment
+		(start 55.88 53.34)
+		(end 55.88 32.53926)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U4A-K2)")
+		(uuid "b7bc9423-cf9e-4e95-a71c-ff6c99ac5e65")
+	)
+	(segment
+		(start 55.88 62.865)
+		(end 58.42 65.405)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U4A-K2)")
+		(uuid "f6c0cd80-41ee-4941-a81f-f24d7e9f1a48")
 	)
 	(segment
 		(start -57.15 21.59)
@@ -37274,6 +37228,126 @@
 		(uuid "bec51a25-f4dd-47ce-9451-c165a2cacd6c")
 	)
 	(segment
+		(start 5.08 10.16)
+		(end 20.24921 10.16)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "2796d995-61b7-4cd6-ae4c-ed0bd6649e8b")
+	)
+	(segment
+		(start 21.59 11.43)
+		(end 21.59 19.05)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "822f4f34-7662-41d8-ba94-52c79c7d1db3")
+	)
+	(segment
+		(start 20.24921 10.16)
+		(end 21.59 11.43)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "970088cc-d71b-44cf-9e66-406547af896e")
+	)
+	(segment
+		(start 1.905 13.335)
+		(end -5.08 13.335)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "b63b84d3-d228-4422-9c9d-f8b3498fc868")
+	)
+	(segment
+		(start 33.655 31.115)
+		(end 37.465 31.115)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "ba39fbc3-4526-45ea-a3eb-a968a783655c")
+	)
+	(segment
+		(start 21.59 19.05)
+		(end 33.655 31.115)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "f0f95d70-0588-446f-b307-fbe623aadcd1")
+	)
+	(segment
+		(start 1.905 13.335)
+		(end 5.08 10.16)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U4B-A1)")
+		(uuid "ffd112dc-162a-42c1-80bd-39d5fa3dd00a")
+	)
+	(segment
+		(start -31.75 64.254999)
+		(end -35.44 67.945)
+		(width 1.524)
+		(layer "F.Cu")
+		(net "G")
+		(uuid "2a471f21-beac-4adf-8970-ec4cc61c6156")
+	)
+	(segment
+		(start -35.44 67.945)
+		(end -41.275 67.945)
+		(width 1.524)
+		(layer "F.Cu")
+		(net "G")
+		(uuid "bce61ee7-a059-4682-927b-051448f791d3")
+	)
+	(segment
+		(start -25.52 70.485)
+		(end -31.75 64.254999)
+		(width 1.27)
+		(layer "F.Cu")
+		(net "G")
+		(uuid "c2ed47b6-bf2e-4f65-a176-d81e9df7b1f4")
+	)
+	(segment
+		(start 18.415 70.485)
+		(end -25.52 70.485)
+		(width 1.27)
+		(layer "F.Cu")
+		(net "G")
+		(uuid "e8b8dd88-5da1-4370-8ad4-d09311d682ad")
+	)
+	(segment
+		(start -24.13 13.335)
+		(end -32.384999 13.335)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "G")
+		(uuid "294cee8b-5076-40bc-8c01-1c74b6467c86")
+	)
+	(segment
+		(start -36.195 17.145)
+		(end -36.195 59.81)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "G")
+		(uuid "2f18a20a-d009-41c6-97f1-d4ced56db736")
+	)
+	(segment
+		(start -32.384999 13.335)
+		(end -36.195 17.145)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "G")
+		(uuid "515c88cd-c779-435d-afd6-c8ba77f441fe")
+	)
+	(segment
+		(start -36.195 59.81)
+		(end -31.75 64.254999)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "G")
+		(uuid "53a4e1ad-0968-4e78-9586-19571c0d6427")
+	)
+	(segment
 		(start -82.55001 22.225)
 		(end -85.53787 25.21286)
 		(width 0.508)
@@ -37344,134 +37418,6 @@
 		(layer "B.Cu")
 		(net "Net-(U5B-G1)")
 		(uuid "e29adcf9-e6f6-48cc-abad-dda9bee07c3d")
-	)
-	(segment
-		(start -62.23 26.67001)
-		(end -62.23 23.495)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "5171e097-6e0a-451b-a5ca-13a9184b43b5")
-	)
-	(segment
-		(start -66.947 31.38701)
-		(end -62.23 26.67001)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "9979fd8f-84a1-4804-85ce-8477bba935fb")
-	)
-	(segment
-		(start -68.09032 31.38701)
-		(end -66.947 31.38701)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "a7d79740-4f08-461a-9ee0-1281bfaa26b0")
-	)
-	(segment
-		(start -62.23 23.495)
-		(end -52.705 13.97)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "c7c06bc4-24d2-479f-bb96-475c6063cd83")
-	)
-	(segment
-		(start -79.375 24.765)
-		(end -85.09 19.05)
-		(width 0.508)
-		(layer "F.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "cece2525-8e28-4894-bed0-15af57ef9438")
-	)
-	(via
-		(at -79.375 24.765)
-		(size 1.27)
-		(drill 0.508)
-		(layers "F.Cu" "B.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "3f8ac745-0e0c-4fa3-b866-97ad23a257b7")
-	)
-	(segment
-		(start -68.09032 31.38701)
-		(end -73.66 24.765)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "3eafa898-cfdd-4b37-a0a5-5a8fd3d4ced7")
-	)
-	(segment
-		(start -73.66 24.765)
-		(end -79.375 24.765)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "Net-(U5A-K2)")
-		(uuid "90bcc0f2-3554-43b2-8917-0f3c713c332c")
-	)
-	(segment
-		(start -31.75 64.254999)
-		(end -35.44 67.945)
-		(width 1.524)
-		(layer "F.Cu")
-		(net "G")
-		(uuid "2a471f21-beac-4adf-8970-ec4cc61c6156")
-	)
-	(segment
-		(start -35.44 67.945)
-		(end -41.275 67.945)
-		(width 1.524)
-		(layer "F.Cu")
-		(net "G")
-		(uuid "bce61ee7-a059-4682-927b-051448f791d3")
-	)
-	(segment
-		(start -25.52 70.485)
-		(end -31.75 64.254999)
-		(width 1.27)
-		(layer "F.Cu")
-		(net "G")
-		(uuid "c2ed47b6-bf2e-4f65-a176-d81e9df7b1f4")
-	)
-	(segment
-		(start 18.415 70.485)
-		(end -25.52 70.485)
-		(width 1.27)
-		(layer "F.Cu")
-		(net "G")
-		(uuid "e8b8dd88-5da1-4370-8ad4-d09311d682ad")
-	)
-	(segment
-		(start -24.13 13.335)
-		(end -32.384999 13.335)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "G")
-		(uuid "294cee8b-5076-40bc-8c01-1c74b6467c86")
-	)
-	(segment
-		(start -36.195 17.145)
-		(end -36.195 59.81)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "G")
-		(uuid "2f18a20a-d009-41c6-97f1-d4ced56db736")
-	)
-	(segment
-		(start -32.384999 13.335)
-		(end -36.195 17.145)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "G")
-		(uuid "515c88cd-c779-435d-afd6-c8ba77f441fe")
-	)
-	(segment
-		(start -36.195 59.81)
-		(end -31.75 64.254999)
-		(width 0.508)
-		(layer "B.Cu")
-		(net "G")
-		(uuid "53a4e1ad-0968-4e78-9586-19571c0d6427")
 	)
 	(segment
 		(start -15.875 55.245)
@@ -37608,6 +37554,70 @@
 		(layer "B.Cu")
 		(net "Net-(C_PRIME-Pad1)")
 		(uuid "c8b38639-8055-48e3-a1f2-eb8a03f97068")
+	)
+	(segment
+		(start -62.23 26.67001)
+		(end -62.23 23.495)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "5171e097-6e0a-451b-a5ca-13a9184b43b5")
+	)
+	(segment
+		(start -66.947 31.38701)
+		(end -62.23 26.67001)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "9979fd8f-84a1-4804-85ce-8477bba935fb")
+	)
+	(segment
+		(start -68.09032 31.38701)
+		(end -66.947 31.38701)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "a7d79740-4f08-461a-9ee0-1281bfaa26b0")
+	)
+	(segment
+		(start -62.23 23.495)
+		(end -52.705 13.97)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "c7c06bc4-24d2-479f-bb96-475c6063cd83")
+	)
+	(segment
+		(start -79.375 24.765)
+		(end -85.09 19.05)
+		(width 0.508)
+		(layer "F.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "cece2525-8e28-4894-bed0-15af57ef9438")
+	)
+	(via
+		(at -79.375 24.765)
+		(size 1.27)
+		(drill 0.508)
+		(layers "F.Cu" "B.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "3f8ac745-0e0c-4fa3-b866-97ad23a257b7")
+	)
+	(segment
+		(start -68.09032 31.38701)
+		(end -73.66 24.765)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "3eafa898-cfdd-4b37-a0a5-5a8fd3d4ced7")
+	)
+	(segment
+		(start -73.66 24.765)
+		(end -79.375 24.765)
+		(width 0.508)
+		(layer "B.Cu")
+		(net "Net-(U5A-K2)")
+		(uuid "90bcc0f2-3554-43b2-8917-0f3c713c332c")
 	)
 	(embedded_fonts no)
 )
