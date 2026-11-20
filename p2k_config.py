@@ -134,6 +134,37 @@ OFF_BOARD_PARTS = {}
 # The 10 IPC 'hole' records: plated 3.0 mm holes with a 6.35 mm pad on both layers, no net.
 HOLE_FOOTPRINT = "tube_pi_fxloop:MountingHole_3.0mm_PTH_Pad6.35mm"
 HOLE_VALUE = "MountingHole_3.0mm"
+# Board thickness: 1.6 mm, the 2010 standard; the 2010 fab READ-ME (source/fab_2010) gives no
+# stack-up. The 2026 export's READ-ME lists Proteus 8's default 2-layer stack (2 x 0.036 Cu +
+# 1.483 FR4 = 1.555 mm, + 2 x 0.01 resist), written when the design was re-saved, not the 2010 order.
+PCB_THICKNESS = 1.6
+# Design rules from the Proteus copper as built (STATUS.md "Phase 3", tools/measure_gaps.py), mm.
+PCB_RULES = dict(
+    min_track=0.5,        # thinnest conductor draw 0.508 (20 mil)
+    min_via=1.2,          # the 4 Proteus vias: 1.27 mm pad / 0.508 mm drill
+    min_annular=0.1,      # vias 0.381; smallest footprint ring 0.35 (KiCad relay pads 1.4 / 0.7)
+    min_drill=0.5,        # smallest drill 0.508 (vias); pads >= 0.70 (KiCad relay)
+    clearance=0.4,        # smallest different-net gap 0.421 (pad-track, Q3-1 / PWR-GND); pad-pad and track-track 0.508
+    hole_clearance=0.25,  # drill to other-net copper: >= 0.4 gap + annular ring
+    hole_to_hole=1.0,     # smallest drill-to-drill 1.270 (Proteus, TO-92), 1.232 with the KiCad 0.8 drills
+    edge_clearance=1.0,   # copper to outline >= 1.143
+    track=0.508,          # Default netclass
+    via=1.27,             # Default netclass = the Proteus vias
+    via_drill=0.508,
+)
+# DRC error types that remain by design (p2k drc; STATUS.md "Phase 3", remaining DRC items).
+DRC_ACCEPTED = {
+    "courtyards_overlap": "KiCad courtyards vs the Proteus placement (47 pairs, parts exactly at the "
+                          "Proteus positions): the 21 mm noval courtyards of U4 / U5 with the mounting "
+                          "holes H3 H4 H7 H8, C8, R54, V8_V9; the 100N rows C3/C5/C9 6.35 mm apart; the "
+                          "TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18 R270, "
+                          "SEND2W SEND3W; resistors / film caps / terminals packed closer than the "
+                          "KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with "
+                          "R24 R26, ...); U4 / U5 go to the bottom side in Phase 5 (user 2026-11-20)",
+    "pth_inside_courtyard": "Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes "
+                            "around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's, "
+                            "R24-1 and R26-1 inside the large C30 Solen box courtyard",
+}
 
 # --- Phase 4 checks (p2k.gerber_roundtrip, p2k.ipc356_diff) ---------------------------
 

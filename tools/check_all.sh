@@ -10,7 +10,13 @@ cd "$(dirname "$0")/.."
 export PYTHONDONTWRITEBYTECODE=1
 rm -rf __pycache__
 fail=0
-step() { echo "== $1"; shift; "$@" || { echo "!! FAILED: $*"; fail=1; }; }
+mkdir -p build/tmp
+log=build/tmp/check_all.log; : > "$log"
+step() {
+    echo "== $1" | tee -a "$log"; shift
+    "$@" 2>&1 | tee -a "$log"
+    [ "${PIPESTATUS[0]}" -eq 0 ] || { echo "!! FAILED: $*" | tee -a "$log"; fail=1; }
+}
 
 # Phase 0: environment and sources
 step "KiCad environment" tools/p2k/bin/kipy -c "import pcbnew; v = pcbnew.GetBuildVersion(); print('pcbnew', v); assert v.startswith('10.0.7'), v"
@@ -29,7 +35,17 @@ step "No symbol pin of type no_connect" bash -c '! grep -n "(pin no_connect" lib
 step "Footprint library, map and fp-lib-table up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
 step "Pin order vs unmoved KiCad base footprints" tools/p2k/bin/kipy tools/check_pin_order.py
+# Phase 3: PCB (build_pcb, gerber_to_tracks with the 4 vias, assign_nets; no pours)
+step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
+step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
+step "Board copper connectivity (KiCad geometry)" tools/p2k/bin/kipy -m p2k.assign_nets --check
+# p2k drc through tools/drc_pending.py while the TO-92 pad-1 question is open (STATUS.md
+# "Decisions"): it passes only if the 9 TO-92 pad-1 clearance errors are the only unaccepted errors.
+step "DRC with schematic parity" python3 tools/drc_pending.py
 
 echo
-[ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"
+pending=$(grep -c "PENDING USER DECISION" "$log")
+if [ $fail -ne 0 ]; then echo "SOME CHECKS FAILED"
+elif [ "$pending" -ne 0 ]; then echo "ALL CHECKS PASSED, EXCEPT $pending PENDING USER DECISION(S):"; grep "PENDING USER DECISION" "$log" | sed 's/^/  /'
+else echo "ALL CHECKS PASSED"; fi
 exit $fail

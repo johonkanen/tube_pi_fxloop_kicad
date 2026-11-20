@@ -7,7 +7,7 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 0 Skeleton and inventory | **done** 2026-11-20 (Opus 5.5) |
 | 1 Schematic | **done** 2026-11-20 (preparation Opus 5.5, transcription Fable 5.2) |
 | 2 Footprints | **done** 2026-11-20 (Opus 5.5); drills decided by the user 2026-11-20 (KiCad drills kept, `DRILL_SMALLER`) |
-| 3 PCB | not started; next (next_prompt.md) |
+| 3 PCB | board generated, copper and checks clean; **stopped on a user decision** (TO-92 pad 1, 9 DRC clearance errors) 2026-11-20 (Opus 5.5) |
 | 4 Verification | not started |
 | 5 Clean-up | not started |
 
@@ -455,9 +455,114 @@ Negative tests (each restored afterwards; check_all.sh passes):
    check_pin_order FAILED ("renumbering … differs from gen_footprints").
 8. Noval sense expected counter-clockwise → check_pin_order FAILED for U4 and U5.
 
+## Phase 3 – PCB – stopped on a user decision (Opus 5.5, 2026-11-20)
+
+`kicad/tube_pi_fxloop.kicad_pcb` is generated: `tools/make_pcb.sh` runs the shared tools (about 3 s)
+and two runs give a byte-identical board; `tools/make_pcb.sh --check` (in `check_all.sh`) rebuilds it
+in `build/tmp/make_pcb_check` (with a copy of the `.kicad_pro`) and compares the board,
+`reports/pour_nets.json` (empty: no pours) and the stage A/B part of `reports/assign_nets.txt`. Do not
+hand-edit the board while it is generated. `build_pcb` writes the design rules into
+`kicad/tube_pi_fxloop.kicad_pro` (committed with the board).
+
+**Everything passes except one DRC item that needs the user: 9 `clearance` errors at the rectangular
+KiCad pad 1 of the TO-92 footprint** (section "TO-92 pad 1" below; Decisions). Until it is decided,
+`check_all.sh` runs `p2k drc` through `tools/drc_pending.py`, which passes only when those 9 errors are
+the only unaccepted ones and prints PENDING USER DECISION.
+
+### Steps (tools/make_pcb.sh; the pilot's without its Phase 5 place_refdes step)
+
+| Step | Tool | Result |
+|---|---|---|
+| 3a | `p2k.build_pcb` | 126 footprints with nets and symbol links at `reports/footprint_fit.csv` (none excluded); 2 Cu layers (Top / Bottom Copper → F.Cu / B.Cu; User.1/2 reserved for pours, none); outline 225.425 × 71.755 mm (4 Mechanical 1 segments); **H1-H10** = `tube_pi_fxloop:MountingHole_3.0mm_PTH_Pad6.35mm` at the IPC hole records (plated, no net); thickness 1.6 mm; rules below. Board nets: 66 IPC nets + the 5 `unconnected-(…)` N/C pins (U4-9, U5-9, SERIES_MIX 6-8) = 71. |
+| 3b | `p2k.gerber_to_tracks` | 515 tracks (F.Cu 277 / B.Cu 238), **4 vias** (1.27 / 0.508 mm, from the ViaPad flashes + drills; IPC 4), 0 pours, 8 profile draws skipped; every pad flash (247 per layer) lands on a footprint pad, every OtherPad flash on a mounting-hole pad, every drill on a pad / via hole. |
+| 3c | `p2k.assign_nets` | stage A = stage B (no pours): **81 groups (66 nets + 10 holes + 5 N/C pads), 0 shorts, 0 orphans, 0 opens**; 519/519 tracks and vias got their net. |
+| check | `p2k.check_board` | 247 pads within 0.001 mm and on the IPC nets (66 IPC nets 1:1), 10 mounting holes (size, plating, no net), 4 vias (position, size, net), 515 tracks, 0 zones, every copper item has a net. |
+| check | `p2k.assign_nets --check` | KiCad geometry: 81 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net. |
+| check | `p2k drc` | **0 shorts, 0 unconnected, 0 parity**; accepted types below; **9 clearance errors open** (TO-92 pad 1). |
+
+### Design rules (p2k_config.py `PCB_RULES`, `PCB_THICKNESS`)
+
+Measured on the Proteus copper (`tools/measure_gaps.py`, the pilot's / tube_psu's copy, read-only,
+assign_nets stage B geometry = Proteus pad flashes + tracks + vias): smallest different-net gap
+**0.421 mm** (pad–track: Q3-1 / the PWR-GND track beside it; TO-92 rows), pad–pad 0.508 (C8 + / −,
+P2.54 with 2.032 pads), track–track 0.508, pad–via 0.766, track–via 0.907; copper to outline ≥ 1.143 mm;
+drill to drill ≥ 1.270 mm (TO-92, 1.232 with the KiCad 0.8 drills); conductors 0.508 – 1.778 mm (thinnest
+0.508 = 20 mil); vias 1.27 / 0.508 mm.
+Rules: clearance **0.4** (also the netclass clearance), min track 0.5, min via 1.2, min annular 0.1, min
+drill 0.5 (the vias), hole clearance 0.25, hole-to-hole 1.0, copper-to-edge 1.0; Default netclass track
+0.508, via 1.27 / 0.508 (= the Proteus vias).
+Thickness **1.6 mm**: the 2010 fab READ-ME has no stack-up; the 2026 export's READ-ME lists Proteus 8's
+default 2-layer stack (1.555 mm + resist), added when the design was re-saved – not the 2010 order (as
+the pilot; agent's choice, change `PCB_THICKNESS` if the board measures otherwise).
+
+### KiCad pad sizes: one conflict, the TO-92 pad 1 (open: user decision)
+
+The first DRC with the Phase 2 footprints (KiCad pad sizes) has 0 shorts, 0 hole-clearance and 0
+solder-mask-bridge errors, but **9 clearance errors, all at pad 1 of the TO-92 parts Q1, Q3, Q6, Q20**.
+The KiCad TO-92 footprint (`TO-92_Inline_P2.03mm`, derived from `TO-92_Inline_Wide`) has a **square**
+1.5 × 1.5 mm pad 1; the Proteus TO92 pads are all **round** 1.524 mm. The square's corner reaches
+0.31 mm farther than the Proteus circle towards a diagonal track:
+
+| Pad | Track | KiCad gap | Proteus gap |
+|---|---|---|---|
+| Q3-1 (Net-(Q3-D)) | F.Cu PWR-GND, 45° from Q3-2 | **0.122** (and 0.393 to two more) | 0.421 |
+| Q6-1 (Net-(Q6-D)) | F.Cu PWR-GND, 45° from Q6-2 | **0.122** (and 0.393 to two B.Cu tracks) | 0.421 |
+| Q1-1 (Net-(Q1-D)) | B.Cu PWR-GND, 45° from Q1-2 | **0.123** | 0.421 |
+| Q20-1 (PWR-GND) | B.Cu Net-(Q20-B), 45° from Q20-2 | **0.122** (and 0.392) | 0.421 |
+
+The pad size is not the problem (1.5 < 1.524), the shape is. The pilot uses the same footprint (Q2 /
+Q3) without a conflict: no diagonal track passes its pad-1 corners. Options (tried on scratch copies in
+`build/tmp/padexp`, DRC rerun):
+
+- **(a) Round pad 1** (KiCad size 1.5 mm, circle like pads 2 / 3; pin 1 then marked by the silk only):
+  all 9 errors gone, smallest TO-92 gap **0.433 mm** (better than Proteus 0.421). Needs a board-local
+  pad-shape override after `derive()` in `tools/gen_footprints.py` (the shared tool keeps the base pad
+  shapes; p2k candidate 16).
+- **(b) Proteus pads** (1.524 mm round, drill 0.762): all 9 errors gone, gaps = Proteus (0.421). Note
+  `ipc_sizes=True` alone keeps the square shape (it only sets size and drill), so this also needs the
+  shape override, or the TO-92 footprint built from the IPC pads (`from_ipc` with a body, losing the
+  KiCad graphics / 3D model).
+- **(c) Keep the square pad** and accept 0.12 mm: `p2k drc` accepts by violation type only, so
+  `DRC_ACCEPTED["clearance"]` would hide every future clearance error – not recommended.
+
+Agent's recommendation: (a). Not decided (the rule: a pad change forced by DRC is the user's). The
+other KiCad pads: the 2 W resistors (2.4 vs Proteus 2.286 mm) are nowhere near the clearance – smallest
+gap **1.171 mm** (R48-2 / F.Cu PWR-GND track; Proteus 1.228); no other pair below 0.433 mm apart from
+the TO-92 pad 1 (DRC at 0.6 mm clearance on a scratch copy: 73 pairs < 0.6, all Proteus-tight spots).
+Drills are decided (KiCad drills kept, `DRILL_SMALLER`); DRC does not involve them.
+
+### Remaining DRC items (`DRC_ACCEPTED`)
+
+| Type | Count | Why it stays |
+|---|---|---|
+| shorting_items / unconnected / schematic parity | 0 / 0 / 0 | – |
+| clearance (error) | 9 | **open**: TO-92 pad 1 (above) |
+| courtyards_overlap (error) | 47 | Proteus placement vs KiCad courtyards, parts exactly at the Proteus positions: U4 / U5 noval courtyards (21 mm circle) with H3 H4 H7 H8, C8, R54, V8_V9; the 100N rows C3 / C5 / C9 (6.35 mm apart); the TO-92 rows Q1/Q2, Q3/Q5, Q6/Q7 and their neighbours R11, R16, R18, R270, SEND2W, SEND3W; tight resistor / film-cap / terminal rows (R19-R24, R66, RETURN1-3, A / D_PRIME with R28, FX_PRIME/R25, VREF/R100, C4 / C7 with D9 and R50, C30 with R24 / R26, C37 with R67 / SW4, C2/R9, C28/R48, C29/C6, C32/R53, R1/V8_V9). Accepted. |
+| pth_inside_courtyard (error) | 7 | H3 / H4 in the U5 / U4 courtyard (Finding 17), C8 + / − in U4's, V8_V9-1 in U5's, R24-1 and R26-1 in the C30 Solen box. Accepted. |
+| track_dangling (warning) | 3 | Proteus copper stubs (Finding 19). |
+| silk_overlap / silk_over_copper (warning) | 134 / 55 | KiCad footprint silk and default reference positions on the Proteus placement (Phase 5). |
+| silk_edge_clearance (warning) | 2 | reference texts of H1 / H2 at the board edge (Phase 5). |
+
+Several courtyard items (U4 / U5 with top-side parts) go away when the sockets move to the bottom side
+in Phase 5 (user decision 2026-11-20); then the counts in `DRC_ACCEPTED`'s reason need updating.
+
+### Negative tests (all restored with tools/make_pcb.sh; board byte-identical afterwards)
+
+| Change | make_pcb --check | check_board | assign_nets --check | drc |
+|---|---|---|---|---|
+| a SWLOOP track (F.Cu, at SERIES_MIX-4) moved 3 mm | not up to date | OK (tracks not position-checked) | **1 open** (SWLOOP: D2/D7-D9 vs D1/SERIES_MIX-4) | **1 unconnected** |
+| the SWLOOP via at (30.48, 50.8) deleted | not up to date | **"IPC via (30.48, -50.8) SWLOOP: no board via"** | **1 open** (same groups) | **1 unconnected** |
+| pad R13-1 net edited in the file (HYPPY2 → PWR-GND) | not up to date | **IPC net HYPPY2 spans two KiCad nets** (+ 3 pad net errors) | **IPC net HYPPY2 spans two KiCad nets** | **1 short, 1 unconnected, 1 parity** |
+| footprint R13 moved 0.2 mm | not up to date | **R13-1/-2 0.200 mm from the IPC pad** | OK | OK (gaps still ≥ 0.4) |
+| a segment's net edited in the file (SWLOOP → PWR-GND) | not up to date | OK | OK | OK – pcbnew / kicad-cli re-derive track nets from the pads on load (the pilot's pitfall); only the byte compare catches it |
+| `DRC_ACCEPTED` without `pth_inside_courtyard` | – | – | – | `drc_pending.py` **FAILED** (7 unaccepted errors besides the 9 pending) |
+
+Every board change is caught by at least the byte compare; geometry and net errors by the independent
+checks as well.
+
 ## Last check output
 
-`tools/check_all.sh` (2026-11-20, end of Phase 2):
+`tools/check_all.sh` (2026-11-20, Phase 3, stopped on the TO-92 pad decision):
 
 ```
 == KiCad environment
@@ -524,8 +629,43 @@ U4: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-cl
 U5: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-clockwise from the top)
 SW4 SW5 SW6: 1 (NO) and 2 (NC) 5.08 mm apart, 3 (COM) the offset hole 5.12 mm from both
 check_pin_order: OK (results as recorded in STATUS.md)
+== PCB rebuilt from schematic + gerbers, up to date
+build_pcb: 126 footprints placed (0 excluded from board), 10 mounting holes, 71 nets, 4 outline segments
+gerber_to_tracks: 515 tracks, 4 vias (IPC 4), 0 pour outlines on User.1-4
+assign_nets: stage A (no pours): 81 groups, 0 shorts, 0 orphans, 0 opens
+assign_nets: stage B (with pours): 81 groups, 0 shorts, 0 orphans, 0 opens
+make_pcb: board rebuilt from scratch, byte-identical
+== Board pads, holes, vias vs IPC (position, size, nets 1:1)
+check_board: 136 footprints, 247 pads, worst pad offset 0.001 mm (limit 0.05), 66 IPC nets mapped 1:1, 10 mounting holes
+check_board: 515 tracks, 4 vias, 0 zones
+check_board: OK
+== Board copper connectivity (KiCad geometry)
+assign_nets: after zone fill: 81 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
+assign_nets: OK (report reports/assign_nets.txt)
+== DRC with schematic parity
+drc: 257 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc:     47 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement (47 pairs, parts exactly at the Proteus positions): the 21 mm noval courtyards of U4 / U5 with the mounting holes H3 H4 H7 H8, C8, R54, V8_V9; the 100N rows C3/C5/C9 6.35 mm apart; the TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18 R270, SEND2W SEND3W; resistors / film caps / terminals packed closer than the KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with R24 R26, ...); U4 / U5 go to the bottom side in Phase 5 (user 2026-11-20)
+drc:      9 error    clearance
+drc:      7 error    pth_inside_courtyard  accepted: Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's, R24-1 and R26-1 inside the large C30 Solen box courtyard
+drc:    134 warning  silk_overlap
+drc:     55 warning  silk_over_copper
+drc:      3 warning  track_dangling
+drc:      2 warning  silk_edge_clearance
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.1218 mm): PTH pad 1 [Net-(Q3-D)] of Q3 / Track [PWR-GND] on F.Cu, length 2.6941 mm
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.3930 mm): PTH pad 1 [Net-(Q3-D)] of Q3 / Track [PWR-GND] on F.Cu, length 3.8100 mm
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.3930 mm): PTH pad 1 [Net-(Q3-D)] of Q3 / Track [PWR-GND] on F.Cu, length 0.8980 mm
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.1218 mm): PTH pad 1 [Net-(Q6-D)] of Q6 / Track [PWR-GND] on F.Cu, length 2.6941 mm
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.3930 mm): Track [PWR-GND] on B.Cu, length 0.8980 mm / PTH pad 1 [Net-(Q6-D)] of Q6
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.3930 mm): Track [PWR-GND] on B.Cu, length 8.8900 mm / PTH pad 1 [Net-(Q6-D)] of Q6
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.1225 mm): Track [PWR-GND] on B.Cu, length 2.6941 mm / PTH pad 1 [Net-(Q1-D)] of Q1
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.3916 mm): PTH pad 1 [PWR-GND] of Q20 / Track [Net-(Q20-B)] on B.Cu, length 1.3470 mm
+drc: clearance: Clearance violation (netclass 'Default' clearance 0.4000 mm; actual 0.1222 mm): Track [Net-(Q20-B)] on B.Cu, length 2.2451 mm / PTH pad 1 [PWR-GND] of Q20
+drc: ERROR 9 clearance
+drc: FAILED
+drc_pending: PENDING USER DECISION: 9 clearance errors, rectangular KiCad pad 1 of the TO-92 parts Q1 Q3 Q6 Q20 vs Proteus tracks (0.122 mm; STATUS.md Phase 3)
 
-ALL CHECKS PASSED
+ALL CHECKS PASSED, EXCEPT 1 PENDING USER DECISION(S):
+  drc_pending: PENDING USER DECISION: 9 clearance errors, rectangular KiCad pad 1 of the TO-92 parts Q1 Q3 Q6 Q20 vs Proteus tracks (0.122 mm; STATUS.md Phase 3)
 ```
 
 ## Findings about the original design
@@ -615,6 +755,16 @@ ALL CHECKS PASSED
    caps** (SERIES_MIX 1.143 vs KiCad 0.7 mm, C2 1.143 vs 1.0, MMK caps 0.762 vs 0.75): the 2010 board was
    drilled with the larger holes. **User 2026-11-20: the KiCad drills stay** (`DRILL_SMALLER`, Decisions).
 
+19. **Three dangling copper stubs in the Proteus layout** (Phase 3 DRC `track_dangling` warnings; KiCad
+   frame, y down, IPC y = −y): a 1.27 mm B.Cu SWLOOP segment from D8-K to (84.455, 43.815), lying on top of
+   the D8-K → D9-K track (redundant); a 0.635 mm F.Cu Net-(Q90-B) stub from the junction at (-20.003, 43.18)
+   to (-19.368, 43.18); a 1.905 mm F.Cu H stub from R67-2 to (-58.42, 67.945). The free ends touch nothing
+   (checked against every pad and track end). No net effect; leftovers of the 2010 routing. Reproduced
+   (`REMOVED_TRACKS` could drop them in Phase 5 if wanted).
+20. **The Proteus clearance is tight at the TO-92 rows**: 0.421 mm between a TO-92 pad and the 45° tracks
+   that leave the neighbouring pad (Q1, Q3, Q6, Q20), the smallest gap on the board (otherwise ≥ 0.508).
+   Fine for the 2010 board; relevant for the redesign's rules.
+
 ## p2k candidates
 
 (Shared-tool limitations met on this board, with the board-local workaround used.)
@@ -697,6 +847,23 @@ ALL CHECKS PASSED
    map and the library files), so a missing `kicad/fp-lib-table` passes it; ERC reports it only as a
    `footprint_link_issues` **warning**. Board-local: `tools/erc.sh` fails on those warnings.
 
+16. **No pad-shape override in `footprints.derive()`**: `ipc_sizes=True` takes the Proteus pad size and drill
+   but keeps the base pad's shape (the square pad 1 of KiCad's TO-92 becomes a 1.524 mm square, still
+   wider than the round Proteus pad). This board's TO-92 conflict (Phase 3) needs a shape change: the
+   shared tool would need a `pad_shape` (`{pin: "circle"}` or `"ipc"` = the IPC shape) per spec. Until
+   then a board-local edit of the derived footprint in `tools/gen_footprints.py`.
+17. **`p2k drc` accepts by violation type only.** A single pending item (9 clearance errors at known
+   pads) cannot be accepted without accepting every clearance error. Board-local:
+   `tools/drc_pending.py` (passes only when exactly those 9 TO-92 pad-1 clearance errors are the
+   unaccepted errors; prints PENDING USER DECISION; `check_all.sh` counts them as the pilot's does). The
+   shared tool would need item-level acceptance (`{type: {item pattern: reason}}`) or an expected
+   count per type.
+18. **`measure_gaps.py` measures the Proteus geometry only** (the pilot's / tube_psu's copy). The gaps with
+   the KiCad pads were measured with kicad-cli DRC at a raised clearance on a scratch copy (0.6 and 1.5 mm,
+   `build/tmp/padexp`). A KiCad-geometry mode (assign_nets' `--check` items) would make that a tool step.
+   Pilot candidate 12 / place_refdes: make_pcb.sh leaves out `place_refdes` here (reference positions are
+   Phase 5).
+
 ## Decisions
 
 - Sheet names (no title blocks in the PDF): FX loop driver / PI supply and FX switching /
@@ -731,4 +898,13 @@ ALL CHECKS PASSED
      that Phase 4's `ipc356_diff` / `gerber_roundtrip` accept exactly these pairs.
   3. **Pad sizes**: `FOOTPRINT_PAD_SIZES = "kicad"` stays; only if the Phase 3 DRC forces a change, stop
      and ask (unchanged rule).
-- Open for the user: nothing blocking.
+- Phase 3 (agent's choices, no user decision needed): design rules from the Proteus copper (clearance 0.4
+  mm from the measured 0.421, edge 1.0, min drill 0.5 for the 0.508 vias, netclass via = the Proteus via);
+  thickness 1.6 mm (as the pilot); `make_pcb.sh` without `place_refdes` (Phase 5); `DRC_ACCEPTED` for
+  courtyards_overlap and pth_inside_courtyard (Proteus placement).
+- **OPEN FOR THE USER (blocks Phase 3): TO-92 pad 1.** The KiCad TO-92 footprint's square pad 1 is 0.122
+  mm from Proteus tracks on Q1, Q3, Q6, Q20 (9 DRC clearance errors; Proteus gap 0.421 with its round
+  pads). Options (Phase 3 "KiCad pad sizes"): **(a)** round pad 1 at the KiCad size 1.5 mm (gap 0.433;
+  agent's recommendation), **(b)** the Proteus pads 1.524 round / drill 0.762 (gap 0.421), **(c)** keep the
+  square pad and accept 0.12 mm (not recommended). (a) and (b) change the footprint shared by all ten TO-92
+  parts (Q1-Q3, Q5-Q7, Q8, Q10, Q20, Q90); the pilot uses the same footprint without a conflict.
