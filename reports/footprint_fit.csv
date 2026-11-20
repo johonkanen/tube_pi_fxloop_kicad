@@ -112,7 +112,7 @@ SEND2,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-16.5730,-18.7960,-
 SEND2W,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-13.3350,-36.0040,-13.3350,36.0040,0,0.0000,0.000,0.000,0
 SEND3,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-30.5430,-19.4310,-30.5430,19.4310,0,0.0000,0.000,0.000,0
 SEND3W,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-27.3680,-36.0040,-27.3680,36.0040,0,0.0000,0.000,0.000,0
-SERIES_MIX,tube_pi_fxloop:Relay_DPDT_Omron_G5V-2_Proteus,top,0,12.7000,-32.3850,12.7000,32.3850,0,0.0000,1.140,0.443,0
+SERIES_MIX,Relay_THT:Relay_DPDT_Omron_G5V-2,top,0,12.7000,-32.3850,12.7000,32.3850,0,0.0000,1.140,0.443,0
 SIGNALGND,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,36.1950,-65.4050,36.1950,65.4050,0,0.0000,0.000,0.000,0
 SUKKA,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,-56.8320,-60.6420,-56.8320,60.6420,0,0.0000,0.000,0.000,0
 SW1,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,top,0,97.7900,-33.0200,97.7900,33.0200,0,0.0000,0.000,0.000,0

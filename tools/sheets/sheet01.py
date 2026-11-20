@@ -5,8 +5,9 @@ MVX and R53; triode 2 (pins 6-8) is the cathode follower on F (grid bias R47-R49
 via R50 / C29) driving SEND through C30. Relay SERIES/MIX connects R26 (to NOLLA) to ground or SEND.
 
 Differences to the PDF drawing (same nets): the two triodes of KiCad's ECC83 symbol are drawn side
-by side and the heater unit below them; the relay is one symbol with both poles and the coil (the
-unused pole 2 carries no-connect flags), turned so that the common contact faces R26."""
+by side and the heater unit below them; the relay is one symbol with both poles and the coil, Omron pin
+numbers (design fixes 2026-11-20): the Proteus pole is Omron pole 2 (13 / 9 / 11), the unused pole 1
+(4 / 6 / 8) carries no-connect flags; turned so that the common contact faces R26."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("01_fx_loop_driver.kicad_sch")
@@ -86,22 +87,25 @@ sh.wire(r13b, P(133, 137))
 sh.junction(*P(133, 137))
 sh.label("HYPPY2", *P(141, 137), 0)
 
-# relay SERIES/MIX (rotated 180: common 2 on top, contacts 1 / 3 below, coil 4 / 5 on the right)
-k = sh.place(sym("SERIES_MIX"), "SERIES_MIX", *P(XR, 88), 180, value=sh_value("SERIES_MIX"),
+# relay SERIES/MIX, Omron pin numbers (design fixes 2026-11-20, Finding 15): the used pole is pole 2
+# (COM 13, NO 9, NC 11; Proteus 2 / 1 / 3), the coil 16 / 1 (Proteus 4 / 5), pole 1 (4 / 6 / 8) N/C.
+# Rotated 180 and placed one column right of XR + 8 so that COM2 sits under R26 and NO2 / NC2 where
+# the Proteus pole was drawn; the coil column then holds the coil wires and D1 one column further.
+k = sh.place(sym("SERIES_MIX"), "SERIES_MIX", *P(XR + 8, 88), 180, value=sh_value("SERIES_MIX"),
              ref_at=(P(150, 0)[0], P(0, 86)[1], 0, "right"), value_at=(P(150, 0)[0], P(0, 88)[1], 0, "right"))
-sh.wire(r26b, k.pin(2))
-sh.wire(c30r, P(169, 98), k.pin(1))
-sh.wire(k.pin(3), P(173, GND))
-for n in "678":
+sh.wire(r26b, k.pin("13"))
+sh.wire(c30r, P(169, 98), k.pin("9"))
+sh.wire(k.pin("11"), P(173, GND))
+for n in ("4", "6", "8"):
     sh.no_connect(*k.pin(n))
-d1a, d1k = pv(sh, "D1", 187, 88, top="A")
-sh.wire(k.pin(5), P(179, 80), P(193, 80))
-sh.wire(P(187, 80), d1a)
-sh.glabel("PWRH4", *P(193, 80), 0)
-sh.wire(k.pin(4), P(179, 96), P(193, 96))
-sh.wire(d1k, P(187, 96))
-sh.glabel("SWLOOP", *P(193, 96), 0)
-junctions(sh, P(187, 80), P(187, 96))
+d1k, d1a = pv(sh, "D1", 195, 88, top="K")
+sh.wire(k.pin("16"), P(187, 80), P(201, 80))
+sh.wire(P(195, 80), d1k)
+sh.glabel("SWLOOP", *P(201, 80), 0)
+sh.wire(k.pin("1"), P(187, 96), P(201, 96))
+sh.wire(d1a, P(195, 96))
+sh.glabel("PWRH4", *P(201, 96), 0)
+junctions(sh, P(195, 80), P(195, 96))
 sh.wire(P(115, 98), P(115, 104))
 sh.junction(*P(115, 98))
 sh.glabel("SEND", *P(115, 104), 270)
@@ -124,7 +128,7 @@ for net, pin, y, ref in (("PWRH4", u3.pin(4), 81, "PRE_H4"), ("PWRH5", u3.pin(5)
 
 sh.text("R47 = 50-100k (Proteus hand note; value 33k)", *P(45, 122))
 sh.text("PDF labels 'send' / 'nolla' = nets SEND / NOLLA (Proteus net names are case-insensitive).", *P(45, 145))
-sh.text("Terminals PRE-H4 / PRE-H5 = PRE_H4 / PRE_H5; relay SERIES/MIX = SERIES_MIX (pins 6-8, pole 2: not connected).", *P(45, 148))
+sh.text("Terminals PRE-H4 / PRE-H5 = PRE_H4 / PRE_H5; relay SERIES/MIX = SERIES_MIX, Omron pins (Proteus 1-8 = 9 13 11 16 1 4 6 8; pole 1 not connected).", *P(45, 148))
 sh.text("U4: KiCad ECC83 symbol in three units (heater U4C below); pin 9 (HCT) is not connected. Value 12AT7.", *P(45, 151))
 sh.save()
 print("sheet01: written")

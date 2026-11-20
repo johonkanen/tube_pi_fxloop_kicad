@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Generate lib/tube_pi_fxloop.kicad_sym, the project symbol library (helpers: p2k.symgen).
 
-Adapted from the power amp pilot. Pin numbers equal the Proteus/IPC pin ids (STATUS.md
+Adapted from the power amp pilot. Pin numbers equal the IPC pin ids of reference/ (the Proteus ids,
+except SERIES_MIX: Omron ids, IPC_PIN_IDS) (STATUS.md
 "Phase 1 preparation"). All symbols are copied from the KiCad 10 standard library (flattened,
 pins renumbered where needed). The Proteus pin definitions in ROOT.DSN (device `$PINSHORT` /
 `$PINDEFAULT` records and the `*PINOUT` package tables, read by hand: p2k candidate 4 of the
@@ -18,7 +19,11 @@ pilot) are:
   G5V-2(HI) (*PINOUT G5V-2(HI))  AC1=1 COM1=2 NC1=3 DC1=4 DC2=5 COM2=6 NC2=7 AC2=8
                                    (AC = normally open, as the PDF draws pole 1; DC = coil)
                                  KiCad Relay:G5V-2 (Omron numbering 1/16 coil, 4/6/8 = COM/NC/NO
-                                   pole 1, 13/11/9 pole 2): renumbered to the Proteus ids
+                                   pole 1, 13/11/9 pole 2), NOT renumbered since the design fixes
+                                   2026-11-20 (user decision, Finding 15): the IPC pin ids of
+                                   SERIES_MIX are renamed to the physical Omron pins instead
+                                   (p2k_config.py IPC_PIN_IDS, tools/ipc356.py): Proteus 1-8 =
+                                   Omron 9 13 11 16 1 4 6 8, i.e. the used pole is pole 2
   diodes, zeners                 A, K
   HITEMP10U50V (C8, C28)         +, -
   22µF 450V (C1, C36, C37; *PINOUT ELEC D16 R7.5)  + = 2, - = 1   -> symbol C_Polarized_21
@@ -28,7 +33,7 @@ No power symbols: the IPC has no =POWER nets.
 
 Valve pins are all `passive` (pilot candidate 9: KiCad's anode `output`, cathode `bidirectional`,
 grid `input`, heater `power_in` give pin_to_pin / undriven ERC errors on resistor-only nets).
-Pin 9 (HCT) is N/C on both tubes and the relay's pins 6-8 (pole 2) are N/C: they stay
+Pin 9 (HCT) is N/C on both tubes and the relay's pins 4 / 6 / 8 (Omron pole 1) are N/C: they stay
 `passive` and get a no-connect flag in the schematic (as Proteus marks them N/C).
 
 Run:  tools/gen_symbols.py           (needs the AppImage mount for the std libs)
@@ -89,9 +94,8 @@ def build():
                  desc="SPDT switch (Proteus SW-SPDT, package SPDT HOLES): 1=NO 2=NC 3=COM",
                  pins={"1": "2", "2": "3", "3": "1"}, names={"1": "NO", "2": "NC", "3": "COM"}),
         from_std("Relay", "G5V-2", "G5V-2", "K", "G5V-2(HI)",
-                 desc="Omron G5V-2 DPDT relay, Proteus G5V-2(HI) pin ids: AC1(NO)=1 COM1=2 NC1=3 "
-                      "DC1(coil)=4 DC2(coil)=5 COM2=6 NC2=7 AC2(NO)=8",
-                 pins={"8": "1", "4": "2", "6": "3", "1": "4", "16": "5", "13": "6", "11": "7", "9": "8"}),
+                 desc="Omron G5V-2 DPDT relay, Omron pin numbers (coil 1 / 16, pole 1 COM 4 NC 6 NO 8, "
+                      "pole 2 COM 13 NC 11 NO 9); KiCad Relay:G5V-2 unchanged"),
         from_std("Connector", "TestPoint", "PIN", "J", "PIN",
                  desc="Proteus TERMINAL: one pad (package C-120-60)"),
     ]

@@ -78,6 +78,19 @@ KICAD_REFDES = {
     "SERIES/MIX": "SERIES_MIX",
 }
 
+# Pin ids renamed after parsing the IPC file (board-local key, read by tools/ipc356.py, the wrapper
+# around p2k.ipc356; STATUS.md "Design fixes 2026-11-20", p2k candidate 24). {KiCad refdes: {Proteus
+# pin id: KiCad pin id}}; every IPC pad of the refdes must be listed, the targets unique.
+# SERIES_MIX (user decision 2026-11-20, Finding 15): the Proteus package G5V-2(HI) numbers the pads
+# 1-8 and is the mirror image of the Omron G5V-2 seen from the top; a top-mounted G5V-2 puts Omron
+# 9 (NO2) on Proteus pad 1, 13 (COM2) on 2, 11 (NC2) on 3, the coil 16 / 1 on 4 / 5 and pole 1
+# (4 COM1, 6 NC1, 8 NO1) on the N/C pads 6-8. With the physical Omron ids the symbol and footprint
+# are KiCad's Relay:G5V-2 / Relay_THT:Relay_DPDT_Omron_G5V-2 unchanged; the copper and every net
+# stay as built (the used pole is pole 2, the coil is not polarised).
+IPC_PIN_IDS = {
+    "SERIES_MIX": {"1": "9", "2": "13", "3": "11", "4": "16", "5": "1", "6": "4", "7": "6", "8": "8"},
+}
+
 # No Proteus power nets (no "=POWER" names). The named nets keep their IPC spelling; the PDF
 # writes "send" and "nolla" in lower case (Proteus net names ignore case): IPC "SEND", "NOLLA".
 NET_ALIASES = {}
@@ -99,7 +112,7 @@ EXPECTED_IPC = {
     "smd_records": 0,
     "smd_top": 0,
     "smd_bottom": 0,
-    "nc_pads": 5,         # U4-9, U5-9 (heater centre tap), SERIES/MIX 6-8
+    "nc_pads": 5,         # U4-9, U5-9 (heater centre tap), SERIES/MIX Proteus 6-8 (Omron 4, 6, 8)
     "vias": 4,
     "free_pads": 0,
     "holes": 10,
@@ -165,6 +178,18 @@ DRC_ACCEPTED = {
                             "around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's (a "
                             "THT pad is on both sides, so the bottom-side socket courtyards still contain "
                             "them), R24-1 and R26-1 inside the large C30 Solen box courtyard",
+}
+
+# Recorded copper deviations (p2k.pcb removed_track; user decision 2026-11-20, Finding 19, reverses
+# Phase 5 decision 3): the three dangling stubs of the 2010 routing are not built. {(layer, x1, y1,
+# x2, y2): reason}, IPC frame (Y up); gerber_to_tracks fails unless every entry matches exactly one
+# Conductor draw, gerber_roundtrip drops them from the Proteus copper.
+REMOVED_TRACKS = {
+    ("B.Cu", 84.455, -42.545, 84.455, -43.815): "SWLOOP stub 1.27 mm at D8-K, lying on the D8-K -> D9-K "
+                                                 "track (redundant), free end touches nothing",
+    ("F.Cu", -20.0025, -43.18, -19.3675, -43.18): "Net-(Q90-B) stub 0.635 mm from a track junction, free "
+                                                   "end touches nothing",
+    ("F.Cu", -60.325, -67.945, -58.42, -67.945): "H stub 1.905 mm from R67-2, free end touches nothing",
 }
 
 # --- Phase 4 checks (p2k.gerber_roundtrip, p2k.ipc356_diff) ---------------------------

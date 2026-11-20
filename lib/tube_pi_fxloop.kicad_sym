@@ -2477,7 +2477,7 @@
 				)
 			)
 		)
-		(property "Description" "Omron G5V-2 DPDT relay, Proteus G5V-2(HI) pin ids: AC1(NO)=1 COM1=2 NC1=3 DC1(coil)=4 DC2(coil)=5 COM2=6 NC2=7 AC2(NO)=8"
+		(property "Description" "Omron G5V-2 DPDT relay, Omron pin numbers (coil 1 / 16, pole 1 COM 4 NC 6 NO 8, pole 2 COM 13 NC 11 NO 9); KiCad Relay:G5V-2 unchanged"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2833,7 +2833,7 @@
 						)
 					)
 				)
-				(number "4"
+				(number "1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2851,7 +2851,7 @@
 						)
 					)
 				)
-				(number "2"
+				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2869,7 +2869,7 @@
 						)
 					)
 				)
-				(number "3"
+				(number "6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2887,7 +2887,7 @@
 						)
 					)
 				)
-				(number "1"
+				(number "8"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2905,7 +2905,7 @@
 						)
 					)
 				)
-				(number "8"
+				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2923,7 +2923,7 @@
 						)
 					)
 				)
-				(number "7"
+				(number "11"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2941,7 +2941,7 @@
 						)
 					)
 				)
-				(number "6"
+				(number "13"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -2959,7 +2959,7 @@
 						)
 					)
 				)
-				(number "5"
+				(number "16"
 					(effects
 						(font
 							(size 1.27 1.27)

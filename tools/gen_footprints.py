@@ -74,7 +74,7 @@ RULES = [
      P + "Valve_Noval_Belton_PCD21.00mm",
      "9-PIN BELTON NOVAL: noval socket, Proteus pads and pin ids, standard noval numbering, bottom side"),
     ("G5V-2", dict(package="G5V-2(HI)", n=8, pad=(2.54, 2.54), drill=1.143),
-     P + "Relay_DPDT_Omron_G5V-2_Proteus", "G5V-2(HI): Omron G5V-2, Proteus pin ids 1-8"),
+     "Relay_THT:Relay_DPDT_Omron_G5V-2", "G5V-2(HI): Omron G5V-2, Omron pin numbers (IPC_PIN_IDS)"),
     ("SW_SPDT", dict(package="SPDT HOLES", n=3, pad=(3.048, 3.048), drill=1.524),
      P + "SW_SPDT_3Holes_Proteus", "SPDT HOLES: three solder holes for a wired switch, NO=1 NC=2 COM=3"),
     # --- terminals (fly leads)
@@ -87,14 +87,12 @@ RULES = [
 U4_BODY = [(32.734, -37.649), (59.179, -37.649), (59.179, -12.241), (32.734, -12.241)]
 SW4_BODY = [(-25.654, -66.929), (-17.526, -66.929), (-17.526, -59.436), (-25.654, -59.436)]
 
-# Relay: the Proteus package G5V-2(HI) numbers its pads 1-8 (AC1 COM1 NC1 DC1 DC2 COM2 NC2 AC2).
-# Fitted by position, the Proteus pads are the MIRROR of the Omron pinout seen from the top
-# (STATUS.md Findings, tools/check_pin_order.py): the symbol's Omron mapping (8/4/6/1/16/13/11/9
-# -> 1..8, pole 1) only fits mirrored. The physical mapping of a top-mounted G5V-2 onto the
-# Proteus pads swaps the poles and the coil ends: Omron 9 -> 1, 13 -> 2, 11 -> 3, 16 -> 4, 1 -> 5,
-# 4 -> 6, 6 -> 7, 8 -> 8. The footprint uses this one (unmirrored, KiCad graphics and pin-1 mark
-# where the real relay's pin 1 goes); the copper is the same either way.
-G5V2_RENUMBER = {"9": "1", "13": "2", "11": "3", "16": "4", "1": "5", "4": "6", "6": "7", "8": "8"}
+# Relay SERIES_MIX: the Proteus package G5V-2(HI) numbers its pads 1-8 and is the mirror image of the
+# Omron G5V-2 seen from the top (STATUS.md Finding 15). Since the design fixes 2026-11-20 (user
+# decision) the IPC pin ids of SERIES_MIX are renamed to the physical Omron pins (p2k_config.py
+# IPC_PIN_IDS, tools/ipc356.py: Proteus 1-8 = Omron 9 13 11 16 1 4 6 8), so the relay uses KiCad's
+# Relay_THT:Relay_DPDT_Omron_G5V-2 unchanged (pads 1.4 / drill 0.7, DRILL_SMALLER). Until then a
+# project copy renumbered to the Proteus ids (Relay_DPDT_Omron_G5V-2_Proteus) was used; same copper.
 
 # Project footprints (spec keys: see p2k.footprints). `ipc` = refdes whose IPC pads give the
 # pad centres. All parts are THT and on the top side (Proteus Top Assembly), except the noval
@@ -154,10 +152,6 @@ PROJECT = {
         descr="Noval tube socket (Proteus 9-PIN BELTON NOVAL), standard noval numbering, mounted on the "
               "solder side: 9 pads 4.318 mm / drill 1.727 on a 21.0 mm pitch circle, pad 9 without a net, "
               "body = the Proteus assembly outline"),
-    "Relay_DPDT_Omron_G5V-2_Proteus": dict(
-        base="Relay_THT:Relay_DPDT_Omron_G5V-2", renumber=G5V2_RENUMBER, ipc="SERIES_MIX",
-        descr="Omron G5V-2 DPDT relay, pads numbered as the Proteus package G5V-2(HI) "
-              "(1 NO, 2 COM, 3 NC, 4 / 5 coil; 6-8 the other pole) at the physical position"),
     # SW-SPDT: three solder holes (two 5.08 mm apart, the third 2.54 / 4.445 mm off), for a
     # panel switch wired to the board; KiCad has no such pattern: built from the IPC pads
     "SW_SPDT_3Holes_Proteus": dict(

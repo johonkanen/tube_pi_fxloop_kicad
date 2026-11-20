@@ -14,8 +14,11 @@ the unmirrored fit (KiCad = standard noval numbering, clockwise seen from the pi
 side of a top-mounted socket) with the mirrored one, fits an ideal standard noval on the Proteus
 pitch circle (free rotation: the noval steps are 36 deg) and prints the sense of pins 1 -> 9.
 
-The relay SERIES_MIX is fitted twice: with the symbol's Omron mapping (pole 1, gen_symbols) and
-with the footprint's physical mapping (gen_footprints G5V2_RENUMBER).
+The relay SERIES_MIX: since the design fixes 2026-11-20 (user decision, Finding 15) its IPC pin ids
+are the physical Omron pins (p2k_config.py IPC_PIN_IDS, tools/ipc356.py), so the UNMOVED KiCad G5V-2
+footprint without renumbering must fit unmirrored; the old Proteus-pole mapping (Omron pole 1 on the
+Proteus pole, = the Phase 2 symbol) must still fit only mirrored (Finding 15: G5V-2(HI) is the mirror
+image), which also proves that IPC_PIN_IDS is the physical and not the mirrored mapping.
 
 Phase 5 (user decision 2026-11-20: the noval sockets are on the BOTTOM side, as the power amp
 pilot's octal sockets): the project footprint tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm has the
@@ -42,10 +45,18 @@ os.chdir(ROOT)
 from p2k import fpgeom, pcb, sexpr  # noqa: E402
 from p2k.footprints import footprint_path  # noqa: E402
 
-# refdes group -> (KiCad base footprint, Proteus renumbering of the base pads)
-G5V2_POLE1 = {"8": "1", "4": "2", "6": "3", "1": "4", "16": "5", "13": "6", "11": "7", "9": "8"}   # symbol (gen_symbols)
+# refdes group -> (KiCad base footprint, renumbering of the base pads to the IPC pin ids of reference/)
+# SERIES_MIX: the IPC ids are Omron ids (IPC_PIN_IDS). The Phase 2 symbol mapping (Omron pole 1 on the
+# Proteus pole 1-8), expressed in today's Omron ids: Omron k -> the Omron id of the Proteus pad that
+# mapping put k on (Proteus 1-8 = Omron 9 13 11 16 1 4 6 8).
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from gen_footprints import G5V2_RENUMBER as G5V2_PHYS, PROJECT  # noqa: E402  footprint (gen_footprints)
+sys.path.insert(0, ROOT)
+sys.dont_write_bytecode = True
+import p2k_config  # noqa: E402
+_OMRON = p2k_config.IPC_PIN_IDS["SERIES_MIX"]
+G5V2_POLE1 = {o: _OMRON[p] for o, p in {"8": "1", "4": "2", "6": "3", "1": "4", "16": "5", "13": "6",
+                                         "11": "7", "9": "8"}.items()}
+from gen_footprints import PROJECT  # noqa: E402
 CHECKS = [
     ("Q4", "Package_TO_SOT_THT:TO-220-3_Vertical", {}),
     ("Q8 Q10 Q20 Q90", "Package_TO_SOT_THT:TO-92_Inline_Wide", {}),
@@ -54,8 +65,8 @@ CHECKS = [
     ("D1 D3 D4 D5 D6", "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal", {"1": "K", "2": "A"}),
     ("C8 C28", "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm", {"1": "+", "2": "-"}),
     ("C1 C36 C37", "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm", {"1": "2", "2": "1"}),
-    ("SERIES_MIX", "Relay_THT:Relay_DPDT_Omron_G5V-2", G5V2_POLE1),
-    ("SERIES_MIX ", "Relay_THT:Relay_DPDT_Omron_G5V-2", G5V2_PHYS),
+    ("SERIES_MIX", "Relay_THT:Relay_DPDT_Omron_G5V-2", {}),
+    ("SERIES_MIX ", "Relay_THT:Relay_DPDT_Omron_G5V-2", G5V2_POLE1),
     ("U4 U5", "Valve:Valve_Noval_P", {}),
 ]
 # expected best fit per group: (mirror, residual upper bound mm)
@@ -67,8 +78,8 @@ EXPECT = {
     "D1 D3 D4 D5 D6": (False, 0.01),
     "C8 C28": (False, 0.03),               # P2.50 vs P2.54
     "C1 C36 C37": (False, 0.01),           # pad 2 = + = KiCad pad 1
-    "SERIES_MIX": (True, 0.01),            # the symbol's Omron mapping (pole 1) fits only MIRRORED
-    "SERIES_MIX ": (False, 0.01),          # the physical mapping (pole 2, coil ends swapped) fits unmirrored
+    "SERIES_MIX": (False, 0.01),           # Omron ids (IPC_PIN_IDS) on the unmoved KiCad G5V-2: unmirrored
+    "SERIES_MIX ": (True, 0.01),           # the Phase 2 Proteus-pole mapping (pole 1) fits only MIRRORED
     "U4 U5": (True, 3.0),                  # KiCad Noval_P is a smaller circle; only the MIRRORED one is near
 }
 NOVAL = "tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm"
@@ -269,7 +280,7 @@ def main():
     # the renumbering checked here must be the one the derived project footprints use
     for refs, fpid, ren in CHECKS:
         for name, spec in PROJECT.items():
-            if spec.get("base") == fpid and spec.get("renumber", {}) != ren and refs != "SERIES_MIX":
+            if spec.get("base") == fpid and spec.get("renumber", {}) != ren and refs != "SERIES_MIX ":
                 bad.append(f"{refs}: renumbering {ren} differs from gen_footprints {name} {spec.get('renumber', {})}")
     print(f"{'parts':16s} {'KiCad base (unmoved)':44s} {'unmirrored':>18s} {'mirrored':>18s}  best")
     for refs, fpid, ren in CHECKS:

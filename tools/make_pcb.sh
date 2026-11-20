@@ -20,10 +20,13 @@ set -eu
 cd "$(dirname "$0")/.."
 K=tools/p2k/bin/kipy
 PCB=kicad/tube_pi_fxloop.kicad_pcb
+# Chained with &&: `run` is called inside `||` below, where `set -e` does not apply, so a failing step
+# (e.g. gerber_to_tracks on a REMOVED_TRACKS entry without a draw) must stop the run explicitly
+# (fixed in the design fixes 2026-11-20; before, the later steps ran on and the ERROR line was filtered).
 run() {
-    $K -m p2k.build_pcb
-    $K -m p2k.gerber_to_tracks
-    $K -m p2k.assign_nets
+    $K -m p2k.build_pcb &&
+    $K -m p2k.gerber_to_tracks &&
+    $K -m p2k.assign_nets &&
     $K -m p2k.place_refdes
 }
 if [ "${1:-}" = "--check" ]; then

@@ -2,11 +2,12 @@ Gerber round trip: KiCad plot of kicad/tube_pi_fxloop.kicad_pcb vs the Proteus C
 raster 0.025 mm/px, tolerance 0.05 mm, clusters >= 0.01 mm^2 counted, positions in the IPC frame (mm, Y up)
 board outline -123.825 .. 101.6 x -78.105 .. -6.35 mm
 
-== F.Cu: Proteus copper 2460.4 mm^2, KiCad copper 2391.7 mm^2
-   raw XOR 94.27 mm^2; after 0.05 mm tolerance: only Proteus 53.53 mm^2, only KiCad 6.39 mm^2, 669 clusters (451 below 0.01 mm^2)
-   pad shape   218 clusters, 59.24 mm^2
-   coverage: Proteus 281 draws / 261 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 277 draws / 261 flashes, 0 not on Proteus copper (0 explained by pad shape)
-   pad shape     9 clusters, only KiCad   0.00 mm^2, only Proteus  24.99 mm^2  tube_pi_fxloop:Relay_DPDT_Omron_G5V-2_Proteus  (1 parts: SERIES_MIX)
+== F.Cu: Proteus objects not compared (recorded deviations): 2 Conductor draws (REMOVED_TRACKS)
+== F.Cu: Proteus copper 2459.6 mm^2, KiCad copper 2391.0 mm^2
+   raw XOR 94.31 mm^2; after 0.05 mm tolerance: only Proteus 53.53 mm^2, only KiCad 6.41 mm^2, 670 clusters (452 below 0.01 mm^2)
+   pad shape   218 clusters, 59.25 mm^2
+   coverage: Proteus 279 draws / 261 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 275 draws / 261 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   pad shape     9 clusters, only KiCad   0.00 mm^2, only Proteus  24.99 mm^2  Relay_THT:Relay_DPDT_Omron_G5V-2  (1 parts: SERIES_MIX)
    pad shape    80 clusters, only KiCad   0.00 mm^2, only Proteus  14.14 mm^2  Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal  (34 parts: R10 R100 R11 R110 R12 R13 ...)
    pad shape     9 clusters, only KiCad   0.00 mm^2, only Proteus   3.60 mm^2  Capacitor_THT:C_Rect_L7.2mm_W5.0mm_P5.00mm  (4 parts: C32 C4 C6 C7)
    pad shape     2 clusters, only KiCad   0.00 mm^2, only Proteus   3.14 mm^2  tube_pi_fxloop:C_Rect_L13.0mm_W6.0mm_P9.70mm  (1 parts: C2)
@@ -15,19 +16,19 @@ board outline -123.825 .. 101.6 x -78.105 .. -6.35 mm
    pad shape    10 clusters, only KiCad   0.00 mm^2, only Proteus   2.73 mm^2  tube_pi_fxloop:CP_Radial_D5.0mm_P2.54mm_PM  (2 parts: C28 C8)
    pad shape    11 clusters, only KiCad   1.26 mm^2, only Proteus   0.66 mm^2  tube_pi_fxloop:CP_Radial_D16.0mm_P7.50mm_21  (3 parts: C1 C36 C37)
    pad shape     7 clusters, only KiCad   0.00 mm^2, only Proteus   1.60 mm^2  Package_TO_SOT_THT:TO-220-3_Vertical  (1 parts: Q4)
-   pad shape    21 clusters, only KiCad   0.92 mm^2, only Proteus   0.00 mm^2  tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal  (6 parts: R2 R45 R46 R48 R67 R9)
+   pad shape    21 clusters, only KiCad   0.93 mm^2, only Proteus   0.00 mm^2  tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal  (6 parts: R2 R45 R46 R48 R67 R9)
    pad shape     2 clusters, only KiCad   0.00 mm^2, only Proteus   0.48 mm^2  Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3  (1 parts: C31)
-   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -40.013) 2.55x2.58 mm  near SERIES_MIX-6 (N/C) 0.01 mm, via (PWR-GND) 17.51 mm
-   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -45.088) 2.55x2.58 mm  near SERIES_MIX-7 (N/C) 0.01 mm, via (SWLOOP) 18.68 mm
-   pad shape  only Proteus  3.348 mm^2 at (  20.332,  -45.088) 2.55x2.58 mm  near SERIES_MIX-3 (PWR-GND) 0.01 mm, via (SWLOOP) 11.65 mm
+   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -40.013) 2.55x2.58 mm  near SERIES_MIX-4 (N/C) 0.01 mm, via (PWR-GND) 17.51 mm
+   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -45.088) 2.55x2.58 mm  near SERIES_MIX-6 (N/C) 0.01 mm, via (SWLOOP) 18.68 mm
+   pad shape  only Proteus  3.348 mm^2 at (  20.332,  -45.088) 2.55x2.58 mm  near SERIES_MIX-11 (PWR-GND) 0.01 mm, via (SWLOOP) 11.65 mm
    pad shape  only Proteus  3.348 mm^2 at (  12.693,  -50.163) 2.55x2.58 mm  near SERIES_MIX-8 (N/C) 0.01 mm, via (SWLOOP) 17.80 mm
-   pad shape  only Proteus  3.031 mm^2 at (  20.260,  -32.313) 2.55x2.58 mm  near SERIES_MIX-4 (SWLOOP) 0.09 mm, via (SWLOOP) 21.12 mm
-   pad shape  only Proteus  3.031 mm^2 at (  20.260,  -39.938) 2.55x2.58 mm  near SERIES_MIX-2 (#00018) 0.09 mm, via (SWLOOP) 14.91 mm
-   pad shape  only Proteus  2.833 mm^2 at (  12.710,  -32.388) 2.55x2.58 mm  near SERIES_MIX-5 (PWRH4) 0.01 mm, via (PWR-GND) 15.34 mm
-   pad shape  only Proteus  1.758 mm^2 at (  20.091,  -50.746) 2.50x1.95 mm  near SERIES_MIX-1 (SEND) 0.62 mm, via (SWLOOP) 10.39 mm
+   pad shape  only Proteus  3.031 mm^2 at (  20.260,  -32.313) 2.55x2.58 mm  near SERIES_MIX-16 (SWLOOP) 0.09 mm, via (SWLOOP) 21.12 mm
+   pad shape  only Proteus  3.031 mm^2 at (  20.260,  -39.938) 2.55x2.58 mm  near SERIES_MIX-13 (#00018) 0.09 mm, via (SWLOOP) 14.91 mm
+   pad shape  only Proteus  2.833 mm^2 at (  12.710,  -32.388) 2.55x2.58 mm  near SERIES_MIX-1 (PWRH4) 0.01 mm, via (PWR-GND) 15.34 mm
+   pad shape  only Proteus  1.758 mm^2 at (  20.091,  -50.746) 2.50x1.95 mm  near SERIES_MIX-9 (SEND) 0.62 mm, via (SWLOOP) 10.39 mm
    pad shape  only Proteus  1.643 mm^2 at (-101.452,  -54.613) 2.55x2.58 mm  near C2-1 (PWR-GND) 0.03 mm, via (#00057) 37.12 mm
    pad shape  only Proteus  1.500 mm^2 at (-111.077,  -54.690) 2.55x2.58 mm  near C2-2 (#00029) 0.09 mm, via (#00057) 43.59 mm
-   pad shape  only Proteus  0.949 mm^2 at (  20.661,  -49.310) 1.90x0.98 mm  near SERIES_MIX-1 (SEND) 0.92 mm, via (SWLOOP) 9.93 mm
+   pad shape  only Proteus  0.949 mm^2 at (  20.661,  -49.310) 1.90x0.98 mm  near SERIES_MIX-9 (SEND) 0.92 mm, via (SWLOOP) 9.93 mm
    pad shape  only Proteus  0.938 mm^2 at (  38.737,  -37.972) 2.08x2.00 mm  near C8-- (PWR-GND) 0.13 mm, via (SWLOOP) 15.26 mm
    pad shape  only Proteus  0.878 mm^2 at (  64.809,  -59.134) 2.05x2.00 mm  near C28-- (PWR-GND) 0.09 mm, via (SWLOOP) 35.33 mm
    pad shape  only Proteus  0.497 mm^2 at (  93.401,  -50.226) 1.80x1.80 mm  near C4-2 (A) 0.08 mm, via (SWLOOP) 62.92 mm
@@ -162,6 +163,7 @@ board outline -123.825 .. 101.6 x -78.105 .. -6.35 mm
    pad shape  only Proteus  0.087 mm^2 at (  25.130,  -57.830) 1.25x0.70 mm  near R24-1 (NOLLA) 0.77 mm, via (SWLOOP) 8.83 mm
    pad shape  only Proteus  0.081 mm^2 at (  24.570,  -56.625) 1.62x1.28 mm  near R24-1 (NOLLA) 0.56 mm, via (SWLOOP) 8.30 mm
    pad shape  only KiCad    0.073 mm^2 at (  61.089,  -66.164) 1.38x1.38 mm  near R46-2 (#00006) 1.08 mm, via (SWLOOP) 34.25 mm
+   pad shape  only KiCad    0.073 mm^2 at ( -59.561,  -67.186) 1.38x1.38 mm  near R67-2 (H) 1.08 mm, via (#00057) 46.82 mm
    pad shape  only Proteus  0.071 mm^2 at (  -8.141,  -52.091) 1.65x0.58 mm  near R110-2 (#00045) 0.67 mm, via (PWR-GND) 21.33 mm
    pad shape  only Proteus  0.071 mm^2 at (  -4.966,  -52.091) 1.65x0.58 mm  near R100-2 (#00045) 0.67 mm, via (PWR-GND) 20.73 mm
    pad shape  only Proteus  0.071 mm^2 at (  61.282,  -59.196) 0.18x0.90 mm  near C28-+ (#00011) 0.96 mm, via (SWLOOP) 31.93 mm
@@ -175,7 +177,6 @@ board outline -123.825 .. 101.6 x -78.105 .. -6.35 mm
    pad shape  only Proteus  0.071 mm^2 at (  12.968,  -66.569) 1.23x0.60 mm  near R21-1 (#00083) 0.79 mm, via (SWLOOP) 23.57 mm
    pad shape  only Proteus  0.067 mm^2 at (  92.760,  -55.753) 0.53x0.53 mm  near C4-1 (PWR-GND) 0.83 mm, via (SWLOOP) 62.48 mm
    pad shape  only KiCad    0.061 mm^2 at (  40.597,  -66.297) 1.33x0.90 mm  near R46-1 (PWR-GND) 1.12 mm, via (SWLOOP) 18.51 mm
-   pad shape  only KiCad    0.061 mm^2 at ( -59.647,  -67.053) 1.33x0.90 mm  near R67-2 (H) 1.12 mm, via (#00057) 46.66 mm
    pad shape  only KiCad    0.053 mm^2 at (  66.362,  -35.342) 0.68x1.70 mm  near R48-1 (#00011) 1.07 mm, via (SWLOOP) 39.07 mm
    pad shape  only Proteus  0.052 mm^2 at (-118.762,  -64.388) 2.05x0.05 mm  near Q4-1 (#00029) 1.02 mm, via (#00057) 55.87 mm
    pad shape  only Proteus  0.048 mm^2 at (  31.993,  -24.443) 0.55x0.55 mm  near R54-2 (#00007) 0.85 mm, via (SWLOOP) 26.40 mm
@@ -236,11 +237,12 @@ board outline -123.825 .. 101.6 x -78.105 .. -6.35 mm
    pad shape  only KiCad    0.010 mm^2 at ( -94.706,  -60.639) 0.33x0.25 mm  near R2-2 (H) 1.20 mm, via (#00057) 39.01 mm
    pad shape  only KiCad    0.010 mm^2 at ( -40.544,  -68.889) 0.33x0.25 mm  near R67-1 (G) 1.19 mm, via (PWR-GND) 46.00 mm
 
+== B.Cu: Proteus objects not compared (recorded deviations): 1 Conductor draws (REMOVED_TRACKS)
 == B.Cu: Proteus copper 2658.1 mm^2, KiCad copper 2590.4 mm^2
    raw XOR 97.05 mm^2; after 0.05 mm tolerance: only Proteus 54.15 mm^2, only KiCad 7.29 mm^2, 718 clusters (505 below 0.01 mm^2)
    pad shape   213 clusters, 60.69 mm^2
-   coverage: Proteus 242 draws / 261 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 238 draws / 261 flashes, 0 not on Proteus copper (0 explained by pad shape)
-   pad shape     8 clusters, only KiCad   0.00 mm^2, only Proteus  25.43 mm^2  tube_pi_fxloop:Relay_DPDT_Omron_G5V-2_Proteus  (1 parts: SERIES_MIX)
+   coverage: Proteus 241 draws / 261 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 237 draws / 261 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   pad shape     8 clusters, only KiCad   0.00 mm^2, only Proteus  25.43 mm^2  Relay_THT:Relay_DPDT_Omron_G5V-2  (1 parts: SERIES_MIX)
    pad shape    71 clusters, only KiCad   0.00 mm^2, only Proteus  15.33 mm^2  Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal  (34 parts: R10 R100 R11 R110 R12 R13 ...)
    pad shape     8 clusters, only KiCad   0.00 mm^2, only Proteus   3.74 mm^2  Capacitor_THT:C_Rect_L7.2mm_W5.0mm_P5.00mm  (4 parts: C32 C4 C6 C7)
    pad shape    20 clusters, only KiCad   3.14 mm^2, only Proteus   0.00 mm^2  tube_pi_fxloop:D_DO-41_SOD81_P10.16mm_Horizontal_AK  (5 parts: D1 D3 D4 D5 D6)
@@ -251,14 +253,14 @@ board outline -123.825 .. 101.6 x -78.105 .. -6.35 mm
    pad shape     7 clusters, only KiCad   0.00 mm^2, only Proteus   1.72 mm^2  Package_TO_SOT_THT:TO-220-3_Vertical  (1 parts: Q4)
    pad shape    21 clusters, only KiCad   1.05 mm^2, only Proteus   0.00 mm^2  tube_pi_fxloop:R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal  (6 parts: R2 R45 R46 R48 R67 R9)
    pad shape     3 clusters, only KiCad   0.00 mm^2, only Proteus   0.42 mm^2  Capacitor_THT:C_Rect_L18.0mm_W6.0mm_P15.00mm_FKS3_FKP3  (1 parts: C31)
-   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -40.013) 2.55x2.58 mm  near SERIES_MIX-6 (N/C) 0.01 mm, via (PWR-GND) 17.51 mm
-   pad shape  only Proteus  3.348 mm^2 at (  20.332,  -40.013) 2.55x2.58 mm  near SERIES_MIX-2 (#00018) 0.01 mm, via (SWLOOP) 14.81 mm
-   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -45.088) 2.55x2.58 mm  near SERIES_MIX-7 (N/C) 0.01 mm, via (SWLOOP) 18.68 mm
+   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -40.013) 2.55x2.58 mm  near SERIES_MIX-4 (N/C) 0.01 mm, via (PWR-GND) 17.51 mm
+   pad shape  only Proteus  3.348 mm^2 at (  20.332,  -40.013) 2.55x2.58 mm  near SERIES_MIX-13 (#00018) 0.01 mm, via (SWLOOP) 14.81 mm
+   pad shape  only Proteus  3.348 mm^2 at (  12.693,  -45.088) 2.55x2.58 mm  near SERIES_MIX-6 (N/C) 0.01 mm, via (SWLOOP) 18.68 mm
    pad shape  only Proteus  3.348 mm^2 at (  12.693,  -50.163) 2.55x2.58 mm  near SERIES_MIX-8 (N/C) 0.01 mm, via (SWLOOP) 17.80 mm
-   pad shape  only Proteus  3.348 mm^2 at (  20.332,  -50.163) 2.55x2.58 mm  near SERIES_MIX-1 (SEND) 0.01 mm, via (SWLOOP) 10.17 mm
-   pad shape  only Proteus  3.042 mm^2 at (  20.404,  -32.317) 2.55x2.58 mm  near SERIES_MIX-4 (SWLOOP) 0.11 mm, via (SWLOOP) 21.05 mm
-   pad shape  only Proteus  3.013 mm^2 at (  20.222,  -45.088) 2.50x2.58 mm  near SERIES_MIX-3 (PWR-GND) 0.10 mm, via (SWLOOP) 11.74 mm
-   pad shape  only Proteus  2.634 mm^2 at (  12.769,  -32.446) 2.55x2.58 mm  near SERIES_MIX-5 (PWRH4) 0.09 mm, via (PWR-GND) 15.40 mm
+   pad shape  only Proteus  3.348 mm^2 at (  20.332,  -50.163) 2.55x2.58 mm  near SERIES_MIX-9 (SEND) 0.01 mm, via (SWLOOP) 10.17 mm
+   pad shape  only Proteus  3.042 mm^2 at (  20.404,  -32.317) 2.55x2.58 mm  near SERIES_MIX-16 (SWLOOP) 0.11 mm, via (SWLOOP) 21.05 mm
+   pad shape  only Proteus  3.013 mm^2 at (  20.222,  -45.088) 2.50x2.58 mm  near SERIES_MIX-11 (PWR-GND) 0.10 mm, via (SWLOOP) 11.74 mm
+   pad shape  only Proteus  2.634 mm^2 at (  12.769,  -32.446) 2.55x2.58 mm  near SERIES_MIX-1 (PWRH4) 0.09 mm, via (PWR-GND) 15.40 mm
    pad shape  only Proteus  1.494 mm^2 at (-111.154,  -54.497) 2.55x2.53 mm  near C2-2 (#00029) 0.12 mm, via (#00057) 43.52 mm
    pad shape  only Proteus  1.036 mm^2 at (  38.737,  -38.072) 2.08x2.05 mm  near C8-- (PWR-GND) 0.03 mm, via (SWLOOP) 15.17 mm
    pad shape  only Proteus  0.893 mm^2 at (  64.808,  -58.917) 2.05x2.00 mm  near C28-- (PWR-GND) 0.14 mm, via (SWLOOP) 35.27 mm

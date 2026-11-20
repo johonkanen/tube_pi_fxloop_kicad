@@ -10,6 +10,7 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 3 PCB | **done** 2026-11-20 (Opus 5.5); TO-92 pad 1 round decided by the user 2026-11-20 (option (a)) |
 | 4 Verification | **done** 2026-11-20 (Fable 5.2, clean context): `ipc356_diff`, `gerber_roundtrip --check` (with the 2010 Excellon) pass; the board is unchanged |
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5, clean context): U4 / U5 on the bottom side (standard noval numbering), `place_refdes` in `make_pcb.sh`; the rest kept as the user decided. **The conversion is complete.** |
+| Design fixes | **done** 2026-11-20 (Opus 5.5, user decisions after the conversion): relay SERIES_MIX on Omron pin numbers (Finding 15), the three dangling Proteus stubs removed (`REMOVED_TRACKS`, Finding 19); values unchanged; the board is still generated |
 
 ## Phase 0 – done (Opus 5.5, 2026-11-20)
 
@@ -793,7 +794,8 @@ Model: the power amp pilot `~/dev/tube_power_amp_kicad` (read only), its Phase 5
 1. U4 / U5 on the bottom side with the standard noval numbering, footprint built mirrored – **done** (below).
 2. `p2k place_refdes` as a `make_pcb.sh` step – **done** (below).
 3. The three dangling Proteus stubs (Finding 19) – **kept as drawn**, no `REMOVED_TRACKS`; the 3
-   `track_dangling` warnings stay.
+   `track_dangling` warnings stay. **Reversed by the user 2026-11-20 after the conversion: removed**
+   ("Design fixes 2026-11-20").
 4. TO-92 pin-1 dot (`PIN1_DOT`) – **kept**.
 5. Body graphics (KiCad library), KiCad pad sizes, sheet names, KiCad refdes of the signed names, 1.6 mm
    – **kept**, nothing changed.
@@ -877,9 +879,102 @@ Scratch boards in `build/tmp/neg5/<case>` (pcbnew from the generated board, run 
   intended differences (record them as deviations).
 - Courtyard / silk items above (library graphics on the Proteus placement), as decided.
 
+## Design fixes 2026-11-20 (Opus 5.5, after the conversion)
+
+User decisions: "Decisions", "User decisions 2026-11-20, after the conversion" (recorded before the work).
+Verified state first: `tools/check_all.sh` printed the Phase 5 "Last check output" (ALL CHECKS PASSED).
+Everything is done in the generators and config; the board, schematic, libraries and reports are
+regenerated (`tools/make_pcb.sh`, sheet scripts, `gen_symbols`, `gen_footprints`, `tools/ipc356.py`).
+`tools/p2k` and its pin are unchanged.
+
+### Which findings are fixed
+
+| Finding | Action |
+|---|---|
+| 15 relay G5V-2(HI) mirrored / Proteus pin ids | **fixed**: Omron pin numbers on symbol and footprint (below) |
+| 19 three dangling Proteus stubs | **fixed**: removed with `REMOVED_TRACKS` (below) |
+| 5, 8, 21 values (R47 33k vs hand note, U4 12AT7 on the 12AX7 device, C8 / C28 22u) | **unchanged** (user: values stay) |
+| 14 stray junction dot, page 1 hand note | nothing to fix in KiCad: the redrawn sheets have no stray dot; the hand note stays as a text (it belongs to Finding 5) |
+| 16 noval numbering | already fixed in Phase 5 (bottom side, standard numbering) |
+| 9 C1 / C36 / C37 `+` = pin 2, 10 SW-SPDT ids | left: pin numbering only, the footprints carry the same ids and mark `+`; changing them is a redesign choice (not asked) |
+| 1, 2, 3, 4, 12, 13, 17, 18, 20, 22 | design / topology facts or already decided (18: `DRILL_SMALLER`); changing them changes the circuit or the copper - for the redesign, not a clean-up |
+
+### Relay SERIES_MIX on Omron pin numbers (Finding 15)
+
+- `p2k_config.py` **`IPC_PIN_IDS`** (board-local key) `{"SERIES_MIX": {Proteus pin: Omron pin}}`: 1 → 9
+  (NO2, SEND), 2 → 13 (COM2, #00018 = R26), 3 → 11 (NC2, PWR-GND), 4 → 16 (coil, SWLOOP), 5 → 1 (coil,
+  PWRH4), 6 → 4, 7 → 6, 8 → 8 (pole 1, N/C). That is the physical mapping of a top-mounted G5V-2 found in
+  Phase 2 (the former `G5V2_RENUMBER`, inverted).
+- **`tools/ipc356.py`** (new): `p2k ipc356` with the renaming applied after the shared parser (wraps
+  `ipc356.parse`); fails unless every IPC pad of a listed refdes is renamed, the targets are unique and the
+  refdes exists. `reference/` is regenerated with it, so `ipc356_pads.json` and the cheat sheets carry the
+  Omron ids and every check reading them (check_symbols, compare, check_footprints, check_pin_order,
+  check_board, assign_nets, ipc356_diff, gerber_roundtrip) compares against the Omron ids; positions and
+  nets stay Proteus'. `check_all.sh` runs `tools/ipc356.py --check` instead of `p2k ipc356 --check`
+  (p2k candidate 24).
+- `tools/gen_symbols.py`: KiCad `Relay:G5V-2` **unchanged** (no renumbering; KiCad's symbol has no pin
+  names, the numbers are the Omron ones). `tools/sheets/sheet01.py`: the Proteus pole is drawn as Omron
+  **pole 2** (COM 13 under R26, NO 9 to C30 / SEND, NC 11 to ground), the coil 16 on SWLOOP and 1 on
+  PWRH4 with D1 (K on SWLOOP, A on PWRH4) one column right; pole 1 (4 / 6 / 8) has the no-connect flags.
+  Relay placed one 10.16 mm column right so the contacts keep their Proteus positions
+  (`reports/render/01_fx_loop_driver.png`).
+- `tools/gen_footprints.py`: the rule maps G5V-2(HI) to KiCad's **`Relay_THT:Relay_DPDT_Omron_G5V-2`
+  unchanged**; the project footprint `Relay_DPDT_Omron_G5V-2_Proteus` (renumbered copy) is gone (17
+  footprints, 13 project). Same pads 1.4 / 0.7, same placement (check_footprints: top, 0°, same origin,
+  residual 0.000).
+- `tools/check_pin_order.py`: the unmoved KiCad G5V-2 with the Omron ids of `reference/` fits
+  **unmirrored 0.000** (mirrored 7.62); the Phase 2 Proteus-pole mapping (Omron pole 1 on Proteus 1-8,
+  expressed in today's ids) still fits **only mirrored** - proves `IPC_PIN_IDS` is the physical and not
+  the mirrored mapping. `tools/check_drill_smaller.py`: the 8 relay holes by their Omron pad numbers.
+- Copper: unchanged (ipc356_diff 261 / 261, 66 nets 1:1, 0 mismatches; check_board 0.001 mm; round trip
+  areas unchanged for the relay; only the pad names in the reports changed).
+
+### Dangling stubs removed (Finding 19)
+
+- `p2k_config.py` **`REMOVED_TRACKS`** (shared p2k key, IPC frame): B.Cu SWLOOP (84.455, −42.545)–(84.455,
+  −43.815), F.Cu Net-(Q90-B) (−20.0025, −43.18)–(−19.3675, −43.18), F.Cu H (−60.325, −67.945)–(−58.42,
+  −67.945) (R67-2). gerber_to_tracks: 515 → **512 tracks** ("removed as recorded: 3 tracks"); assign_nets
+  81 groups, 0 shorts / orphans / opens (unchanged).
+- Round trip: "Proteus objects not compared (recorded deviations): 3 Conductor draws (REMOVED_TRACKS)";
+  F.Cu only-KiCad 6.39 → 6.41 mm² = one new 0.073 mm² "pad shape" cluster at the R67-2 corner that the
+  H stub used to cover (the same 2 W pad corner as R46-2's); everything else equal.
+- DRC: track_dangling 3 → **0** (total 105 → 102: 40 + 7 accepted errors, 28 silk_overlap, 27
+  silk_over_copper warnings).
+- New check **`tools/check_no_dangling.py`** (check_all step after DRC): fails on any `track_dangling` /
+  `via_dangling` in `reports/drc.json`. Needed because `p2k drc` does not enforce warnings and the round
+  trip passes when a stub is on both sides (negative test 1b).
+- `tools/make_pcb.sh` fix: the steps of `run()` are chained with `&&`. `run` is called inside `||` in
+  `--check` mode, where `set -e` is off, so a failing gerber_to_tracks (e.g. a `REMOVED_TRACKS` entry
+  without a draw) was followed by assign_nets on a trackless board and its ERROR line was filtered out;
+  the step still failed (board not byte-identical) but for the wrong visible reason. Now it prints
+  `gerber_to_tracks: ERROR REMOVED_TRACKS: … missing …` and `make_pcb: FAILED`. The other board repos'
+  `make_pcb.sh` have the same `run()` (not changed here; p2k candidate 25).
+
+### Negative tests (config / sheet edited temporarily or scratch boards in `build/tmp/neg6/<case>`; all restored, md5 of the board, sheets and `reference/ipc356_pads.json` equal afterwards; `check_all.sh` afterwards: ALL CHECKS PASSED)
+
+| Change | Caught by |
+|---|---|
+| 1a `REMOVED_TRACKS` entry of the H stub deleted (board not regenerated) | **make_pcb --check** (board / assign_nets not up to date), **gerber_roundtrip** FAILED (1 unexplained cluster, 1 Proteus draw without KiCad copper) |
+| 1b same, board regenerated in place | `check_all`: **check_no_dangling** FAILED (`track_dangling: Track [H] on F.Cu, length 1.9050 mm`); every other step passes (stub on both sides) - the reason for the new step |
+| 2a non-existent track listed (`("F.Cu", 1, 1, 2, 1)`) | **make_pcb --check**: `gerber_to_tracks: ERROR REMOVED_TRACKS: 4 listed, found 3 draws (missing …)`, `make_pcb: FAILED` |
+| 2b real stub with a wrong end point (−58.40 for −58.42) | same: `3 listed, found 2 draws (missing …)` |
+| 3a relay pins on the wrong net in the schematic (wires to 9 and 11 swapped in sheet01.py) | **compare**: 3 wrong-net pins, `KiCad net PWR-GND merges IPC nets [PWR-GND …] [SEND …]`, 1 error |
+| 3b `IPC_PIN_IDS` = the mirrored mapping (Omron pole 1 on the Proteus pole) | **ipc356 --check** stale; after regenerating `reference/`: **compare** 8 wrong-net pins, **check_pin_order** (KiCad G5V-2 fits mirrored), **check_board**, **ipc356_diff** FAILED |
+| 3c `IPC_PIN_IDS` with a pin missing | **tools/ipc356.py**: `IPC pins [1..8], listed [1..7]` |
+| 3d scratch board: SERIES_MIX pad 9 on PWR-GND | **check_board** `SERIES_MIX-9: net PWR-GND, IPC net SEND`, **ipc356_diff** FAILED, **assign_nets --check** (SEND spans two KiCad nets) |
+| 3e scratch board: pad numbers 9 / 11 swapped (copper nets kept) | **check_board** (5.08 mm from the IPC pad, wrong nets), **ipc356_diff** FAILED |
+
+### Left open
+
+- Generation stops later (user decision 4): after the shared-tool migration; then remove the
+  `make_pcb.sh --check` step from `check_all.sh` (Phase 5 "Left open").
+- `IPC_PIN_IDS` / `tools/ipc356.py`, `tools/check_no_dangling.py` and the `make_pcb.sh` `&&` fix are
+  board-local; for the shared-tool migration (p2k candidates 24, 25).
+
 ## Last check output
 
-`tools/check_all.sh` (2026-11-20, Phase 5 done; ipc356_diff, check_drill_smaller and gerber_roundtrip print exactly the Phase 4 lines):
+`tools/check_all.sh` (2026-11-20, design fixes done: relay on Omron pins, 3 stubs removed; new steps
+"No dangling track or via"; the IPC self-check runs through `tools/ipc356.py`):
 
 ```
 == KiCad environment
@@ -887,6 +982,7 @@ pcbnew 10.0.7
 == IPC-D-356A parser self-check
 ipc356: nets=66, records=261, refdes_raw=125, tht_records=261, smd_records=0, smd_top=0, smd_bottom=0, nc_pads=5, vias=4, free_pads=0, holes=10, parts=126
 ipc356: OK
+ipc356: pin ids renamed (IPC_PIN_IDS): SERIES_MIX 1->9 2->13 3->11 4->16 5->1 6->4 7->6 8->8
 == Gerber X2 export vs IPC (pads, vias, holes, drills, outline)
   8 gerbers, one SameCoordinates id
   Top Copper: Draw:Conductor 277, Draw:Profile 4, Flash:ComponentPad 247, Flash:OtherPad,Unknown 10, Flash:ViaPad 4
@@ -924,7 +1020,7 @@ compare: per sheet (drawn/total) 1:24/24 2:46/46 3:24/24 4:32/32
 compare: OK
 == No symbol pin of type no_connect
 == Footprint library, map and fp-lib-table up to date
-gen_footprints: 126 parts, 17 footprints (14 project), up to date
+gen_footprints: 126 parts, 17 footprints (13 project), up to date
 == Footprints vs IPC pad geometry
 check_footprints: pcbnew placement of 126 parts, worst pad offset 0.001 mm
 check_footprints: note: U4: THT pad pattern fits only mirrored -> bottom side
@@ -940,8 +1036,8 @@ D2 D7 D8 D9 D10 D11 D12 Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal        0.000
 D1 D3 D4 D5 D6   Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal        0.000 @   90       0.000 @  270  unmirrored
 C8 C28           Capacitor_THT:CP_Radial_D5.0mm_P2.50mm             0.020 @  180       0.020 @    0  unmirrored
 C1 C36 C37       Capacitor_THT:CP_Radial_D16.0mm_P7.50mm            0.000 @  270       0.000 @   90  unmirrored
-SERIES_MIX       Relay_THT:Relay_DPDT_Omron_G5V-2                   7.620 @    0       0.000 @    0  mirrored
 SERIES_MIX       Relay_THT:Relay_DPDT_Omron_G5V-2                   0.000 @    0       7.620 @    0  unmirrored
+SERIES_MIX       Relay_THT:Relay_DPDT_Omron_G5V-2                   7.620 @    0       0.000 @    0  mirrored
 U4 U5            Valve:Valve_Noval_P                             17.630 @150.272       2.972 @    0  mirrored
 U4 U5            ideal standard noval, PCD 21.00 mm (free rot.)  19.318              0.007             mirrored
 U4: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-clockwise from the top)
@@ -953,26 +1049,28 @@ U4 U5            Valve_Noval_Belton_PCD21.00mm (project)       19.314           
 check_pin_order: OK (results as recorded in STATUS.md)
 == PCB rebuilt from schematic + gerbers, up to date
 build_pcb: 126 footprints placed (0 excluded from board), 10 mounting holes, 71 nets, 4 outline segments
-gerber_to_tracks: 515 tracks, 4 vias (IPC 4), 0 pour outlines on User.1-4
+gerber_to_tracks: 512 tracks, 4 vias (IPC 4), 0 pour outlines on User.1-4; removed as recorded: 3 tracks (REMOVED_TRACKS), 0 vias (REMOVED_VIAS)
 assign_nets: stage A (no pours): 81 groups, 0 shorts, 0 orphans, 0 opens
 assign_nets: stage B (with pours): 81 groups, 0 shorts, 0 orphans, 0 opens
 place_refdes: 68 kept, 67 moved, 1 moved, 0.8 mm text (sizes 1.0, 0.8 mm)
 make_pcb: board rebuilt from scratch, byte-identical
 == Board pads, holes, vias vs IPC (position, size, nets 1:1)
 check_board: 136 footprints, 247 pads, worst pad offset 0.001 mm (limit 0.05), 66 IPC nets mapped 1:1, 10 mounting holes
-check_board: 515 tracks, 4 vias, 0 zones
+check_board: 512 tracks, 4 vias, 0 zones
 check_board: OK
 == Board copper connectivity (KiCad geometry)
 assign_nets: after zone fill: 81 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
 == DRC with schematic parity
-drc: 105 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc: 102 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
 drc:     40 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement (40 pairs, parts exactly at the Proteus positions, all on the top side): the 100N rows C3/C5/C9 6.35 mm apart; the TO-92 rows (Q1/Q2, Q3/Q5, Q6/Q7) with each other and R11 R16 R18, Q20 / R270, SEND2W SEND3W; resistors / film caps / terminals packed closer than the KiCad courtyards (R19-R24, R66, RETURN1-3, C4 C7 with D9 R50, C30 with R24 R26, ...). The noval sockets U4 / U5 are on the bottom side since Phase 5 (user 2026-11-20): their courtyards (B.CrtYd) no longer meet the top-side parts
 drc:      7 error    pth_inside_courtyard  accepted: Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's (a THT pad is on both sides, so the bottom-side socket courtyards still contain them), R24-1 and R26-1 inside the large C30 Solen box courtyard
 drc:     28 warning  silk_overlap
 drc:     27 warning  silk_over_copper
-drc:      3 warning  track_dangling
 drc: OK
+== No dangling track or via (DRC)
+check_no_dangling: 0 dangling tracks / vias in reports/drc.json
+check_no_dangling: OK
 == 2010 Excellon drill file converted to metric, up to date
 excellon_metric: reference/fab_2010_drill_metric.drl up to date (7 tools, 261 holes)
 == IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)
@@ -986,8 +1084,9 @@ ipc356_diff: OK
 check_drill_smaller: 261 IPC records, 261 board holes; smaller board drills: 18 (decided 18: 8x 0.762->0.75, 8x 1.143->0.7, 2x 1.143->1.0)
 check_drill_smaller: OK
 == Gerber round trip vs Proteus (copper XOR, coverage, drills, 2010 Excellon)
-roundtrip: F.Cu   XOR   94.27 mm^2, beyond 0.05 mm: only Proteus  53.53, only KiCad   6.39 mm^2; clusters >= 0.01 mm^2: 218 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: F.Cu   XOR   94.31 mm^2, beyond 0.05 mm: only Proteus  53.53, only KiCad   6.41 mm^2; clusters >= 0.01 mm^2: 218 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
 roundtrip: B.Cu   XOR   97.05 mm^2, beyond 0.05 mm: only Proteus  54.15, only KiCad   7.29 mm^2; clusters >= 0.01 mm^2: 213 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
+roundtrip: Proteus objects not compared (recorded deviations, all layers): 3 Conductor draws (REMOVED_TRACKS)
 roundtrip: drills 0 mismatches; KiCad drill smaller, accepted (DRILL_SMALLER): 8x 0.762->0.75, 8x 1.143->0.7, 2x 1.143->1.0; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
 roundtrip: OK
 
@@ -1060,6 +1159,10 @@ ALL CHECKS PASSED
    not polarised and D1 sits across it either way), so the board works; only the pole and pin names
    differ. The footprint uses the physical mapping (KiCad pin-1 mark at Proteus pad 5); the symbol keeps
    Proteus' names. Worth correcting in the redesign's symbol / footprint pair.
+   **Fixed 2026-11-20 (user decision, "Design fixes 2026-11-20"): symbol and footprint use the Omron pin
+   numbers** (KiCad Relay:G5V-2 / Relay_THT:Relay_DPDT_Omron_G5V-2 unchanged; the IPC pin ids of
+   SERIES_MIX renamed, `IPC_PIN_IDS`): Proteus 1-8 = Omron 9 13 11 16 1 4 6 8; the schematic now shows
+   that pole 2 is the used pole. Every pin on its net, copper unchanged.
 16. **The noval sockets U4 / U5 are numbered mirrored** (as the pilot's octal, power amp Finding 10): pins
    1 → 9 run clockwise seen from the top (1 at −144°, 2 at 180°, … 9 at −72°, gap at −108°); the noval
    standard runs clockwise seen from the pin side. Only the mirrored ideal noval fits (0.007 mm vs 19.3 mm).
@@ -1088,6 +1191,8 @@ ALL CHECKS PASSED
    to (-19.368, 43.18); a 1.905 mm F.Cu H stub from R67-2 to (-58.42, 67.945). The free ends touch nothing
    (checked against every pad and track end). No net effect; leftovers of the 2010 routing. Reproduced
    (`REMOVED_TRACKS` could drop them in Phase 5 if wanted). **User 2026-11-20: kept as drawn.**
+   **Fixed 2026-11-20 (user decision after the conversion, reverses the Phase 5 one): removed** with
+   `REMOVED_TRACKS` ("Design fixes 2026-11-20"); DRC track_dangling 3 -> 0.
 20. **The Proteus clearance is tight at the TO-92 rows**: 0.421 mm between a TO-92 pad and the 45° tracks
    that leave the neighbouring pad (Q1, Q3, Q6, Q20), the smallest gap on the board (otherwise ≥ 0.508).
    Fine for the 2010 board; relevant for the redesign's rules.
@@ -1234,6 +1339,17 @@ ALL CHECKS PASSED
    the result. The shared tool would need a `bottom` spec key (or a side override per refdes). Also as
    on the pilot (candidate 25): `p2k drc` does not enforce warning counts; only the byte compare sees a
    new silk warning while the board is generated.
+24. **No pin id renaming for the IPC file** (design fixes 2026-11-20): the relay SERIES_MIX should carry the
+   Omron pin numbers while the Proteus IPC numbers it 1-8. Board-local: `IPC_PIN_IDS` in `p2k_config.py` and
+   `tools/ipc356.py` (wraps `ipc356.parse`, renames after parsing, checks completeness / uniqueness), so
+   `reference/` carries the KiCad ids. The shared tool would need the key in `ipc356` itself (with the
+   Proteus pin kept in an extra field such as `pin_proteus`, which `FIELDS` does not allow today).
+25. **`make_pcb.sh --check` hides a failing step** (the pilot's script, copied to every board repo): `run` is
+   called inside `run >log || {...}`, where `set -e` does not apply, so after a failing gerber_to_tracks the
+   later steps run on and the filtered output never shows the ERROR (the step still fails, as "not up to
+   date"). Fixed here by chaining the steps with `&&`; the other board repos have the same `run()`. Also:
+   `p2k drc` does not enforce warnings, so a dangling track coming back is only a count; board-local
+   `tools/check_no_dangling.py`.
 
 ## Decisions
 
@@ -1310,3 +1426,19 @@ ALL CHECKS PASSED
   steps); `place_refdes` with its defaults (no `REFDES_PLACEMENT`); `DRC_ACCEPTED` reasons and counts
   updated (40 courtyards_overlap, 7 pth_inside_courtyard). **Open for the user: nothing blocking.** The
   conversion is complete; the first hand edit of the board (which ends generation) is the user's call.
+- **User decisions 2026-11-20, after the conversion** (given through the coordinating session; recorded
+  before the work, done in "Design fixes 2026-11-20"):
+  1. **Fix the design findings in the KiCad design, but leave the component values as they are**
+     (Findings 5, 8, 21 unchanged: R47 33k, U4 value 12AT7 on the 12AX7 symbol, C8 / C28 22u). The
+     boards will be redesigned; the aim is a clean starting point.
+  2. **Finding 15: relabel the relay SERIES_MIX symbol / footprint pin names to Omron's** (electrically
+     identical, no copper change). Every pin stays on its net; compare / check_board / ipc356_diff must
+     still pass.
+  3. **Finding 19: REMOVE the three dangling Proteus stubs** (SWLOOP, Net-(Q90-B), H at R67-2) with the
+     p2k key `REMOVED_TRACKS`. **This reverses Phase 5 decision 3.** The checks accept recorded removals.
+  4. **Generation stops later** (after the shared-tool migration); the board stays generated for now.
+- Design fixes 2026-11-20 (agent's choices, no user decision needed): the relay renaming is done on the
+  IPC side (`IPC_PIN_IDS`, `tools/ipc356.py`) so that symbol and footprint are KiCad's unchanged; the
+  sheet draws the used pole as Omron pole 2; findings other than 15 / 19 are left (table in "Design
+  fixes 2026-11-20"); new board-local `tools/check_no_dangling.py`; `make_pcb.sh` steps chained with `&&`.
+  **Open for the user: nothing blocking** (which further findings, if any, to change is redesign work).

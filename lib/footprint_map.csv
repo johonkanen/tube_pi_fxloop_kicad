@@ -112,7 +112,7 @@ SEND3,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-
 SEND1W,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
 SEND2W,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
 SEND3W,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
-SERIES_MIX,tube_pi_fxloop:G5V-2,tube_pi_fxloop:Relay_DPDT_Omron_G5V-2_Proteus,"G5V-2(HI): Omron G5V-2, Proteus pin ids 1-8"
+SERIES_MIX,tube_pi_fxloop:G5V-2,Relay_THT:Relay_DPDT_Omron_G5V-2,"G5V-2(HI): Omron G5V-2, Omron pin numbers (IPC_PIN_IDS)"
 SIGNALGND,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
 SUKKA,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad
 SW1,tube_pi_fxloop:PIN,tube_pi_fxloop:FlyLead_Pad_D3.048mm_Drill1.524mm,C-120-60: fly-lead terminal pad

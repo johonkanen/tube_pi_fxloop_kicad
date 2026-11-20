@@ -1191,7 +1191,7 @@
 					)
 				)
 			)
-			(property "Description" "Omron G5V-2 DPDT relay, Proteus G5V-2(HI) pin ids: AC1(NO)=1 COM1=2 NC1=3 DC1(coil)=4 DC2(coil)=5 COM2=6 NC2=7 AC2(NO)=8"
+			(property "Description" "Omron G5V-2 DPDT relay, Omron pin numbers (coil 1 / 16, pole 1 COM 4 NC 6 NO 8, pole 2 COM 13 NC 11 NO 9); KiCad Relay:G5V-2 unchanged"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1547,7 +1547,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1565,7 +1565,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1583,7 +1583,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1601,7 +1601,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1619,7 +1619,7 @@
 							)
 						)
 					)
-					(number "8"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1637,7 +1637,7 @@
 							)
 						)
 					)
-					(number "7"
+					(number "11"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1655,7 +1655,7 @@
 							)
 						)
 					)
-					(number "6"
+					(number "13"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1673,7 +1673,7 @@
 							)
 						)
 					)
-					(number "5"
+					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3798,7 +3798,7 @@
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop:G5V-2")
-		(at 267.97 149.86 180)
+		(at 278.13 149.86 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3823,8 +3823,8 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tube_pi_fxloop:Relay_DPDT_Omron_G5V-2_Proteus"
-			(at 251.46 148.59 0)
+		(property "Footprint" "Relay_THT:Relay_DPDT_Omron_G5V-2"
+			(at 261.62 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3834,7 +3834,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 267.97 149.86 0)
+			(at 278.13 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3842,38 +3842,38 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Omron G5V-2 DPDT relay, Proteus G5V-2(HI) pin ids: AC1(NO)=1 COM1=2 NC1=3 DC1(coil)=4 DC2(coil)=5 COM2=6 NC2=7 AC2(NO)=8"
-			(at 267.97 149.86 0)
+		(property "Description" "Omron G5V-2 DPDT relay, Omron pin numbers (coil 1 / 16, pole 1 COM 4 NC 6 NO 8, pole 2 COM 13 NC 11 NO 9); KiCad Relay:G5V-2 unchanged"
+			(at 278.13 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(pin "4"
-			(uuid "5ede474b-1725-50dc-a18b-6d9999a2b5f8")
-		)
-		(pin "2"
-			(uuid "25277b49-b503-5f8f-84e9-3eed85d0644e")
-		)
-		(pin "3"
-			(uuid "4306d59d-2038-5bb3-b5d4-b03ddaf7ec0c")
 		)
 		(pin "1"
 			(uuid "d66807a9-8703-5b4c-92d0-dad2bc1bc3e2")
 		)
-		(pin "8"
-			(uuid "ed158a10-dceb-507d-8baa-cc280a3af68e")
-		)
-		(pin "7"
-			(uuid "c0956deb-df76-59cc-b281-0dd993a200ed")
+		(pin "4"
+			(uuid "5ede474b-1725-50dc-a18b-6d9999a2b5f8")
 		)
 		(pin "6"
 			(uuid "2008a97b-234b-5180-84e7-0dc4f3ca8a99")
 		)
-		(pin "5"
-			(uuid "c766bdfa-b747-5fd0-a341-c4af3b0c1782")
+		(pin "8"
+			(uuid "ed158a10-dceb-507d-8baa-cc280a3af68e")
+		)
+		(pin "9"
+			(uuid "13a3a6d4-0433-5523-8657-748178f659ad")
+		)
+		(pin "11"
+			(uuid "e2f8f3b4-1933-5919-972d-31afb347b03d")
+		)
+		(pin "13"
+			(uuid "637cc5f1-d755-5787-8c74-07cb6135ce88")
+		)
+		(pin "16"
+			(uuid "70d1384c-7f3b-5dca-84c9-b474255aedce")
 		)
 		(instances
 			(project "tube_pi_fxloop"
@@ -3925,20 +3925,20 @@
 		(uuid "1ff23691-a403-5a4b-ad57-f050214f67b0")
 	)
 	(no_connect
-		(at 257.81 142.24)
+		(at 278.13 142.24)
 		(uuid "8f38ab9c-e702-56f0-8802-760634bd5b34")
 	)
 	(no_connect
-		(at 260.35 157.48)
+		(at 280.67 157.48)
 		(uuid "ef1d43b8-eab9-553c-97e3-992fe8fd139b")
 	)
 	(no_connect
-		(at 255.27 157.48)
+		(at 275.59 157.48)
 		(uuid "54b5949d-fffd-5f1a-b18a-cbb0a251ea63")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop:D")
-		(at 288.29 149.86 90)
+		(at 298.45 149.86 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3946,7 +3946,7 @@
 		(dnp no)
 		(uuid "5bb497f7-12f7-5a0c-b91b-142100789c32")
 		(property "Reference" "D1"
-			(at 291.93 148.59 270)
+			(at 302.09 148.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3954,7 +3954,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 294.13 151.13 270)
+			(at 304.29 151.13 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3962,7 +3962,7 @@
 			)
 		)
 		(property "Footprint" "tube_pi_fxloop:D_DO-41_SOD81_P10.16mm_Horizontal_AK"
-			(at 288.29 149.86 0)
+			(at 298.45 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3971,7 +3971,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 288.29 149.86 0)
+			(at 298.45 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3980,7 +3980,7 @@
 			)
 		)
 		(property "Description" "Diode, Proteus pins A/K"
-			(at 288.29 149.86 0)
+			(at 298.45 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4005,7 +4005,7 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 142.24) (xy 278.13 139.7)
+			(xy 288.29 142.24) (xy 288.29 139.7)
 		)
 		(stroke
 			(width 0)
@@ -4015,7 +4015,7 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 139.7) (xy 295.91 139.7)
+			(xy 288.29 139.7) (xy 306.07 139.7)
 		)
 		(stroke
 			(width 0)
@@ -4025,7 +4025,7 @@
 	)
 	(wire
 		(pts
-			(xy 288.29 139.7) (xy 288.29 146.05)
+			(xy 298.45 139.7) (xy 298.45 146.05)
 		)
 		(stroke
 			(width 0)
@@ -4033,9 +4033,9 @@
 		)
 		(uuid "657e5bd2-96b6-5706-956b-3f556f7b7fae")
 	)
-	(global_label "PWRH4"
+	(global_label "SWLOOP"
 		(shape passive)
-		(at 295.91 139.7 0)
+		(at 306.07 139.7 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4045,7 +4045,7 @@
 		)
 		(uuid "d97de34f-11bf-5b44-9c3d-2af186f4cc9c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 295.91 139.7 0)
+			(at 306.07 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4057,7 +4057,7 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 157.48) (xy 278.13 160.02)
+			(xy 288.29 157.48) (xy 288.29 160.02)
 		)
 		(stroke
 			(width 0)
@@ -4067,7 +4067,7 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 160.02) (xy 295.91 160.02)
+			(xy 288.29 160.02) (xy 306.07 160.02)
 		)
 		(stroke
 			(width 0)
@@ -4077,7 +4077,7 @@
 	)
 	(wire
 		(pts
-			(xy 288.29 153.67) (xy 288.29 160.02)
+			(xy 298.45 153.67) (xy 298.45 160.02)
 		)
 		(stroke
 			(width 0)
@@ -4085,9 +4085,9 @@
 		)
 		(uuid "a0494663-3947-53da-8239-568f235f9195")
 	)
-	(global_label "SWLOOP"
+	(global_label "PWRH4"
 		(shape passive)
-		(at 295.91 160.02 0)
+		(at 306.07 160.02 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4097,7 +4097,7 @@
 		)
 		(uuid "59b5c80c-6d24-5015-81e5-4a50506ee179")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 295.91 160.02 0)
+			(at 306.07 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4108,13 +4108,13 @@
 		)
 	)
 	(junction
-		(at 288.29 139.7)
+		(at 298.45 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b1f0820a-c148-5922-a0e8-f40265caadea")
 	)
 	(junction
-		(at 288.29 160.02)
+		(at 298.45 160.02)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "161fe763-c8cb-5a8a-a8ab-13c09bf00d2d")
@@ -4551,7 +4551,7 @@
 		)
 		(uuid "28c83f4a-0c2a-52e1-b309-fdbb1db09d38")
 	)
-	(text "Terminals PRE-H4 / PRE-H5 = PRE_H4 / PRE_H5; relay SERIES/MIX = SERIES_MIX (pins 6-8, pole 2: not connected)."
+	(text "Terminals PRE-H4 / PRE-H5 = PRE_H4 / PRE_H5; relay SERIES/MIX = SERIES_MIX, Omron pins (Proteus 1-8 = 9 13 11 16 1 4 6 8; pole 1 not connected)."
 		(exclude_from_sim no)
 		(at 107.95 226.06 0)
 		(effects

@@ -29,7 +29,7 @@ import p2k_config as cfg  # noqa: E402
 
 # (Proteus drill, KiCad drill) -> pads, as decided (STATUS.md "Decisions", 2026-11-20)
 EXPECTED = {
-    (1.143, 0.7): {("SERIES_MIX", str(n)) for n in range(1, 9)},
+    (1.143, 0.7): {("SERIES_MIX", n) for n in ("1", "4", "6", "8", "9", "11", "13", "16")},   # Omron pads (IPC_PIN_IDS)
     (1.143, 1.0): {("C2", "1"), ("C2", "2")},
     (0.762, 0.75): {(c, p) for c in ("C4", "C6", "C7", "C32") for p in ("1", "2")},
 }

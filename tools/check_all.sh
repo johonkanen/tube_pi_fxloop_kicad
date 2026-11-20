@@ -20,7 +20,8 @@ step() {
 
 # Phase 0: environment and sources
 step "KiCad environment" tools/p2k/bin/kipy -c "import pcbnew; v = pcbnew.GetBuildVersion(); print('pcbnew', v); assert v.startswith('10.0.7'), v"
-step "IPC-D-356A parser self-check" tools/p2k/bin/p2k ipc356 --check
+# tools/ipc356.py = p2k ipc356 + the board-local pin id renaming IPC_PIN_IDS (relay SERIES_MIX -> Omron ids)
+step "IPC-D-356A parser self-check" python3 tools/ipc356.py --check
 step "Gerber X2 export vs IPC (pads, vias, holes, drills, outline)" tools/p2k/bin/p2k check_sources
 # Phase 1: schematic
 step "Part map up to date" python3 tools/make_part_map.py --check
@@ -40,6 +41,9 @@ step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --chec
 step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
 step "Board copper connectivity (KiCad geometry)" tools/p2k/bin/kipy -m p2k.assign_nets --check
 step "DRC with schematic parity" tools/p2k/bin/p2k drc
+# Design fixes 2026-11-20: the dangling Proteus stubs are removed (REMOVED_TRACKS); p2k drc does not enforce
+# warnings, so a stub that comes back (entry dropped and the board regenerated) is caught here.
+step "No dangling track or via (DRC)" python3 tools/check_no_dangling.py
 # Phase 4: independent verification (kicad-cli IPC-D-356 export and gerber plot of the board vs Proteus).
 # DRILL_SMALLER (p2k_config.py) accepts exactly the three decided drill pairs (18 holes).
 step "2010 Excellon drill file converted to metric, up to date" python3 tools/excellon_metric.py --check
