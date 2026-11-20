@@ -988,8 +988,15 @@ file, `check_all.sh`, clean `git status`): **PASS** after each commit.
    texts). No strict exception needed: the D-Z default set (`no_connect_pin_type`, `nc_joined`,
    `net_names`, `derive_max_move`, `hole_refdes`, `track_nets`, `roundtrip_counts`) passes; the new
    strict lines print to stdout only.
-2. **Migration** (this section): board-local tools deleted, shared keys added; every generated file
+2. **Migration** (`81e19cd`): board-local tools deleted, shared keys added; every generated file
    byte-identical except the two accepted re-baselines below (D-K2, R1).
+3. No design change is listed for this board in CANDIDATES.md 7.3, so there is no third commit (this
+   record is docs only).
+
+Regression (`regress.sh a9a286c tube_pi_fxloop_kicad`): `da63c7d` PASS (63 s); `81e19cd` PASS (70 s). A
+first try of commit 2 failed the clean-tree step: the R1 line of `reports/roundtrip/roundtrip.txt` had been
+reverted by the negative-test restore (`git checkout reports/`) before the commit; regenerated and amended
+before pushing, then PASS.
 
 ### Board-local → shared
 
