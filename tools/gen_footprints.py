@@ -6,8 +6,7 @@ Writes (through the shared generator tools/p2k/p2k/footprints.py)
   lib/tube_pi_fxloop.pretty/   project footprints: derived from KiCad library footprints (pads
                                renumbered to the Proteus ids, pad centres moved onto the Proteus
                                positions) or built from the IPC-D-356A pads where KiCad has nothing
-  kicad/fp-lib-table           registers the project library (board-local: footprints.run does
-                               not write it; STATUS.md "p2k candidates")
+  kicad/fp-lib-table           registers the project library (p2k_config.py FP_LIB_TABLE = True)
 
 Usage: python3 tools/gen_footprints.py [--check]      (needs the KiCad AppImage mount)
 
@@ -24,14 +23,12 @@ footprints built from the IPC pads have the Proteus pads). tools/p2k check_footp
 every footprint against the IPC pads (residual < 0.05 mm per pad) and reports the pad size /
 drill differences (STATUS.md "Phase 2").
 """
-import copy
 import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools", "p2k"))  # proteus2kicad
-from p2k import footprints, fpgeom, sexpr  # noqa: E402
-from p2k.sexpr import Sym  # noqa: E402
+from p2k import footprints  # noqa: E402
 
 P = "tube_pi_fxloop:"
 
@@ -94,6 +91,15 @@ SW4_BODY = [(-25.654, -66.929), (-17.526, -66.929), (-17.526, -59.436), (-25.654
 # Relay_THT:Relay_DPDT_Omron_G5V-2 unchanged (pads 1.4 / drill 0.7, DRILL_SMALLER). Until then a
 # project copy renumbered to the Proteus ids (Relay_DPDT_Omron_G5V-2_Proteus) was used; same copper.
 
+# TO-92 pad 1 (user decision 2026-11-20, option (a); STATUS.md "Phase 3"): KiCad's TO-92 has a
+# square 1.5 mm pad 1 whose corners come 0.12 mm close to diagonal Proteus tracks (Q1, Q3, Q6, Q20);
+# the Proteus TO92 pads are all round. Pad 1 becomes a circle at the KiCad size 1.5 mm (spec key
+# `pads`, which also requires the base pad 1 to be a rect). With three round pads the symmetric TO-92
+# outline no longer shows pin 1, so a filled dot is added on F.SilkS and F.Fab beside pad 1 at the
+# flat side (outside the body, 0.6 mm off the pad, inside the courtyard): spec key `pin1_dot`
+# (x, y in the KiCad frame, Y down, radius in mm).
+PIN1_DOT = (-0.45, 1.35, 0.2)   # x, y (KiCad frame, Y down), radius in mm
+
 # Project footprints (spec keys: see p2k.footprints). `ipc` = refdes whose IPC pads give the
 # pad centres. All parts are THT and on the top side (Proteus Top Assembly), except the noval
 # sockets U4 / U5 (bottom side, user decision 2026-11-20).
@@ -114,8 +120,10 @@ PROJECT = {
         base="Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal", renumber={"1": "K", "2": "A"}, ipc="D2",
         descr="DO-35 diode P10.16, pads K (KiCad pad 1, band) / A"),
     # TO-92 at the Proteus 2.032 mm (80 mil) pitch: KiCad has 1.27 (Inline) and 2.54 (Inline_Wide)
+    # pads / pin1_dot: the round TO-92 pad 1 and its silk dot (see PIN1_DOT above)
     "TO-92_Inline_P2.03mm": dict(
         base="Package_TO_SOT_THT:TO-92_Inline_Wide", ipc="Q8",
+        pads={"1": dict(shape="circle", expect_shape="rect")}, pin1_dot=PIN1_DOT,
         descr="TO-92 inline, pads 1-3 2.032 mm apart (Proteus TO92)"),
     "FlyLead_Pad_D3.048mm_Drill1.524mm": dict(
         ipc="EQOUT", descr="Fly-lead terminal (Proteus C-120-60): one 3.048 mm pad, drill 1.524"),
@@ -164,86 +172,5 @@ PROJECT = {
         descr="Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net"),
 }
 
-# TO-92 pad 1 (user decision 2026-11-20, option (a); STATUS.md "Phase 3"): KiCad's TO-92 has a
-# square 1.5 mm pad 1 whose corners come 0.12 mm close to diagonal Proteus tracks (Q1, Q3, Q6, Q20);
-# the Proteus TO92 pads are all round. Pad 1 becomes a circle at the KiCad size 1.5 mm. With
-# three round pads the symmetric TO-92 outline no longer shows pin 1, so a filled dot is added on
-# F.SilkS and F.Fab beside pad 1 at the flat side (outside the body, 0.6 mm off the pad, inside
-# the courtyard). footprints.derive() keeps the base pad shapes (ipc_sizes only sets size and
-# drill): board-local edit after derive() (STATUS.md p2k candidate 16).
-ROUND_PAD1 = "TO-92_Inline_P2.03mm"
-PIN1_DOT = (-0.45, 1.35, 0.2)   # x, y (KiCad frame, Y down), radius in mm
-
-
-def _dot(x, y, r, layer, width):
-    return [Sym("fp_circle"), [Sym("center"), x, y], [Sym("end"), round(x + r, 4), y],
-            [Sym("stroke"), [Sym("width"), width], [Sym("type"), Sym("solid")]], [Sym("fill"), Sym("yes")],
-            [Sym("layer"), layer]]
-
-
-_derive = footprints.derive
-
-
-def derive(name, spec, ipc):
-    node = _derive(name, spec, ipc)
-    if name != ROUND_PAD1:
-        return node
-    pads = [p for p in sexpr.find_all(node, "pad") if str(p[1]) == "1"]
-    if len(pads) != 1 or str(pads[0][3]) != "rect":
-        raise SystemExit(f"gen_footprints: {name}: expected one rect pad 1 in the base, got "
-                         f"{[str(p[3]) for p in pads]}")
-    pads[0][3] = Sym("circle")
-    x, y, r = PIN1_DOT
-    i = node.index(pads[0])
-    node[i:i] = [_dot(x, y, r, "F.SilkS", 0.12), _dot(x, y, r, "F.Fab", 0.1)]
-    return node
-
-
-footprints.derive = derive
-
-_build_library = footprints.build_library
-
-
-def build_library(project_fps, ipc=None):
-    """footprints.build_library with the board-local spec key `bottom` (as the power amp pilot): the
-    IPC pads of the spec's `ipc` refdes are marked bottom side, so from_ipc builds the footprint
-    mirrored (the shared tool mirrors only bottom SMD parts; THT pads are 'both' in the IPC file).
-    STATUS.md p2k candidates."""
-    ipc = copy.deepcopy(ipc or fpgeom.ipc_pads_by_refdes())
-    for spec in project_fps.values():
-        if spec.get("bottom"):
-            for p in ipc[spec["ipc"]]:
-                p["side"] = "bottom"
-    return _build_library(project_fps, ipc)
-
-
-footprints.build_library = build_library   # footprints.run calls it through the module
-
-FP_LIB_TABLE = """(fp_lib_table
-\t(version 7)
-\t(lib (name "tube_pi_fxloop")(type "KiCad")(uri "${KIPRJMOD}/../lib/tube_pi_fxloop.pretty")(options "")(descr "Project footprints, pad numbers = IPC pin ids (tools/gen_footprints.py)"))
-)
-"""
-
-
-def fp_lib_table(check):
-    path = os.path.join(ROOT, "kicad", "fp-lib-table")
-    cur = open(path).read() if os.path.exists(path) else None
-    if cur == FP_LIB_TABLE:
-        return True
-    if check:
-        print("gen_footprints: out of date: kicad/fp-lib-table")
-        return False
-    with open(path, "w") as f:
-        f.write(FP_LIB_TABLE)
-    print("gen_footprints: wrote kicad/fp-lib-table")
-    return True
-
-
 if __name__ == "__main__":
-    ok = fp_lib_table("--check" in sys.argv[1:])
-    try:
-        footprints.run(RULES, PROJECT)
-    except SystemExit as e:
-        sys.exit(e.code if ok else 1)
-    sys.exit(0 if ok else 1)
+    sys.exit(footprints.run(RULES, PROJECT))

@@ -10,7 +10,8 @@ Plan: [PLAN.md](PLAN.md). Playbook: `tools/p2k/CONVERSION_PLAYBOOK.md`.
 | 3 PCB | **done** 2026-11-20 (Opus 5.5); TO-92 pad 1 round decided by the user 2026-11-20 (option (a)) |
 | 4 Verification | **done** 2026-11-20 (Fable 5.2, clean context): `ipc356_diff`, `gerber_roundtrip --check` (with the 2010 Excellon) pass; the board is unchanged |
 | 5 Clean-up | **done** 2026-11-20 (Opus 5.5, clean context): U4 / U5 on the bottom side (standard noval numbering), `place_refdes` in `make_pcb.sh`; the rest kept as the user decided. **The conversion is complete.** |
-| Design fixes | **done** 2026-11-20 (Opus 5.5, user decisions after the conversion): relay SERIES_MIX on Omron pin numbers (Finding 15), the three dangling Proteus stubs removed (`REMOVED_TRACKS`, Finding 19); values unchanged; the board is still generated |
+| Design fixes | **done** 2026-11-20 (Opus 5.5, user decisions after the conversion): relay SERIES_MIX on Omron pin numbers (Finding 15), the three dangling Proteus stubs removed (`REMOVED_TRACKS`, Finding 19); values unchanged |
+| Shared-tool migration | **done** 2026-11-20 (Opus 5.5): p2k a9a286c, every board-local workaround replaced by a shared tool / key; re-baselines D-R, D-K2, R1 only; strict opt-outs none; the board is still generated (stopping is the user's call) |
 
 ## Phase 0 – done (Opus 5.5, 2026-11-20)
 
@@ -968,13 +969,126 @@ regenerated (`tools/make_pcb.sh`, sheet scripts, `gen_symbols`, `gen_footprints`
 
 - Generation stops later (user decision 4): after the shared-tool migration; then remove the
   `make_pcb.sh --check` step from `check_all.sh` (Phase 5 "Left open").
-- `IPC_PIN_IDS` / `tools/ipc356.py`, `tools/check_no_dangling.py` and the `make_pcb.sh` `&&` fix are
-  board-local; for the shared-tool migration (p2k candidates 24, 25).
+- `IPC_PIN_IDS` / `tools/ipc356.py`, `tools/check_no_dangling.py` and the `make_pcb.sh` `&&` fix were
+  board-local: replaced in the shared-tool migration 2026-11-20 (p2k candidates 24, 25).
+
+## Shared-tool migration 2026-11-20 (Opus 5.5)
+
+Task: `tools/p2k/docs/CANDIDATES.md` section 7.3 (PF), coordinating-session prompt. Every board-local
+p2k workaround is replaced by the shared tool / config key of proteus2kicad **a9a286c** (all p2k code is in
+2fb1563 = batch Z; later commits are docs only). Proven per commit from a clean clone with
+`~/dev/proteus2kicad/tools/regress.sh a9a286c tube_pi_fxloop_kicad` (clone, regenerate every generated
+file, `check_all.sh`, clean `git status`): **PASS** after each commit.
+
+### Commits
+
+1. **Bump** `tools/p2k` c5682dd → a9a286c (`da63c7d`). `p2k ipc356` (still through the old
+   `tools/ipc356.py`) re-baselines exactly 2 lines of `reference/pin_nets_by_component.md`: `Net aliases:
+   none.` and the `Index:` line naming `MV0 N6 P6` (was `MV`, `N`, `P`) - **decision D-R** (batch R report
+   texts). No strict exception needed: the D-Z default set (`no_connect_pin_type`, `nc_joined`,
+   `net_names`, `derive_max_move`, `hole_refdes`, `track_nets`, `roundtrip_counts`) passes; the new
+   strict lines print to stdout only.
+2. **Migration** (this section): board-local tools deleted, shared keys added; every generated file
+   byte-identical except the two accepted re-baselines below (D-K2, R1).
+
+### Board-local → shared
+
+| Deleted / replaced | Shared tool / key now |
+|---|---|
+| `tools/make_part_map.py` readers (`_strings`, `lyt_parts`, `LATIN1_PARTS`) | data only: `part_map.run(SPEC)` with `LATIN1=True`, `CHECK_UNUSED_DEVICES=True`, `COMMENT` = the committed first line; `lib/part_map.csv` identical |
+| `gen_symbols.py` `pin_types()` | `from_std(..., pin_types={"*": PAS})` (valve) |
+| sheets `_common.py` `place_mirrored()`, `place_rot90_mirrored()` (sheet02 Q4) | `Sheet.place(..., mirror="x" / "y")` (Q4: `place(..., 90, mirror="y")`) |
+| sheets `term()` body | `sheetkit.terminal(sh, ref, x, y, d, symbol=sym(ref), value=sh_value(ref), justify="away")` |
+| sheets `ph()` capacitor `ref_at` / `value_at` | `place(..., text="above", text_gap=3.175)` - **D-K2** re-baseline |
+| `tools/check_sheets.sh` | `p2k sheets --check` |
+| `tools/compare.py` (type-safe sort key, joined N/C nets) | `p2k compare_netlists` (C1 fixed; strict `nc_joined`, `net_names` on by default) |
+| check_all step `grep "(pin no_connect"` | strict `no_connect_pin_type` (check_symbols, default on) |
+| `tools/erc.sh` | `p2k erc`, `ERC_FATAL_WARNINGS = {"no_connect_connected", "footprint_link_issues"}` |
+| check_all `PYTHONDONTWRITEBYTECODE` / `rm -rf __pycache__` | `board.config()` executes the config source (G1) |
+| `gen_footprints.py` `fp_lib_table()` | `FP_LIB_TABLE = True` (p2k_config.py; default descr = the committed one) |
+| `gen_footprints.py` `build_library` wrapper (`bottom`) | spec key `bottom=True` |
+| `gen_footprints.py` `derive` wrapper (`ROUND_PAD1`, `_dot`) | spec keys `pads={"1": dict(shape="circle", expect_shape="rect")}`, `pin1_dot=PIN1_DOT` |
+| `tools/check_pin_order.py` | `p2k check_pin_order`, `PIN_ORDER` (15 entries: `spec=` + `polarity` for the derived groups, `G5V2_POLE1` computed in `p2k_config.py` from `IPC_PIN_IDS`, Valve_Noval_P mirrored, ideal noval / footprint vs ideal / footprint on IPC with `free_angle` and `other=1.0`, `turn="clockwise"`, SW4-SW6 `distances`), `PIN_ORDER_BOTTOM = {"U4", "U5"}`; every residual and angle as the board script printed |
+| `tools/ipc356.py` | `p2k ipc356 [--check]` with the shared `IPC_PIN_IDS` (same key and values; `reference/` identical) |
+| `tools/check_no_dangling.py` | `DRC_EXPECTED_WARNINGS = {"track_dangling": 0, "via_dangling": 0}` (p2k drc) |
+| `tools/check_drill_smaller.py` | `DRILL_SMALLER` pad sets: SERIES_MIX; C2; C4 / C6 / C7 / C32 (ipc356_diff and gerber_roundtrip) |
+| `tools/excellon_metric.py` + `reference/fab_2010_drill_metric.drl` | `DRILL_EXCELLON = "source/fab_2010/poweri - CADCAM Drill.TXT"` (inch, read natively) - **R1** re-baseline |
+| `tools/make_pcb.sh` (`run()` chained with `&&`) | one-liner `exec tools/p2k/bin/p2k make_pcb "$@"` (default `PCB_STEPS`; kept as a file because the regression harness calls it) |
+| `tools/measure_gaps.py` | `tools/p2k/bin/kipy -m p2k.measure_gaps` |
+
+Kept in the board repo: `tools/check_all.sh`, `tools/make_part_map.py` (SPEC), `tools/gen_symbols.py`,
+`tools/sheets/*` (sheet scripts and board helpers `part`, `sym`, `sh_value`, `term`, `P`, `noval`, `pv`,
+`ph`, `q_right`, `send_channel`, `return_block`, `diode_input`), `tools/gen_footprints.py` (RULES,
+PROJECT), `tools/make_pcb.sh` (one line). **Strict opt-outs: none** (`STRICT_CHECKS` / `STRICT_CHECKS_OFF`
+absent).
+
+### Accepted re-baselines
+
+- **D-R** (commit 1): `reference/pin_nets_by_component.md`, 2 lines (above).
+- **D-K2** (commit 2): `kicad/01_fx_loop_driver.kicad_sch` (8 lines: C29, C30, C31, C32 Reference /
+  Value angle 0 → 270) and `kicad/03_phase_inverter.kicad_sch` (2 lines: C3, 0 → 90). The old `ph()`
+  passed angle 0 on a rotated capacitor, so KiCad drew the texts vertical over the plates; the shared
+  `text_gap` passes the angle that draws them horizontal. Positions unchanged. Rendered both sheets
+  (`p2k render_sheet`, `build/tmp/dk2/`): the five capacitor texts are horizontal above the part. ERC,
+  compare, every netlist check unchanged.
+- **R1** (commit 2): `reports/roundtrip/roundtrip.txt`, 1 line: `== excellon (fab_2010_drill_metric.drl):
+  …` → `== excellon (poweri - CADCAM Drill.TXT): …` (file name only; 261 / 261 holes matched, same tool
+  table).
+
+### Negative tests (config / footprint script edited temporarily, all restored; md5 of the board, `reference/*` and `lib/tube_pi_fxloop.pretty/*` equal afterwards)
+
+| Change | Caught by |
+|---|---|
+| relay `PIN_ORDER` entry expected `mirror=True` | **check_pin_order** `SERIES_MIX: unmirrored 0.000, expected mirrored <= 0.01` |
+| C1 renumbering `{"1": "1", "2": "2"}` in gen_footprints | **check_pin_order** `C1 C36 C37: the marked base pad 1 is pin '1', expected '2'` (polarity) |
+| noval `turn="counter-clockwise"` | **check_pin_order** U4 / U5 `pins 1 -> 9 run clockwise, expected counter-clockwise` |
+| `bottom=True` removed from the noval spec (library regenerated) | **check_pin_order** footprint vs ideal (fits mirrored) and footprint on IPC (fits unmirrored) |
+| `DRILL_SMALLER` (0.762, 0.75) without C32 | **ipc356_diff** and **gerber_roundtrip** `C32-1 / C32-2: KiCad drill smaller, not in the entry's pad set` |
+| `IPC_PIN_IDS` SERIES_MIX pin 8 → "6" (duplicate target) | **p2k ipc356** `target pin ids not unique` |
+| `IPC_PIN_IDS` SERIES_MIX pin 8 dropped | config import fails (`G5V2_POLE1` KeyError '8'), so every tool stops |
+| `REMOVED_TRACKS` H-stub entry dropped, board regenerated in place | **p2k drc** `1 track_dangling warnings, DRC_EXPECTED_WARNINGS 0` |
+
+### p2k candidates (section "p2k candidates" below) after the migration
+
+| # | Status |
+|---|---|
+| 1 | solved in p2k a9a286c (I3 / I4, D-R re-baseline) |
+| 2 | not migrated: open in p2k (I1 `truncated_nets_keys`); no effect here, every `TRUNCATED_NETS` key is a KiCad refdes |
+| 3 | solved in p2k a9a286c (G1; the check_all bytecode lines are gone) |
+| 4 | not migrated: deferred in p2k (I2); not needed here |
+| 5 | solved in p2k a9a286c (P1 / P2: `LATIN1=True`; the local reader is gone) |
+| 6 | solved in p2k a9a286c (P4 reader); nothing to migrate: the pinouts were read once by hand and are recorded in `gen_symbols.py` |
+| 7, 10 | solved in p2k a9a286c (K1 `place(mirror=)`) |
+| 8, 12 | solved in p2k a9a286c (G3 playbook notes; nothing board-local) |
+| 9 | solved in p2k a9a286c (C1; `tools/compare.py` deleted) |
+| 11 | solved in p2k a9a286c (K2 `text_gap`; D-K2 re-baseline) |
+| 13 | solved in p2k a9a286c (F1 `FP_LIB_TABLE`, F11 `check_pin_order` with `free_angle`, `turn`) |
+| 14 | solved in p2k a9a286c (F3 `max_move`, strict `derive_max_move` on by default: limits printed, all pass) |
+| 15 | solved in p2k a9a286c (E1 `ERC_FATAL_WARNINGS`, CF3 check_footprints resolves the fp-lib-table with `FP_LIB_TABLE`) |
+| 16 | solved in p2k a9a286c (F4 `pads`, `pin1_dot`) |
+| 17 | solved in p2k a9a286c (B7 `DRC_ACCEPTED_ITEMS`, B9 `PENDING`); not used here (no pending items) |
+| 18 | solved in p2k a9a286c (B11 `p2k.measure_gaps`; `tools/measure_gaps.py` deleted) |
+| 19 | solved in p2k a9a286c (C2 strict `nc_joined` default; `no_connect_connected` fatal in `ERC_FATAL_WARNINGS`) |
+| 20 | solved in p2k a9a286c (R3 `DRILL_SMALLER` pad sets) |
+| 21 | not migrated: R5 `roundtrip_pad_match` is opt-in (off by default per D-Z until the pad sizes are a decided design); the byte compare covers it while the board is generated |
+| 22 | solved in p2k a9a286c (R1 inch Excellon, C5 `P2K_SCHEMATIC`) |
+| 23 | solved in p2k a9a286c (F2 spec `bottom`, B8 `DRC_EXPECTED_WARNINGS`) |
+| 24 | solved in p2k a9a286c (I6 `IPC_PIN_IDS` in `p2k ipc356`) |
+| 25 | solved in p2k a9a286c (B12 `p2k make_pcb` stops at the first failing step; B8 replaces `check_no_dangling.py`) |
+
+### Left open
+
+- **Stop generating the board** (Phase 5 "Left open", user decision 4): the board is still generated
+  (`make_pcb.sh --check` in `check_all.sh`); when to stop is the user's call. Then remove that step, say so
+  here, and record hand edits as deviations (check_board / assign_nets / DRC / ipc356_diff /
+  gerber_roundtrip keep working on the edited board).
+- The meta repo `tube_amplifier_kicad` bumps its submodule after all boards are migrated (coordinating
+  session).
 
 ## Last check output
 
-`tools/check_all.sh` (2026-11-20, design fixes done: relay on Omron pins, 3 stubs removed; new steps
-"No dangling track or via"; the IPC self-check runs through `tools/ipc356.py`):
+`tools/check_all.sh` (2026-11-20, after the shared-tool migration, p2k a9a286c; every step runs a shared
+tool, `make_pcb.sh` = `p2k make_pcb`):
 
 ```
 == KiCad environment
@@ -991,7 +1105,7 @@ ipc356: pin ids renamed (IPC_PIN_IDS): SERIES_MIX 1->9 2->13 3->11 4->16 5->1 6-
   outline 225.4 x 71.8 mm at (-123.83, -78.11)
 check_sources: OK
 == Part map up to date
-make_part_map: lib/part_map.csv up to date, 126 parts; per sheet 1:24 2:46 3:24 4:32
+make_part_map: lib/part_map.csv up to date, 126 parts (126 on the board); per sheet 1:24 2:46 3:24 4:32
 == Symbol library up to date
 gen_symbols: lib/tube_pi_fxloop.kicad_sym up to date (13 symbols)
 == Symbol pin sets vs IPC
@@ -1013,13 +1127,19 @@ symbols: OK
 == ERC
 erc: 0 errors, 0 warnings (reports/erc.rpt)
 == Sheet scripts reproduce kicad/*.kicad_sch
-sheets: 4 scripts reproduce kicad/0?_*.kicad_sch
+sheets: 4 sheet scripts, kicad/*.kicad_sch up to date
 == Netlist comparison vs IPC
-compare: parts 126/126 present, 0 missing, 0 extra; pins compared 247, wrong-net pins 0; IPC nets touched 71, complete 71
+compare: parts 126/126 present, 0 missing, 0 extra; pins compared 247, wrong-net pins 0; IPC nets touched 66, complete 66 (+ 5 N/C / no-net pins)
 compare: per sheet (drawn/total) 1:24/24 2:46/46 3:24/24 4:32/32
 compare: OK
-== No symbol pin of type no_connect
 == Footprint library, map and fp-lib-table up to date
+footprints: R_Axial_DIN0414_L11.9mm_D4.5mm_P19.05mm_Horizontal: fit on R45 unmirrored, largest pad move 0.635 mm (pad 2), limit 10.160 mm
+footprints: C_Rect_L13.0mm_W6.0mm_P9.70mm: fit on C2 unmirrored, largest pad move 0.150 mm (pad 2), limit 5.000 mm
+footprints: D_DO-41_SOD81_P10.16mm_Horizontal_AK: fit on D1 unmirrored, largest pad move 0.000 mm (pad A), limit 5.080 mm
+footprints: D_DO-35_SOD27_P10.16mm_Horizontal_AK: fit on D2 unmirrored, largest pad move 0.000 mm (pad A), limit 5.080 mm
+footprints: TO-92_Inline_P2.03mm: fit on Q8 unmirrored, largest pad move 0.508 mm (pad 3), limit 1.270 mm
+footprints: CP_Radial_D5.0mm_P2.54mm_PM: fit on C8 unmirrored, largest pad move 0.020 mm (pad +), limit 1.250 mm
+footprints: CP_Radial_D16.0mm_P7.50mm_21: fit on C1 unmirrored, largest pad move 0.000 mm (pad 1), limit 3.750 mm
 gen_footprints: 126 parts, 17 footprints (13 project), up to date
 == Footprints vs IPC pad geometry
 check_footprints: pcbnew placement of 126 parts, worst pad offset 0.001 mm
@@ -1028,25 +1148,33 @@ check_footprints: note: U5: THT pad pattern fits only mirrored -> bottom side
 check_footprints: 126/126 parts fitted, 247 pads, 17 footprints, worst residual 0.001 mm (limit 0.05)
 check_footprints: OK
 == Pin order vs unmoved KiCad base footprints
-parts            KiCad base (unmoved)                                 unmirrored           mirrored  best
-Q4               Package_TO_SOT_THT:TO-220-3_Vertical               0.000 @   90       0.000 @  270  unmirrored
-Q8 Q10 Q20 Q90   Package_TO_SOT_THT:TO-92_Inline_Wide               0.508 @   90       0.508 @  270  unmirrored
-Q1 Q2 Q3 Q5 Q6 Q7 Package_TO_SOT_THT:TO-92_Inline_Wide               0.508 @  270       0.508 @   90  unmirrored
-D2 D7 D8 D9 D10 D11 D12 Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal        0.000 @    0       0.000 @  180  unmirrored
-D1 D3 D4 D5 D6   Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal        0.000 @   90       0.000 @  270  unmirrored
-C8 C28           Capacitor_THT:CP_Radial_D5.0mm_P2.50mm             0.020 @  180       0.020 @    0  unmirrored
-C1 C36 C37       Capacitor_THT:CP_Radial_D16.0mm_P7.50mm            0.000 @  270       0.000 @   90  unmirrored
-SERIES_MIX       Relay_THT:Relay_DPDT_Omron_G5V-2                   0.000 @    0       7.620 @    0  unmirrored
-SERIES_MIX       Relay_THT:Relay_DPDT_Omron_G5V-2                   7.620 @    0       0.000 @    0  mirrored
-U4 U5            Valve:Valve_Noval_P                             17.630 @150.272       2.972 @    0  mirrored
-U4 U5            ideal standard noval, PCD 21.00 mm (free rot.)  19.318              0.007             mirrored
-U4: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-clockwise from the top)
-U5: pins 1 -> 9 run clockwise seen from the top side (noval standard: counter-clockwise from the top)
-SW4 SW5 SW6: 1 (NO) and 2 (NC) 5.08 mm apart, 3 (COM) the offset hole 5.12 mm from both
-(footprint)      Valve_Noval_Belton_PCD21.00mm vs ideal noval   0.006             19.318             unmirrored
-U4 U5            Valve_Noval_Belton_PCD21.00mm (project)       19.314              0.001             mirrored = bottom side
-                 footprint_fit.csv and board: U4 U5 bottom (B.Cu), the other 134 footprints top
-check_pin_order: OK (results as recorded in STATUS.md)
+check                    base (unmoved)                                     unmirrored         mirrored  result
+Q4                       TO-220-3_Vertical                               0.000 @    90    0.000 @   270  unmirrored 0.000
+Q8 Q10 Q20 Q90           polarity: base pad 1 (marked) = pin '1' (expected '1')
+Q8 Q10 Q20 Q90           TO-92_Inline_Wide                               0.508 @    90    0.508 @   270  unmirrored 0.508
+Q1 Q2 Q3 Q5 Q6 Q7        polarity: base pad 1 (marked) = pin '1' (expected '1')
+Q1 Q2 Q3 Q5 Q6 Q7        TO-92_Inline_Wide                               0.508 @   270    0.508 @    90  unmirrored 0.508
+D2 D7 D8 D9 D10 D11 D12  polarity: base pad 1 (marked) = pin 'K' (expected 'K')
+D2 D7 D8 D9 D10 D11 D12  D_DO-35_SOD27_P10.16mm_Horizontal               0.000 @     0    0.000 @   180  unmirrored 0.000
+D1 D3 D4 D5 D6           polarity: base pad 1 (marked) = pin 'K' (expected 'K')
+D1 D3 D4 D5 D6           D_DO-41_SOD81_P10.16mm_Horizontal               0.000 @    90    0.000 @   270  unmirrored 0.000
+C8 C28                   polarity: base pad 1 (marked) = pin '+' (expected '+')
+C8 C28                   CP_Radial_D5.0mm_P2.50mm                        0.020 @   180    0.020 @     0  unmirrored 0.020
+C1 C36 C37               polarity: base pad 1 (marked) = pin '2' (expected '2')
+C1 C36 C37               CP_Radial_D16.0mm_P7.50mm                       0.000 @   270    0.000 @    90  unmirrored 0.000
+SERIES_MIX               Relay_DPDT_Omron_G5V-2                          0.000 @     0    7.620 @     0  unmirrored 0.000  (Omron ids (IPC_PIN_IDS) on the unmoved KiCad G5V-2)
+SERIES_MIX pole 1        Relay_DPDT_Omron_G5V-2                          7.620 @     0    0.000 @     0  mirrored 0.000  (the Phase 2 Proteus-pole mapping fits only mirrored)
+U4 U5                    Valve_Noval_P                                  17.630 @ 150.3    2.972 @     0  mirrored 2.972  (KiCad Noval_P is a smaller circle; only the mirrored one is near)
+U4 U5 ideal noval        ideal n=9 PCD 21 mm                            19.318 @   144    0.007 @     0  mirrored 0.007  (ideal standard noval, PCD 21.00 mm)
+U4 U5 sense              U4: pins 1 -> 9 run clockwise seen from the top (expected clockwise)
+U4 U5 sense              U5: pins 1 -> 9 run clockwise seen from the top (expected clockwise)
+SW4 SW5 SW6              SW4: distances 1-2 5.080, 1-3 5.120, 2-3 5.120 mm
+SW4 SW5 SW6              SW5: distances 1-2 5.080, 1-3 5.120, 2-3 5.120 mm
+SW4 SW5 SW6              SW6: distances 1-2 5.080, 1-3 5.120, 2-3 5.120 mm
+noval footprint vs ideal Valve_Noval_Belton_PCD21.00mm                   0.006 @     0   19.318 @   216  unmirrored 0.006  (standard noval numbering in its own view)
+noval footprint on IPC   Valve_Noval_Belton_PCD21.00mm                  19.314 @   144    0.001 @     0  mirrored 0.001  (fits only mirrored = bottom side)
+bottom                   footprint_fit.csv and kicad/tube_pi_fxloop.kicad_pcb: U4 U5 bottom (B.Cu), the other 134 footprints top
+check_pin_order: OK (15 checks as recorded)
 == PCB rebuilt from schematic + gerbers, up to date
 build_pcb: 126 footprints placed (0 excluded from board), 10 mounting holes, 71 nets, 4 outline segments
 gerber_to_tracks: 512 tracks, 4 vias (IPC 4), 0 pour outlines on User.1-4; removed as recorded: 3 tracks (REMOVED_TRACKS), 0 vias (REMOVED_VIAS)
@@ -1057,6 +1185,7 @@ make_pcb: board rebuilt from scratch, byte-identical
 == Board pads, holes, vias vs IPC (position, size, nets 1:1)
 check_board: 136 footprints, 247 pads, worst pad offset 0.001 mm (limit 0.05), 66 IPC nets mapped 1:1, 10 mounting holes
 check_board: 512 tracks, 4 vias, 0 zones
+check_board: 516 track / via nets in the board file = their copper group's net (track_nets)
 check_board: OK
 == Board copper connectivity (KiCad geometry)
 assign_nets: after zone fill: 81 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
@@ -1067,27 +1196,22 @@ drc:     40 error    courtyards_overlap  accepted: KiCad courtyards vs the Prote
 drc:      7 error    pth_inside_courtyard  accepted: Proteus placement: H3 / H4 in the U5 / U4 courtyard (the mounting holes around the sockets, Finding 17), C8's pads in U4's, V8_V9 pad 1 in U5's (a THT pad is on both sides, so the bottom-side socket courtyards still contain them), R24-1 and R26-1 inside the large C30 Solen box courtyard
 drc:     28 warning  silk_overlap
 drc:     27 warning  silk_over_copper
+drc: warning counts as expected (DRC_EXPECTED_WARNINGS): 0 track_dangling, 0 via_dangling
 drc: OK
-== No dangling track or via (DRC)
-check_no_dangling: 0 dangling tracks / vias in reports/drc.json
-check_no_dangling: OK
-== 2010 Excellon drill file converted to metric, up to date
-excellon_metric: reference/fab_2010_drill_metric.drl up to date (7 tools, 261 holes)
 == IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)
 ipc356_diff: Proteus 261 records, KiCad 261; matched 261 (247 pads incl. 5 N/C, 4 vias, 10 holes), worst position offset 0.002 mm (limit 0.05)
 ipc356_diff: 66 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
 ipc356_diff: KiCad drill larger (footprint kept): 116x 0.762->0.8, 13x 1.016->1.1, 16x 1.016->1.199, 8x 1.143->1.199
 ipc356_diff: KiCad drill smaller, accepted (DRILL_SMALLER): 8x 0.762->0.749, 8x 1.143->0.701, 2x 1.143->1.001
 ipc356_diff: pads with another size in KiCad (info): C 22, D 24, Q 33, R 84, SERIES_MIX 8
+ipc356_diff: 5 unconnected-(...) nets, one record each (nc_joined)
 ipc356_diff: OK
-== Smaller KiCad drills are exactly the 18 decided holes
-check_drill_smaller: 261 IPC records, 261 board holes; smaller board drills: 18 (decided 18: 8x 0.762->0.75, 8x 1.143->0.7, 2x 1.143->1.0)
-check_drill_smaller: OK
 == Gerber round trip vs Proteus (copper XOR, coverage, drills, 2010 Excellon)
 roundtrip: F.Cu   XOR   94.31 mm^2, beyond 0.05 mm: only Proteus  53.53, only KiCad   6.41 mm^2; clusters >= 0.01 mm^2: 218 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
 roundtrip: B.Cu   XOR   97.05 mm^2, beyond 0.05 mm: only Proteus  54.15, only KiCad   7.29 mm^2; clusters >= 0.01 mm^2: 213 pad shape; draws/flashes off the other copper: 0 Proteus, 0 KiCad
 roundtrip: Proteus objects not compared (recorded deviations, all layers): 3 Conductor draws (REMOVED_TRACKS)
 roundtrip: drills 0 mismatches; KiCad drill smaller, accepted (DRILL_SMALLER): 8x 0.762->0.75, 8x 1.143->0.7, 2x 1.143->1.0; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: counts (roundtrip_counts): KiCad track draws / flashes per layer F.Cu 275 / 261, B.Cu 237 / 261: tracks as gerber_to_tracks builds them, flashes = Proteus
 roundtrip: OK
 
 ALL CHECKS PASSED
@@ -1209,7 +1333,8 @@ ALL CHECKS PASSED
 
 ## p2k candidates
 
-(Shared-tool limitations met on this board, with the board-local workaround used.)
+(Shared-tool limitations met on this board, with the board-local workaround used. Status after the
+shared-tool migration: table in "Shared-tool migration 2026-11-20".)
 
 1. `p2k ipc356` prints "Net aliases: ." in `pin_nets_by_component.md` when `NET_ALIASES` is
    empty and groups the index by the letter prefix (`MV0` under `MV`, `P6` / `N6` under `P` /

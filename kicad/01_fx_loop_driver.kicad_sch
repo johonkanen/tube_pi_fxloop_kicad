@@ -2336,7 +2336,7 @@
 		(dnp no)
 		(uuid "e05ce033-9f54-5e1f-8323-57988e073b47")
 		(property "Reference" "C29"
-			(at 110.49 95.25 0)
+			(at 110.49 95.25 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2344,7 +2344,7 @@
 			)
 		)
 		(property "Value" "100N XICON"
-			(at 110.49 97.155 0)
+			(at 110.49 97.155 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2829,7 +2829,7 @@
 		(dnp no)
 		(uuid "d073f871-c1a0-5a70-abcc-dbadfadb45d3")
 		(property "Reference" "C30"
-			(at 176.53 157.48 0)
+			(at 176.53 157.48 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2837,7 +2837,7 @@
 			)
 		)
 		(property "Value" "1UF SOLEN FAST"
-			(at 176.53 159.385 0)
+			(at 176.53 159.385 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3021,7 +3021,7 @@
 		(dnp no)
 		(uuid "0f6374b0-2811-5fac-871d-87df76f1b229")
 		(property "Reference" "C31"
-			(at 209.55 82.55 0)
+			(at 209.55 82.55 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3029,7 +3029,7 @@
 			)
 		)
 		(property "Value" "47N XICON"
-			(at 209.55 84.455 0)
+			(at 209.55 84.455 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3370,7 +3370,7 @@
 		(dnp no)
 		(uuid "82da4282-6432-5e1d-94b2-6273c7c362c6")
 		(property "Reference" "C32"
-			(at 234.95 95.25 0)
+			(at 234.95 95.25 270)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3378,7 +3378,7 @@
 			)
 		)
 		(property "Value" "MMK J04 5MM"
-			(at 234.95 97.155 0)
+			(at 234.95 97.155 270)
 			(effects
 				(font
 					(size 1.27 1.27)

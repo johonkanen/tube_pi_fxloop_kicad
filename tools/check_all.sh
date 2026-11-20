@@ -5,10 +5,6 @@
 set -u
 cd "$(dirname "$0")/.."
 [ -x tools/p2k/bin/p2k ] || { echo "tools/p2k missing: git submodule update --init"; exit 1; }
-# p2k_config.py is imported: a stale __pycache__ could hide an edit made within the same
-# second with the same file size (p2k candidate 3), so never write or use bytecode for it.
-export PYTHONDONTWRITEBYTECODE=1
-rm -rf __pycache__
 fail=0
 mkdir -p build/tmp
 log=build/tmp/check_all.log; : > "$log"
@@ -20,36 +16,29 @@ step() {
 
 # Phase 0: environment and sources
 step "KiCad environment" tools/p2k/bin/kipy -c "import pcbnew; v = pcbnew.GetBuildVersion(); print('pcbnew', v); assert v.startswith('10.0.7'), v"
-# tools/ipc356.py = p2k ipc356 + the board-local pin id renaming IPC_PIN_IDS (relay SERIES_MIX -> Omron ids)
-step "IPC-D-356A parser self-check" python3 tools/ipc356.py --check
+# p2k ipc356 renames the relay SERIES_MIX pin ids to the Omron ids (IPC_PIN_IDS)
+step "IPC-D-356A parser self-check" tools/p2k/bin/p2k ipc356 --check
 step "Gerber X2 export vs IPC (pads, vias, holes, drills, outline)" tools/p2k/bin/p2k check_sources
 # Phase 1: schematic
 step "Part map up to date" python3 tools/make_part_map.py --check
 step "Symbol library up to date" python3 tools/gen_symbols.py --check
 step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
-step "ERC" tools/erc.sh
-step "Sheet scripts reproduce kicad/*.kicad_sch" tools/check_sheets.sh
-# tools/compare.py = p2k compare_netlists with a type-safe sort key (STATUS.md p2k candidate 9)
-step "Netlist comparison vs IPC" python3 tools/compare.py
-step "No symbol pin of type no_connect" bash -c '! grep -n "(pin no_connect" lib/tube_pi_fxloop.kicad_sym kicad/*.kicad_sch'
+step "ERC" tools/p2k/bin/p2k erc
+step "Sheet scripts reproduce kicad/*.kicad_sch" tools/p2k/bin/p2k sheets --check
+step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
 # Phase 2: footprints
 step "Footprint library, map and fp-lib-table up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy -m p2k.check_footprints --pcbnew
-step "Pin order vs unmoved KiCad base footprints" tools/p2k/bin/kipy tools/check_pin_order.py
+step "Pin order vs unmoved KiCad base footprints" tools/p2k/bin/p2k check_pin_order
 # Phase 3: PCB (build_pcb, gerber_to_tracks with the 4 vias, assign_nets; no pours)
 step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
 step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
 step "Board copper connectivity (KiCad geometry)" tools/p2k/bin/kipy -m p2k.assign_nets --check
+# DRC_EXPECTED_WARNINGS: 0 track_dangling / via_dangling (the removed Proteus stubs, REMOVED_TRACKS)
 step "DRC with schematic parity" tools/p2k/bin/p2k drc
-# Design fixes 2026-11-20: the dangling Proteus stubs are removed (REMOVED_TRACKS); p2k drc does not enforce
-# warnings, so a stub that comes back (entry dropped and the board regenerated) is caught here.
-step "No dangling track or via (DRC)" python3 tools/check_no_dangling.py
 # Phase 4: independent verification (kicad-cli IPC-D-356 export and gerber plot of the board vs Proteus).
-# DRILL_SMALLER (p2k_config.py) accepts exactly the three decided drill pairs (18 holes).
-step "2010 Excellon drill file converted to metric, up to date" python3 tools/excellon_metric.py --check
+# DRILL_SMALLER (p2k_config.py, pad sets) accepts exactly the 18 decided holes of the three drill pairs.
 step "IPC-D-356 from the board vs Proteus (pads, vias, holes, nets)" tools/p2k/bin/p2k ipc356_diff
-# board-local: the shared tools accept DRILL_SMALLER by diameter pair; this one by pad (the 18 decided holes)
-step "Smaller KiCad drills are exactly the 18 decided holes" tools/p2k/bin/kipy tools/check_drill_smaller.py
 step "Gerber round trip vs Proteus (copper XOR, coverage, drills, 2010 Excellon)" tools/p2k/bin/p2k gerber_roundtrip --check
 
 echo

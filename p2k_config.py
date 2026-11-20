@@ -29,6 +29,13 @@ SCH_NOTE = ("Tube phase inverter and FX loop rev A - redrawn from Proteus poweri
             "One sheet per Proteus PDF page. Net names follow the IPC-D-356A netlist "
             "(reference/pins_by_net.md).")
 
+# --- ERC (p2k erc; was the board-local tools/erc.sh) ------------------------------------
+
+# ERC warning types that fail: footprint_link_issues (a Footprint field that names a missing library /
+# footprint, e.g. without kicad/fp-lib-table: check_footprints does not resolve it, p2k candidate 15) and
+# no_connect_connected (a pin with a no-connect flag that is wired: a netlist error, Phase 4).
+ERC_FATAL_WARNINGS = {"no_connect_connected", "footprint_link_issues"}
+
 # --- IPC-D-356A fix-ups (ipc356) -----------------------------------------------------
 
 # Truncated refdes (IPC 6-char field) -> full Proteus refdes, from the schematic PDF.
@@ -78,8 +85,8 @@ KICAD_REFDES = {
     "SERIES/MIX": "SERIES_MIX",
 }
 
-# Pin ids renamed after parsing the IPC file (board-local key, read by tools/ipc356.py, the wrapper
-# around p2k.ipc356; STATUS.md "Design fixes 2026-11-20", p2k candidate 24). {KiCad refdes: {Proteus
+# Pin ids renamed after parsing the IPC file (p2k ipc356; STATUS.md "Design fixes 2026-11-20", p2k
+# candidate 24, was the board-local wrapper tools/ipc356.py). {KiCad refdes: {Proteus
 # pin id: KiCad pin id}}; every IPC pad of the refdes must be listed, the targets unique.
 # SERIES_MIX (user decision 2026-11-20, Finding 15): the Proteus package G5V-2(HI) numbers the pads
 # 1-8 and is the mirror image of the Omron G5V-2 seen from the top; a top-mounted G5V-2 puts Omron
@@ -141,6 +148,8 @@ OUTLINE_RECT = (-123.825, -78.105, 225.425, 71.755)  # x, y, width, height
 FOOTPRINT_PAD_SIZES = "kicad"
 # Every part of lib/part_map.csv has IPC pads: no off-board parts.
 OFF_BOARD_PARTS = {}
+# footprints.run also writes / checks kicad/fp-lib-table (the project library, default descr).
+FP_LIB_TABLE = True
 
 # --- PCB (Phase 3, build_pcb) ----------------------------------------------------------
 
@@ -151,7 +160,8 @@ HOLE_VALUE = "MountingHole_3.0mm"
 # stack-up. The 2026 export's READ-ME lists Proteus 8's default 2-layer stack (2 x 0.036 Cu +
 # 1.483 FR4 = 1.555 mm, + 2 x 0.01 resist), written when the design was re-saved, not the 2010 order.
 PCB_THICKNESS = 1.6
-# Design rules from the Proteus copper as built (STATUS.md "Phase 3", tools/measure_gaps.py), mm.
+# Design rules from the Proteus copper as built (STATUS.md "Phase 3", measured with the former
+# tools/measure_gaps.py = `kipy -m p2k.measure_gaps`), mm.
 PCB_RULES = dict(
     min_track=0.5,        # thinnest conductor draw 0.508 (20 mil)
     min_via=1.2,          # the 4 Proteus vias: 1.27 mm pad / 0.508 mm drill
@@ -180,6 +190,10 @@ DRC_ACCEPTED = {
                             "them), R24-1 and R26-1 inside the large C30 Solen box courtyard",
 }
 
+# The DRC warning counts that must match exactly (p2k drc): no dangling track or via, so a removed stub
+# that comes back fails (was the board-local tools/check_no_dangling.py; design fixes 2026-11-20).
+DRC_EXPECTED_WARNINGS = {"track_dangling": 0, "via_dangling": 0}
+
 # Recorded copper deviations (p2k.pcb removed_track; user decision 2026-11-20, Finding 19, reverses
 # Phase 5 decision 3): the three dangling stubs of the 2010 routing are not built. {(layer, x1, y1,
 # x2, y2): reason}, IPC frame (Y up); gerber_to_tracks fails unless every entry matches exactly one
@@ -196,14 +210,67 @@ REMOVED_TRACKS = {
 
 # KiCad footprint drills smaller than the Proteus drill, accepted by the user (2026-11-20,
 # STATUS.md "Decisions"): the KiCad drills and pads stay. 18 holes (reports/footprint_pads.csv).
+# The pad-set form (reason, pads): both Phase 4 tools require the smaller drills of each pair to be exactly
+# these pads (was the board-local tools/check_drill_smaller.py).
 DRILL_SMALLER = {
-    (1.143, 0.7): "SERIES_MIX (all 8 pads): KiCad G5V-2 land pattern, 0.70 mm drill / 1.4 mm pad kept "
-                  "(Proteus 1.143 = 45 mil); user decision 2026-11-20",
-    (1.143, 1.0): "C2: KiCad C_Rect 1.0 mm drill kept (Proteus 1.143 = 45 mil); user decision 2026-11-20",
-    (0.762, 0.75): "C4 C6 C7 C32: KiCad C_Rect_L7.2mm_W5.0mm_P5.00mm 0.75 mm drill kept (Proteus 0.762 = "
-                   "30 mil); user decision 2026-11-20",
+    (1.143, 0.7): ("SERIES_MIX (all 8 pads): KiCad G5V-2 land pattern, 0.70 mm drill / 1.4 mm pad kept "
+                   "(Proteus 1.143 = 45 mil); user decision 2026-11-20", {"SERIES_MIX"}),
+    (1.143, 1.0): ("C2: KiCad C_Rect 1.0 mm drill kept (Proteus 1.143 = 45 mil); user decision 2026-11-20",
+                   {"C2"}),
+    (0.762, 0.75): ("C4 C6 C7 C32: KiCad C_Rect_L7.2mm_W5.0mm_P5.00mm 0.75 mm drill kept (Proteus 0.762 = "
+                    "30 mil); user decision 2026-11-20", {"C4", "C6", "C7", "C32"}),
 }
-# The June 2010 fab Excellon drill file (source/fab_2010/poweri - CADCAM Drill.TXT, inch) converted to
-# metric by tools/excellon_metric.py (the shared reader is metric-only): cross-checked 1:1 with the
-# 2026 X2 drill gerber by gerber_roundtrip.
-DRILL_EXCELLON = "reference/fab_2010_drill_metric.drl"
+# The June 2010 fab Excellon drill file (inch, read natively by gerber_roundtrip; decision R1, was converted
+# to metric by the board-local tools/excellon_metric.py): cross-checked 1:1 with the 2026 X2 drill gerber.
+DRILL_EXCELLON = "source/fab_2010/poweri - CADCAM Drill.TXT"
+
+# --- Pin order (p2k check_pin_order; was tools/check_pin_order.py, STATUS.md "Phase 2 - pin order") ----
+
+# The UNMOVED KiCad base footprints with the Proteus renumbering, fitted onto the IPC pads: a small
+# residual on the expected side confirms that the Proteus pin ids sit on the pads the renumbering
+# says. Inline and two-pad parts fit both ways round: `polarity` (the pin id on the marked base pad 1)
+# and the --render overlays decide (reports/pin_order/<refdes>.png, compared by eye in Phase 2).
+# Relay SERIES_MIX: its IPC pin ids are the physical Omron pins (IPC_PIN_IDS), so the unmoved KiCad
+# G5V-2 must fit unmirrored; the Phase 2 Proteus-pole mapping (Omron pole 1 on the Proteus pole 1-8),
+# expressed in today's Omron ids (Omron k -> the Omron id of the Proteus pad that mapping put k on),
+# must fit only mirrored (Finding 15: G5V-2(HI) is the mirror image of the Omron G5V-2 seen from the top),
+# which also proves that IPC_PIN_IDS is the physical and not the mirrored mapping.
+G5V2_POLE1 = {o: IPC_PIN_IDS["SERIES_MIX"][p] for o, p in {"8": "1", "4": "2", "6": "3", "1": "4", "16": "5",
+                                                            "13": "6", "11": "7", "9": "8"}.items()}
+# Noval sockets U4 / U5: Proteus 9-PIN BELTON NOVAL on a 21.0 mm pitch circle; the standard noval
+# (pins 1-9 counter-clockwise seen from the top, 36 deg steps, the gap between 9 and 1) as an ideal
+# socket. KiCad Valve:Valve_Noval_P is a smaller circle, so only its mirror state is checked. The noval
+# steps are 36 deg: free_angle (no 45 deg snap). Phase 5 (user decision 2026-11-20): the sockets are on
+# the BOTTOM side: the project footprint has the standard numbering in its own view and fits the IPC
+# pads only mirrored; PIN_ORDER_BOTTOM checks reports/footprint_fit.csv and the board.
+_NOVAL = dict(n=9, pcd=21.0, step=36, start=-36, pad=4.318, drill=1.727)
+PIN_ORDER = [
+    dict(refs="Q4", footprint="Package_TO_SOT_THT:TO-220-3_Vertical", mirror=False, res=0.01),
+    # TO-92_Inline_Wide is P2.54, Proteus P2.032: 0.508 at the outer pads
+    dict(refs="Q8 Q10 Q20 Q90", spec="TO-92_Inline_P2.03mm", mirror=False, res=0.51, polarity="1"),
+    dict(refs="Q1 Q2 Q3 Q5 Q6 Q7", spec="TO-92_Inline_P2.03mm", mirror=False, res=0.51, polarity="1"),
+    dict(refs="D2 D7 D8 D9 D10 D11 D12", spec="D_DO-35_SOD27_P10.16mm_Horizontal_AK", mirror=False, res=0.01,
+         polarity="K"),
+    dict(refs="D1 D3 D4 D5 D6", spec="D_DO-41_SOD81_P10.16mm_Horizontal_AK", mirror=False, res=0.01, polarity="K"),
+    dict(refs="C8 C28", spec="CP_Radial_D5.0mm_P2.54mm_PM", mirror=False, res=0.03, polarity="+"),   # P2.50 vs P2.54
+    dict(refs="C1 C36 C37", spec="CP_Radial_D16.0mm_P7.50mm_21", mirror=False, res=0.01, polarity="2"),  # + = pin 2
+    dict(refs="SERIES_MIX", footprint="Relay_THT:Relay_DPDT_Omron_G5V-2", mirror=False, res=0.01,
+         note="Omron ids (IPC_PIN_IDS) on the unmoved KiCad G5V-2"),
+    dict(name="SERIES_MIX pole 1", refs="SERIES_MIX", footprint="Relay_THT:Relay_DPDT_Omron_G5V-2",
+         renumber=G5V2_POLE1, mirror=True, res=0.01, render=False,
+         note="the Phase 2 Proteus-pole mapping fits only mirrored"),
+    dict(refs="U4 U5", footprint="Valve:Valve_Noval_P", mirror=True, res=3.0,
+         note="KiCad Noval_P is a smaller circle; only the mirrored one is near"),
+    dict(name="U4 U5 ideal noval", refs="U4 U5", ideal=_NOVAL, free_angle=True, mirror=True, res=0.01, other=1.0,
+         note="ideal standard noval, PCD 21.00 mm"),
+    dict(name="U4 U5 sense", refs="U4 U5", turn="clockwise",
+         note="noval standard: counter-clockwise from the top"),
+    # SW-SPDT (built from the IPC pads, no KiCad base): 1 (NO) and 2 (NC) 5.08 mm apart, 3 (COM) the
+    # offset hole 5.12 mm from both
+    dict(refs="SW4 SW5 SW6", distances={"1-2": 5.08, "1-3": 5.12, "2-3": 5.12}),
+    dict(name="noval footprint vs ideal", footprint="tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm", on_ideal=_NOVAL,
+         free_angle=True, mirror=False, res=0.01, other=1.0, note="standard noval numbering in its own view"),
+    dict(name="noval footprint on IPC", refs="U4 U5", footprint="tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm",
+         free_angle=True, mirror=True, res=0.01, other=1.0, note="fits only mirrored = bottom side"),
+]
+PIN_ORDER_BOTTOM = {"U4", "U5"}

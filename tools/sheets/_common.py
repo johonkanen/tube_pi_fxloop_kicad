@@ -1,6 +1,6 @@
 """Helpers for the per-sheet transcription scripts (tools/sheets/sheetNN.py).
 
-Copied from the power amp pilot (term, P, place_mirrored) and adapted.
+Copied from the power amp pilot (term, P) and adapted; mirrored symbols are p2k Sheet.place(mirror=).
 
 The generic helpers come from p2k.sheetkit (grid g(), sheet(), left/right/up/down,
 glabel_*/label_*, power_at, bus_group, flagged_power, vert2, horiz2, terminal); board helpers
@@ -15,7 +15,6 @@ TOOLS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(TOOLS, "p2k"))  # proteus2kicad
 from p2k.sch_builder import Sheet  # noqa: E402,F401
 from p2k.sheetkit import *  # noqa: E402,F401,F403
-from p2k.sheetkit import _two_pin_rot  # noqa: E402
 
 _PART_MAP = None
 
@@ -40,16 +39,9 @@ def sym(ref):
 
 
 def term(sh, ref, x, y, direction="up"):
-    """Proteus TERMINAL / PIN part as sheetkit.terminal does it (connection point (x, y), circle
-    pointing in `direction`, texts horizontal), but with the symbol and value of the part map:
-    PIN, value TERMINAL. sheetkit.terminal always places PIN / "PIN" (pilot p2k candidates 3, 7)."""
-    rot = {"up": 0, "left": 90, "down": 180, "right": 270}[direction]
-    kw = {}
-    if direction == "right":     # KiCad mirrors justification for rot 270
-        kw = dict(ref_at=(x + 5.08, y - 1.27, 90, "left"), value_at=(x + 5.08, y + 1.27, 90, "left"))
-    elif direction == "left":
-        kw = dict(ref_at=(x - 5.08, y - 1.27, 270, "right"), value_at=(x - 5.08, y + 1.27, 270, "right"))
-    return sh.place(sym(ref), ref, x, y, rot, value=sh_value(ref), **kw)
+    """Proteus TERMINAL / PIN part (connection point (x, y), circle pointing in `direction`, texts
+    horizontal beside the circle, away from the wire) with the symbol and value of the part map."""
+    return terminal(sh, ref, x, y, direction, symbol=sym(ref), value=sh_value(ref), justify="away")
 
 
 # --- PDF coordinates ---------------------------------------------------------------------------------
@@ -64,29 +56,6 @@ def P(x, y):
     return (g(x + OX), g(y + OY))
 
 
-# --- mirrored symbols --------------------------------------------------------------------------------
-def place_mirrored(sh, name, ref, x, y, axis="x", **kw):
-    """sh.place() at rotation 0 with the symbol mirrored: axis 'x' = about the X axis (top and
-    bottom swapped), 'y' = about the Y axis (left and right swapped). p2k.sch_builder.Sheet.place has
-    no mirror option (p2k candidate), so the node it wrote gets a (mirror ...) entry here and the
-    returned pin points are mirrored about the symbol origin. Pass ref_at / value_at for the texts
-    (KiCad keeps field positions absolute)."""
-    from p2k.sexpr import Sym, find
-    p = sh.place(name, ref, x, y, 0, **kw)
-    unit = kw.get("unit", 1)
-    for node in sh.tree:
-        if (isinstance(node, list) and node and str(node[0]) == "symbol" and find(node, "unit")[1] == unit
-                and any(c[1:3] == ["Reference", ref] for c in node if isinstance(c, list) and str(c[0]) == "property")):
-            node.insert(next(i for i, c in enumerate(node) if isinstance(c, list) and str(c[0]) == "at") + 1,
-                        [Sym("mirror"), Sym(axis)])
-            break
-    else:
-        raise KeyError(ref)
-    for num, (px, py) in list(p.pins.items()):
-        p.pins[num] = (px, round(2 * y - py, 4)) if axis == "x" else (round(2 * x - px, 4), py)
-    return p
-
-
 # --- noval dual triodes (U4, U5) ----------------------------------------------------------------
 def noval(sh, ref, a, b, heater, mirror_b=False):
     """Place the three units of a 12AX7 symbol: unit 1 = triode 2 (pins 6 A2, 7 G2, 8 K2) at `a`,
@@ -98,9 +67,9 @@ def noval(sh, ref, a, b, heater, mirror_b=False):
     u1 = sh.place(sym(ref), ref, *a, unit=1, value=val)
     if mirror_b:
         bx, by = b
-        u2 = place_mirrored(sh, sym(ref), ref, bx, by, axis="y", unit=2, value=val,
-                            ref_at=(round(bx + 3.81, 4), round(by - 7.62, 4), 0, "right"),
-                            value_at=(round(bx + 3.81, 4), round(by - 5.715, 4), 0, "right"))
+        u2 = sh.place(sym(ref), ref, bx, by, 0, mirror="y", unit=2, value=val,
+                      ref_at=(round(bx + 3.81, 4), round(by - 7.62, 4), 0, "right"),
+                      value_at=(round(bx + 3.81, 4), round(by - 5.715, 4), 0, "right"))
     else:
         u2 = sh.place(sym(ref), ref, *b, unit=2, value=val)
     u3 = sh.place(sym(ref), ref, *heater, unit=3, value=val)
@@ -120,9 +89,8 @@ def ph(sh, ref, x, y, left, **kw):
     """Horizontal two-pin part `ref` centred on PDF position (x, y), pin `left` on the left.
     Returns (left_point, right_point)."""
     kw.setdefault("text", "above")
-    if sym(ref).startswith("C") and "ref_at" not in kw:      # capacitor plates are taller than a resistor body
-        px, py = P(x, y)
-        kw.update(ref_at=(px, round(py - 5.08, 4), 0, None), value_at=(px, round(py - 3.175, 4), 0, None))
+    if sym(ref).startswith("C"):      # capacitor plates are taller than a resistor body
+        kw.setdefault("text_gap", 3.175)
     _, l, r = horiz2(sh, sym(ref), ref, *P(x, y), sh_value(ref), left=left, **kw)
     return l, r
 
@@ -137,9 +105,9 @@ def q_right(sh, ref, x, y, axis="y"):
     """Transistor `ref` centred on PDF position (x, y), mirrored about the Y axis (base / gate on the
     right), texts right of the body above / below the base lead. Returns the placed symbol."""
     px, py = P(x, y)
-    return place_mirrored(sh, sym(ref), ref, px, py, axis=axis, value=sh_value(ref),
-                          ref_at=(round(px + 1.27, 4), round(py - 3.81, 4), 0, "right"),
-                          value_at=(round(px + 1.27, 4), round(py + 3.81, 4), 0, "right"))
+    return sh.place(sym(ref), ref, px, py, 0, mirror=axis, value=sh_value(ref),
+                    ref_at=(round(px + 1.27, 4), round(py - 3.81, 4), 0, "right"),
+                    value_at=(round(px + 1.27, 4), round(py + 3.81, 4), 0, "right"))
 
 
 # --- sheet 4: JFET send channel, RETURN switch block -------------------------------------------------
@@ -201,21 +169,3 @@ def diode_input(sh, y, d, t, xbus):
     term(sh, t, *P(xbus + 18, y), "right")
     sh.wire(a, P(xbus + 18, y))
 
-
-def place_rot90_mirrored(sh, name, ref, x, y, **kw):
-    """sh.place() at rotation 90 with a (mirror y) entry, as KiCad writes a symbol that is rotated and
-    then flipped left-right: the returned pin points are those of rotation 90 mirrored about the
-    vertical line through the symbol origin. (place_mirrored() covers rotation 0 only.)"""
-    from p2k.sexpr import Sym
-    p = sh.place(name, ref, x, y, 90, **kw)
-    for node in sh.tree:
-        if (isinstance(node, list) and node and str(node[0]) == "symbol"
-                and any(c[1:3] == ["Reference", ref] for c in node if isinstance(c, list) and str(c[0]) == "property")):
-            node.insert(next(i for i, c in enumerate(node) if isinstance(c, list) and str(c[0]) == "at") + 1,
-                        [Sym("mirror"), Sym("y")])
-            break
-    else:
-        raise KeyError(ref)
-    for num, (px, py) in list(p.pins.items()):
-        p.pins[num] = (round(2 * x - px, 4), py)
-    return p

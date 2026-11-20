@@ -30,8 +30,8 @@ for net, x, c, yc in (("F", 19, "C36", 27), ("G", 37, "C37", 27), ("H", 51, "C1"
 
 # --- Q4 source follower: gate down, source (3) left on H, drain (2) right on PIPOWER ---------------
 qx, qy = P(105, 17)
-q4 = place_rot90_mirrored(sh, sym("Q4"), "Q4", qx, qy, value=sh_value("Q4"),
-                          ref_at=(qx, round(qy - 10.16, 4), 270, None), value_at=(qx, round(qy - 8.255, 4), 270, None))
+q4 = sh.place(sym("Q4"), "Q4", qx, qy, 90, mirror="y", value=sh_value("Q4"),
+              ref_at=(qx, round(qy - 10.16, 4), 270, None), value_at=(qx, round(qy - 8.255, 4), 270, None))
 assert q4.pin(1) == P(105, 21) and q4.pin(2) == P(109, 15) and q4.pin(3) == P(101, 15), q4.pins
 sh.wire(r67r, q4.pin(3))
 term(sh, "PIPOWER", *P(127, RAIL), "right")

@@ -47,18 +47,6 @@ from p2k.symgen import *  # noqa: E402,F401,F403
 from p2k.symgen import run  # noqa: E402
 
 
-def pin_types(sym, types):
-    """Set the electrical type of pins {number: type}."""
-    seen = set()
-    for pin in walk(sym, "pin"):
-        num = find(pin, "number")[1]
-        if num in types:
-            pin[1] = Sym(types[num])
-            seen.add(num)
-    assert seen == set(types), (sym[1], set(types) - seen)
-    return sym
-
-
 def valve():
     # KiCad Valve:ECC83 (extends ECC81) has the noval numbers already; names -> the Proteus
     # names (KiCad: A/G/K per unit, heater F1 F1 F2); every pin passive.
@@ -68,8 +56,8 @@ def valve():
                    desc="12AX7 / 12AT7 noval dual triode; Proteus pin ids A1=1 G1=2 K1=3 H1=4 H2=5 "
                         "A2=6 G2=7 K2=8 HCT=9; unit 1 = triode 2 (6 7 8), unit 2 = triode 1 (1 2 3), "
                         "unit 3 = heater (4 5 9)",
-                   pins={n: n for n in nums}, names=names)
-    return pin_types(sym, {n: PAS for n in nums})
+                   pins={n: n for n in nums}, names=names, pin_types={"*": PAS})
+    return sym
 
 
 def build():
