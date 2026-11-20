@@ -22,7 +22,7 @@ board is in `p2k_config.py`.
 Conversion plan: [PLAN.md](PLAN.md); progress: [STATUS.md](STATUS.md); prompt for the next agent session: [next_prompt.md](next_prompt.md).
 
 Phase 0 (skeleton and inventory) done: `p2k_config.py` complete, `reference/` cheat sheets
-written from the IPC netlist, `tools/check_all.sh` passes. Next: Phase 1 preparation.
+written from the IPC netlist, `tools/check_all.sh` passes. Phase 1 (schematic, 4 sheets, 126 parts) is done and matches the IPC netlist. Next: Phase 2 (footprints).
 
 Built in about 2010. The export in `source/cadcam/` matches the June 2010 fab Gerbers (`source/fab_2010/`) exactly: every hole and track. The schematic (`poweri.DSN`) was saved in October 2010, after the layout; all 126 board parts (87 components, 39 terminals) are in the PDF.
 

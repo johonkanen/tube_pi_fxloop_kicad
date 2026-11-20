@@ -422,8 +422,8 @@ ALL CHECKS PASSED
 12. **The FX switch drivers are PNP transistors with the emitter on ground** (sheet 2): Q8, Q10, Q20,
    Q90 (2N3906) have the emitter on PWR-GND and the collector on the gate nets (pull-ups R100 / R110 /
    R270 100k to the VREF terminal, 10k base resistors from the terminals A / C' / D'). That only
-   works with **VREF and the control inputs negative** against PWR-GND (VREF = the power amp board's
-   negative reference, which also gives the J112 gates their pinch-off voltage): a control input
+   works with **VREF and the control inputs negative** against PWR-GND (presumably the power amp board's
+   negative VREF, not verified here; it would also give the J112 gates their pinch-off voltage): a control input
    pulled negative turns its driver on and lifts the gate net to ground (JFET on, send shunted).
    Q8 (input FX') lifts all three gate nets through D10-D12. Consistent as drawn; reproduced.
    Worth knowing for the redesign and for simulation (the polarity is not visible from this board
