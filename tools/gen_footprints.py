@@ -29,7 +29,8 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools", "p2k"))  # proteus2kicad
-from p2k import footprints  # noqa: E402
+from p2k import footprints, sexpr  # noqa: E402
+from p2k.sexpr import Sym  # noqa: E402
 
 P = "tube_pi_fxloop:"
 
@@ -159,6 +160,43 @@ PROJECT = {
         board_only=True, pad=(6.35, 3.0), plated=True,
         descr="Plated 3.0 mm mounting hole with a 6.35 mm pad on both layers, no net"),
 }
+
+# TO-92 pad 1 (user decision 2026-11-20, option (a); STATUS.md "Phase 3"): KiCad's TO-92 has a
+# square 1.5 mm pad 1 whose corners come 0.12 mm close to diagonal Proteus tracks (Q1, Q3, Q6, Q20);
+# the Proteus TO92 pads are all round. Pad 1 becomes a circle at the KiCad size 1.5 mm. With
+# three round pads the symmetric TO-92 outline no longer shows pin 1, so a filled dot is added on
+# F.SilkS and F.Fab beside pad 1 at the flat side (outside the body, 0.6 mm off the pad, inside
+# the courtyard). footprints.derive() keeps the base pad shapes (ipc_sizes only sets size and
+# drill): board-local edit after derive() (STATUS.md p2k candidate 16).
+ROUND_PAD1 = "TO-92_Inline_P2.03mm"
+PIN1_DOT = (-0.45, 1.35, 0.2)   # x, y (KiCad frame, Y down), radius in mm
+
+
+def _dot(x, y, r, layer, width):
+    return [Sym("fp_circle"), [Sym("center"), x, y], [Sym("end"), round(x + r, 4), y],
+            [Sym("stroke"), [Sym("width"), width], [Sym("type"), Sym("solid")]], [Sym("fill"), Sym("yes")],
+            [Sym("layer"), layer]]
+
+
+_derive = footprints.derive
+
+
+def derive(name, spec, ipc):
+    node = _derive(name, spec, ipc)
+    if name != ROUND_PAD1:
+        return node
+    pads = [p for p in sexpr.find_all(node, "pad") if str(p[1]) == "1"]
+    if len(pads) != 1 or str(pads[0][3]) != "rect":
+        raise SystemExit(f"gen_footprints: {name}: expected one rect pad 1 in the base, got "
+                         f"{[str(p[3]) for p in pads]}")
+    pads[0][3] = Sym("circle")
+    x, y, r = PIN1_DOT
+    i = node.index(pads[0])
+    node[i:i] = [_dot(x, y, r, "F.SilkS", 0.12), _dot(x, y, r, "F.Fab", 0.1)]
+    return node
+
+
+footprints.derive = derive
 
 FP_LIB_TABLE = """(fp_lib_table
 \t(version 7)

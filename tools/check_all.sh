@@ -39,9 +39,7 @@ step "Pin order vs unmoved KiCad base footprints" tools/p2k/bin/kipy tools/check
 step "PCB rebuilt from schematic + gerbers, up to date" tools/make_pcb.sh --check
 step "Board pads, holes, vias vs IPC (position, size, nets 1:1)" tools/p2k/bin/kipy -m p2k.check_board
 step "Board copper connectivity (KiCad geometry)" tools/p2k/bin/kipy -m p2k.assign_nets --check
-# p2k drc through tools/drc_pending.py while the TO-92 pad-1 question is open (STATUS.md
-# "Decisions"): it passes only if the 9 TO-92 pad-1 clearance errors are the only unaccepted errors.
-step "DRC with schematic parity" python3 tools/drc_pending.py
+step "DRC with schematic parity" tools/p2k/bin/p2k drc
 
 echo
 pending=$(grep -c "PENDING USER DECISION" "$log")
