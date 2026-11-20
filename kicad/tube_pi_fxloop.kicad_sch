@@ -1,0 +1,195 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "f4e61d06-d9d6-40a6-b250-ca78b6952749")
+	(paper "A3")
+	(title_block
+		(title "Tube phase inverter and FX loop")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus poweri")
+	)
+	(lib_symbols)
+	(text "Tube phase inverter and FX loop rev A - redrawn from Proteus poweri (2010).\nOne sheet per Proteus PDF page. Net names follow the IPC-D-356A netlist (reference/pins_by_net.md)."
+		(exclude_from_sim no)
+		(at 25.4 22.86 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "1bc38b19-7663-4339-bf26-6bc0d38c2352")
+	)
+	(sheet
+		(at 25.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "6d2054c3-a101-4ddb-b7e6-76c429c33c44")
+		(property "Sheetname" "01 FX loop driver"
+			(at 25.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "01_fx_loop_driver.kicad_sch"
+			(at 25.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop"
+				(path "/f4e61d06-d9d6-40a6-b250-ca78b6952749"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "b3eaae5d-2703-4695-88dd-6ef55f88aa46")
+		(property "Sheetname" "02 PI supply and FX switching"
+			(at 152.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "02_pi_supply_fx_switching.kicad_sch"
+			(at 152.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop"
+				(path "/f4e61d06-d9d6-40a6-b250-ca78b6952749"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 38.1)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "5a154276-1a0b-4f78-89be-5b2661bee824")
+		(property "Sheetname" "03 Phase inverter"
+			(at 279.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "03_phase_inverter.kicad_sch"
+			(at 279.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop"
+				(path "/f4e61d06-d9d6-40a6-b250-ca78b6952749"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 88.9)
+		(size 76.2 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "c2304330-badb-4078-9bfa-0554908b0a30")
+		(property "Sheetname" "04 FX send and return"
+			(at 25.4 88.2 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "04_fx_send_return.kicad_sch"
+			(at 25.4 109.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop"
+				(path "/f4e61d06-d9d6-40a6-b250-ca78b6952749"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

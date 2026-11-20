@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "ab573c01-f345-4a9f-9eef-61d38fb5feba")
+	(paper "A3")
+	(title_block
+		(title "Tube phase inverter and FX loop - FX loop driver")
+		(company "Tube amplifier")
+		(rev "rev A (as built)")
+		(comment 1 "Redrawn from Proteus poweri")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)
