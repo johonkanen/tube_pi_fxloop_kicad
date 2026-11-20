@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
-rev_b/kicad/*-backups/
-rev_b/kicad/*.kicad_prl
-rev_b/kicad/fp-info-cache
-rev_b/kicad/.history/
+build/
+kicad/*-backups/
+kicad/*.kicad_prl
+kicad/fp-info-cache
+kicad/.history/

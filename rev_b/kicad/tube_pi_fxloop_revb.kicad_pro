@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "filename": "tube_pi_fxloop_revb.kicad_pro",
+    "version": 3
+  },
+  "schematic": {},
+  "board": {},
+  "sheets": [
+    [
+      "4bce18c3-be74-560a-bbe8-6ba9762bb174",
+      "Root"
+    ],
+    [
+      "fb426ad8-3233-568e-84ef-4881a845c72f",
+      "01 Input buffer, FX send, return, mixer, return stage"
+    ],
+    [
+      "a56163f7-4885-5ca6-9084-3746aa956f44",
+      "02 PI-4 attenuator, phase inverter, grid drive"
+    ],
+    [
+      "1342536e-7ead-5c2e-b2e5-71e5f38cc031",
+      "03 Per-channel feedback networks (presence / resonance)"
+    ],
+    [
+      "59effb50-b08b-5acc-b9a6-0840de21ad80",
+      "04 Switch control"
+    ],
+    [
+      "2ed4c737-7183-5abb-8f55-2c8c6113fed8",
+      "05 B+PI / B+FX regulators, decoupling, heaters, power tabs"
+    ]
+  ]
+}

@@ -1,0 +1,225 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "4bce18c3-be74-560a-bbe8-6ba9762bb174")
+	(paper "A3")
+	(title_block
+		(title "Tube PI + FX loop rev B")
+		(company "Tube amplifier")
+		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
+	)
+	(lib_symbols)
+	(sheet
+		(at 25.4 38.1)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fb426ad8-3233-568e-84ef-4881a845c72f")
+		(property "Sheetname" "01 Input buffer, FX send, return, mixer, return stage"
+			(at 25.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "01_fx_loop.kicad_sch"
+			(at 25.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 38.1)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "a56163f7-4885-5ca6-9084-3746aa956f44")
+		(property "Sheetname" "02 PI-4 attenuator, phase inverter, grid drive"
+			(at 152.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "02_pi.kicad_sch"
+			(at 152.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 279.4 38.1)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "1342536e-7ead-5c2e-b2e5-71e5f38cc031")
+		(property "Sheetname" "03 Per-channel feedback networks (presence / resonance)"
+			(at 279.4 37.4 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "03_feedback.kicad_sch"
+			(at 279.4 59.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 78.74000000000001)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "59effb50-b08b-5acc-b9a6-0840de21ad80")
+		(property "Sheetname" "04 Switch control"
+			(at 25.4 78.04 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "04_control.kicad_sch"
+			(at 25.4 99.66000000000001 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 78.74000000000001)
+		(size 101.6 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "2ed4c737-7183-5abb-8f55-2c8c6113fed8")
+		(property "Sheetname" "05 B+PI / B+FX regulators, decoupling, heaters, power tabs"
+			(at 152.4 78.04 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "05_supply.kicad_sch"
+			(at 152.4 99.66000000000001 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
