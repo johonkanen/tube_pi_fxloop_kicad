@@ -11,7 +11,7 @@
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols
-		(symbol "tube_pi_fxloop_revb:Conn_01x05"
+		(symbol "tube_pi_fxloop_revb:Conn_02x03_Top_Bottom"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -22,7 +22,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 7.62 0)
+				(at 1.27 5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -31,8 +31,8 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x05"
-				(at 0 -7.62 0)
+			(property "Value" "Conn_02x03_Top_Bottom"
+				(at 1.27 -5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -63,7 +63,7 @@
 					)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(property "Description" "Generic connector, double row, 02x03, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -85,7 +85,7 @@
 					)
 				)
 			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(property "ki_fp_filters" "Connector*:*_2x??_*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -96,27 +96,16 @@
 					)
 				)
 			)
-			(symbol "Conn_01x05_1_1"
+			(symbol "Conn_02x03_Top_Bottom_1_1"
 				(rectangle
-					(start -1.27 6.35)
-					(end 1.27 -6.35)
+					(start -1.27 3.81)
+					(end 3.81 -3.81)
 					(stroke
 						(width 0.254)
 						(type default)
 					)
 					(fill
 						(type background)
-					)
-				)
-				(rectangle
-					(start -1.27 5.207)
-					(end 0 4.953)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
 					)
 				)
 				(rectangle
@@ -153,8 +142,30 @@
 					)
 				)
 				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
+					(start 3.81 2.667)
+					(end 2.54 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 0.127)
+					(end 2.54 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -2.413)
+					(end 2.54 -2.667)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -164,7 +175,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 5.08 0)
+					(at -5.08 2.54 0)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -182,7 +193,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 2.54 0)
+					(at -5.08 0 0)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -200,7 +211,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 0 0)
+					(at -5.08 -2.54 0)
 					(length 3.81)
 					(name "Pin_3"
 						(effects
@@ -218,7 +229,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -2.54 0)
+					(at 7.62 2.54 180)
 					(length 3.81)
 					(name "Pin_4"
 						(effects
@@ -236,7 +247,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -5.08 0)
+					(at 7.62 0 180)
 					(length 3.81)
 					(name "Pin_5"
 						(effects
@@ -246,6 +257,24 @@
 						)
 					)
 					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2181,6 +2210,183 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "tube_pi_fxloop_revb:C_Polarized"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C_Polarized"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Polarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "CP_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_Polarized_0_1"
+				(rectangle
+					(start -2.286 0.508)
+					(end 2.286 1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 2.286) (xy -0.762 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 2.794) (xy -1.27 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.286 -0.508)
+					(end -2.286 -1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "C_Polarized_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "02 PI-4 attenuator (five binary L-sections for Z0 = 49.9k, relay energised = section in (NO contacts), unpowered = 0 dB; 0-18 dB used of 0-31) and the phase inverter: 12AX7 LTP, DN2540 CCS tail about 2 mA, equal 100k plates, feedback into the second grid (sim/pi_nfb). Plate DC goes out on W24; the coupling caps are on the power amp (interfaces.md 10)."
 		(exclude_from_sim no)
@@ -2194,7 +2400,7 @@
 		(uuid "cfd70542-a4cd-5635-82dc-736f3f16a509")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:Conn_01x05")
+		(lib_id "tube_pi_fxloop_revb:Conn_02x03_Top_Bottom")
 		(at 518.16 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2203,22 +2409,22 @@
 		(dnp no)
 		(uuid "0b379162-afea-5d44-afa0-946ae4289e1c")
 		(property "Reference" "J201"
-			(at 518.16 170.18 0)
+			(at 519.43 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "DRIVE (W24-a)"
-			(at 518.16 185.42 0)
+		(property "Value" "DRIVE (W24-a, Mini-Fit Jr)"
+			(at 519.43 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_KK-396_A-41791-0005_1x05_P3.96mm_Vertical"
+		(property "Footprint" "Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical"
 			(at 518.16 177.8 0)
 			(effects
 				(font
@@ -2236,7 +2442,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "Generic connector, double row, 02x03, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at 518.16 177.8 0)
 			(effects
 				(font
@@ -2260,6 +2466,9 @@
 		(pin "5"
 			(uuid "cf3d9219-351a-5ea9-bab3-904c4317e9de")
 		)
+		(pin "6"
+			(uuid "31523fe0-bb46-5dc2-91c5-aa2812720e18")
+		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
@@ -2271,7 +2480,7 @@
 	)
 	(wire
 		(pts
-			(xy 513.08 172.72) (xy 510.54 172.72)
+			(xy 513.08 175.26) (xy 510.54 175.26)
 		)
 		(stroke
 			(width 0)
@@ -2280,7 +2489,7 @@
 		(uuid "0175de37-9c57-5979-9078-9c7ce1f2978c")
 	)
 	(label "GND_DRV"
-		(at 510.54 172.72 180)
+		(at 510.54 175.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2291,7 +2500,7 @@
 	)
 	(wire
 		(pts
-			(xy 513.08 175.26) (xy 510.54 175.26)
+			(xy 513.08 177.8) (xy 510.54 177.8)
 		)
 		(stroke
 			(width 0)
@@ -2300,7 +2509,7 @@
 		(uuid "50981c2b-0339-5eaa-a69b-cbc1958df148")
 	)
 	(label "DRV_A"
-		(at 510.54 175.26 180)
+		(at 510.54 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2311,7 +2520,7 @@
 	)
 	(wire
 		(pts
-			(xy 513.08 177.8) (xy 510.54 177.8)
+			(xy 513.08 180.34) (xy 510.54 180.34)
 		)
 		(stroke
 			(width 0)
@@ -2320,7 +2529,7 @@
 		(uuid "37a04172-b577-5965-acc6-eec128e0c524")
 	)
 	(label "GND_DRV"
-		(at 510.54 177.8 180)
+		(at 510.54 180.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2331,7 +2540,7 @@
 	)
 	(wire
 		(pts
-			(xy 513.08 180.34) (xy 510.54 180.34)
+			(xy 525.78 175.26) (xy 528.32 175.26)
 		)
 		(stroke
 			(width 0)
@@ -2340,18 +2549,18 @@
 		(uuid "8acb2228-9044-5382-9214-f287b98e18a3")
 	)
 	(label "DRV_B"
-		(at 510.54 180.34 180)
+		(at 528.32 175.26 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "797bd37e-c5bb-5e31-b0ea-9fc255f9bd88")
 	)
 	(wire
 		(pts
-			(xy 513.08 182.88) (xy 510.54 182.88)
+			(xy 525.78 177.8) (xy 528.32 177.8)
 		)
 		(stroke
 			(width 0)
@@ -2360,14 +2569,18 @@
 		(uuid "4568eb53-c313-5553-93d3-730cabb740b5")
 	)
 	(label "GND_DRV"
-		(at 510.54 182.88 180)
+		(at 528.32 177.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "92e1f01f-5f46-550e-96b2-170cc406805e")
+	)
+	(no_connect
+		(at 525.78 180.34)
+		(uuid "5301431e-a469-5881-8b27-d455bb00b5ea")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -2444,7 +2657,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5301431e-a469-5881-8b27-d455bb00b5ea")
+		(uuid "7583ccae-e941-5e39-89a1-abc201021c80")
 	)
 	(label "GND_DRV"
 		(at 471.17 222.25 180)
@@ -2454,7 +2667,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "7583ccae-e941-5e39-89a1-abc201021c80")
+		(uuid "efd737bc-7383-5823-bbf2-f51056584a15")
 	)
 	(wire
 		(pts
@@ -2464,7 +2677,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "efd737bc-7383-5823-bbf2-f51056584a15")
+		(uuid "c7aa6b55-cbd2-549d-878d-48348bc3775b")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -2606,7 +2819,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c7aa6b55-cbd2-549d-878d-48348bc3775b")
+		(uuid "9d0bcd92-b55e-5d97-be47-2fbf74fa5236")
 	)
 	(label "GND_DRV"
 		(at 491.49 222.25 180)
@@ -2616,7 +2829,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "9d0bcd92-b55e-5d97-be47-2fbf74fa5236")
+		(uuid "784f0d85-a9ca-56d2-859e-0120d24d2aa9")
 	)
 	(wire
 		(pts
@@ -2626,7 +2839,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "784f0d85-a9ca-56d2-859e-0120d24d2aa9")
+		(uuid "b9b5d353-c277-5c91-b097-bde043fc423a")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -2702,7 +2915,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b9b5d353-c277-5c91-b097-bde043fc423a")
+		(uuid "cda71b4a-5b65-51d5-9391-190f4c160458")
 	)
 	(text "1 dB"
 		(exclude_from_sim no)
@@ -2713,7 +2926,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "cda71b4a-5b65-51d5-9391-190f4c160458")
+		(uuid "cbb8e8ae-0834-5375-9671-ffaea034c0f4")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -2790,7 +3003,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cbb8e8ae-0834-5375-9671-ffaea034c0f4")
+		(uuid "f614bea3-7bb0-5ecb-a0d0-43ee0c7a6f76")
 	)
 	(global_label "ATT_IN"
 		(shape passive)
@@ -2802,7 +3015,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f614bea3-7bb0-5ecb-a0d0-43ee0c7a6f76")
+		(uuid "42822279-46ac-52a9-82e3-75c5c5711970")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 50.8 46.99 0)
 			(effects
@@ -2822,7 +3035,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "42822279-46ac-52a9-82e3-75c5c5711970")
+		(uuid "92c955dc-d9c7-5ca7-96f8-1a72f26bb8a5")
 	)
 	(label "ATT1"
 		(at 50.8 59.69 270)
@@ -2832,7 +3045,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "92c955dc-d9c7-5ca7-96f8-1a72f26bb8a5")
+		(uuid "53925e65-308c-555c-a5af-922e272fd779")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
@@ -2930,7 +3143,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "53925e65-308c-555c-a5af-922e272fd779")
+		(uuid "1c3b1f8d-8cea-5e42-9a63-ebfb625628a9")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:+5V")
@@ -3005,7 +3218,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1c3b1f8d-8cea-5e42-9a63-ebfb625628a9")
+		(uuid "47205a06-f9b4-5650-8c34-ca1c29342d97")
 	)
 	(global_label "RLY_ATT1_N"
 		(shape passive)
@@ -3017,7 +3230,7 @@
 			)
 			(justify right)
 		)
-		(uuid "47205a06-f9b4-5650-8c34-ca1c29342d97")
+		(uuid "b69b59f9-b875-50db-a80b-13a132aa1613")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 53.34 102.87 0)
 			(effects
@@ -3031,7 +3244,7 @@
 	)
 	(no_connect
 		(at 60.96 85.09)
-		(uuid "b69b59f9-b875-50db-a80b-13a132aa1613")
+		(uuid "e0e2fbc4-d1a3-5c61-9f3f-67d3fa9657a5")
 	)
 	(wire
 		(pts
@@ -3041,7 +3254,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e0e2fbc4-d1a3-5c61-9f3f-67d3fa9657a5")
+		(uuid "c11d1ae8-6d1a-5e71-8ca3-2b1aab4dc94d")
 	)
 	(global_label "ATT_IN"
 		(shape passive)
@@ -3053,7 +3266,7 @@
 			)
 			(justify right)
 		)
-		(uuid "c11d1ae8-6d1a-5e71-8ca3-2b1aab4dc94d")
+		(uuid "6e8fe33c-178f-5d42-ba74-8e3593f04342")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 63.5 102.87 0)
 			(effects
@@ -3073,7 +3286,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6e8fe33c-178f-5d42-ba74-8e3593f04342")
+		(uuid "f174ee47-856a-5366-a675-bd299911fcc5")
 	)
 	(label "ATT1"
 		(at 66.04 82.55 90)
@@ -3083,11 +3296,11 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f174ee47-856a-5366-a675-bd299911fcc5")
+		(uuid "dbaa5484-1a0e-5670-b871-b2b4b636be55")
 	)
 	(no_connect
 		(at 76.2 85.09)
-		(uuid "dbaa5484-1a0e-5670-b871-b2b4b636be55")
+		(uuid "cfbbd3cd-823c-590a-96a3-15dcef36463d")
 	)
 	(wire
 		(pts
@@ -3097,7 +3310,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cfbbd3cd-823c-590a-96a3-15dcef36463d")
+		(uuid "50f26b75-ffd5-592a-a2c7-12df16ce3cbb")
 	)
 	(label "ATT1"
 		(at 73.66 102.87 270)
@@ -3107,7 +3320,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "50f26b75-ffd5-592a-a2c7-12df16ce3cbb")
+		(uuid "f527c6f1-51da-51c7-9094-6da93b494c78")
 	)
 	(wire
 		(pts
@@ -3117,7 +3330,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f527c6f1-51da-51c7-9094-6da93b494c78")
+		(uuid "c5495be3-6707-57e7-ab11-0570358562c0")
 	)
 	(label "ATP1"
 		(at 71.12 82.55 90)
@@ -3127,7 +3340,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c5495be3-6707-57e7-ab11-0570358562c0")
+		(uuid "92c31015-2495-52b8-9f6e-bd787710c2fd")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -3204,7 +3417,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "92c31015-2495-52b8-9f6e-bd787710c2fd")
+		(uuid "4ab8b8cc-a7a9-5e4b-9708-476da199f349")
 	)
 	(label "ATP1"
 		(at 85.09 133.35 180)
@@ -3214,7 +3427,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "4ab8b8cc-a7a9-5e4b-9708-476da199f349")
+		(uuid "6f45a35f-5833-54e6-8818-dfe5465874ed")
 	)
 	(wire
 		(pts
@@ -3224,7 +3437,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6f45a35f-5833-54e6-8818-dfe5465874ed")
+		(uuid "ccf935fa-d0c7-5faa-9dca-2e8819b79620")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -3300,7 +3513,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ccf935fa-d0c7-5faa-9dca-2e8819b79620")
+		(uuid "818975e9-8fae-531c-b72d-834ec88d49d2")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -3377,7 +3590,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "818975e9-8fae-531c-b72d-834ec88d49d2")
+		(uuid "5e4827be-2937-5d8a-b267-f82abee1f516")
 	)
 	(label "ATT1"
 		(at 115.57 46.99 90)
@@ -3387,7 +3600,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5e4827be-2937-5d8a-b267-f82abee1f516")
+		(uuid "b1a098eb-81aa-5cd7-b1f3-fdf29898a98a")
 	)
 	(wire
 		(pts
@@ -3397,7 +3610,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b1a098eb-81aa-5cd7-b1f3-fdf29898a98a")
+		(uuid "782994b6-2e70-5ada-8e06-305c7aaa470a")
 	)
 	(label "ATT2"
 		(at 115.57 59.69 270)
@@ -3407,7 +3620,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "782994b6-2e70-5ada-8e06-305c7aaa470a")
+		(uuid "2cdf06b4-fe8d-502a-8484-1b5019a284b5")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
@@ -3505,7 +3718,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2cdf06b4-fe8d-502a-8484-1b5019a284b5")
+		(uuid "be5b6da4-faa0-5769-bb04-a97e3a1621da")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:+5V")
@@ -3580,7 +3793,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "be5b6da4-faa0-5769-bb04-a97e3a1621da")
+		(uuid "db0068d5-b1c3-5889-8a62-72265feab477")
 	)
 	(global_label "RLY_ATT2_N"
 		(shape passive)
@@ -3592,7 +3805,7 @@
 			)
 			(justify right)
 		)
-		(uuid "db0068d5-b1c3-5889-8a62-72265feab477")
+		(uuid "85e5973b-5008-5def-a8ec-ba363753c6e0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 118.11 102.87 0)
 			(effects
@@ -3606,7 +3819,7 @@
 	)
 	(no_connect
 		(at 125.73 85.09)
-		(uuid "85e5973b-5008-5def-a8ec-ba363753c6e0")
+		(uuid "4bbdffe2-d98c-5442-a366-a4a1790d2df5")
 	)
 	(wire
 		(pts
@@ -3616,7 +3829,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4bbdffe2-d98c-5442-a366-a4a1790d2df5")
+		(uuid "d8b151fb-9349-5fde-9ed1-b1697891d077")
 	)
 	(label "ATT1"
 		(at 128.27 102.87 270)
@@ -3626,7 +3839,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "d8b151fb-9349-5fde-9ed1-b1697891d077")
+		(uuid "c3bc43b6-d362-564e-a246-029044ed4d18")
 	)
 	(wire
 		(pts
@@ -3636,7 +3849,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c3bc43b6-d362-564e-a246-029044ed4d18")
+		(uuid "332a4418-dd6c-5c6d-be23-840d774e62ee")
 	)
 	(label "ATT2"
 		(at 130.81 82.55 90)
@@ -3646,11 +3859,11 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "332a4418-dd6c-5c6d-be23-840d774e62ee")
+		(uuid "94587161-4642-539e-a626-ef96736d0651")
 	)
 	(no_connect
 		(at 140.97 85.09)
-		(uuid "94587161-4642-539e-a626-ef96736d0651")
+		(uuid "23059f72-dbcb-5f30-ba67-03ea81c408a6")
 	)
 	(wire
 		(pts
@@ -3660,7 +3873,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "23059f72-dbcb-5f30-ba67-03ea81c408a6")
+		(uuid "d64b260a-a48c-5a8e-848f-fa0d189d9b68")
 	)
 	(label "ATT2"
 		(at 138.43 102.87 270)
@@ -3670,7 +3883,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "d64b260a-a48c-5a8e-848f-fa0d189d9b68")
+		(uuid "5508c1c9-cc91-5ebd-903c-f4244b9eaf8f")
 	)
 	(wire
 		(pts
@@ -3680,7 +3893,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5508c1c9-cc91-5ebd-903c-f4244b9eaf8f")
+		(uuid "ef790296-8c08-57a4-8cc0-471974fa6783")
 	)
 	(label "ATP2"
 		(at 135.89 82.55 90)
@@ -3690,7 +3903,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ef790296-8c08-57a4-8cc0-471974fa6783")
+		(uuid "f7a335b3-654c-59e2-98fd-636c27a71b48")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -3767,7 +3980,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f7a335b3-654c-59e2-98fd-636c27a71b48")
+		(uuid "a47701f2-9a75-57b1-8b88-e291b62ff240")
 	)
 	(label "ATP2"
 		(at 149.86 133.35 180)
@@ -3777,7 +3990,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "a47701f2-9a75-57b1-8b88-e291b62ff240")
+		(uuid "e3fa69e4-fdbf-5556-ac34-f91847e8319a")
 	)
 	(wire
 		(pts
@@ -3787,7 +4000,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e3fa69e4-fdbf-5556-ac34-f91847e8319a")
+		(uuid "de33cb8f-e015-5cb9-949f-95fe69f499c6")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -3863,7 +4076,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "de33cb8f-e015-5cb9-949f-95fe69f499c6")
+		(uuid "25c154d2-9bb7-5497-85c5-0d9b69079b82")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -3940,7 +4153,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "25c154d2-9bb7-5497-85c5-0d9b69079b82")
+		(uuid "346734ef-f2b5-54eb-b427-de34c675b147")
 	)
 	(label "ATT2"
 		(at 180.34 46.99 90)
@@ -3950,7 +4163,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "346734ef-f2b5-54eb-b427-de34c675b147")
+		(uuid "dd1002d4-1ade-5ad5-8a67-ca018fea7b64")
 	)
 	(wire
 		(pts
@@ -3960,7 +4173,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "dd1002d4-1ade-5ad5-8a67-ca018fea7b64")
+		(uuid "c10202ee-9180-5bf9-8c02-914355fd96e6")
 	)
 	(label "ATT3"
 		(at 180.34 59.69 270)
@@ -3970,7 +4183,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "c10202ee-9180-5bf9-8c02-914355fd96e6")
+		(uuid "5503f9ca-9e30-51e7-aef8-309ce8142e55")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
@@ -4068,7 +4281,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5503f9ca-9e30-51e7-aef8-309ce8142e55")
+		(uuid "1e4a8711-ffe7-5dfa-8605-ad4b55c68b29")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:+5V")
@@ -4143,7 +4356,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1e4a8711-ffe7-5dfa-8605-ad4b55c68b29")
+		(uuid "3f6781e9-bce1-5bc0-b5ac-70dbe1774fa3")
 	)
 	(global_label "RLY_ATT4_N"
 		(shape passive)
@@ -4155,7 +4368,7 @@
 			)
 			(justify right)
 		)
-		(uuid "3f6781e9-bce1-5bc0-b5ac-70dbe1774fa3")
+		(uuid "92421b6a-f359-5317-b681-054ac4cc1292")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 182.88 102.87 0)
 			(effects
@@ -4169,7 +4382,7 @@
 	)
 	(no_connect
 		(at 190.5 85.09)
-		(uuid "92421b6a-f359-5317-b681-054ac4cc1292")
+		(uuid "1965cd3a-2966-5ddb-a5f3-b992788c39fa")
 	)
 	(wire
 		(pts
@@ -4179,7 +4392,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1965cd3a-2966-5ddb-a5f3-b992788c39fa")
+		(uuid "ae56ab0d-898e-5387-8737-93e4928e0640")
 	)
 	(label "ATT2"
 		(at 193.04 102.87 270)
@@ -4189,7 +4402,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "ae56ab0d-898e-5387-8737-93e4928e0640")
+		(uuid "c42e6bca-16fb-5414-bc3c-bbea9e24d708")
 	)
 	(wire
 		(pts
@@ -4199,7 +4412,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c42e6bca-16fb-5414-bc3c-bbea9e24d708")
+		(uuid "59685cab-db8f-540a-8454-0e2a4890ad2c")
 	)
 	(label "ATT3"
 		(at 195.58 82.55 90)
@@ -4209,11 +4422,11 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "59685cab-db8f-540a-8454-0e2a4890ad2c")
+		(uuid "32572cc5-7059-55dd-aa03-b3a8b3a6d98a")
 	)
 	(no_connect
 		(at 205.74 85.09)
-		(uuid "32572cc5-7059-55dd-aa03-b3a8b3a6d98a")
+		(uuid "2f652c95-5904-5450-9a8f-d37e35c754b1")
 	)
 	(wire
 		(pts
@@ -4223,7 +4436,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2f652c95-5904-5450-9a8f-d37e35c754b1")
+		(uuid "afd9ccf1-e2f6-540e-9fa2-846f3d6432e7")
 	)
 	(label "ATT3"
 		(at 203.2 102.87 270)
@@ -4233,7 +4446,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "afd9ccf1-e2f6-540e-9fa2-846f3d6432e7")
+		(uuid "a649f430-1dc9-599e-94c6-34e97baef066")
 	)
 	(wire
 		(pts
@@ -4243,7 +4456,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a649f430-1dc9-599e-94c6-34e97baef066")
+		(uuid "c8490842-dd44-56e9-9d69-9dfa6d6620a8")
 	)
 	(label "ATP4"
 		(at 200.66 82.55 90)
@@ -4253,7 +4466,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c8490842-dd44-56e9-9d69-9dfa6d6620a8")
+		(uuid "b9f41eac-f924-5d62-8255-044da634c775")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -4330,7 +4543,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b9f41eac-f924-5d62-8255-044da634c775")
+		(uuid "17d0bd79-7336-55ff-8dad-6137ceaf6e11")
 	)
 	(label "ATP4"
 		(at 214.63 133.35 180)
@@ -4340,7 +4553,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "17d0bd79-7336-55ff-8dad-6137ceaf6e11")
+		(uuid "239a1932-3d94-5f73-9834-714edee2a231")
 	)
 	(wire
 		(pts
@@ -4350,7 +4563,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "239a1932-3d94-5f73-9834-714edee2a231")
+		(uuid "e9776d90-7222-51eb-a2e7-7f43712431da")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -4426,7 +4639,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e9776d90-7222-51eb-a2e7-7f43712431da")
+		(uuid "755c0270-0924-52be-96fd-f8bf130f7aac")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -4503,7 +4716,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "755c0270-0924-52be-96fd-f8bf130f7aac")
+		(uuid "670665de-0795-5c6a-8bb4-c739e91bcfde")
 	)
 	(label "ATT3"
 		(at 246.38 46.99 90)
@@ -4513,7 +4726,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "670665de-0795-5c6a-8bb4-c739e91bcfde")
+		(uuid "bcb7a192-0d69-50c6-8a88-a17b85213370")
 	)
 	(wire
 		(pts
@@ -4523,7 +4736,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bcb7a192-0d69-50c6-8a88-a17b85213370")
+		(uuid "72dee1a6-8bb0-5842-af71-bf56bf829fec")
 	)
 	(label "ATT4"
 		(at 246.38 59.69 270)
@@ -4533,7 +4746,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "72dee1a6-8bb0-5842-af71-bf56bf829fec")
+		(uuid "bb97c0a1-81e8-556a-b3b9-cf46e94f7c6a")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
@@ -4631,7 +4844,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bb97c0a1-81e8-556a-b3b9-cf46e94f7c6a")
+		(uuid "e00bca54-ce30-5d17-b1dd-8861d4902edd")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:+5V")
@@ -4706,7 +4919,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e00bca54-ce30-5d17-b1dd-8861d4902edd")
+		(uuid "e335f1b2-d847-5764-8a89-f1699d2495da")
 	)
 	(global_label "RLY_ATT8_N"
 		(shape passive)
@@ -4718,7 +4931,7 @@
 			)
 			(justify right)
 		)
-		(uuid "e335f1b2-d847-5764-8a89-f1699d2495da")
+		(uuid "e240fc12-8db9-5112-adbb-d3987404465c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 247.65 102.87 0)
 			(effects
@@ -4732,7 +4945,7 @@
 	)
 	(no_connect
 		(at 255.27 85.09)
-		(uuid "e240fc12-8db9-5112-adbb-d3987404465c")
+		(uuid "86f571c1-312e-54cf-9690-32cb91830d42")
 	)
 	(wire
 		(pts
@@ -4742,7 +4955,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "86f571c1-312e-54cf-9690-32cb91830d42")
+		(uuid "8c06252b-56a5-52a1-9d61-b65965e1a40d")
 	)
 	(label "ATT3"
 		(at 257.81 102.87 270)
@@ -4752,7 +4965,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "8c06252b-56a5-52a1-9d61-b65965e1a40d")
+		(uuid "52fd8259-1c00-5d8f-9829-d53afb7c0a25")
 	)
 	(wire
 		(pts
@@ -4762,7 +4975,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "52fd8259-1c00-5d8f-9829-d53afb7c0a25")
+		(uuid "ab3ff162-3b8e-5057-9f0e-3b5a0cb01430")
 	)
 	(label "ATT4"
 		(at 260.35 82.55 90)
@@ -4772,11 +4985,11 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ab3ff162-3b8e-5057-9f0e-3b5a0cb01430")
+		(uuid "56b66c16-ff37-56b7-bd8c-c0f2b6019f83")
 	)
 	(no_connect
 		(at 270.51 85.09)
-		(uuid "56b66c16-ff37-56b7-bd8c-c0f2b6019f83")
+		(uuid "873e3250-aaa3-5a1c-b4a3-d9f4375a7b36")
 	)
 	(wire
 		(pts
@@ -4786,7 +4999,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "873e3250-aaa3-5a1c-b4a3-d9f4375a7b36")
+		(uuid "f174f821-a858-5316-8415-39561da87494")
 	)
 	(label "ATT4"
 		(at 267.97 102.87 270)
@@ -4796,7 +5009,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "f174f821-a858-5316-8415-39561da87494")
+		(uuid "c1976dcd-e9c3-508c-be58-d0bc8d517fbc")
 	)
 	(wire
 		(pts
@@ -4806,7 +5019,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c1976dcd-e9c3-508c-be58-d0bc8d517fbc")
+		(uuid "e8930b0f-45ca-5925-ba56-fa20c9886afd")
 	)
 	(label "ATP8"
 		(at 265.43 82.55 90)
@@ -4816,7 +5029,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e8930b0f-45ca-5925-ba56-fa20c9886afd")
+		(uuid "ffb4d17b-4f38-5014-8996-a61e816ba109")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -4893,7 +5106,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ffb4d17b-4f38-5014-8996-a61e816ba109")
+		(uuid "5b7a9447-2f1a-54aa-8c8b-1b97f736a0c5")
 	)
 	(label "ATP8"
 		(at 280.67 133.35 180)
@@ -4903,7 +5116,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "5b7a9447-2f1a-54aa-8c8b-1b97f736a0c5")
+		(uuid "6b289cf4-b6f2-504f-b481-f0eea58aa8c8")
 	)
 	(wire
 		(pts
@@ -4913,7 +5126,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b289cf4-b6f2-504f-b481-f0eea58aa8c8")
+		(uuid "73490a5d-33e2-5e11-a5b6-29e3198cab01")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -4989,7 +5202,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "73490a5d-33e2-5e11-a5b6-29e3198cab01")
+		(uuid "1b1ebca4-0b34-5869-96b9-3b189dbff571")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -5066,7 +5279,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1b1ebca4-0b34-5869-96b9-3b189dbff571")
+		(uuid "a113cf33-19f2-5553-9865-353951735d5a")
 	)
 	(label "ATT4"
 		(at 311.15 46.99 90)
@@ -5076,7 +5289,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a113cf33-19f2-5553-9865-353951735d5a")
+		(uuid "2e623b59-ed92-5994-b44a-12959912f640")
 	)
 	(wire
 		(pts
@@ -5086,7 +5299,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2e623b59-ed92-5994-b44a-12959912f640")
+		(uuid "e029c4e4-76dd-5915-88e7-77b6b14daa44")
 	)
 	(label "ATT_OUT"
 		(at 311.15 59.69 270)
@@ -5096,7 +5309,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "e029c4e4-76dd-5915-88e7-77b6b14daa44")
+		(uuid "626ee6f8-2ff8-5e78-ac21-744f01fd61ef")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
@@ -5194,7 +5407,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "626ee6f8-2ff8-5e78-ac21-744f01fd61ef")
+		(uuid "2ae98b70-456d-583e-83dd-dd97d2e72a70")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:+5V")
@@ -5269,7 +5482,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2ae98b70-456d-583e-83dd-dd97d2e72a70")
+		(uuid "13c6c9a9-0b56-5200-84c2-518f1d5f3051")
 	)
 	(global_label "RLY_ATT16_N"
 		(shape passive)
@@ -5281,7 +5494,7 @@
 			)
 			(justify right)
 		)
-		(uuid "13c6c9a9-0b56-5200-84c2-518f1d5f3051")
+		(uuid "fcf11a2b-20e8-50f7-955a-7f4b63169b80")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 312.42 102.87 0)
 			(effects
@@ -5295,7 +5508,7 @@
 	)
 	(no_connect
 		(at 320.04 85.09)
-		(uuid "fcf11a2b-20e8-50f7-955a-7f4b63169b80")
+		(uuid "ea496104-7181-5c00-88d1-7a81f4581632")
 	)
 	(wire
 		(pts
@@ -5305,7 +5518,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ea496104-7181-5c00-88d1-7a81f4581632")
+		(uuid "6b9c005a-4aa4-5c53-8b25-63f0a18cda9e")
 	)
 	(label "ATT4"
 		(at 322.58 102.87 270)
@@ -5315,7 +5528,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "6b9c005a-4aa4-5c53-8b25-63f0a18cda9e")
+		(uuid "45f4374e-bc8f-5765-8c50-68be3609363f")
 	)
 	(wire
 		(pts
@@ -5325,7 +5538,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "45f4374e-bc8f-5765-8c50-68be3609363f")
+		(uuid "44950780-e63f-5b77-b166-7c1ba29fa6b8")
 	)
 	(label "ATT_OUT"
 		(at 325.12 82.55 90)
@@ -5335,11 +5548,11 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "44950780-e63f-5b77-b166-7c1ba29fa6b8")
+		(uuid "e3082a3c-daff-53b5-ab3e-0d9f6a9fd622")
 	)
 	(no_connect
 		(at 335.28 85.09)
-		(uuid "e3082a3c-daff-53b5-ab3e-0d9f6a9fd622")
+		(uuid "a5113c39-b3fd-50d9-b63e-0cc5640d2393")
 	)
 	(wire
 		(pts
@@ -5349,7 +5562,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a5113c39-b3fd-50d9-b63e-0cc5640d2393")
+		(uuid "194462d8-5f9b-588f-a085-f65fb11bcaa3")
 	)
 	(label "ATT_OUT"
 		(at 332.74 102.87 270)
@@ -5359,7 +5572,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "194462d8-5f9b-588f-a085-f65fb11bcaa3")
+		(uuid "ad7175e9-2577-5f64-b24f-2ea4d92fe568")
 	)
 	(wire
 		(pts
@@ -5369,7 +5582,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ad7175e9-2577-5f64-b24f-2ea4d92fe568")
+		(uuid "474f3be4-d8a7-5158-ba0c-d3d9ed6ecad8")
 	)
 	(label "ATP16"
 		(at 330.2 82.55 90)
@@ -5379,7 +5592,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "474f3be4-d8a7-5158-ba0c-d3d9ed6ecad8")
+		(uuid "6b954a8a-3c58-5b4a-9e5b-d134c3a66522")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -5456,7 +5669,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b954a8a-3c58-5b4a-9e5b-d134c3a66522")
+		(uuid "ea51b323-555b-57be-8b1e-c1d38bacf3ac")
 	)
 	(label "ATP16"
 		(at 345.44 133.35 180)
@@ -5466,7 +5679,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "ea51b323-555b-57be-8b1e-c1d38bacf3ac")
+		(uuid "6cbbada6-afcf-5ce0-99f7-2b0287dd4f12")
 	)
 	(wire
 		(pts
@@ -5476,7 +5689,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6cbbada6-afcf-5ce0-99f7-2b0287dd4f12")
+		(uuid "03a9a61c-2977-50ee-ad1d-163d48173cb4")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -5618,7 +5831,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "03a9a61c-2977-50ee-ad1d-163d48173cb4")
+		(uuid "3cee3d22-5c32-5aa5-b365-cba563f4324c")
 	)
 	(label "ATT_OUT"
 		(at 369.57 74.93 180)
@@ -5628,7 +5841,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "3cee3d22-5c32-5aa5-b365-cba563f4324c")
+		(uuid "59b52707-1e73-599b-8eef-d5da752427a6")
 	)
 	(wire
 		(pts
@@ -5638,7 +5851,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "59b52707-1e73-599b-8eef-d5da752427a6")
+		(uuid "93d66362-32a6-53ed-be03-f1ddeb20dbbf")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -5780,7 +5993,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "93d66362-32a6-53ed-be03-f1ddeb20dbbf")
+		(uuid "5cb436a2-9632-5fc3-af87-09821e5a095f")
 	)
 	(label "ATT_OUT"
 		(at 396.24 46.99 90)
@@ -5790,7 +6003,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5cb436a2-9632-5fc3-af87-09821e5a095f")
+		(uuid "ef22c7b0-621c-5c0d-8590-6fcac88562d0")
 	)
 	(wire
 		(pts
@@ -5800,7 +6013,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ef22c7b0-621c-5c0d-8590-6fcac88562d0")
+		(uuid "19ad0191-b260-52aa-8d7b-6f2de6d5787e")
 	)
 	(label "PIX"
 		(at 396.24 59.69 270)
@@ -5810,7 +6023,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "19ad0191-b260-52aa-8d7b-6f2de6d5787e")
+		(uuid "62c843fa-c27f-5dc4-a371-8c78008e5580")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -5887,7 +6100,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "62c843fa-c27f-5dc4-a371-8c78008e5580")
+		(uuid "5eb96db0-b2f8-5d24-a4d6-ebe07c4c99ad")
 	)
 	(label "PIX"
 		(at 420.37 74.93 180)
@@ -5897,7 +6110,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "5eb96db0-b2f8-5d24-a4d6-ebe07c4c99ad")
+		(uuid "beeb05ef-2cca-544d-b2be-6d5c855423e2")
 	)
 	(wire
 		(pts
@@ -5907,9 +6120,9 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "beeb05ef-2cca-544d-b2be-6d5c855423e2")
+		(uuid "9f448f52-98c0-513c-bff2-bc1f5baed82f")
 	)
-	(label "PTOP"
+	(label "PI_REF"
 		(at 433.07 74.93 0)
 		(effects
 			(font
@@ -5917,7 +6130,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9f448f52-98c0-513c-bff2-bc1f5baed82f")
+		(uuid "b58453e0-03d7-5c9b-8a2d-b3fef31bee63")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -5994,7 +6207,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b58453e0-03d7-5c9b-8a2d-b3fef31bee63")
+		(uuid "e55e9ab3-92ae-5649-b1bf-7f2f7ae3768e")
 	)
 	(label "PIX"
 		(at 426.72 46.99 90)
@@ -6004,7 +6217,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e55e9ab3-92ae-5649-b1bf-7f2f7ae3768e")
+		(uuid "fb5623a9-d70c-5296-89a2-541f7a2a1341")
 	)
 	(wire
 		(pts
@@ -6014,7 +6227,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fb5623a9-d70c-5296-89a2-541f7a2a1341")
+		(uuid "c0d43180-aa5a-57b6-9202-12f6559b8254")
 	)
 	(label "G2A"
 		(at 426.72 59.69 270)
@@ -6024,7 +6237,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "c0d43180-aa5a-57b6-9202-12f6559b8254")
+		(uuid "aa20d84b-65bd-5a66-8c8a-1c9ce5dbdadf")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:ECC83")
@@ -6104,7 +6317,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "aa20d84b-65bd-5a66-8c8a-1c9ce5dbdadf")
+		(uuid "d37aa543-2dc6-5a56-b616-56fd6d39e068")
 	)
 	(label "DRV_A"
 		(at 457.2 49.53 90)
@@ -6114,7 +6327,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d37aa543-2dc6-5a56-b616-56fd6d39e068")
+		(uuid "b0b1bb50-97b7-5985-ab2b-95ff51715a29")
 	)
 	(wire
 		(pts
@@ -6124,7 +6337,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b0b1bb50-97b7-5985-ab2b-95ff51715a29")
+		(uuid "2ff46da2-e8ea-55b1-a5a8-f561184f82ef")
 	)
 	(label "G2A"
 		(at 447.04 62.23 180)
@@ -6134,7 +6347,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "2ff46da2-e8ea-55b1-a5a8-f561184f82ef")
+		(uuid "ae16856e-7eda-501c-bb35-e7ac315d7d79")
 	)
 	(wire
 		(pts
@@ -6144,7 +6357,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ae16856e-7eda-501c-bb35-e7ac315d7d79")
+		(uuid "b21a9cea-36d1-5ff2-83bc-9794da035e20")
 	)
 	(label "PK"
 		(at 454.66 74.93 270)
@@ -6154,7 +6367,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "b21a9cea-36d1-5ff2-83bc-9794da035e20")
+		(uuid "ecb4925a-5e08-57ce-8bf0-586bdd86e4b6")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -6231,7 +6444,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ecb4925a-5e08-57ce-8bf0-586bdd86e4b6")
+		(uuid "59f829a4-ca2a-5d26-bfb3-67d46066f3d9")
 	)
 	(global_label "BPI_P"
 		(shape passive)
@@ -6243,7 +6456,7 @@
 			)
 			(justify right)
 		)
-		(uuid "59f829a4-ca2a-5d26-bfb3-67d46066f3d9")
+		(uuid "c03252ff-6281-584c-ac22-3ea560eaab31")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 450.85 35.56 0)
 			(effects
@@ -6263,7 +6476,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c03252ff-6281-584c-ac22-3ea560eaab31")
+		(uuid "4325314a-c9e3-5d25-9617-682ef947e92c")
 	)
 	(label "DRV_A"
 		(at 463.55 35.56 0)
@@ -6273,7 +6486,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4325314a-c9e3-5d25-9617-682ef947e92c")
+		(uuid "b3c22ec6-9c65-58a1-9dcd-96b1216d05b7")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:ECC83")
@@ -6353,7 +6566,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b3c22ec6-9c65-58a1-9dcd-96b1216d05b7")
+		(uuid "8234d93a-915f-51a9-bfc5-efd6e89e37a1")
 	)
 	(label "DRV_B"
 		(at 457.2 129.54 90)
@@ -6363,7 +6576,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8234d93a-915f-51a9-bfc5-efd6e89e37a1")
+		(uuid "b8214fe5-41fd-5aef-9e90-236ed96c3b95")
 	)
 	(wire
 		(pts
@@ -6373,7 +6586,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b8214fe5-41fd-5aef-9e90-236ed96c3b95")
+		(uuid "4d771115-9488-5b9a-8c6c-4312ec2b3f5a")
 	)
 	(label "G2B"
 		(at 447.04 142.24 180)
@@ -6383,7 +6596,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "4d771115-9488-5b9a-8c6c-4312ec2b3f5a")
+		(uuid "507879c8-15c8-5795-b0fb-e0be70d63592")
 	)
 	(wire
 		(pts
@@ -6393,7 +6606,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "507879c8-15c8-5795-b0fb-e0be70d63592")
+		(uuid "b7ec8438-77f2-54a0-be9b-b3a36c9fef92")
 	)
 	(label "PK"
 		(at 454.66 154.94 270)
@@ -6403,7 +6616,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "b7ec8438-77f2-54a0-be9b-b3a36c9fef92")
+		(uuid "bcb19688-1f69-5986-b1b9-b7dd07bca553")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -6480,7 +6693,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bcb19688-1f69-5986-b1b9-b7dd07bca553")
+		(uuid "22e9c8ee-8afb-526a-a504-277597a49831")
 	)
 	(global_label "BPI_P"
 		(shape passive)
@@ -6492,7 +6705,7 @@
 			)
 			(justify right)
 		)
-		(uuid "22e9c8ee-8afb-526a-a504-277597a49831")
+		(uuid "2942b25b-b861-5115-b446-8fcb992e443f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 450.85 115.57 0)
 			(effects
@@ -6512,7 +6725,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2942b25b-b861-5115-b446-8fcb992e443f")
+		(uuid "6382a0e5-2904-59c2-ad24-399e0cda70c3")
 	)
 	(label "DRV_B"
 		(at 463.55 115.57 0)
@@ -6522,7 +6735,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6382a0e5-2904-59c2-ad24-399e0cda70c3")
+		(uuid "7be03081-278e-5b16-a9e5-ad99dc5adc66")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -6599,7 +6812,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7be03081-278e-5b16-a9e5-ad99dc5adc66")
+		(uuid "b6680f6c-872a-5ed7-bd28-dd1e038916d7")
 	)
 	(label "G2BX"
 		(at 426.72 135.89 90)
@@ -6609,7 +6822,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b6680f6c-872a-5ed7-bd28-dd1e038916d7")
+		(uuid "35897d2a-7653-5fec-b96c-78ef8ef3333c")
 	)
 	(wire
 		(pts
@@ -6619,7 +6832,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "35897d2a-7653-5fec-b96c-78ef8ef3333c")
+		(uuid "4a73a05d-9785-56bb-9def-c54b9f8e7268")
 	)
 	(label "G2B"
 		(at 426.72 148.59 270)
@@ -6629,7 +6842,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "4a73a05d-9785-56bb-9def-c54b9f8e7268")
+		(uuid "6ecfa43d-3bcf-5489-8455-8d659d3454d6")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -6706,7 +6919,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6ecfa43d-3bcf-5489-8455-8d659d3454d6")
+		(uuid "df0c5c87-d287-540c-9520-a0080528665f")
 	)
 	(label "G2BX"
 		(at 400.05 165.1 180)
@@ -6716,7 +6929,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "df0c5c87-d287-540c-9520-a0080528665f")
+		(uuid "55d34877-1929-51cc-8a82-7a2da71de0f2")
 	)
 	(wire
 		(pts
@@ -6726,9 +6939,9 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "55d34877-1929-51cc-8a82-7a2da71de0f2")
+		(uuid "5daaf1ad-e701-5996-a4c4-6db0da5b3002")
 	)
-	(label "PTOP"
+	(label "PI_REF"
 		(at 412.75 165.1 0)
 		(effects
 			(font
@@ -6736,7 +6949,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5daaf1ad-e701-5996-a4c4-6db0da5b3002")
+		(uuid "ea5585a3-12b6-5979-a61d-fc124985c02a")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:C")
@@ -6813,7 +7026,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ea5585a3-12b6-5979-a61d-fc124985c02a")
+		(uuid "a8016bde-dd7c-5eb3-ae03-f2f7d327562b")
 	)
 	(global_label "FB_NODE"
 		(shape passive)
@@ -6825,7 +7038,7 @@
 			)
 			(justify left)
 		)
-		(uuid "a8016bde-dd7c-5eb3-ae03-f2f7d327562b")
+		(uuid "d961a877-0a75-58f1-82c6-ef606b55b5d5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 386.08 135.89 0)
 			(effects
@@ -6845,7 +7058,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d961a877-0a75-58f1-82c6-ef606b55b5d5")
+		(uuid "92b0c35c-b57c-535e-8cc2-36a381adc937")
 	)
 	(label "G2BX"
 		(at 386.08 148.59 270)
@@ -6855,9 +7068,9 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "92b0c35c-b57c-535e-8cc2-36a381adc937")
+		(uuid "1fa71b57-3501-5d58-be2d-155f9ed4db48")
 	)
-	(text "Second-grid cap 22n (pi_nfb); open-load LF margin: rev_b/sim/pi_nfb/results/open_load.md. The power-tube coupling caps and grid leaks (47n / 100n, 100k / 220k) are OPEN and on the power amp, not here."
+	(text "Second-grid cap 22n (pi_nfb, unchanged by V1). Power tubes (on the power amp): grid leak 91k, coupling cap 220n film >= 630 V per tube (user V1, 2026-11-23; docs/output_stage_stability.md)."
 		(exclude_from_sim no)
 		(at 335.28 181.61 0)
 		(effects
@@ -6866,7 +7079,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "1fa71b57-3501-5d58-be2d-155f9ed4db48")
+		(uuid "e53d21c9-50d7-576e-b1a3-661fd0065aef")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -6943,7 +7156,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e53d21c9-50d7-576e-b1a3-661fd0065aef")
+		(uuid "df009f16-1d03-5ded-8a15-946ae805f321")
 	)
 	(label "PK"
 		(at 481.33 92.71 180)
@@ -6953,7 +7166,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "df009f16-1d03-5ded-8a15-946ae805f321")
+		(uuid "211a0f19-a517-5cf6-ab05-4184ee3568fb")
 	)
 	(wire
 		(pts
@@ -6963,7 +7176,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "211a0f19-a517-5cf6-ab05-4184ee3568fb")
+		(uuid "7657ca1b-14f0-5473-bc7c-48621fafbf11")
 	)
 	(label "PTOP"
 		(at 494.03 92.71 0)
@@ -6973,7 +7186,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7657ca1b-14f0-5473-bc7c-48621fafbf11")
+		(uuid "370e1867-3345-5b60-9bfc-509f38b9958e")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:DN2540N8-G")
@@ -7055,7 +7268,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "370e1867-3345-5b60-9bfc-509f38b9958e")
+		(uuid "9a2cfe60-8b2d-54fd-8103-8dde8db1e8aa")
 	)
 	(label "PTOP"
 		(at 490.22 116.84 90)
@@ -7065,7 +7278,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9a2cfe60-8b2d-54fd-8103-8dde8db1e8aa")
+		(uuid "e2750887-b08c-57cf-90a2-070eb85aeb06")
 	)
 	(wire
 		(pts
@@ -7075,7 +7288,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e2750887-b08c-57cf-90a2-070eb85aeb06")
+		(uuid "69190392-9f32-5a58-8c72-b598f5bea49c")
 	)
 	(label "QG"
 		(at 480.06 124.46 180)
@@ -7085,7 +7298,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "69190392-9f32-5a58-8c72-b598f5bea49c")
+		(uuid "cd0d4cf7-e337-579d-8df2-fd0254e45c48")
 	)
 	(wire
 		(pts
@@ -7095,7 +7308,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cd0d4cf7-e337-579d-8df2-fd0254e45c48")
+		(uuid "30d6a949-7271-53c7-8901-80ca76335b60")
 	)
 	(label "QS"
 		(at 490.22 132.08 270)
@@ -7105,7 +7318,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "30d6a949-7271-53c7-8901-80ca76335b60")
+		(uuid "f0c2a706-cd51-59e9-981f-903f6e9a863e")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
@@ -7182,7 +7395,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f0c2a706-cd51-59e9-981f-903f6e9a863e")
+		(uuid "2b5cd799-8b1c-55ec-b108-a5fb158f353d")
 	)
 	(label "QG"
 		(at 461.01 152.4 180)
@@ -7192,7 +7405,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "2b5cd799-8b1c-55ec-b108-a5fb158f353d")
+		(uuid "5e464934-44e6-5931-924c-9fcb81b22636")
 	)
 	(wire
 		(pts
@@ -7202,7 +7415,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5e464934-44e6-5931-924c-9fcb81b22636")
+		(uuid "f3c868df-3e31-5c4a-ad7d-33d2d6096ca8")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -7344,7 +7557,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f3c868df-3e31-5c4a-ad7d-33d2d6096ca8")
+		(uuid "b1bda782-ecc2-5873-8611-a3a18b650a45")
 	)
 	(label "QS"
 		(at 501.65 152.4 180)
@@ -7354,7 +7567,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "b1bda782-ecc2-5873-8611-a3a18b650a45")
+		(uuid "16807170-e39b-58c7-9ea6-0c61da3e7551")
 	)
 	(wire
 		(pts
@@ -7364,7 +7577,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "16807170-e39b-58c7-9ea6-0c61da3e7551")
+		(uuid "c77e63d1-0391-5772-948a-dddfbab0c277")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -7431,7 +7644,7 @@
 			)
 		)
 	)
-	(text "CCS: DN2540 with a source resistor (Vgs(off) spread 1.5-3.5 V: select or trim Rs for 2.0 mA); tail top about 20 V"
+	(text "CCS: DN2540 with a source resistor (Vgs(off) spread 1.5-3.5 V: select or trim Rs for 2.0 mA); tail top about 21 V"
 		(exclude_from_sim no)
 		(at 396.24 199.39 0)
 		(effects
@@ -7440,7 +7653,568 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c77e63d1-0391-5772-948a-dddfbab0c277")
+		(uuid "faa42d1e-249b-5fa2-b792-c91573f1767c")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 355.6 222.25 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec9918a8-3651-53d2-88cb-895b56be6659")
+		(property "Reference" "R222"
+			(at 355.6 219.71 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "820k"
+			(at 355.6 224.79 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 355.6 224.028 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 355.6 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 355.6 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a1c1f218-5ad0-5f5b-9283-6f747365bb50")
+		)
+		(pin "2"
+			(uuid "a01b0c0d-c24b-5137-90fe-ab7c991857fa")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
+					(reference "R222")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 351.79 222.25) (xy 349.25 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47bda3bd-455f-5d6e-880f-95663bdf88fd")
+	)
+	(global_label "BPI_P"
+		(shape passive)
+		(at 349.25 222.25 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f4ecaaec-9549-5412-94f9-489bb0126f5c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 349.25 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 359.41 222.25) (xy 361.95 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d9d75d4-2d83-54c9-a6ad-9cd2a574b107")
+	)
+	(label "PIR_M"
+		(at 361.95 222.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a6538d9d-23e5-5ea1-99ee-2034e409ff22")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 355.6 248.92 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0a973392-0d1e-5e7f-a1da-a6fab6dbb5f2")
+		(property "Reference" "R223"
+			(at 355.6 246.38 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "820k"
+			(at 355.6 251.46 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 355.6 250.698 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 355.6 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 355.6 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "40e8239f-e3b8-5e6e-9279-86b9cf013003")
+		)
+		(pin "2"
+			(uuid "d81bf142-0ce5-534b-b8ea-3b578aba9e94")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
+					(reference "R223")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 351.79 248.92) (xy 349.25 248.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c65be03-9062-525f-a6e6-37b9702236aa")
+	)
+	(label "PIR_M"
+		(at 349.25 248.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bb2af243-effb-5fbd-8f93-a9d91b790d1a")
+	)
+	(wire
+		(pts
+			(xy 359.41 248.92) (xy 361.95 248.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c75d1c00-19ff-5f83-8c93-62bdb637b711")
+	)
+	(label "PI_REF"
+		(at 361.95 248.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "719cf526-c7fc-5cd4-9fd8-50b8ea620fa8")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 379.73 270.51 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b58d1edb-910a-569d-afd0-d6870660bafd")
+		(property "Reference" "R224"
+			(at 379.73 267.97 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100k"
+			(at 379.73 273.05 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 379.73 272.288 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 379.73 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 379.73 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e2b5624f-44d1-58dc-8d0f-972ce0b2c841")
+		)
+		(pin "2"
+			(uuid "a5dcd9cc-fadd-5c94-8c5e-5d13d32f2730")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
+					(reference "R224")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 375.92 270.51) (xy 373.38 270.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8b50fe3-28b9-5b17-8e6c-66423aebb4b8")
+	)
+	(label "PI_REF"
+		(at 373.38 270.51 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ff617559-4f5b-5bc7-9214-d9367092059b")
+	)
+	(wire
+		(pts
+			(xy 383.54 270.51) (xy 386.08 270.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "646f39a3-bdb7-5548-b519-528292683404")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 386.08 270.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4fc4dfef-863c-52c2-8897-556a5a2f27ff")
+		(property "Reference" "#PWR216"
+			(at 386.08 276.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 386.08 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 386.08 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 386.08 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 386.08 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7c18e337-3d5a-562c-b5e9-b1b4fdc3055b")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
+					(reference "#PWR216")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:C_Polarized")
+		(at 400.05 270.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cb3365ea-5bef-5251-9da9-6e245d6f681b")
+		(property "Reference" "C204"
+			(at 404.79 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10u/50V"
+			(at 406.44 271.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:CP_Elec_5x5.4"
+			(at 401.0152 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 400.05 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 400.05 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ddfc31cc-3459-5cb5-80d6-cacc1d69d2c5")
+		)
+		(pin "2"
+			(uuid "39085872-a82f-5cb8-b2db-24c04c67bd85")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
+					(reference "C204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 400.05 266.7) (xy 400.05 264.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c32386e-c29a-5f53-ad39-21d5e46fbe14")
+	)
+	(label "PI_REF"
+		(at 400.05 264.16 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "54ddffb6-c7b9-5d46-a21d-e93f74e88829")
+	)
+	(wire
+		(pts
+			(xy 400.05 274.32) (xy 400.05 276.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbe19e9c-83a8-5e42-93e8-057f026c1a82")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 400.05 276.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f8e1aa72-5934-59ba-a950-ab1b33b3e910")
+		(property "Reference" "#PWR217"
+			(at 400.05 283.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 400.05 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 400.05 276.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 400.05 276.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 400.05 276.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09bfc2be-78a2-5ac9-860b-d241a9a17944")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
+					(reference "#PWR217")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "PI_REF: grid-leak reference, 386 V x 100k / 1.74M = 22 V, 10u (corner 0.17 Hz)"
+		(exclude_from_sim no)
+		(at 335.28 294.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ba66706f-2cdd-50bb-935d-e73c849ee604")
 	)
 	(sheet_instances
 		(path "/"

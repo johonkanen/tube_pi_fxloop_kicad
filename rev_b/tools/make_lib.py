@@ -19,7 +19,7 @@ WANT = [
     ("Interface_Expansion", "MCP23S17x-x-SS"), ("Transistor_Array", "ULN2803A"),
     ("Analog_Switch", "DG412xY"), ("74xGxx", "74LVC1G11"),
     ("Connector_Generic", "Conn_02x07_Odd_Even"), ("Connector_Generic", "Conn_02x08_Odd_Even"),
-    ("Connector_Generic", "Conn_02x05_Odd_Even"), ("Connector_Generic", "Conn_01x05"),
+    ("Connector_Generic", "Conn_02x05_Odd_Even"), ("Connector_Generic", "Conn_01x05"), ("Connector_Generic", "Conn_02x03_Top_Bottom"),
     ("Connector_Generic", "Conn_01x02"), ("Connector_Generic", "Conn_01x03"),
     ("power", "GND"), ("power", "GNDD"), ("power", "+5V"), ("power", "+15V"), ("power", "-15V"), ("power", "PWR_FLAG"),
 ]

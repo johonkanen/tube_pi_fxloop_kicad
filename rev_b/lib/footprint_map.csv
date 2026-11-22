@@ -14,6 +14,7 @@ C111,Capacitor_THT:C_Rect_L18.0mm_W8.0mm_P15.00mm_FKS3_FKP3
 C201,Capacitor_SMD:C_0603_1608Metric
 C202,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4
 C203,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4
+C204,Capacitor_SMD:CP_Elec_5x5.4
 C301,Capacitor_SMD:C_1206_3216Metric
 C302,Capacitor_SMD:C_1206_3216Metric
 C303,Capacitor_SMD:C_1206_3216Metric
@@ -64,7 +65,7 @@ D508,Diode_SMD:D_SMA
 D509,Diode_SMD:D_SOD-123
 J101,Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical
 J102,Connector_IDC:IDC-Header_2x08_P2.54mm_Vertical
-J201,Connector_Molex:Molex_KK-396_A-41791-0005_1x05_P3.96mm_Vertical
+J201,Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical
 J301,Connector_Molex:Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical
 J302,Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical
 J303,Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical
@@ -154,6 +155,9 @@ R218,Resistor_SMD:R_0805_2012Metric
 R219,Resistor_SMD:R_0805_2012Metric
 R220,Resistor_SMD:R_0805_2012Metric
 R221,Resistor_SMD:R_0805_2012Metric
+R222,Resistor_SMD:R_2512_6332Metric
+R223,Resistor_SMD:R_2512_6332Metric
+R224,Resistor_SMD:R_0805_2012Metric
 R301,Resistor_SMD:R_0805_2012Metric
 R302,Resistor_SMD:R_0805_2012Metric
 R303,Resistor_SMD:R_1206_3216Metric

@@ -63,6 +63,7 @@ FP = {
     "FILM27": "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4",
     "CPD8": "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm", "CPD12": "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm",
     "CPD18": "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm", "CPE6": "Capacitor_SMD:CP_Elec_6.3x7.7",
+    "CPE5": "Capacitor_SMD:CP_Elec_5x5.4",
     "SMA": "Diode_SMD:D_SMA", "SOD123": "Diode_SMD:D_SOD-123",
     "DPAK": "Package_TO_SOT_SMD:TO-252-2", "SOT89": "Package_TO_SOT_SMD:SOT-89-3",
     "SOT23": "Package_TO_SOT_SMD:SOT-23", "SOT23-6": "Package_TO_SOT_SMD:SOT-23-6",
@@ -72,7 +73,7 @@ FP = {
     "IDC2x8": "Connector_IDC:IDC-Header_2x08_P2.54mm_Vertical",
     "KK254x3": "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical",
     "KK396x2": "Connector_Molex:Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical",
-    "KK396x5": "Connector_Molex:Molex_KK-396_A-41791-0005_1x05_P3.96mm_Vertical",
+    "MFJ2x3": "Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical",
     "TAB48": "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_4.8mm_Legs_P5.00mm_D1.4mm",
     "TAB63": "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm",
 }
@@ -222,7 +223,8 @@ def sheet01(d):
                                               13: "GND", 14: "GND", 15: "GND", 16: "RETURN_SIG"}, value="FX (W23-a)",
            fp="IDC2x8")
     d.text("J102 (IF-1.2): 2 SEND_SRC, 8 PAD_A, 10 PAD_B = GND (the rear switch grounds PAD_A), 16 RETURN_SIG "
-           "(far end from SEND_SRC, 2.2M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-230.", 0, 9.3)
+           "(far end from SEND_SRC, 2.2M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-190 "
+           "(the rear I/O jack board stands behind x 191-219).", 0, 9.3)
     # input network and send cathode follower (V1 pins 1-3)
     R(d, 1.5, 2.2, "PRE_IN", "GND", "2.2M")
     C(d, 2.5, 1, "PRE_IN", "CI", "100n/250V film", rot=0, fp="FILM5")
@@ -288,9 +290,11 @@ def sheet02(d):
            "0 dB; 0-18 dB used of 0-31) "
            "and the phase inverter: 12AX7 LTP, DN2540 CCS tail about 2 mA, equal 100k plates, feedback into the second "
            "grid (sim/pi_nfb). Plate DC goes out on W24; the coupling caps are on the power amp (interfaces.md 10).", 0, -1.0, 2)
-    # INTERFACE: J201 = W24-a (1 GND, 2 DRV_A, 3 GND, 4 DRV_B, 5 GND), Lock-3.96, >= 600 V wire
-    d.part("Conn_01x05", "J", 24, 8, {1: "GND_DRV", 2: "DRV_A", 3: "GND_DRV", 4: "DRV_B", 5: "GND_DRV"},
-           value="DRIVE (W24-a)", fp="KK396x5")
+    # INTERFACE: J201 = W24-a, Molex Mini-Fit Jr (user V5, 2026-11-23; interfaces.md IF-1.3), pin order unchanged:
+    # 1 GND, 2 DRV_A, 3 GND, 4 DRV_B, 5 GND; the 2x3 part (5566-06A) with position 6 unused. Rows: 1-2-3 / 4-5-6, so each
+    # drive pin has only GND pins beside it (DRV_A: 1, 3, 5; DRV_B: 1, 5); >= 600 V wire.
+    d.part("Conn_02x03_Top_Bottom", "J", 24, 8, {1: "GND_DRV", 2: "DRV_A", 3: "GND_DRV", 4: "DRV_B", 5: "GND_DRV", 6: "NC"},
+           value="DRIVE (W24-a, Mini-Fit Jr)", fp="MFJ2x3")
     softtie(d, 22, 10.5, "GND_DRV", "GND", "W24 ground: soft tie at the sending end (grounding.md)")
     node = "ATT_IN"
     for i, (db, rs, rp) in enumerate(ATT):
@@ -305,22 +309,31 @@ def sheet02(d):
     R(d, 17, 2.2, "ATT_OUT", "GND", "49.9k")
     # PI
     C(d, 18, 1, "ATT_OUT", "PIX", "10n/630V film", rot=0, fp="FILM10")
-    R(d, 19.5, 2.2, "PIX", "PTOP", "1M")
+    R(d, 19.5, 2.2, "PIX", "PI_REF", "1M")
     R(d, 19.5, 1, "PIX", "G2A", "1k", rot=0)
     d.part("ECC83", "V2", 21, 1.5, {1: "DRV_A", 2: "G2A", 3: "PK"}, value="12AX7", unit=2)
     R(d, 21, 0, "BPI_P", "DRV_A", "100k 1W", fp="R2512")
     d.part("ECC83", "V2", 21, 6, {6: "DRV_B", 7: "G2B", 8: "PK"}, value="12AX7", unit=1)
     R(d, 21, 4.5, "BPI_P", "DRV_B", "100k 1W", fp="R2512")
     R(d, 19.5, 6, "G2BX", "G2B", "1k", rot=0)
-    R(d, 18.5, 7.3, "G2BX", "PTOP", "1M")
+    R(d, 18.5, 7.3, "G2BX", "PI_REF", "1M")
     C(d, 17.5, 6, "FB_NODE", "G2BX", "22n/630V film", rot=0, fp="FILM10")
-    d.text("Second-grid cap 22n (pi_nfb); open-load LF margin: rev_b/sim/pi_nfb/results/open_load.md. The power-tube "
-           "coupling caps and grid leaks (47n / 100n, 100k / 220k) are OPEN and on the power amp, not here.", 15, 8.2)
+    d.text("Second-grid cap 22n (pi_nfb, unchanged by V1). Power tubes (on the power amp): grid leak 91k, coupling cap 220n "
+           "film >= 630 V per tube (user V1, 2026-11-23; docs/output_stage_stability.md).", 15, 8.2)
     R(d, 22.5, 3.2, "PK", "PTOP", "1k")
     d.part("DN2540N8-G", "Q", 22.5, 5, {2: "PTOP", 1: "QG", 3: "QS"}, value="DN2540N8")
     R(d, 21.5, 6.6, "QG", "GND", "100")
     R(d, 23.5, 6.6, "QS", "GND", "1k (select, ~2 mA)")
-    d.text("CCS: DN2540 with a source resistor (Vgs(off) spread 1.5-3.5 V: select or trim Rs for 2.0 mA); tail top about 20 V", 18, 9.2)
+    d.text("CCS: DN2540 with a source resistor (Vgs(off) spread 1.5-3.5 V: select or trim Rs for 2.0 mA); tail top about 21 V", 18, 9.2)
+    # Third pass: the PI grid leaks return to a fixed, decoupled reference (PI_REF about 22 V), not to the CCS tail top:
+    # with the leaks on the tail top an overdrive burst pumps the PI's common mode up (+39 V after +13 dB, +108 V after
+    # +20 dB, not back after 1 s; docs/output_stage_stability.md section 5); with PI_REF the PI grid moves +1.2 / +2.8 V
+    # and is back within 11 ms (rev_b/sim/pi_burst/results/leak_ref.md). 2 x 820k 2512 (182 V each) from B+PI decoupled.
+    R(d, 16, 10.5, "BPI_P", "PIR_M", "820k", fp="R2512")
+    R(d, 16, 12, "PIR_M", "PI_REF", "820k", fp="R2512")
+    R(d, 17.2, 13.2, "PI_REF", "GND", "100k")
+    CP(d, 18.2, 13.2, "PI_REF", "GND", "10u/50V", fp="CPE5")
+    d.text("PI_REF: grid-leak reference, 386 V x 100k / 1.74M = 22 V, 10u (corner 0.17 Hz)", 15, 14.6)
 
 
 # ------------------------------------------------------------------ sheet 03
@@ -355,11 +368,12 @@ def sheet03(d):
         jfet_series(d, 18, r0 + 1, f"T_{t}", "FB_NODE", f"JDRV_FBS_{t}", f"S2{t}")
         jfet_shunt(d, 16.5, r0 + 3, f"T_{t}", f"JDRV_FBH_{t}", f"H{t}")
     R(d, 21, 5, "FB_NODE", "GND", "4.7k")
-    R(d, 22, 4, "FB_NODE", "STP", "DNP (step R)", rot=0)
+    R(d, 22, 4, "FB_NODE", "STP", "DNP (step R)", rot=0)   # footprint only; the Rf 47k + step option is dropped (V1)
     C(d, 23, 5.2, "STP", "GND", "DNP (step C)", fp="C0805")
-    d.text("PI-6: step network footprint (DNP) on the common node; Cf per channel; Zobel belongs at the OT secondary", 20, 7)
-    d.text("Layout: J302-J304 (W30-W32) at the board's right-hand end, x about 200-279 (interfaces.md 12.3), "
-           "away from J101 and the FX return", 20, 8)
+    d.text("Rf >= 68k on every channel (user V1, 2026-11-23; drawn 100k || 22p each). PI-6 step network: DNP footprint only "
+           "(the Rf 47k + step option is dropped); Zobel belongs at the OT secondary", 20, 7)
+    d.text("Layout: J302 / J303 / J304 (W30 / W31 / W32) at x 200-279, on the downward face near the front edge, in CL / CR / LD "
+           "order (interfaces.md 12.3), away from J101 and the FX return", 20, 8)
 
 
 # ------------------------------------------------------------------ sheet 04
@@ -529,6 +543,7 @@ KNOWN = {
     ("MCP23S17-E/SS", None): ("MCP23S17-E/SS", "C148009"), ("DG412DY", None): ("DG412DY-T1-E3", "C553989"),
     ("ULN2803A", "SOIC18W"): ("ULN2803ADWR", ""), ("74LVC1G11", "SOT23-6"): ("74LVC1G11GV,125", ""),
     ("G6K-2F-Y 5VDC", None): ("G6K-2F-Y-TR DC5", "C47190"),
+    ("DRIVE (W24-a, Mini-Fit Jr)", "MFJ2x3"): ("Molex 39-30-1060 (5566-06A)", ""),
     ("CONTROL (W13-b)", "IDC2x7"): ("HY2541WV-N-2x7P", "C17179454"),
     ("PRE IN (W22-b)", "KK254x3"): ("Molex 22272031", "C471416"),
     ("RAW HV (W03-b, 4.8 mm tabs)", "TAB48"): ("2x BTC-3-PCB484608T", "C20626099"),
@@ -537,9 +552,9 @@ KNOWN = {
 }
 NOTES = {
     "FILM5": "film >= 100 V (PET / PP)", "FILM10": "film 630 V", "FILM15": "film >= 400 V", "FILM27": "PP film 630 V (preamp_regulator.md)",
-    "CPD8": "105 C electrolytic", "CPE6": "105 C electrolytic", "CPD12": "105 C electrolytic", "CPD18": "105 C electrolytic",
+    "CPD8": "105 C electrolytic", "CPE6": "105 C electrolytic", "CPE5": "105 C electrolytic", "CPD12": "105 C electrolytic", "CPD18": "105 C electrolytic",
     "R2512": "2512, 1 W, 200 V", "TAB48": "PLACEHOLDER footprint", "TAB63": "PLACEHOLDER footprint",
-    "KK396x5": "W24: header rated >= 450 V DC between pins (OPEN check)",
+    "MFJ2x3": "W24: Mini-Fit Jr 600 V (V5); 2x3 with position 6 unused, same mapping on the power amp",
 }
 SYM_NOTES = {
     "ECC83": "noval PCB socket on the solder side (rev A part; rev A footprint tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm "

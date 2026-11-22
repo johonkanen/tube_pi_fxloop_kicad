@@ -12208,7 +12208,7 @@
 			)
 		)
 	)
-	(text "PI-6: step network footprint (DNP) on the common node; Cf per channel; Zobel belongs at the OT secondary"
+	(text "Rf >= 68k on every channel (user V1, 2026-11-23; drawn 100k || 22p each). PI-6 step network: DNP footprint only (the Rf 47k + step option is dropped); Zobel belongs at the OT secondary"
 		(exclude_from_sim no)
 		(at 436.88 160.02 0)
 		(effects
@@ -12219,7 +12219,7 @@
 		)
 		(uuid "4abc5642-bcda-590b-b5f5-1ba1a13ed541")
 	)
-	(text "Layout: J302-J304 (W30-W32) at the board's right-hand end, x about 200-279 (interfaces.md 12.3), away from J101 and the FX return"
+	(text "Layout: J302 / J303 / J304 (W30 / W31 / W32) at x 200-279, on the downward face near the front edge, in CL / CR / LD order (interfaces.md 12.3), away from J101 and the FX return"
 		(exclude_from_sim no)
 		(at 436.88 177.8 0)
 		(effects

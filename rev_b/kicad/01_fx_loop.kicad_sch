@@ -3472,7 +3472,7 @@
 		)
 		(uuid "00f4dc42-d537-510e-9cff-1732546c4444")
 	)
-	(text "J102 (IF-1.2): 2 SEND_SRC, 8 PAD_A, 10 PAD_B = GND (the rear switch grounds PAD_A), 16 RETURN_SIG (far end from SEND_SRC, 2.2M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-230."
+	(text "J102 (IF-1.2): 2 SEND_SRC, 8 PAD_A, 10 PAD_B = GND (the rear switch grounds PAD_A), 16 RETURN_SIG (far end from SEND_SRC, 2.2M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-190 (the rear I/O jack board stands behind x 191-219)."
 		(exclude_from_sim no)
 		(at 30.48 200.66 0)
 		(effects
