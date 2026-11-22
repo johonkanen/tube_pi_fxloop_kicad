@@ -5,3 +5,4 @@ kicad/*-backups/
 kicad/*.kicad_prl
 kicad/fp-info-cache
 kicad/.history/
+sim/*/out/
