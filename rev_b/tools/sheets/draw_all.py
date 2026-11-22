@@ -543,7 +543,7 @@ KNOWN = {
     ("MCP23S17-E/SS", None): ("MCP23S17-E/SS", "C148009"), ("DG412DY", None): ("DG412DY-T1-E3", "C553989"),
     ("ULN2803A", "SOIC18W"): ("ULN2803ADWR", ""), ("74LVC1G11", "SOT23-6"): ("74LVC1G11GV,125", ""),
     ("G6K-2F-Y 5VDC", None): ("G6K-2F-Y-TR DC5", "C47190"),
-    ("DRIVE (W24-a, Mini-Fit Jr)", "MFJ2x3"): ("Molex 39-30-1060 (5566-06A)", ""),
+    ("DRIVE (W24-a, Mini-Fit Jr)", "MFJ2x3"): ("Molex 39-28-1063 class (5566-06A; confirm the order code), receptacle 39-01-2060", ""),
     ("CONTROL (W13-b)", "IDC2x7"): ("HY2541WV-N-2x7P", "C17179454"),
     ("PRE IN (W22-b)", "KK254x3"): ("Molex 22272031", "C471416"),
     ("RAW HV (W03-b, 4.8 mm tabs)", "TAB48"): ("2x BTC-3-PCB484608T", "C20626099"),

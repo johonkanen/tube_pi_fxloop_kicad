@@ -1,5 +1,88 @@
 # PI + FX loop rev B: status
 
+## Third pass (2026-11-23)
+
+Scope: the user's decisions of 2026-11-23 (the coordinator's decisions_1123 list; interfaces.md
+IF-1.3). **252 parts, ERC 0 / 0, `verify.py` 168 nets with 0 mismatches, footprints on all parts,
+`bom/bom.csv` 89 lines (37 with an LCSC number).**
+
+### Changes
+
+| # | Decision | Change |
+|---|---|---|
+| 1 | W24 = Molex Mini-Fit Jr, pin order unchanged (V5) | J201: `Conn_02x03_Top_Bottom`, footprint `Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical` (header Molex 39-28-1063 class, order code to confirm; receptacle 39-01-2060; as the coordinator set for both boards). KiCad has no single-row Mini-Fit Jr, so the 2x3 with position 6 unused: 1 GND, 2 DRV_A, 3 GND / 4 DRV_B, 5 GND, 6 NC. Every pin beside a drive pin is GND (DRV_A: 1, 3, 5; DRV_B: 1, 5); the two drive pins are only diagonal (6.9 mm). **The power amp must use the same 2x3 mapping** |
+| 2 | Rf ≥ 68k on every channel, 47k option dropped, second grid 22n (V1) | Nothing to re-value: all three Rf are 100k ∥ 22p and C203 is 22n. The DNP step-network footprint (R327 / C319) stays as an empty footprint, noted "the Rf 47k + step option is dropped" |
+| 3 | PI grid leaks to a fixed decoupled reference if they return to the tail (V1 list, item 16) | **They did** (R213 / R218, 1M to PTOP, the CCS top). Now to **PI_REF**: 2x 820k 2512 from B+PI decoupled (BPI_P, 386 V; 182 V per part) + 100k to GND = 22.2 V, 10 µF / 50 V (0.17 Hz). New R222-R224, C204. Tail top about 21 V, so the DN2540 keeps about 19 V of compliance. Simulated, below |
+| 4 | Raw rail to 480 V as a transient / trip level, sustained ≤ 450 V, raw-rail parts ≥ 500 V (V7) | Checked, no change needed (below) |
+| 5 | Normalled return at full level accepted (V15) | Simulated, no change (below); manual text proposed |
+| 6 | P-J_FX and the pot-ribbon headers | Layout notes: J102 at the rear edge, **x 170-190** (the rear I/O jack board stands behind x 191-219); J302 / J303 / J304 at x 200-279 on the downward face near the front edge, in CL / CR / LD order |
+| 7 | Power tubes 91k / 220 nF (V1) | Sheet 02 note: 91k leak, 220 nF film ≥ 630 V per tube, on the power amp; no longer OPEN |
+
+### Result: where the PI grid leaks return (`sim/pi_burst/run_leak_ref.py` → `results/leak_ref.md`)
+
+The master repo's burst test (copied from sim/pi_nfb at ca741ff, plus a divider option): 220n / 91k,
+4x EL34, 400 V, Rf 100k, speaker; 300 ms of 100 Hz on a 1 kHz probe.
+
+| Leak return | Burst | Power grid shift / back within 1 V | PI grid shift down / up / back within 1 V | Probe dip / back within 1 dB |
+|---|---|---|---|---|
+| tail top (second pass) | +13 dB | -11.8 V / 120 ms | -0.2 / **+39.3 V / not back after 1 s** | -1.1 dB / 19 ms |
+| tail top (second pass) | +20 dB | -12.1 V / 115 ms | -0.1 / **+108.7 V / not back** | -0.6 dB / 45 ms |
+| PI_REF divider 22 V (third pass) | +13 dB | -8.1 V / 78 ms | -1.3 / +1.2 V / 0 ms | -0.8 dB / 0 ms |
+| PI_REF divider 22 V (third pass) | +20 dB | -16.8 V / 93 ms | -3.0 / +2.8 V / 11 ms | -1.4 dB (the probe stays about 1-1.4 dB low to the end of the run; the ideal 9 V reference gives exactly the same) |
+
+The divider behaves like the study's ideal reference (identical figures). +13 dB is the real maximum
+drive; +20 dB is beyond the PI-4 limit.
+
+### Result: regulators at 430 / 450 / 480 V raw (`sim/preamp_supply/run_raw480.py` → `results/raw480.md`)
+
+Part stress at 480 V: LND150N8 (500 V) sees 90 V (PI) / 150 V (FX), the full raw only if a zener
+string fails short; STD4N80K5 (800 V) up to 480 V into a short; MMBTA42 (300 V) under 20 V; M7
+(1000 V) up to 480 V reverse at power-up; R3 3x 270k 2512: 160 V each into a short (200 V); Rf 3x
+330k: 130 V each (set by the reference); the 2.2 µF film is 630 V on the reference. No capacitor on
+the raw rail itself on this board. All within rating.
+
+| Raw | Q1 at 70 °C: limit B+PI / B+FX | at 85 °C | at 100 °C | Start-up and recovery after a short |
+|---|---|---|---|---|
+| 430 V | 19.5 / 20.0 mA | 17.5 / 17.5 mA | 16.0 / 15.5 mA | yes everywhere (27-100 °C) |
+| 450 V | 18.5 / 18.5 mA | 16.5 / 16.0 mA | 14.5 / 14.0 mA | yes everywhere |
+| 480 V | 16.5 / 16.0 mA | 14.5 / 14.0 mA | 12.5 / 11.5 mA | yes everywhere |
+
+Against loads of 2.9 / 3.1 mA (bleed included) the limit keeps a margin of 4x or more, and unlike
+B+PRE (15 mA, no start at 480 V above 85 °C) both regulators start and recover even with the raw rail
+**held** at 480 V up to Q1 = 100 °C. Into a short at 480 V the current is lower than at 430 V (4.6 /
+5.6 mA at 27 °C, near zero above 70 °C). Fault note (not a raw-rail part): if a pass device fails
+short, B+PI / B+FX go to the raw rail, and the 450 V outputs and decoupling electrolytics (C502 /
+C505, C507-C509) would then see up to 480 V; 500 V parts would cover that case too (optional).
+
+### Result: normalled return at 17 V peak (`sim/fx_loop/run_normalled.py` → `results/normalled.md`)
+
+Series mode, both rear pots full, nothing plugged in: 300 ms of 1 kHz at 17 V peak on RETURN_SIG
+with a 0.3 V / 3 kHz probe.
+
+| RETURN_SIG | Pad | Return grid current peak / average | Wet node / mixer node peak | Return plate | Loop output (PI input, 0 dB) | Probe after the burst |
+|---|---|---|---|---|---|---|
+| 17 V | 0 dB | 1.5 / 0.08 µA | 6.6 / 2.7 V | 202-252 V | 30 V peak | -26 dB at 10-50 ms, back (±0.1 dB) by 50 ms |
+| 17 V | -20 dB | 0.3 / 0.08 µA | 1.5 / 0.6 V | 201-226 V | 12.7 V peak | no dip |
+| 9 V | 0 dB | 0.9 / 0.08 µA | 3.7 / 1.5 V | 201-243 V | 24.7 V peak | no dip |
+
+Nothing latches and no part rating is exceeded: return grid current is negligible (the 1M / 220k
+network), DC shifts (return grid +0.6 V, cathode +0.3 V, wet node +1.5 V) decay within about 200 ms,
+JFET and film-cap voltages far below their ratings. What it does: with the pad off the wet series
+JFET and the mixer are driven past their 2 V limit (FX-4) and the loop output reaches about 30 V peak
+at the PI input, beyond the PI-4 18 V limit: heavy distortion, and the PI then blocks like the +20 dB
+burst above (recovers within about 0.1 s with PI_REF). No damage. **Manual text proposed:** "With
+nothing plugged into SEND / RETURN the effects loop passes the send signal straight back. Set RETURN
+LEVEL to about half, or switch the pad to -20 dB: with both rear pots at full the loop overdrives the
+power amp's input stage (loud, distorted, no harm). Bypass the loop if you don't use it."
+
+### New or changed items for the coordinator
+
+- J201 / W24 2x3 mapping (position 6 unused) must match on the power amp's W24-b.
+- PI_REF adds four parts and 0.22 mA on B+PI (rail figures unchanged at this resolution).
+- The B+ output electrolytics at 450 V: fine in normal use; 500 V parts only if the pass-device
+  short is to be covered (decision for the user, optional).
+- Manual text for the normalled return (above).
+
 ## Second pass (2026-11-23)
 
 Scope: bring the schematic into line with interfaces.md **IF-1.2** and the decisions since the

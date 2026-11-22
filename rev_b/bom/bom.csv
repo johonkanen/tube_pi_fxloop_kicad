@@ -24,7 +24,7 @@ Qty,Refs,Value,Footprint,Candidate MPN,LCSC,DNP,Note
 1,D507,180V,Diode_SMD:D_SMA,1SMA5955B,,,
 1,J101,PRE IN (W22-b),Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical,Molex 22272031,C471416,,
 1,J102,FX (W23-a),Connector_IDC:IDC-Header_2x08_P2.54mm_Vertical,,,,
-1,J201,"DRIVE (W24-a, Mini-Fit Jr)",Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical,Molex 39-30-1060 (5566-06A),,,"W24: Mini-Fit Jr 600 V (V5); 2x3 with position 6 unused, same mapping on the power amp"
+1,J201,"DRIVE (W24-a, Mini-Fit Jr)",Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical,"Molex 39-28-1063 class (5566-06A; confirm the order code), receptacle 39-01-2060",,,"W24: Mini-Fit Jr 600 V (V5); 2x3 with position 6 unused, same mapping on the power amp"
 1,J301,FB (W25-b),Connector_Molex:Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical,,,,
 1,J302,PRES/RES CL (W30-b),Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical,,,,
 1,J303,PRES/RES CR (W31-b),Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical,,,,
