@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube PI + FX loop rev B - Switch control")
 		(company "Tube amplifier")
-		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(rev "rev B - second-pass draft (IF-1.2)")
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols
@@ -3982,7 +3982,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_IDC:IDC-Header_2x07_P2.54mm_Vertical"
 			(at 30.48 71.12 0)
 			(effects
 				(font
@@ -5365,7 +5365,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 30.48 161.798 0)
 			(effects
 				(font
@@ -5582,7 +5582,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 54.61 159.0548 0)
 			(effects
 				(font
@@ -5950,7 +5950,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 91.44 55.118 0)
 			(effects
 				(font
@@ -6112,7 +6112,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 91.44 90.678 0)
 			(effects
 				(font
@@ -7192,7 +7192,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 153.3652 39.37 0)
 			(effects
 				(font
@@ -7409,7 +7409,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 213.36 188.468 0)
 			(effects
 				(font
@@ -7571,7 +7571,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 246.38 188.468 0)
 			(effects
 				(font
@@ -7733,7 +7733,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 278.13 188.468 0)
 			(effects
 				(font
@@ -7895,7 +7895,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 311.15 188.468 0)
 			(effects
 				(font
@@ -8057,7 +8057,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 342.9 188.468 0)
 			(effects
 				(font
@@ -8219,7 +8219,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 375.92 188.468 0)
 			(effects
 				(font
@@ -8381,7 +8381,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 408.94 188.468 0)
 			(effects
 				(font
@@ -8543,7 +8543,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 213.36 213.868 0)
 			(effects
 				(font
@@ -8705,7 +8705,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 246.38 213.868 0)
 			(effects
 				(font
@@ -8867,7 +8867,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 278.13 213.868 0)
 			(effects
 				(font
@@ -9029,7 +9029,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 311.15 213.868 0)
 			(effects
 				(font
@@ -9191,7 +9191,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 342.9 213.868 0)
 			(effects
 				(font
@@ -9353,7 +9353,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 375.92 213.868 0)
 			(effects
 				(font
@@ -9515,7 +9515,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 408.94 213.868 0)
 			(effects
 				(font
@@ -9677,7 +9677,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 233.68 53.34 0)
 			(effects
 				(font
@@ -9986,7 +9986,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 233.68 106.68 0)
 			(effects
 				(font
@@ -10295,7 +10295,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 265.1252 39.37 0)
 			(effects
 				(font
@@ -10512,7 +10512,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 265.1252 92.71 0)
 			(effects
 				(font
@@ -11900,7 +11900,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 532.13 52.3748 0)
 			(effects
 				(font
@@ -12117,7 +12117,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 552.45 52.3748 0)
 			(effects
 				(font
@@ -13505,7 +13505,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 532.13 115.8748 0)
 			(effects
 				(font
@@ -13722,7 +13722,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 552.45 115.8748 0)
 			(effects
 				(font
@@ -15022,7 +15022,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 532.13 180.6448 0)
 			(effects
 				(font
@@ -15239,7 +15239,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 552.45 180.6448 0)
 			(effects
 				(font
@@ -15456,7 +15456,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 314.96 259.588 0)
 			(effects
 				(font
@@ -15630,7 +15630,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 339.09 259.588 0)
 			(effects
 				(font
@@ -15804,7 +15804,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 363.22 259.588 0)
 			(effects
 				(font
@@ -15978,7 +15978,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 388.62 259.588 0)
 			(effects
 				(font
@@ -16152,7 +16152,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 412.75 259.588 0)
 			(effects
 				(font
@@ -16326,7 +16326,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 436.88 259.588 0)
 			(effects
 				(font
@@ -16500,7 +16500,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 461.01 259.588 0)
 			(effects
 				(font
@@ -16674,7 +16674,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 485.14 259.588 0)
 			(effects
 				(font
@@ -16848,7 +16848,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 510.54 259.588 0)
 			(effects
 				(font
@@ -17022,7 +17022,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 534.67 259.588 0)
 			(effects
 				(font
@@ -17207,7 +17207,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm"
 			(at 153.67 247.65 0)
 			(effects
 				(font
@@ -17889,7 +17889,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 196.85 265.7348 0)
 			(effects
 				(font
@@ -18080,6 +18080,17 @@
 				)
 			)
 		)
+	)
+	(text "Relay coils: G6K-2F-Y 5 V, 21.1 mA each; +5 V about 25 mA at 0 dB (one feedback relay), about 115 mA at the 15 dB step (4 attenuator relays + 1 feedback relay). ULN2803A clamp diodes to +5V (pin 10)."
+		(exclude_from_sim no)
+		(at 30.48 289.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac3dc314-5d20-598f-869e-12846dc77680")
 	)
 	(sheet_instances
 		(path "/"

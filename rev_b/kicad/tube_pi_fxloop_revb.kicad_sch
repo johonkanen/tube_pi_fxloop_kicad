@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube PI + FX loop rev B")
 		(company "Tube amplifier")
-		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(rev "rev B - second-pass draft (IF-1.2)")
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols)

@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube PI + FX loop rev B - Per-channel feedback networks (presence / resonance)")
 		(company "Tube amplifier")
-		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(rev "rev B - second-pass draft (IF-1.2)")
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols
@@ -814,7 +814,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_pi_fxloop_revb:G6K-2"
+		(symbol "tube_pi_fxloop_revb:G6K-2F-Y"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -831,7 +831,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "G6K-2"
+			(property "Value" "G6K-2F-Y"
 				(at 16.51 1.27 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -842,7 +842,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -898,7 +898,7 @@
 					)
 				)
 			)
-			(symbol "G6K-2_0_0"
+			(symbol "G6K-2F-Y_0_0"
 				(text "+"
 					(at -9.271 2.921 0)
 					(effects
@@ -908,7 +908,7 @@
 					)
 				)
 			)
-			(symbol "G6K-2_0_1"
+			(symbol "G6K-2F-Y_0_1"
 				(rectangle
 					(start -15.24 5.08)
 					(end 15.24 -5.08)
@@ -1053,7 +1053,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -2.54) (xy -1.905 3.81)
+						(xy 0 -2.54) (xy 1.905 3.81)
 					)
 					(stroke
 						(width 0.508)
@@ -1185,7 +1185,7 @@
 				)
 				(polyline
 					(pts
-						(xy 10.16 -2.54) (xy 8.255 3.81)
+						(xy 10.16 -2.54) (xy 12.065 3.81)
 					)
 					(stroke
 						(width 0.508)
@@ -1220,7 +1220,7 @@
 					)
 				)
 			)
-			(symbol "G6K-2_1_1"
+			(symbol "G6K-2F-Y_1_1"
 				(pin passive line
 					(at -10.16 7.62 270)
 					(length 2.54)
@@ -1883,7 +1883,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "03 Feedback: one network per channel (PI-3, sim/pi_nfb): relay at the 8 ohm end -> Rf 100k || Cf 22p -> Cres 22n || resonance pot (front panel, W30-W32) -> network node -> NJFET T-switch -> common feedback node (second grid's cap); presence 1k + pot + 22n from the network node. Rbot 4.7k stays on the common node (no network = no feedback, grid still returned)."
+	(text "03 Feedback: one network per channel (PI-3, sim/pi_nfb): relay (G6K-2F-Y, NO contacts) at the 8 ohm end -> Rf 100k || Cf 22p -> Cres 22n || resonance pot (front panel, W30-W32) -> network node -> NJFET T-switch -> common feedback node (second grid's cap); presence 1k + pot + 22n from the network node. Rbot 4.7k stays on the common node (no network = no feedback, grid still returned)."
 		(exclude_from_sim no)
 		(at 30.48 17.78 0)
 		(effects
@@ -1919,7 +1919,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical"
 			(at 30.48 142.24 0)
 			(effects
 				(font
@@ -2026,7 +2026,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 60.96 170.688 0)
 			(effects
 				(font
@@ -2210,7 +2210,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical"
 			(at 254 80.01 0)
 			(effects
 				(font
@@ -2807,7 +2807,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 91.44 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2833,7 +2833,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 91.44 71.12 0)
 			(effects
 				(font
@@ -3001,9 +3001,25 @@
 			)
 		)
 	)
-	(no_connect
-		(at 88.9 63.5)
+	(wire
+		(pts
+			(xy 88.9 63.5) (xy 88.9 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "641e01a0-64e2-5607-b8aa-0c40c7fb1b01")
+	)
+	(label "SPK_CL"
+		(at 88.9 60.96 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ae8a8cd8-ca20-57ea-babb-d74d371d3e61")
 	)
 	(wire
 		(pts
@@ -3013,7 +3029,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ae8a8cd8-ca20-57ea-babb-d74d371d3e61")
+		(uuid "47660dec-ed7e-58ba-b5de-201d05c0db0e")
 	)
 	(label "FB_8R"
 		(at 91.44 81.28 270)
@@ -3023,47 +3039,15 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "47660dec-ed7e-58ba-b5de-201d05c0db0e")
-	)
-	(wire
-		(pts
-			(xy 93.98 63.5) (xy 93.98 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
 		(uuid "f2ec8d8e-896b-52ab-9a0f-50146d77372c")
 	)
-	(label "SPK_CL"
-		(at 93.98 60.96 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
+	(no_connect
+		(at 93.98 63.5)
 		(uuid "bd282bd5-54e1-5256-9b6d-860172f921b5")
 	)
-	(wire
-		(pts
-			(xy 104.14 63.5) (xy 104.14 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 104.14 63.5)
 		(uuid "f4f60f8c-8af4-541f-b539-d3b0ac764088")
-	)
-	(label "SPK_CL"
-		(at 104.14 60.96 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1085df5a-974f-5ae5-8431-ce9e09d4a961")
 	)
 	(wire
 		(pts
@@ -3073,7 +3057,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "72bd76c0-cc8d-5d84-95b7-acd7cc0804f1")
+		(uuid "1085df5a-974f-5ae5-8431-ce9e09d4a961")
 	)
 	(label "FB_8R"
 		(at 101.6 81.28 270)
@@ -3083,10 +3067,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "72bd76c0-cc8d-5d84-95b7-acd7cc0804f1")
+	)
+	(wire
+		(pts
+			(xy 99.06 63.5) (xy 99.06 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "1d22fb37-aa34-5eec-ac95-99cecadf7141")
 	)
-	(no_connect
-		(at 99.06 63.5)
+	(label "SPK_CL"
+		(at 99.06 60.96 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "f82d0c6a-5fdd-5141-b611-d3ff263bb5fa")
 	)
 	(symbol
@@ -3114,7 +3114,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 132.08 94.488 0)
 			(effects
 				(font
@@ -3276,7 +3276,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 150.622 53.34 0)
 			(effects
 				(font
@@ -3383,7 +3383,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 153.3652 74.93 0)
 			(effects
 				(font
@@ -3482,15 +3482,15 @@
 				)
 			)
 		)
-		(property "Value" "22n/100V film"
-			(at 202.73 63.5 0)
+		(property "Value" "22n C0G 50V"
+			(at 201.63 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 194.0052 66.04 0)
 			(effects
 				(font
@@ -3597,7 +3597,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 191.262 88.9 0)
 			(effects
 				(font
@@ -3696,7 +3696,7 @@
 				)
 			)
 		)
-		(property "Value" "22n/100V film"
+		(property "Value" "22n C0G 50V"
 			(at 223.52 109.22 270)
 			(effects
 				(font
@@ -3704,7 +3704,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 227.33 105.7148 0)
 			(effects
 				(font
@@ -4000,7 +4000,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 313.182 53.34 0)
 			(effects
 				(font
@@ -4119,7 +4119,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 311.15 73.3552 0)
 			(effects
 				(font
@@ -4281,7 +4281,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 331.47 85.598 0)
 			(effects
 				(font
@@ -4534,7 +4534,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 374.142 53.34 0)
 			(effects
 				(font
@@ -4653,7 +4653,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 372.11 73.3552 0)
 			(effects
 				(font
@@ -4815,7 +4815,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 392.43 85.598 0)
 			(effects
 				(font
@@ -5111,7 +5111,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 343.662 88.9 0)
 			(effects
 				(font
@@ -5230,7 +5230,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 341.63 108.9152 0)
 			(effects
 				(font
@@ -5403,7 +5403,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical"
 			(at 254 160.02 0)
 			(effects
 				(font
@@ -6000,7 +6000,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 91.44 151.13 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6026,7 +6026,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 91.44 151.13 0)
 			(effects
 				(font
@@ -6194,9 +6194,25 @@
 			)
 		)
 	)
-	(no_connect
-		(at 88.9 143.51)
+	(wire
+		(pts
+			(xy 88.9 143.51) (xy 88.9 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "5394606e-c9fc-51a9-b19b-6393e32b8ead")
+	)
+	(label "SPK_CR"
+		(at 88.9 140.97 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "725efec7-8ba1-5a17-ac60-525e85e4595e")
 	)
 	(wire
 		(pts
@@ -6206,7 +6222,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "725efec7-8ba1-5a17-ac60-525e85e4595e")
+		(uuid "5d4bbd9d-c95c-543f-b427-9daecbf00475")
 	)
 	(label "FB_8R"
 		(at 91.44 161.29 270)
@@ -6216,47 +6232,15 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "5d4bbd9d-c95c-543f-b427-9daecbf00475")
-	)
-	(wire
-		(pts
-			(xy 93.98 143.51) (xy 93.98 140.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
 		(uuid "7268aad9-7bd0-51d7-9915-fda1b8683547")
 	)
-	(label "SPK_CR"
-		(at 93.98 140.97 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
+	(no_connect
+		(at 93.98 143.51)
 		(uuid "7fc405d0-6dba-5190-83b5-f270116f0fb3")
 	)
-	(wire
-		(pts
-			(xy 104.14 143.51) (xy 104.14 140.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 104.14 143.51)
 		(uuid "e5b5d403-7ae7-552f-bcfc-9a16f801b85c")
-	)
-	(label "SPK_CR"
-		(at 104.14 140.97 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bd69d9ea-e59f-5ed3-ae86-40a3f66adbc3")
 	)
 	(wire
 		(pts
@@ -6266,7 +6250,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "39c4adbe-8819-5c01-a072-9b9e0c11e5d7")
+		(uuid "bd69d9ea-e59f-5ed3-ae86-40a3f66adbc3")
 	)
 	(label "FB_8R"
 		(at 101.6 161.29 270)
@@ -6276,10 +6260,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "39c4adbe-8819-5c01-a072-9b9e0c11e5d7")
+	)
+	(wire
+		(pts
+			(xy 99.06 143.51) (xy 99.06 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "990f6295-9d82-547f-b582-073bf1209c78")
 	)
-	(no_connect
-		(at 99.06 143.51)
+	(label "SPK_CR"
+		(at 99.06 140.97 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "f8b45d99-f4c6-5e8a-974e-1de698d412ba")
 	)
 	(symbol
@@ -6307,7 +6307,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 132.08 174.498 0)
 			(effects
 				(font
@@ -6469,7 +6469,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 150.622 133.35 0)
 			(effects
 				(font
@@ -6576,7 +6576,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 153.3652 154.94 0)
 			(effects
 				(font
@@ -6675,15 +6675,15 @@
 				)
 			)
 		)
-		(property "Value" "22n/100V film"
-			(at 202.73 143.51 0)
+		(property "Value" "22n C0G 50V"
+			(at 201.63 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 194.0052 146.05 0)
 			(effects
 				(font
@@ -6790,7 +6790,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 191.262 168.91 0)
 			(effects
 				(font
@@ -6889,7 +6889,7 @@
 				)
 			)
 		)
-		(property "Value" "22n/100V film"
+		(property "Value" "22n C0G 50V"
 			(at 223.52 189.23 270)
 			(effects
 				(font
@@ -6897,7 +6897,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 227.33 185.7248 0)
 			(effects
 				(font
@@ -7193,7 +7193,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 313.182 133.35 0)
 			(effects
 				(font
@@ -7312,7 +7312,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 311.15 153.3652 0)
 			(effects
 				(font
@@ -7474,7 +7474,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 331.47 165.608 0)
 			(effects
 				(font
@@ -7727,7 +7727,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 374.142 133.35 0)
 			(effects
 				(font
@@ -7846,7 +7846,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 372.11 153.3652 0)
 			(effects
 				(font
@@ -8008,7 +8008,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 392.43 165.608 0)
 			(effects
 				(font
@@ -8304,7 +8304,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 343.662 168.91 0)
 			(effects
 				(font
@@ -8423,7 +8423,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 341.63 188.9252 0)
 			(effects
 				(font
@@ -8596,7 +8596,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical"
 			(at 254 240.03 0)
 			(effects
 				(font
@@ -9193,7 +9193,7 @@
 		)
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 91.44 231.14 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9219,7 +9219,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 91.44 231.14 0)
 			(effects
 				(font
@@ -9387,9 +9387,25 @@
 			)
 		)
 	)
-	(no_connect
-		(at 88.9 223.52)
+	(wire
+		(pts
+			(xy 88.9 223.52) (xy 88.9 220.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "5f6eae36-b3c2-5e47-baad-8cbcfe7c46fc")
+	)
+	(label "SPK_LD"
+		(at 88.9 220.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "993a5ea9-db3e-5b31-80c1-f06047b60f7f")
 	)
 	(wire
 		(pts
@@ -9399,7 +9415,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "993a5ea9-db3e-5b31-80c1-f06047b60f7f")
+		(uuid "cef27416-c5ff-5c07-89cd-fd479e270d9b")
 	)
 	(label "FB_8R"
 		(at 91.44 241.3 270)
@@ -9409,47 +9425,15 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "cef27416-c5ff-5c07-89cd-fd479e270d9b")
-	)
-	(wire
-		(pts
-			(xy 93.98 223.52) (xy 93.98 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
 		(uuid "7dd25c60-6a0b-586f-8674-e460ef04fb16")
 	)
-	(label "SPK_LD"
-		(at 93.98 220.98 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
+	(no_connect
+		(at 93.98 223.52)
 		(uuid "951c90b2-4700-560a-ac38-79d6017b8e8a")
 	)
-	(wire
-		(pts
-			(xy 104.14 223.52) (xy 104.14 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 104.14 223.52)
 		(uuid "f677c574-2da3-5241-80e6-3a7d645413d5")
-	)
-	(label "SPK_LD"
-		(at 104.14 220.98 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ea6f632c-9f99-58be-8fde-3f9839fa146c")
 	)
 	(wire
 		(pts
@@ -9459,7 +9443,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d95f4b8f-ebaa-5c22-a8c4-dff0c3889507")
+		(uuid "ea6f632c-9f99-58be-8fde-3f9839fa146c")
 	)
 	(label "FB_8R"
 		(at 101.6 241.3 270)
@@ -9469,10 +9453,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "d95f4b8f-ebaa-5c22-a8c4-dff0c3889507")
+	)
+	(wire
+		(pts
+			(xy 99.06 223.52) (xy 99.06 220.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "82f601c8-8d8b-58f3-8ac3-5fe2688afacb")
 	)
-	(no_connect
-		(at 99.06 223.52)
+	(label "SPK_LD"
+		(at 99.06 220.98 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "d4ed9e30-faf5-5c5b-8b9b-1b5718a0ed7c")
 	)
 	(symbol
@@ -9500,7 +9500,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 132.08 254.508 0)
 			(effects
 				(font
@@ -9662,7 +9662,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 150.622 213.36 0)
 			(effects
 				(font
@@ -9769,7 +9769,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 153.3652 234.95 0)
 			(effects
 				(font
@@ -9868,15 +9868,15 @@
 				)
 			)
 		)
-		(property "Value" "22n/100V film"
-			(at 202.73 223.52 0)
+		(property "Value" "22n C0G 50V"
+			(at 201.63 223.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 194.0052 226.06 0)
 			(effects
 				(font
@@ -9983,7 +9983,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 191.262 248.92 0)
 			(effects
 				(font
@@ -10082,7 +10082,7 @@
 				)
 			)
 		)
-		(property "Value" "22n/100V film"
+		(property "Value" "22n C0G 50V"
 			(at 223.52 269.24 270)
 			(effects
 				(font
@@ -10090,7 +10090,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 227.33 265.7348 0)
 			(effects
 				(font
@@ -10386,7 +10386,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 313.182 213.36 0)
 			(effects
 				(font
@@ -10505,7 +10505,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 311.15 233.3752 0)
 			(effects
 				(font
@@ -10667,7 +10667,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 331.47 245.618 0)
 			(effects
 				(font
@@ -10920,7 +10920,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 374.142 213.36 0)
 			(effects
 				(font
@@ -11039,7 +11039,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 372.11 233.3752 0)
 			(effects
 				(font
@@ -11201,7 +11201,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 392.43 245.618 0)
 			(effects
 				(font
@@ -11497,7 +11497,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 343.662 248.92 0)
 			(effects
 				(font
@@ -11616,7 +11616,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 341.63 268.9352 0)
 			(effects
 				(font
@@ -11778,7 +11778,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 457.2 126.238 0)
 			(effects
 				(font
@@ -11952,7 +11952,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 475.742 106.68 0)
 			(effects
 				(font
@@ -12071,7 +12071,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 501.65 127.3048 0)
 			(effects
 				(font
@@ -12218,6 +12218,17 @@
 			(justify left bottom)
 		)
 		(uuid "4abc5642-bcda-590b-b5f5-1ba1a13ed541")
+	)
+	(text "Layout: J302-J304 (W30-W32) at the board's right-hand end, x about 200-279 (interfaces.md 12.3), away from J101 and the FX return"
+		(exclude_from_sim no)
+		(at 436.88 177.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7cdbc42c-2057-594b-8f34-ce1bc3652fdc")
 	)
 	(sheet_instances
 		(path "/"

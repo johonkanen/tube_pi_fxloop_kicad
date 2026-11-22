@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube PI + FX loop rev B - B+PI / B+FX regulators, decoupling, heaters, power tabs")
 		(company "Tube amplifier")
-		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(rev "rev B - second-pass draft (IF-1.2)")
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols
@@ -399,10 +399,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_pi_fxloop_revb:Q_NMOS_Depletion"
-			(pin_numbers
-				(hide yes)
-			)
+		(symbol "tube_pi_fxloop_revb:DN2540N8-G"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -423,7 +420,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "Q_NMOS_Depletion"
+			(property "Value" "DN2540N8-G"
 				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -434,7 +431,29 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3"
+				(at 0 -14.605 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/DN2540%20B060313.pdf"
+				(at 0 -12.065 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "150mA Ids, 400 Vds, Depletion-mode N-channel MOSFET, SOT-89"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -445,7 +464,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "ki_keywords" "N-Channel Depletion-Mode MOSFET"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -456,7 +475,7 @@
 					)
 				)
 			)
-			(property "Description" "Depletion-mode N-channel MOSFET"
+			(property "ki_fp_filters" "SOT?89*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -467,18 +486,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "NMOS"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Q_NMOS_Depletion_0_1"
+			(symbol "DN2540N8-G_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905) (xy 0.254 -1.905)
@@ -621,25 +629,7 @@
 					)
 				)
 			)
-			(symbol "Q_NMOS_Depletion_1_1"
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+			(symbol "DN2540N8-G_1_1"
 				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -650,7 +640,25 @@
 							)
 						)
 					)
-					(number "G"
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -668,7 +676,7 @@
 							)
 						)
 					)
-					(number "S"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1328,10 +1336,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_pi_fxloop_revb:Q_NMOS"
-			(pin_numbers
-				(hide yes)
-			)
+		(symbol "tube_pi_fxloop_revb:Q_NMOS_GDS"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -1342,7 +1347,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "Q"
-				(at 5.08 1.27 0)
+				(at 5.08 1.905 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1352,8 +1357,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "Q_NMOS"
-				(at 5.08 -1.27 0)
+			(property "Value" "Q_NMOS_GDS"
+				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1385,7 +1390,7 @@
 					)
 				)
 			)
-			(property "Description" "N-MOSFET transistor"
+			(property "Description" "N-MOSFET transistor, gate/drain/source"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1396,7 +1401,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "NMOS N-MOS"
+			(property "ki_keywords" "transistor NMOS N-MOS N-MOSFET"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1407,7 +1412,7 @@
 					)
 				)
 			)
-			(symbol "Q_NMOS_0_1"
+			(symbol "Q_NMOS_GDS_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905) (xy 0.254 -1.905)
@@ -1574,25 +1579,7 @@
 					)
 				)
 			)
-			(symbol "Q_NMOS_1_1"
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+			(symbol "Q_NMOS_GDS_1_1"
 				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -1603,7 +1590,25 @@
 							)
 						)
 					)
-					(number "G"
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1621,7 +1626,7 @@
 							)
 						)
 					)
-					(number "S"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1632,9 +1637,17 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_pi_fxloop_revb:Q_NPN"
-			(pin_numbers
+		(symbol "tube_pi_fxloop_revb:MMBTA42"
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
 				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
 			)
 			(pin_names
 				(offset 0)
@@ -1646,7 +1659,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "Q"
-				(at 5.08 1.27 0)
+				(at 5.08 1.905 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1656,8 +1669,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "Q_NPN"
-				(at 5.08 -1.27 0)
+			(property "Value" "MMBTA42"
+				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -1667,8 +1680,21 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" ""
-				(at 5.08 2.54 0)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 5.08 -1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MMBTA42LT1-D.PDF"
+				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -1676,9 +1702,10 @@
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Description" "0.5A Ic, 300V Vce, NPN High Voltage Transistor, SOT-23"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1689,7 +1716,7 @@
 					)
 				)
 			)
-			(property "Description" "NPN bipolar junction transistor"
+			(property "Sim.Device" "NPN"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1700,7 +1727,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "BJT"
+			(property "Sim.Pins" "1=B 2=E 3=C"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1711,7 +1738,18 @@
 					)
 				)
 			)
-			(symbol "Q_NPN_0_1"
+			(property "ki_keywords" "NPN High Voltage Transistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "MMBTA42_0_1"
 				(polyline
 					(pts
 						(xy -2.54 0) (xy 0.635 0)
@@ -1736,6 +1774,19 @@
 						(type none)
 					)
 				)
+				(circle
+					(center 1.27 0)
+					(radius 2.8194)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "MMBTA42_1_1"
 				(polyline
 					(pts
 						(xy 0.635 0.635) (xy 2.54 2.54)
@@ -1760,17 +1811,6 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 1.27 0)
-					(radius 2.8194)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
 				(polyline
 					(pts
 						(xy 1.27 -1.778) (xy 1.778 -1.27) (xy 2.286 -2.286) (xy 1.27 -1.778)
@@ -1783,8 +1823,6 @@
 						(type outline)
 					)
 				)
-			)
-			(symbol "Q_NPN_1_1"
 				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -1795,25 +1833,7 @@
 							)
 						)
 					)
-					(number "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "C"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1831,7 +1851,25 @@
 							)
 						)
 					)
-					(number "E"
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2554,7 +2592,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "05 Supply: raw HV tab (RAW_SS through the HV supplies' 100 mA fuse), B+PI and B+FX regulators (preamp_regulator.md), RC decoupling per triode, heater tabs (in from the PSU, out to the preamp; floating, no reference on this board)."
+	(text "05 Supply: raw HV tab (RAW_SS, no fuse: protected by the regulators' foldback, the tube PSU's short-circuit protection and the control board's trip request, interfaces.md 8), B+PI and B+FX regulators (preamp_regulator.md rev B reference), RC decoupling per triode, heater tabs (in from the PSU, out to the preamp; floating, no reference on this board)."
 		(exclude_from_sim no)
 		(at 30.48 17.78 0)
 		(effects
@@ -2590,7 +2628,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_4.8mm_Legs_P5.00mm_D1.4mm"
 			(at 30.48 53.34 0)
 			(effects
 				(font
@@ -2752,7 +2790,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm"
 			(at 30.48 195.58 0)
 			(effects
 				(font
@@ -2859,7 +2897,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm"
 			(at 30.48 231.14 0)
 			(effects
 				(font
@@ -3196,7 +3234,7 @@
 		)
 		(uuid "bd1a099f-9329-5b9b-a41f-b93ac93b8c35")
 	)
-	(text "B+PI about 388 V (3x 130 V), limit 25 mA, foldback 8 mA"
+	(text "B+PI about 388 V (3x 130 V), limit 25 mA (19.5 mA with Q at 70 C), short 8 mA cold, about 0.6 W steady"
 		(exclude_from_sim no)
 		(at 71.12 43.18 0)
 		(effects
@@ -3208,7 +3246,7 @@
 		(uuid "8f119568-fb36-5213-819b-a928ad535ab0")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NMOS_Depletion")
+		(lib_id "tube_pi_fxloop_revb:DN2540N8-G")
 		(at 91.44 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3225,7 +3263,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LND150"
+		(property "Value" "LND150N8"
 			(at 96.52 53.34 0)
 			(effects
 				(font
@@ -3234,7 +3272,25 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3"
+			(at 91.44 67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/DN2540%20B060313.pdf"
+			(at 91.44 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "150mA Ids, 400 Vds, Depletion-mode N-channel MOSFET, SOT-89"
 			(at 91.44 53.34 0)
 			(effects
 				(font
@@ -3243,32 +3299,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 91.44 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "1"
+			(uuid "4735a997-69ff-5c10-935f-36b491f26216")
 		)
-		(property "Description" "Depletion-mode N-channel MOSFET"
-			(at 91.44 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "2"
+			(uuid "f9c9c683-6121-52f4-82f2-37f712e2ca4c")
 		)
-		(pin "D"
-			(uuid "95cbfee7-6e73-50e0-b8e7-d17a11f70afd")
-		)
-		(pin "G"
-			(uuid "ed589bff-2041-5143-b1e1-89fbed0c6ae9")
-		)
-		(pin "S"
-			(uuid "947c2ac4-9bf9-52ab-ab16-d0813a7a5f43")
+		(pin "3"
+			(uuid "89bca0da-a8ca-5640-b1db-5dcee76c3b3a")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
@@ -3364,7 +3402,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 111.76 72.898 0)
 			(effects
 				(font
@@ -3463,15 +3501,15 @@
 				)
 			)
 		)
-		(property "Value" "130V 5W 2%"
-			(at 119.8 93.98 270)
+		(property "Value" "130V"
+			(at 116.5 93.98 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 111.76 92.71 0)
 			(effects
 				(font
@@ -3570,15 +3608,15 @@
 				)
 			)
 		)
-		(property "Value" "130V 5W 2%"
-			(at 119.8 113.03 270)
+		(property "Value" "130V"
+			(at 116.5 113.03 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 111.76 111.76 0)
 			(effects
 				(font
@@ -3677,15 +3715,15 @@
 				)
 			)
 		)
-		(property "Value" "130V 5W 2%"
-			(at 119.8 133.35 270)
+		(property "Value" "130V"
+			(at 116.5 133.35 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 111.76 132.08 0)
 			(effects
 				(font
@@ -3839,15 +3877,15 @@
 				)
 			)
 		)
-		(property "Value" "1M 500V"
-			(at 148.63 72.39 0)
+		(property "Value" "330k"
+			(at 146.98 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 140.462 71.12 0)
 			(effects
 				(font
@@ -3919,7 +3957,7 @@
 		)
 		(uuid "7c233631-85b7-512f-ba91-cd52a57ab19d")
 	)
-	(label "GF_PI"
+	(label "RF1_PI"
 		(at 142.24 77.47 270)
 		(effects
 			(font
@@ -3954,7 +3992,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4"
 			(at 166.37 91.7448 0)
 			(effects
 				(font
@@ -4116,7 +4154,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 181.102 71.12 0)
 			(effects
 				(font
@@ -4215,7 +4253,7 @@
 				)
 			)
 		)
-		(property "Value" "1N4007"
+		(property "Value" "1N4007 (M7)"
 			(at 162.56 50.8 0)
 			(effects
 				(font
@@ -4223,7 +4261,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 162.56 48.26 0)
 			(effects
 				(font
@@ -4306,7 +4344,7 @@
 		(uuid "48f91ccc-95dc-5fbb-ab59-66d399693fef")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NMOS")
+		(lib_id "tube_pi_fxloop_revb:Q_NMOS_GDS")
 		(at 213.36 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4315,7 +4353,7 @@
 		(dnp no)
 		(uuid "60a40651-6c79-52ac-a023-03975af42992")
 		(property "Reference" "Q502"
-			(at 218.44 69.85 0)
+			(at 218.44 69.215 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4323,8 +4361,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STF4N80K5 (insulated)"
-			(at 218.44 72.39 0)
+		(property "Value" "STD4N80K5"
+			(at 218.44 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4332,7 +4370,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:TO-252-2"
 			(at 218.44 68.58 0)
 			(effects
 				(font
@@ -4350,7 +4388,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "N-MOSFET transistor"
+		(property "Description" "N-MOSFET transistor, gate/drain/source"
 			(at 213.36 71.12 0)
 			(effects
 				(font
@@ -4359,14 +4397,14 @@
 				(hide yes)
 			)
 		)
-		(pin "D"
-			(uuid "6c815eea-540a-5b52-bd0d-824ed728db5d")
+		(pin "1"
+			(uuid "c53037ab-81d7-56d0-aefb-5654b0751eda")
 		)
-		(pin "G"
-			(uuid "0a6b2563-5b9f-57b8-ba24-683436a67279")
+		(pin "2"
+			(uuid "231086d4-ac51-5eab-8897-a5bddbe46ee7")
 		)
-		(pin "S"
-			(uuid "5c6bda4b-92a1-5b89-872b-c5050e9a7459")
+		(pin "3"
+			(uuid "91db2d77-e982-5fb3-93c3-568150a8c444")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
@@ -4462,7 +4500,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-123"
 			(at 203.2 106.68 0)
 			(effects
 				(font
@@ -4569,7 +4607,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 231.902 88.9 0)
 			(effects
 				(font
@@ -4652,7 +4690,7 @@
 		(uuid "9bd5504f-ffec-5176-9761-29e54edbe9cc")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NPN")
+		(lib_id "tube_pi_fxloop_revb:MMBTA42")
 		(at 243.84 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4661,7 +4699,7 @@
 		(dnp no)
 		(uuid "f1a7c658-e657-5b76-b1b9-b52b98a99f9d")
 		(property "Reference" "Q503"
-			(at 248.92 123.19 0)
+			(at 248.92 122.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4670,7 +4708,7 @@
 			)
 		)
 		(property "Value" "MMBTA42"
-			(at 248.92 125.73 0)
+			(at 248.92 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4678,16 +4716,27 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 248.92 121.92 0)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 248.92 126.365 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MMBTA42LT1-D.PDF"
+			(at 243.84 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.5A Ic, 300V Vce, NPN High Voltage Transistor, SOT-23"
 			(at 243.84 124.46 0)
 			(effects
 				(font
@@ -4696,23 +4745,14 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "NPN bipolar junction transistor"
-			(at 243.84 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "1"
+			(uuid "c5489467-93be-5ff1-a5f9-013f35686a9d")
 		)
-		(pin "B"
-			(uuid "4d5cb666-a33b-53f9-b969-1a03ad0c804f")
+		(pin "2"
+			(uuid "8344bf13-3102-56f8-b084-62a54188fbad")
 		)
-		(pin "C"
-			(uuid "1b75485d-91c9-549b-9161-2b6ba2e543ec")
-		)
-		(pin "E"
-			(uuid "1ae48633-b95a-5fbf-a495-4c3b2b9a8880")
+		(pin "3"
+			(uuid "fdc2e1c6-4119-5801-a154-5cb9be03ce3d")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
@@ -4808,7 +4848,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 221.742 146.05 0)
 			(effects
 				(font
@@ -4915,7 +4955,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 262.382 146.05 0)
 			(effects
 				(font
@@ -5014,15 +5054,15 @@
 				)
 			)
 		)
-		(property "Value" "820k 500V"
-			(at 251.33 165.1 0)
+		(property "Value" "270k"
+			(at 248.58 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 242.062 163.83 0)
 			(effects
 				(font
@@ -5094,7 +5134,7 @@
 		)
 		(uuid "2698e90e-9666-5415-8183-60ae4143e765")
 	)
-	(label "QB_PI"
+	(label "FBA_PI"
 		(at 243.84 170.18 270)
 		(effects
 			(font
@@ -5129,7 +5169,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
 			(at 275.2852 96.52 0)
 			(effects
 				(font
@@ -5291,7 +5331,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4"
 			(at 298.45 91.7448 0)
 			(effects
 				(font
@@ -5445,7 +5485,7 @@
 				)
 			)
 		)
-		(property "Value" "470k 0.5W"
+		(property "Value" "150k"
 			(at 314.96 95.25 270)
 			(effects
 				(font
@@ -5453,7 +5493,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 314.96 94.488 0)
 			(effects
 				(font
@@ -5525,74 +5565,8 @@
 		)
 		(uuid "c1d8b726-58fb-5778-9dfc-5497d8399d0e")
 	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
+	(label "BL1_PI"
 		(at 321.31 92.71 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "020118c9-88a7-5dcf-8027-51602952a83a")
-		(property "Reference" "#PWR506"
-			(at 321.31 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 321.31 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 321.31 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 321.31 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 321.31 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5a547b13-aefc-5518-b0e9-c90339e83384")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "#PWR506")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(text "B+FX about 328 V (150 V + 180 V), limit 27 mA, foldback 10 mA"
-		(exclude_from_sim no)
-		(at 71.12 158.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5602,140 +5576,8 @@
 		(uuid "3f17a21d-9ef3-52a4-afc7-32670c0f4761")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NMOS_Depletion")
-		(at 91.44 168.91 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "bc0e7d45-c0ba-522f-91ad-3ff2f89c358c")
-		(property "Reference" "Q504"
-			(at 96.52 167.005 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "LND150"
-			(at 96.52 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 91.44 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 91.44 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Depletion-mode N-channel MOSFET"
-			(at 91.44 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "D"
-			(uuid "b818dee7-ed6e-5cd9-a326-9eff3adb400b")
-		)
-		(pin "G"
-			(uuid "863304d2-1aad-5e11-9603-815f881c2f34")
-		)
-		(pin "S"
-			(uuid "e95a003c-12e9-5f88-9f58-94acd38f1882")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "Q504")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 93.98 163.83) (xy 93.98 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c989e77-9733-5551-ada6-a8ddb65a6665")
-	)
-	(label "BP_RAW"
-		(at 93.98 161.29 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d3764d7b-df7e-56f3-b2f8-99f88acb29de")
-	)
-	(wire
-		(pts
-			(xy 86.36 168.91) (xy 83.82 168.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b50717dc-d398-53e6-952f-078564d12820")
-	)
-	(label "ZT_FX"
-		(at 83.82 168.91 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0b8e3163-32b7-512d-a2f2-cdc630155270")
-	)
-	(wire
-		(pts
-			(xy 93.98 173.99) (xy 93.98 176.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9375edbd-c30e-5a5b-a493-7f8da895b0d6")
-	)
-	(label "CS_FX"
-		(at 93.98 176.53 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "cc390e9f-0c06-5490-85b2-2c82a9a1cc26")
-	)
-	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 111.76 186.69 90)
+		(at 142.24 57.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5743,23 +5585,23 @@
 		(dnp no)
 		(uuid "b4836b4b-1347-5822-8b8b-3ab4b24ced5c")
 		(property "Reference" "R509"
-			(at 111.76 184.15 270)
+			(at 146.98 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "330"
-			(at 111.76 189.23 270)
+		(property "Value" "330k"
+			(at 146.98 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 111.76 188.468 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 140.462 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5768,7 +5610,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.76 186.69 0)
+			(at 142.24 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5777,7 +5619,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 111.76 186.69 0)
+			(at 142.24 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5802,316 +5644,47 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 186.69) (xy 105.41 186.69)
+			(xy 142.24 53.34) (xy 142.24 50.8)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "29a6428e-07dc-5057-a15c-98d8f3c954c1")
+		(uuid "8c989e77-9733-5551-ada6-a8ddb65a6665")
 	)
-	(label "CS_FX"
-		(at 105.41 186.69 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7c3a142a-e284-540a-8e4c-ba93d4df09bc")
-	)
-	(wire
-		(pts
-			(xy 115.57 186.69) (xy 118.11 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cedba622-013e-5cfd-8d63-6f42e1d82d52")
-	)
-	(label "ZT_FX"
-		(at 118.11 186.69 0)
+	(label "RF1_PI"
+		(at 142.24 50.8 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "e09c6e24-8eea-542a-b8b1-3ccbf126a546")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:D_Zener")
-		(at 111.76 208.28 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b90c51af-b282-5a68-a70c-cfea9f5e39c4")
-		(property "Reference" "D506"
-			(at 116.5 207.01 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "150V 5W 2%"
-			(at 119.8 209.55 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 111.76 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 111.76 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zener diode"
-			(at 111.76 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ee711073-ea40-5cc4-acb9-c5f84e51800a")
-		)
-		(pin "2"
-			(uuid "714edcb3-edb5-5618-8bb4-84273f9b751b")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "D506")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "d3764d7b-df7e-56f3-b2f8-99f88acb29de")
 	)
 	(wire
 		(pts
-			(xy 111.76 212.09) (xy 111.76 214.63)
+			(xy 142.24 60.96) (xy 142.24 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a500ae56-d091-597c-be8d-aab7c3dbf9a3")
+		(uuid "b50717dc-d398-53e6-952f-078564d12820")
 	)
-	(label "ZT_FX"
-		(at 111.76 214.63 270)
+	(label "RF2_PI"
+		(at 142.24 63.5 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "c870274d-c675-593a-b46d-4847457de359")
-	)
-	(wire
-		(pts
-			(xy 111.76 204.47) (xy 111.76 201.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9f130cf7-e831-56b9-987d-891838134465")
-	)
-	(label "Z1_FX"
-		(at 111.76 201.93 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "14456a62-5d2b-5ae7-b179-4272e966943a")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:D_Zener")
-		(at 111.76 227.33 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7fd7a133-5588-5077-8067-975b28958506")
-		(property "Reference" "D507"
-			(at 116.5 226.06 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "180V 5W 2%"
-			(at 119.8 228.6 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 111.76 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 111.76 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zener diode"
-			(at 111.76 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "74204ec9-8dea-5527-8e76-aa062715b699")
-		)
-		(pin "2"
-			(uuid "eb9bdb7a-ce7e-557b-a5de-67b044094333")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "D507")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 111.76 231.14) (xy 111.76 233.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c86d60a4-a1c1-56f3-b692-5f130c379cc8")
-	)
-	(label "Z1_FX"
-		(at 111.76 233.68 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7f5b3bff-614f-54f6-a0ee-657b64a86f91")
-	)
-	(wire
-		(pts
-			(xy 111.76 223.52) (xy 111.76 220.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dc3a1f88-e22c-5db5-b664-1510425bc881")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 111.76 220.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d820b223-857f-5e22-97ef-bb8bb9246332")
-		(property "Reference" "#PWR507"
-			(at 111.76 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 111.76 224.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 111.76 220.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 111.76 220.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 111.76 220.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0ebbb035-c6bf-5d86-96f6-4d0c02d44367")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "#PWR507")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "0b8e3163-32b7-512d-a2f2-cdc630155270")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 142.24 186.69 0)
+		(at 162.56 67.31 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6119,23 +5692,23 @@
 		(dnp no)
 		(uuid "f0b01112-0ab2-57e1-9ee8-60f322d60279")
 		(property "Reference" "R510"
-			(at 146.98 185.42 0)
+			(at 167.3 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "1M 500V"
-			(at 148.63 187.96 0)
+		(property "Value" "330k"
+			(at 167.3 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 140.462 186.69 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 160.782 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6144,7 +5717,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 142.24 186.69 0)
+			(at 162.56 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6153,7 +5726,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 142.24 186.69 0)
+			(at 162.56 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6178,209 +5751,47 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 182.88) (xy 142.24 180.34)
+			(xy 162.56 63.5) (xy 162.56 60.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e3fdef26-8adf-50a2-9247-a538acbc54c2")
+		(uuid "9375edbd-c30e-5a5b-a493-7f8da895b0d6")
 	)
-	(label "ZT_FX"
-		(at 142.24 180.34 90)
+	(label "RF2_PI"
+		(at 162.56 60.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "99e47766-78ca-5fa9-a6c6-7f1ecc0b8286")
+		(uuid "cc390e9f-0c06-5490-85b2-2c82a9a1cc26")
 	)
 	(wire
 		(pts
-			(xy 142.24 190.5) (xy 142.24 193.04)
+			(xy 162.56 71.12) (xy 162.56 73.66)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6b9b79fc-b65f-554d-9a81-11c213ff1001")
+		(uuid "29a6428e-07dc-5057-a15c-98d8f3c954c1")
 	)
-	(label "GF_FX"
-		(at 142.24 193.04 270)
+	(label "GF_PI"
+		(at 162.56 73.66 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "0e626cc8-91ad-567a-9a3f-477a743b80e9")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:C")
-		(at 162.56 208.28 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5d4f7761-2c1c-5697-8526-0b0ed1a4be74")
-		(property "Reference" "C504"
-			(at 162.56 205.74 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.2u/630V film"
-			(at 162.56 210.82 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 166.37 207.3148 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 162.56 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 162.56 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "69049492-5f60-5a8e-a251-6c0f37ea4af1")
-		)
-		(pin "2"
-			(uuid "7e117ea0-8892-5fa7-a335-d52e7cc02e75")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "C504")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 158.75 208.28) (xy 156.21 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "746c3b99-dbb9-529e-b56d-c88237d9b956")
-	)
-	(label "GF_FX"
-		(at 156.21 208.28 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6acd5476-3734-5af5-a0a4-a4d8d28fbede")
-	)
-	(wire
-		(pts
-			(xy 166.37 208.28) (xy 168.91 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ab8a856-80e3-5e59-b796-d906ae16aacf")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 168.91 208.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f449d6ec-1d72-5f73-9de0-478c0049fe7e")
-		(property "Reference" "#PWR508"
-			(at 168.91 214.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 168.91 212.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 168.91 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 168.91 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 168.91 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c8031884-af49-529c-9944-1be5c41aecd8")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "#PWR508")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "7c3a142a-e284-540a-8e4c-ba93d4df09bc")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 182.88 186.69 0)
+		(at 284.48 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6388,23 +5799,23 @@
 		(dnp no)
 		(uuid "9ce53829-c4b4-5431-a54e-97a6107b37f9")
 		(property "Reference" "R511"
-			(at 187.62 185.42 0)
+			(at 289.22 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10k"
-			(at 187.07 187.96 0)
+		(property "Value" "270k"
+			(at 289.22 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 181.102 186.69 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 282.702 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6413,7 +5824,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 186.69 0)
+			(at 284.48 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6422,7 +5833,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 182.88 186.69 0)
+			(at 284.48 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6447,393 +5858,47 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 182.88) (xy 182.88 180.34)
+			(xy 284.48 160.02) (xy 284.48 157.48)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7c4a5c06-cc1a-56b7-88eb-3b73cdc43f02")
+		(uuid "cedba622-013e-5cfd-8d63-6f42e1d82d52")
 	)
-	(label "GF_FX"
-		(at 182.88 180.34 90)
+	(label "FBA_PI"
+		(at 284.48 157.48 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "d2a13f85-36aa-5bc6-bd8a-2cc8c3e03539")
+		(uuid "e09c6e24-8eea-542a-b8b1-3ccbf126a546")
 	)
 	(wire
 		(pts
-			(xy 182.88 190.5) (xy 182.88 193.04)
+			(xy 284.48 167.64) (xy 284.48 170.18)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "20e85898-b38f-5477-ac88-5b25b206d5bd")
+		(uuid "a500ae56-d091-597c-be8d-aab7c3dbf9a3")
 	)
-	(label "GP_FX"
-		(at 182.88 193.04 270)
+	(label "FBB_PI"
+		(at 284.48 170.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "47fd1d7a-45f8-5fbd-bc4c-bdf0e3a2ab84")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:D")
-		(at 162.56 163.83 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e97ca6c6-f6a2-576d-819a-e33f4239e824")
-		(property "Reference" "D508"
-			(at 162.56 161.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1N4007"
-			(at 162.56 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 162.56 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 162.56 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Diode"
-			(at 162.56 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b550d3e7-9791-5569-ad8d-fbb83d5ce40e")
-		)
-		(pin "2"
-			(uuid "91782422-af91-5b53-ba51-32aaa7ee3a71")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "D508")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 158.75 163.83) (xy 156.21 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ae319700-8c98-50ac-8762-5a8bce26827f")
-	)
-	(label "BP_RAW"
-		(at 156.21 163.83 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6fa4c216-1b65-57dd-9859-9b610e5cbd88")
-	)
-	(wire
-		(pts
-			(xy 166.37 163.83) (xy 168.91 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6636f784-de32-5e7b-9cd8-01e73d425ecb")
-	)
-	(label "GF_FX"
-		(at 168.91 163.83 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a1699107-600a-5462-9e8f-8036406153ae")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NMOS")
-		(at 213.36 186.69 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "cad478bb-d07d-58fb-88c8-2964cd23190d")
-		(property "Reference" "Q505"
-			(at 218.44 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "STF4N80K5 (insulated)"
-			(at 218.44 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 218.44 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 213.36 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "N-MOSFET transistor"
-			(at 213.36 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "D"
-			(uuid "dc3b9c4a-4024-5cca-8507-01fa99bdad29")
-		)
-		(pin "G"
-			(uuid "d617c7ef-ba9d-53be-a94d-78695828bd02")
-		)
-		(pin "S"
-			(uuid "2ff94cbf-c076-564a-9fcf-6193711781e6")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "Q505")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 215.9 181.61) (xy 215.9 179.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8a018c13-fca4-583c-8653-aaba201b427a")
-	)
-	(label "BP_RAW"
-		(at 215.9 179.07 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4fc2f891-f7ac-5ee4-b4c4-f2d40bc2c125")
-	)
-	(wire
-		(pts
-			(xy 208.28 186.69) (xy 205.74 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7ec9ddb1-975f-5ac9-979c-ea0acdedea7b")
-	)
-	(label "GP_FX"
-		(at 205.74 186.69 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "df31b98f-efbe-589f-be78-6b334ad206d3")
-	)
-	(wire
-		(pts
-			(xy 215.9 191.77) (xy 215.9 194.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2103a682-b80c-51ef-93ee-5374a58a35ac")
-	)
-	(label "SRC_FX"
-		(at 215.9 194.31 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f67d7b5e-a743-5bec-8775-4f852bd48e2e")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:D_Zener")
-		(at 203.2 222.25 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9942ab3f-07b9-5a5e-9a65-52eb35b93a89")
-		(property "Reference" "D509"
-			(at 207.94 220.98 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "15V"
-			(at 207.39 223.52 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 203.2 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 203.2 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zener diode"
-			(at 203.2 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d3fcbe1c-6cec-5cf2-8ba9-d882b7d37106")
-		)
-		(pin "2"
-			(uuid "0a86e1b5-7518-5199-ac40-52e6c812dc72")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "D509")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 203.2 226.06) (xy 203.2 228.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff77906c-7c1c-5f26-8f3b-9b31f9e89574")
-	)
-	(label "GP_FX"
-		(at 203.2 228.6 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4348d4fb-0d2f-5df5-a3d2-eb9756bb1e7f")
-	)
-	(wire
-		(pts
-			(xy 203.2 218.44) (xy 203.2 215.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8b298518-5209-5ed9-ae6b-ad314e4fe882")
-	)
-	(label "SRC_FX"
-		(at 203.2 215.9 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1261b2ad-48c3-5ef6-b798-0fd022d74448")
+		(uuid "c870274d-c675-593a-b46d-4847457de359")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 233.68 204.47 0)
+		(at 314.96 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6841,23 +5906,23 @@
 		(dnp no)
 		(uuid "c5504c47-469b-5cef-b2cc-487019003b2b")
 		(property "Reference" "R512"
-			(at 238.42 203.2 0)
+			(at 319.7 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "16R"
-			(at 237.87 205.74 0)
+		(property "Value" "270k"
+			(at 319.7 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 231.902 204.47 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 313.182 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6866,7 +5931,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 233.68 204.47 0)
+			(at 314.96 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6875,7 +5940,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 233.68 204.47 0)
+			(at 314.96 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6900,179 +5965,47 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 200.66) (xy 233.68 198.12)
+			(xy 314.96 160.02) (xy 314.96 157.48)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "39d0f0df-3a2f-5464-a50b-7f8963c3f2a7")
+		(uuid "9f130cf7-e831-56b9-987d-891838134465")
 	)
-	(label "SRC_FX"
-		(at 233.68 198.12 90)
+	(label "FBB_PI"
+		(at 314.96 157.48 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "c128a835-763c-5f9f-bbc0-d236bb616ef8")
+		(uuid "14456a62-5d2b-5ae7-b179-4272e966943a")
 	)
 	(wire
 		(pts
-			(xy 233.68 208.28) (xy 233.68 210.82)
+			(xy 314.96 167.64) (xy 314.96 170.18)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0a3e2353-0122-5840-8a0c-abae9061f6a4")
+		(uuid "c86d60a4-a1c1-56f3-b692-5f130c379cc8")
 	)
-	(label "BFX"
-		(at 233.68 210.82 270)
+	(label "QB_PI"
+		(at 314.96 170.18 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "5f47b9e6-a037-53e8-960b-8cf74cb3e2c4")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NPN")
-		(at 243.84 240.03 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "6c2b003e-f9fb-53f1-b636-3a831cd7dc1c")
-		(property "Reference" "Q506"
-			(at 248.92 238.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MMBTA42"
-			(at 248.92 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 248.92 237.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 243.84 240.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "NPN bipolar junction transistor"
-			(at 243.84 240.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "B"
-			(uuid "32b39a43-9c5b-5fc8-aece-9a34f2012443")
-		)
-		(pin "C"
-			(uuid "ec66909f-999a-5fa2-85d6-6b2f0b4907c2")
-		)
-		(pin "E"
-			(uuid "70e54bf8-efa0-5b70-bb5f-f47284213025")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "Q506")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 238.76 240.03) (xy 236.22 240.03)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5e163fe8-ea35-5090-8101-f05341274569")
-	)
-	(label "QB_FX"
-		(at 236.22 240.03 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fc3d43c0-ff30-5294-82d1-709e37a7cf45")
-	)
-	(wire
-		(pts
-			(xy 246.38 234.95) (xy 246.38 232.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dbfd98fb-c469-589f-84d3-88d06c947dbb")
-	)
-	(label "GP_FX"
-		(at 246.38 232.41 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bc0fc509-d351-5bc5-9c90-bb1e158bfdf7")
-	)
-	(wire
-		(pts
-			(xy 246.38 245.11) (xy 246.38 247.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59c8f1cc-7f13-5f75-94f0-883cf95e74e5")
-	)
-	(label "BFX"
-		(at 246.38 247.65 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4bca3ac8-d90b-54f6-a279-05e3c7a29f05")
+		(uuid "7f5b3bff-614f-54f6-a0ee-657b64a86f91")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 223.52 261.62 0)
+		(at 314.96 116.84 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7080,23 +6013,23 @@
 		(dnp no)
 		(uuid "ecffda05-319a-5dd2-8119-1d332c40735e")
 		(property "Reference" "R513"
-			(at 228.26 260.35 0)
+			(at 314.96 114.3 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "1k"
-			(at 227.16 262.89 0)
+		(property "Value" "150k"
+			(at 314.96 119.38 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 221.742 261.62 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 314.96 118.618 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7105,7 +6038,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 223.52 261.62 0)
+			(at 314.96 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7114,7 +6047,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 223.52 261.62 0)
+			(at 314.96 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7139,47 +6072,47 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 257.81) (xy 223.52 255.27)
+			(xy 311.15 116.84) (xy 308.61 116.84)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "81e05d7f-21b1-59c9-a59d-cbf45b761bb2")
+		(uuid "dc3a1f88-e22c-5db5-b664-1510425bc881")
 	)
-	(label "SRC_FX"
-		(at 223.52 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dbc82822-49b5-5aba-8c80-146924cc74be")
-	)
-	(wire
-		(pts
-			(xy 223.52 265.43) (xy 223.52 267.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2e203505-0235-584e-9bce-9c22e1783aa4")
-	)
-	(label "QB_FX"
-		(at 223.52 267.97 270)
+	(label "BL1_PI"
+		(at 308.61 116.84 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "92d8fd1d-1ad5-5c14-9b5e-db3bc55bacc4")
+		(uuid "e3fdef26-8adf-50a2-9247-a538acbc54c2")
+	)
+	(wire
+		(pts
+			(xy 318.77 116.84) (xy 321.31 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99e47766-78ca-5fa9-a6c6-7f1ecc0b8286")
+	)
+	(label "BL2_PI"
+		(at 321.31 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6b9b79fc-b65f-554d-9a81-11c213ff1001")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 264.16 261.62 0)
+		(at 314.96 142.24 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7187,23 +6120,23 @@
 		(dnp no)
 		(uuid "a1164f6c-f980-5ac8-9b73-0feb61c14e19")
 		(property "Reference" "R514"
-			(at 268.9 260.35 0)
+			(at 314.96 139.7 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10k"
-			(at 268.35 262.89 0)
+		(property "Value" "150k"
+			(at 314.96 144.78 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 262.382 261.62 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 314.96 144.018 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7212,7 +6145,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 264.16 261.62 0)
+			(at 314.96 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7221,7 +6154,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 264.16 261.62 0)
+			(at 314.96 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7246,63 +6179,54 @@
 	)
 	(wire
 		(pts
-			(xy 264.16 257.81) (xy 264.16 255.27)
+			(xy 311.15 142.24) (xy 308.61 142.24)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1443d957-9ba0-5354-8147-d0d2b297b341")
+		(uuid "0e626cc8-91ad-567a-9a3f-477a743b80e9")
 	)
-	(label "QB_FX"
-		(at 264.16 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0211ac49-e19d-5b9c-a044-f36ad23580e4")
-	)
-	(wire
-		(pts
-			(xy 264.16 265.43) (xy 264.16 267.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0cf12842-21a4-5dc7-9f47-2885b656b563")
-	)
-	(label "BFX"
-		(at 264.16 267.97 270)
+	(label "BL2_PI"
+		(at 308.61 142.24 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "f3194d77-0509-531a-a10a-461302acfc01")
+		(uuid "746c3b99-dbb9-529e-b56d-c88237d9b956")
+	)
+	(wire
+		(pts
+			(xy 318.77 142.24) (xy 321.31 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6acd5476-3734-5af5-a0a4-a4d8d28fbede")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:R")
-		(at 243.84 279.4 0)
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 321.31 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c306d6bd-cb41-5203-9e11-e8dbb7124424")
-		(property "Reference" "R515"
-			(at 248.58 278.13 0)
+		(uuid "020118c9-88a7-5dcf-8027-51602952a83a")
+		(property "Reference" "#PWR506"
+			(at 321.31 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Value" "820k 500V"
-			(at 251.33 280.67 0)
+		(property "Value" "GND"
+			(at 321.31 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7310,7 +6234,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 242.062 279.4 0)
+			(at 321.31 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7319,7 +6243,225 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 243.84 279.4 0)
+			(at 321.31 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 321.31 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5a547b13-aefc-5518-b0e9-c90339e83384")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "#PWR506")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "Q (MMBTA42) on the STD4N80K5's copper pour (thermal foldback); 2.2u film: Rf 3 x 330k"
+		(exclude_from_sim no)
+		(at 193.04 177.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4ab8a856-80e3-5e59-b796-d906ae16aacf")
+	)
+	(text "B+FX about 328 V (150 V + 180 V), limit 27 mA (20 mA with Q at 70 C), short 10 mA cold, about 0.6 W steady"
+		(exclude_from_sim no)
+		(at 71.12 194.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7c4a5c06-cc1a-56b7-88eb-3b73cdc43f02")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:DN2540N8-G")
+		(at 91.44 204.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bc0e7d45-c0ba-522f-91ad-3ff2f89c358c")
+		(property "Reference" "Q504"
+			(at 96.52 202.565 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LND150N8"
+			(at 96.52 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3"
+			(at 91.44 219.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/DN2540%20B060313.pdf"
+			(at 91.44 216.535 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "150mA Ids, 400 Vds, Depletion-mode N-channel MOSFET, SOT-89"
+			(at 91.44 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1a2c1dc4-d705-5657-ae5c-7640de443c02")
+		)
+		(pin "2"
+			(uuid "e243d2d5-81be-5c69-95a0-bbc297586fa5")
+		)
+		(pin "3"
+			(uuid "22d5de75-8840-5377-a1ff-dc6000c2fc1f")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "Q504")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 93.98 199.39) (xy 93.98 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2a13f85-36aa-5bc6-bd8a-2cc8c3e03539")
+	)
+	(label "BP_RAW"
+		(at 93.98 196.85 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "20e85898-b38f-5477-ac88-5b25b206d5bd")
+	)
+	(wire
+		(pts
+			(xy 86.36 204.47) (xy 83.82 204.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47fd1d7a-45f8-5fbd-bc4c-bdf0e3a2ab84")
+	)
+	(label "ZT_FX"
+		(at 83.82 204.47 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ae319700-8c98-50ac-8762-5a8bce26827f")
+	)
+	(wire
+		(pts
+			(xy 93.98 209.55) (xy 93.98 212.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6fa4c216-1b65-57dd-9859-9b610e5cbd88")
+	)
+	(label "CS_FX"
+		(at 93.98 212.09 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6636f784-de32-5e7b-9cd8-01e73d425ecb")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 111.76 222.25 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c306d6bd-cb41-5203-9e11-e8dbb7124424")
+		(property "Reference" "R515"
+			(at 111.76 219.71 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "330"
+			(at 111.76 224.79 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 111.76 224.028 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 111.76 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7328,7 +6470,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 243.84 279.4 0)
+			(at 111.76 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7353,71 +6495,71 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 275.59) (xy 243.84 273.05)
+			(xy 107.95 222.25) (xy 105.41 222.25)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ca9b9969-baa3-56ed-b2d2-a8fd12f57aaf")
+		(uuid "a1699107-600a-5462-9e8f-8036406153ae")
 	)
-	(label "BP_RAW"
-		(at 243.84 273.05 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2ce28673-2b6e-5c40-bd52-a6659f958ef1")
-	)
-	(wire
-		(pts
-			(xy 243.84 283.21) (xy 243.84 285.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6e1da7a4-3288-59d7-9cf5-8e3382df1804")
-	)
-	(label "QB_FX"
-		(at 243.84 285.75 270)
+	(label "CS_FX"
+		(at 105.41 222.25 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "aba50510-e763-5eb8-a5cd-a176c6bb183c")
+		(uuid "8a018c13-fca4-583c-8653-aaba201b427a")
+	)
+	(wire
+		(pts
+			(xy 115.57 222.25) (xy 118.11 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fc2f891-f7ac-5ee4-b4c4-f2d40bc2c125")
+	)
+	(label "ZT_FX"
+		(at 118.11 222.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7ec9ddb1-975f-5ac9-979c-ea0acdedea7b")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:C_Polarized")
-		(at 274.32 208.28 0)
+		(lib_id "tube_pi_fxloop_revb:D_Zener")
+		(at 111.76 243.84 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f0836702-d45b-5349-9518-e4ff80227a9f")
-		(property "Reference" "C505"
-			(at 279.06 207.01 0)
+		(uuid "b90c51af-b282-5a68-a70c-cfea9f5e39c4")
+		(property "Reference" "D506"
+			(at 116.5 242.57 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "47u/450V"
-			(at 281.26 209.55 0)
+		(property "Value" "150V"
+			(at 116.5 245.11 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 275.2852 212.09 0)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 111.76 243.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7426,7 +6568,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 274.32 208.28 0)
+			(at 111.76 243.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7434,8 +6576,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Polarized capacitor"
-			(at 274.32 208.28 0)
+		(property "Description" "Zener diode"
+			(at 111.76 243.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7444,15 +6586,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "681fb6c4-ff8b-5f44-8b3f-c2338c4eaf3c")
+			(uuid "ee711073-ea40-5cc4-acb9-c5f84e51800a")
 		)
 		(pin "2"
-			(uuid "5ae79c95-14e6-5b2b-a1ce-4a1e86c2f4bc")
+			(uuid "714edcb3-edb5-5618-8bb4-84273f9b751b")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "C505")
+					(reference "D506")
 					(unit 1)
 				)
 			)
@@ -7460,45 +6602,152 @@
 	)
 	(wire
 		(pts
-			(xy 274.32 204.47) (xy 274.32 201.93)
+			(xy 111.76 247.65) (xy 111.76 250.19)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "875d7742-d267-50b4-b91d-e3a3d6c2e7e4")
+		(uuid "df31b98f-efbe-589f-be78-6b334ad206d3")
 	)
-	(label "BFX"
-		(at 274.32 201.93 90)
+	(label "ZT_FX"
+		(at 111.76 250.19 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2103a682-b80c-51ef-93ee-5374a58a35ac")
+	)
+	(wire
+		(pts
+			(xy 111.76 240.03) (xy 111.76 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f67d7b5e-a743-5bec-8775-4f852bd48e2e")
+	)
+	(label "Z1_FX"
+		(at 111.76 237.49 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "5614da45-ee18-5f45-b72f-26b7cab46a7e")
-	)
-	(wire
-		(pts
-			(xy 274.32 212.09) (xy 274.32 214.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "342482c9-be2c-5342-b96c-9c439dce8ab9")
+		(uuid "ff77906c-7c1c-5f26-8f3b-9b31f9e89574")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 274.32 214.63 0)
+		(lib_id "tube_pi_fxloop_revb:D_Zener")
+		(at 111.76 262.89 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ed90b1ce-ee93-5c92-bc34-908655879a73")
-		(property "Reference" "#PWR509"
-			(at 274.32 220.98 0)
+		(uuid "7fd7a133-5588-5077-8067-975b28958506")
+		(property "Reference" "D507"
+			(at 116.5 261.62 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "180V"
+			(at 116.5 264.16 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 111.76 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 111.76 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Zener diode"
+			(at 111.76 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "74204ec9-8dea-5527-8e76-aa062715b699")
+		)
+		(pin "2"
+			(uuid "eb9bdb7a-ce7e-557b-a5de-67b044094333")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "D507")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 111.76 266.7) (xy 111.76 269.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4348d4fb-0d2f-5df5-a3d2-eb9756bb1e7f")
+	)
+	(label "Z1_FX"
+		(at 111.76 269.24 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8b298518-5209-5ed9-ae6b-ad314e4fe882")
+	)
+	(wire
+		(pts
+			(xy 111.76 259.08) (xy 111.76 256.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1261b2ad-48c3-5ef6-b798-0fd022d74448")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 111.76 256.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d820b223-857f-5e22-97ef-bb8bb9246332")
+		(property "Reference" "#PWR507"
+			(at 111.76 262.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7507,7 +6756,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 274.32 218.44 0)
+			(at 111.76 260.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7515,7 +6764,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 274.32 214.63 0)
+			(at 111.76 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7524,7 +6773,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 274.32 214.63 0)
+			(at 111.76 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7533,7 +6782,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 274.32 214.63 0)
+			(at 111.76 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7542,174 +6791,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "537b4558-adfc-5ec0-9bbd-bfd4dc698fa9")
+			(uuid "0ebbb035-c6bf-5d86-96f6-4d0c02d44367")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "#PWR509")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:C")
-		(at 294.64 208.28 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "475131b7-6fcb-521d-a85f-c0e8429e21ae")
-		(property "Reference" "C506"
-			(at 294.64 205.74 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100n/630V"
-			(at 294.64 210.82 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 298.45 207.3148 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 294.64 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 294.64 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "76d8c3ca-783b-50d4-a088-f81b22bae3a4")
-		)
-		(pin "2"
-			(uuid "8a775415-95ca-512c-a3eb-f71f0878b11f")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "C506")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 290.83 208.28) (xy 288.29 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29fb59b5-b301-519f-88f9-7a475dee37d0")
-	)
-	(label "BFX"
-		(at 288.29 208.28 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "193f9df8-c321-5170-9796-89e9d731da95")
-	)
-	(wire
-		(pts
-			(xy 298.45 208.28) (xy 300.99 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29886ffd-3883-52f3-8245-4de3054b0366")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 300.99 208.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2a24fa9f-5d4f-5f93-8292-4aeaf09719b1")
-		(property "Reference" "#PWR510"
-			(at 300.99 214.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 300.99 212.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 300.99 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 300.99 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 300.99 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6c3d273d-cad7-5dab-9ab5-234cb52d49a8")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "#PWR510")
+					(reference "#PWR507")
 					(unit 1)
 				)
 			)
@@ -7717,7 +6804,7 @@
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 314.96 208.28 90)
+		(at 142.24 222.25 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7725,23 +6812,23 @@
 		(dnp no)
 		(uuid "587b968f-919c-5d01-91cf-dc137a450977")
 		(property "Reference" "R516"
-			(at 314.96 205.74 270)
+			(at 146.98 220.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "470k 0.5W"
-			(at 314.96 210.82 270)
+		(property "Value" "330k"
+			(at 146.98 223.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 314.96 210.058 0)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 140.462 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7750,7 +6837,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 314.96 208.28 0)
+			(at 142.24 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7759,7 +6846,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 314.96 208.28 0)
+			(at 142.24 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7784,62 +6871,71 @@
 	)
 	(wire
 		(pts
-			(xy 311.15 208.28) (xy 308.61 208.28)
+			(xy 142.24 218.44) (xy 142.24 215.9)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "121167e0-7554-5093-877e-c6abdf642d66")
+		(uuid "39d0f0df-3a2f-5464-a50b-7f8963c3f2a7")
 	)
-	(label "BFX"
-		(at 308.61 208.28 180)
+	(label "ZT_FX"
+		(at 142.24 215.9 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c128a835-763c-5f9f-bbc0-d236bb616ef8")
+	)
+	(wire
+		(pts
+			(xy 142.24 226.06) (xy 142.24 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a3e2353-0122-5840-8a0c-abae9061f6a4")
+	)
+	(label "RF1_FX"
+		(at 142.24 228.6 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "7dd24c75-76e6-54d7-b193-8833cadd0a93")
-	)
-	(wire
-		(pts
-			(xy 318.77 208.28) (xy 321.31 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1ad54cf4-b24a-54db-8e84-a6cbe5bd1d5a")
+		(uuid "5f47b9e6-a037-53e8-960b-8cf74cb3e2c4")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 321.31 208.28 0)
+		(lib_id "tube_pi_fxloop_revb:C")
+		(at 162.56 243.84 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c8f5740a-e5ce-55f2-a589-859c1205b874")
-		(property "Reference" "#PWR511"
-			(at 321.31 214.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 321.31 212.09 0)
+		(uuid "5d4f7761-2c1c-5697-8526-0b0ed1a4be74")
+		(property "Reference" "C504"
+			(at 162.56 241.3 270)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 321.31 208.28 0)
+		(property "Value" "2.2u/630V film"
+			(at 162.56 246.38 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4"
+			(at 166.37 242.8748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7848,7 +6944,105 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 321.31 208.28 0)
+			(at 162.56 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 162.56 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "69049492-5f60-5a8e-a251-6c0f37ea4af1")
+		)
+		(pin "2"
+			(uuid "7e117ea0-8892-5fa7-a335-d52e7cc02e75")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "C504")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 158.75 243.84) (xy 156.21 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e163fe8-ea35-5090-8101-f05341274569")
+	)
+	(label "GF_FX"
+		(at 156.21 243.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fc3d43c0-ff30-5294-82d1-709e37a7cf45")
+	)
+	(wire
+		(pts
+			(xy 166.37 243.84) (xy 168.91 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbfd98fb-c469-589f-84d3-88d06c947dbb")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 168.91 243.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f449d6ec-1d72-5f73-9de0-478c0049fe7e")
+		(property "Reference" "#PWR508"
+			(at 168.91 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 168.91 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 168.91 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 168.91 243.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7857,7 +7051,2150 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 321.31 208.28 0)
+			(at 168.91 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c8031884-af49-529c-9944-1be5c41aecd8")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "#PWR508")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 182.88 222.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5c0b8461-c869-558a-a396-9b1c30fc74bc")
+		(property "Reference" "R517"
+			(at 187.62 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 187.07 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 181.102 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 182.88 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 182.88 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc79cc95-26ef-5559-805f-11142f770ca6")
+		)
+		(pin "2"
+			(uuid "23ef469a-0d9c-57a2-a6c2-421fe3e726e3")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R517")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 182.88 218.44) (xy 182.88 215.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc0fc509-d351-5bc5-9c90-bb1e158bfdf7")
+	)
+	(label "GF_FX"
+		(at 182.88 215.9 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59c8f1cc-7f13-5f75-94f0-883cf95e74e5")
+	)
+	(wire
+		(pts
+			(xy 182.88 226.06) (xy 182.88 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4bca3ac8-d90b-54f6-a279-05e3c7a29f05")
+	)
+	(label "GP_FX"
+		(at 182.88 228.6 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "81e05d7f-21b1-59c9-a59d-cbf45b761bb2")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:D")
+		(at 162.56 199.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e97ca6c6-f6a2-576d-819a-e33f4239e824")
+		(property "Reference" "D508"
+			(at 162.56 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N4007 (M7)"
+			(at 162.56 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 162.56 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 162.56 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 162.56 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b550d3e7-9791-5569-ad8d-fbb83d5ce40e")
+		)
+		(pin "2"
+			(uuid "91782422-af91-5b53-ba51-32aaa7ee3a71")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "D508")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 158.75 199.39) (xy 156.21 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbc82822-49b5-5aba-8c80-146924cc74be")
+	)
+	(label "BP_RAW"
+		(at 156.21 199.39 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2e203505-0235-584e-9bce-9c22e1783aa4")
+	)
+	(wire
+		(pts
+			(xy 166.37 199.39) (xy 168.91 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92d8fd1d-1ad5-5c14-9b5e-db3bc55bacc4")
+	)
+	(label "GF_FX"
+		(at 168.91 199.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1443d957-9ba0-5354-8147-d0d2b297b341")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:Q_NMOS_GDS")
+		(at 213.36 222.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cad478bb-d07d-58fb-88c8-2964cd23190d")
+		(property "Reference" "Q505"
+			(at 218.44 220.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "STD4N80K5"
+			(at 218.44 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:TO-252-2"
+			(at 218.44 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 213.36 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "N-MOSFET transistor, gate/drain/source"
+			(at 213.36 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "948a99ea-810a-5324-9d29-45bd8c466726")
+		)
+		(pin "2"
+			(uuid "af4fdc98-5a9a-53a3-bb4a-9cbca058e0d6")
+		)
+		(pin "3"
+			(uuid "c19902c5-ed51-50d2-bb05-7fc61264ef73")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "Q505")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 215.9 217.17) (xy 215.9 214.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0211ac49-e19d-5b9c-a044-f36ad23580e4")
+	)
+	(label "BP_RAW"
+		(at 215.9 214.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0cf12842-21a4-5dc7-9f47-2885b656b563")
+	)
+	(wire
+		(pts
+			(xy 208.28 222.25) (xy 205.74 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3194d77-0509-531a-a10a-461302acfc01")
+	)
+	(label "GP_FX"
+		(at 205.74 222.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ca9b9969-baa3-56ed-b2d2-a8fd12f57aaf")
+	)
+	(wire
+		(pts
+			(xy 215.9 227.33) (xy 215.9 229.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ce28673-2b6e-5c40-bd52-a6659f958ef1")
+	)
+	(label "SRC_FX"
+		(at 215.9 229.87 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6e1da7a4-3288-59d7-9cf5-8e3382df1804")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:D_Zener")
+		(at 203.2 257.81 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9942ab3f-07b9-5a5e-9a65-52eb35b93a89")
+		(property "Reference" "D509"
+			(at 207.94 256.54 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "15V"
+			(at 207.39 259.08 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 203.2 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Zener diode"
+			(at 203.2 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d3fcbe1c-6cec-5cf2-8ba9-d882b7d37106")
+		)
+		(pin "2"
+			(uuid "0a86e1b5-7518-5199-ac40-52e6c812dc72")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "D509")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 203.2 261.62) (xy 203.2 264.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aba50510-e763-5eb8-a5cd-a176c6bb183c")
+	)
+	(label "GP_FX"
+		(at 203.2 264.16 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "875d7742-d267-50b4-b91d-e3a3d6c2e7e4")
+	)
+	(wire
+		(pts
+			(xy 203.2 254) (xy 203.2 251.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5614da45-ee18-5f45-b72f-26b7cab46a7e")
+	)
+	(label "SRC_FX"
+		(at 203.2 251.46 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "342482c9-be2c-5342-b96c-9c439dce8ab9")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 233.68 240.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "eb837381-4cae-5ded-a5cd-ce761d2a4ae3")
+		(property "Reference" "R518"
+			(at 238.42 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "16R"
+			(at 237.87 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 231.902 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 233.68 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 233.68 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c65e64d9-5c23-5eca-bf67-c618d64a6a32")
+		)
+		(pin "2"
+			(uuid "eb4f7b7d-0ef4-526d-9dbe-d3e57a9555d3")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R518")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 233.68 236.22) (xy 233.68 233.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29fb59b5-b301-519f-88f9-7a475dee37d0")
+	)
+	(label "SRC_FX"
+		(at 233.68 233.68 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "193f9df8-c321-5170-9796-89e9d731da95")
+	)
+	(wire
+		(pts
+			(xy 233.68 243.84) (xy 233.68 246.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29886ffd-3883-52f3-8245-4de3054b0366")
+	)
+	(label "BFX"
+		(at 233.68 246.38 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "121167e0-7554-5093-877e-c6abdf642d66")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:MMBTA42")
+		(at 243.84 275.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6c2b003e-f9fb-53f1-b636-3a831cd7dc1c")
+		(property "Reference" "Q506"
+			(at 248.92 273.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MMBTA42"
+			(at 248.92 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 248.92 277.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MMBTA42LT1-D.PDF"
+			(at 243.84 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.5A Ic, 300V Vce, NPN High Voltage Transistor, SOT-23"
+			(at 243.84 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5b0da284-c25c-5efb-82c7-c7bb279f6b50")
+		)
+		(pin "2"
+			(uuid "56e8ff5e-7a9e-570d-a7af-5e9121bfeac8")
+		)
+		(pin "3"
+			(uuid "89d729a2-7cd3-5dbf-a2bf-b908e97e8052")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "Q506")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 238.76 275.59) (xy 236.22 275.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7dd24c75-76e6-54d7-b193-8833cadd0a93")
+	)
+	(label "QB_FX"
+		(at 236.22 275.59 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1ad54cf4-b24a-54db-8e84-a6cbe5bd1d5a")
+	)
+	(wire
+		(pts
+			(xy 246.38 270.51) (xy 246.38 267.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b60861d9-ca06-54e1-938d-a49da002ee32")
+	)
+	(label "GP_FX"
+		(at 246.38 267.97 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c9aba853-b838-583f-974e-6036d6433145")
+	)
+	(wire
+		(pts
+			(xy 246.38 280.67) (xy 246.38 283.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a62e4cdd-df4d-5217-95b0-d6094c2ce07e")
+	)
+	(label "BFX"
+		(at 246.38 283.21 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7bcbcec6-7f44-5224-88d2-a0234c485df0")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 223.52 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a2866ddd-13ac-5dcb-8ee2-cc62e3f2c4d7")
+		(property "Reference" "R519"
+			(at 228.26 295.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 227.16 298.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 221.742 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.52 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 223.52 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "680622b0-e20d-544d-a2a5-29168bba9095")
+		)
+		(pin "2"
+			(uuid "e06021d6-35f5-511e-b3a5-fb7470b9ce30")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R519")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 223.52 293.37) (xy 223.52 290.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1c0684e-51fa-578f-9fec-e71b96dc94fc")
+	)
+	(label "SRC_FX"
+		(at 223.52 290.83 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d73531df-47af-5eb1-8961-ee5fbe63bbd3")
+	)
+	(wire
+		(pts
+			(xy 223.52 300.99) (xy 223.52 303.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "930444f1-2ebd-5498-85a7-893ba41077d2")
+	)
+	(label "QB_FX"
+		(at 223.52 303.53 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d8a4d66c-a2a6-5a5b-a932-f3c8581610d1")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 264.16 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8c5c89da-7d58-5fb1-8c3e-124c137bf6a9")
+		(property "Reference" "R520"
+			(at 268.9 295.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 268.35 298.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 262.382 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 264.16 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 264.16 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c6d9065a-3991-5033-bfa2-fc416eb46c77")
+		)
+		(pin "2"
+			(uuid "8f05fc2f-bde5-58db-a588-d7e9a15cf599")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R520")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 264.16 293.37) (xy 264.16 290.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6dc99196-c368-50b5-8db6-42d747b975ee")
+	)
+	(label "QB_FX"
+		(at 264.16 290.83 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4853e1c5-6b61-5bd1-bf30-f673c3870f04")
+	)
+	(wire
+		(pts
+			(xy 264.16 300.99) (xy 264.16 303.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f5ffdb0-1b9f-5d98-9670-93a02787ecdf")
+	)
+	(label "BFX"
+		(at 264.16 303.53 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5d97654c-c9d9-5271-b2f0-3cf3490894b9")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 243.84 314.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5457dfc9-bf38-58ce-a82d-bad2d921c39e")
+		(property "Reference" "R521"
+			(at 248.58 313.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "270k"
+			(at 248.58 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 242.062 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 243.84 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 243.84 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2e3d1b8b-ffe6-5c71-828c-67834019a539")
+		)
+		(pin "2"
+			(uuid "045f5284-b358-5e71-a603-18d7c0c77778")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R521")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 243.84 311.15) (xy 243.84 308.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d265600-ce0e-5095-ad6e-b40479976c35")
+	)
+	(label "BP_RAW"
+		(at 243.84 308.61 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4b14636-daff-505d-bf46-ec7aefc074da")
+	)
+	(wire
+		(pts
+			(xy 243.84 318.77) (xy 243.84 321.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d73707a0-bbbb-50dd-8a69-5b27fc47a4e9")
+	)
+	(label "FBA_FX"
+		(at 243.84 321.31 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4f3807e0-71ce-5c0e-b533-31988767c86d")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:C_Polarized")
+		(at 274.32 243.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f0836702-d45b-5349-9518-e4ff80227a9f")
+		(property "Reference" "C505"
+			(at 279.06 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "47u/450V"
+			(at 281.26 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm"
+			(at 275.2852 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 274.32 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Polarized capacitor"
+			(at 274.32 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "681fb6c4-ff8b-5f44-8b3f-c2338c4eaf3c")
+		)
+		(pin "2"
+			(uuid "5ae79c95-14e6-5b2b-a1ce-4a1e86c2f4bc")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "C505")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 274.32 240.03) (xy 274.32 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d384fa61-1fdc-5719-8b46-d49f1d76874a")
+	)
+	(label "BFX"
+		(at 274.32 237.49 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4c8992d1-12de-53a1-9f8d-88c69eb1c532")
+	)
+	(wire
+		(pts
+			(xy 274.32 247.65) (xy 274.32 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b64ef876-b852-56ff-adc4-cc6e5fba2fb6")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 274.32 250.19 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ed90b1ce-ee93-5c92-bc34-908655879a73")
+		(property "Reference" "#PWR509"
+			(at 274.32 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 274.32 254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 274.32 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 274.32 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 274.32 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "537b4558-adfc-5ec0-9bbd-bfd4dc698fa9")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "#PWR509")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:C")
+		(at 294.64 243.84 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "475131b7-6fcb-521d-a85f-c0e8429e21ae")
+		(property "Reference" "C506"
+			(at 294.64 241.3 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n/630V"
+			(at 294.64 246.38 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4"
+			(at 298.45 242.8748 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 294.64 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 294.64 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "76d8c3ca-783b-50d4-a088-f81b22bae3a4")
+		)
+		(pin "2"
+			(uuid "8a775415-95ca-512c-a3eb-f71f0878b11f")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "C506")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 290.83 243.84) (xy 288.29 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15b4a642-36f6-5a90-b094-a5fc32e716a1")
+	)
+	(label "BFX"
+		(at 288.29 243.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "18016740-520c-59c4-ac04-44c5c3525230")
+	)
+	(wire
+		(pts
+			(xy 298.45 243.84) (xy 300.99 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "451a6f47-4113-5491-a818-62dcf7a3bf8e")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 300.99 243.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2a24fa9f-5d4f-5f93-8292-4aeaf09719b1")
+		(property "Reference" "#PWR510"
+			(at 300.99 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 300.99 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 300.99 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 300.99 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 300.99 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6c3d273d-cad7-5dab-9ab5-234cb52d49a8")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "#PWR510")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 314.96 243.84 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0a0af5cd-d314-54c1-8967-6be1627f1d08")
+		(property "Reference" "R522"
+			(at 314.96 241.3 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "150k"
+			(at 314.96 246.38 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 314.96 245.618 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 314.96 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 314.96 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fcb6cffb-428d-5315-9d8c-afe7134a4bfd")
+		)
+		(pin "2"
+			(uuid "a7496b5d-2873-584c-b34e-0e046cece2a7")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R522")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 311.15 243.84) (xy 308.61 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "407e0b80-a397-5645-8240-b98dbdd9ca67")
+	)
+	(label "BFX"
+		(at 308.61 243.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c6034f13-d39a-5a6d-afc7-91c20fd5da11")
+	)
+	(wire
+		(pts
+			(xy 318.77 243.84) (xy 321.31 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e50aab6e-be41-5fb7-bb26-1410293ada00")
+	)
+	(label "BL1_FX"
+		(at 321.31 243.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9c5677ad-3ea7-544d-b069-4102473d36a0")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 142.24 208.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7e8fa067-e8aa-54f4-bfd7-7bf2243adc8c")
+		(property "Reference" "R523"
+			(at 146.98 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "330k"
+			(at 146.98 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 140.462 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.24 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 142.24 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7d8a74df-088e-526d-864c-70589b9ecd29")
+		)
+		(pin "2"
+			(uuid "0d77e04a-bea2-5db9-98c2-fe6d72f76b5e")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R523")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 142.24 204.47) (xy 142.24 201.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1993206-51c0-55a3-849d-7ee8b995d3cc")
+	)
+	(label "RF1_FX"
+		(at 142.24 201.93 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "595a16af-a4ad-5130-88eb-24c32e41890f")
+	)
+	(wire
+		(pts
+			(xy 142.24 212.09) (xy 142.24 214.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e39a8e67-1699-5125-b79f-cccc4e74e06e")
+	)
+	(label "RF2_FX"
+		(at 142.24 214.63 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6a5961be-3547-5f32-9095-e8eca6dd7f7f")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 162.56 218.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9e415ab7-4cc5-512d-8592-16b7f4348dac")
+		(property "Reference" "R524"
+			(at 167.3 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "330k"
+			(at 167.3 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 160.782 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 162.56 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 162.56 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "55caa2dd-b877-5fe3-a76f-262d64aec28a")
+		)
+		(pin "2"
+			(uuid "32a16f5a-3d01-5204-bd57-d23f5296009f")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R524")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 162.56 214.63) (xy 162.56 212.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b4d99e6-5639-57c5-831d-49669f979118")
+	)
+	(label "RF2_FX"
+		(at 162.56 212.09 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c6d74b9f-f3fc-52a5-8dd2-15003aa41e4f")
+	)
+	(wire
+		(pts
+			(xy 162.56 222.25) (xy 162.56 224.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94a09bc1-7f51-5241-a73e-f9087a17194d")
+	)
+	(label "GF_FX"
+		(at 162.56 224.79 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bdba6616-91fa-5ffa-8d29-bcca2f68004c")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 284.48 314.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4d370a93-a879-5ac5-b05b-f0ef289efbcb")
+		(property "Reference" "R525"
+			(at 289.22 313.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "270k"
+			(at 289.22 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 282.702 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 284.48 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b764a0c-e814-557e-bb0c-abc588db97ef")
+		)
+		(pin "2"
+			(uuid "209d09bf-6b5d-5149-bbee-5c9a15022d16")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R525")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 284.48 311.15) (xy 284.48 308.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a06847b-1d97-5acf-880c-6291744f74bc")
+	)
+	(label "FBA_FX"
+		(at 284.48 308.61 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "33cb8170-e04f-5db7-8de7-5a6f137b0427")
+	)
+	(wire
+		(pts
+			(xy 284.48 318.77) (xy 284.48 321.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20885fdc-a2ea-5fcf-ac9f-c55729dc231a")
+	)
+	(label "FBB_FX"
+		(at 284.48 321.31 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "94cc81ba-c5cf-5b0d-a8b4-6f40409b90ce")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 314.96 314.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90e45ea9-3dae-5ad4-8bb0-f29b8ba9867f")
+		(property "Reference" "R526"
+			(at 319.7 313.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "270k"
+			(at 319.7 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 313.182 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 314.96 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 314.96 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9cb190a7-0499-5dbe-b84b-15b2ba9e9b84")
+		)
+		(pin "2"
+			(uuid "a3b4394b-af12-58a8-ab24-ecbd04bc845d")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R526")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 314.96 311.15) (xy 314.96 308.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18d83299-e34e-59dc-a782-03dc2e81dec3")
+	)
+	(label "FBB_FX"
+		(at 314.96 308.61 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9808ee51-a555-5dce-8546-8f6e20e06fe4")
+	)
+	(wire
+		(pts
+			(xy 314.96 318.77) (xy 314.96 321.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7637b269-5f2e-59ee-9910-c00f23ed4ca4")
+	)
+	(label "QB_FX"
+		(at 314.96 321.31 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fe722216-d65b-5d0d-b198-a82023515623")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 314.96 267.97 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "81c093ba-5e4d-5129-9f0a-4793149965fa")
+		(property "Reference" "R527"
+			(at 314.96 265.43 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "150k"
+			(at 314.96 270.51 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 314.96 269.748 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 314.96 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 314.96 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6ebd8591-9102-533a-8f84-b8f42d7eae56")
+		)
+		(pin "2"
+			(uuid "89fdc7c3-cc4d-58c0-a0be-b1cc7a4d25ff")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R527")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 311.15 267.97) (xy 308.61 267.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4ab9a6b-1d81-5c9b-a91d-336d221071eb")
+	)
+	(label "BL1_FX"
+		(at 308.61 267.97 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ea68a43e-d14c-5792-be40-7a4daaa1ab59")
+	)
+	(wire
+		(pts
+			(xy 318.77 267.97) (xy 321.31 267.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a54993be-88ef-5e31-bb9b-b4c4a6150c77")
+	)
+	(label "BL2_FX"
+		(at 321.31 267.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "73390cd5-5bd1-5074-9926-165e1e38bcde")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 314.96 293.37 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c86671b5-6a41-5e9d-937b-d51cddde5bc3")
+		(property "Reference" "R528"
+			(at 314.96 290.83 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "150k"
+			(at 314.96 295.91 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+			(at 314.96 295.148 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 314.96 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 314.96 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8b969f4d-2473-5947-a9e0-7a283460e05b")
+		)
+		(pin "2"
+			(uuid "c197951c-f3c2-5ffa-91c1-89707ed1f1ea")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
+					(reference "R528")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 311.15 293.37) (xy 308.61 293.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c8bba7f-74c6-5903-bc95-ce489d4c2c9c")
+	)
+	(label "BL2_FX"
+		(at 308.61 293.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f4f76cbd-2146-5f69-9658-5aeec5feef08")
+	)
+	(wire
+		(pts
+			(xy 318.77 293.37) (xy 321.31 293.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ba39013-2891-5988-8c8b-58d4d055684c")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 321.31 293.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c8f5740a-e5ce-55f2-a589-859c1205b874")
+		(property "Reference" "#PWR511"
+			(at 321.31 299.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 321.31 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 321.31 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 321.31 293.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 321.31 293.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7877,6 +9214,17 @@
 			)
 		)
 	)
+	(text "Q (MMBTA42) on the STD4N80K5's copper pour (thermal foldback); 2.2u film: Rf 3 x 330k"
+		(exclude_from_sim no)
+		(at 193.04 328.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e3416bc6-611e-5873-8481-a84ab2423f75")
+	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
 		(at 375.92 53.34 0)
@@ -7885,8 +9233,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5c0b8461-c869-558a-a396-9b1c30fc74bc")
-		(property "Reference" "R517"
+		(uuid "278eb83c-b010-5f5e-9f10-30a74606fbac")
+		(property "Reference" "R529"
 			(at 380.66 52.07 0)
 			(effects
 				(font
@@ -7902,7 +9250,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 374.142 53.34 0)
 			(effects
 				(font
@@ -7930,15 +9278,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "dc79cc95-26ef-5559-805f-11142f770ca6")
+			(uuid "13320005-1913-52e1-8991-f1071dc64e87")
 		)
 		(pin "2"
-			(uuid "23ef469a-0d9c-57a2-a6c2-421fe3e726e3")
+			(uuid "4ac84fcc-8216-5939-84f3-80d7e2ebe23a")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "R517")
+					(reference "R529")
 					(unit 1)
 				)
 			)
@@ -7952,7 +9300,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b60861d9-ca06-54e1-938d-a49da002ee32")
+		(uuid "2270761f-4d39-5e1b-aac7-bc7c3f000136")
 	)
 	(label "BPI"
 		(at 375.92 46.99 90)
@@ -7962,7 +9310,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c9aba853-b838-583f-974e-6036d6433145")
+		(uuid "2c725384-78dc-54c9-a8c3-7b291d028fec")
 	)
 	(wire
 		(pts
@@ -7972,7 +9320,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a62e4cdd-df4d-5217-95b0-d6094c2ce07e")
+		(uuid "ceda32a0-ff51-5e1e-8af4-f56f3e241d7f")
 	)
 	(global_label "BPI_P"
 		(shape passive)
@@ -7984,7 +9332,7 @@
 			)
 			(justify right)
 		)
-		(uuid "7bcbcec6-7f44-5224-88d2-a0234c485df0")
+		(uuid "733651f1-2bf6-5630-b2af-56b32a013bd9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 375.92 59.69 0)
 			(effects
@@ -8021,7 +9369,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
 			(at 397.2052 78.74 0)
 			(effects
 				(font
@@ -8071,7 +9419,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d1c0684e-51fa-578f-9fec-e71b96dc94fc")
+		(uuid "67bc5bf1-c847-5c3e-9781-246858ac9c39")
 	)
 	(global_label "BPI_P"
 		(shape passive)
@@ -8083,7 +9431,7 @@
 			)
 			(justify left)
 		)
-		(uuid "d73531df-47af-5eb1-8961-ee5fbe63bbd3")
+		(uuid "8b671162-a665-5293-85f7-8b1a4aa85979")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 396.24 68.58 0)
 			(effects
@@ -8103,7 +9451,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "930444f1-2ebd-5498-85a7-893ba41077d2")
+		(uuid "5a03629c-053b-5fa0-9c5a-b324ef02ed75")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -8172,15 +9520,15 @@
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 375.92 168.91 0)
+		(at 375.92 204.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "eb837381-4cae-5ded-a5cd-ce761d2a4ae3")
-		(property "Reference" "R518"
-			(at 380.66 167.64 0)
+		(uuid "57fd9c06-33f2-5665-b1f6-d30dc4da514f")
+		(property "Reference" "R530"
+			(at 380.66 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8188,15 +9536,15 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 380.11 170.18 0)
+			(at 380.11 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 374.142 168.91 0)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 374.142 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8205,7 +9553,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 375.92 168.91 0)
+			(at 375.92 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8214,7 +9562,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 375.92 168.91 0)
+			(at 375.92 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8223,15 +9571,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "c65e64d9-5c23-5eca-bf67-c618d64a6a32")
+			(uuid "85955695-9fa6-5533-9e08-d4665c6462ca")
 		)
 		(pin "2"
-			(uuid "eb4f7b7d-0ef4-526d-9dbe-d3e57a9555d3")
+			(uuid "2c368504-48f0-586a-acde-233c8c834c6a")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "R518")
+					(reference "R530")
 					(unit 1)
 				)
 			)
@@ -8239,37 +9587,37 @@
 	)
 	(wire
 		(pts
-			(xy 375.92 165.1) (xy 375.92 162.56)
+			(xy 375.92 200.66) (xy 375.92 198.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d8a4d66c-a2a6-5a5b-a932-f3c8581610d1")
+		(uuid "f3424d1e-a71b-5ba5-9119-854377fb16e3")
 	)
 	(label "BFX"
-		(at 375.92 162.56 90)
+		(at 375.92 198.12 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "6dc99196-c368-50b5-8db6-42d747b975ee")
+		(uuid "7ad58f11-9dda-5e05-85ba-30c00030276f")
 	)
 	(wire
 		(pts
-			(xy 375.92 172.72) (xy 375.92 175.26)
+			(xy 375.92 208.28) (xy 375.92 210.82)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4853e1c5-6b61-5bd1-bf30-f673c3870f04")
+		(uuid "56496a3e-ed81-5fe1-b32a-8c8bcf693b5c")
 	)
 	(global_label "BFX1"
 		(shape passive)
-		(at 375.92 175.26 270)
+		(at 375.92 210.82 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8277,9 +9625,9 @@
 			)
 			(justify right)
 		)
-		(uuid "3f5ffdb0-1b9f-5d98-9670-93a02787ecdf")
+		(uuid "44bd849d-c895-5151-b6e9-64e920a4a834")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 375.92 175.26 0)
+			(at 375.92 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8291,7 +9639,7 @@
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:C_Polarized")
-		(at 396.24 190.5 0)
+		(at 396.24 226.06 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8299,7 +9647,7 @@
 		(dnp no)
 		(uuid "ff32bf56-7ece-5cc6-bf11-a1aac12e1c13")
 		(property "Reference" "C508"
-			(at 400.98 189.23 0)
+			(at 400.98 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8307,15 +9655,15 @@
 			)
 		)
 		(property "Value" "22u/450V"
-			(at 403.18 191.77 0)
+			(at 403.18 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 397.2052 194.31 0)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
+			(at 397.2052 229.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8324,7 +9672,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 396.24 190.5 0)
+			(at 396.24 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8333,7 +9681,7 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
-			(at 396.24 190.5 0)
+			(at 396.24 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8358,17 +9706,17 @@
 	)
 	(wire
 		(pts
-			(xy 396.24 186.69) (xy 396.24 184.15)
+			(xy 396.24 222.25) (xy 396.24 219.71)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5d97654c-c9d9-5271-b2f0-3cf3490894b9")
+		(uuid "1fbb6aad-2dba-5cca-afe7-49b2823a50f0")
 	)
 	(global_label "BFX1"
 		(shape passive)
-		(at 396.24 184.15 90)
+		(at 396.24 219.71 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8376,9 +9724,9 @@
 			)
 			(justify left)
 		)
-		(uuid "1d265600-ce0e-5095-ad6e-b40479976c35")
+		(uuid "a9a0b5a5-73a2-5063-82ad-6c705d63795a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 396.24 184.15 0)
+			(at 396.24 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8390,17 +9738,17 @@
 	)
 	(wire
 		(pts
-			(xy 396.24 194.31) (xy 396.24 196.85)
+			(xy 396.24 229.87) (xy 396.24 232.41)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b4b14636-daff-505d-bf46-ec7aefc074da")
+		(uuid "354047f0-c1ff-568f-9460-dca37d33efda")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 396.24 196.85 0)
+		(at 396.24 232.41 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8408,7 +9756,7 @@
 		(dnp no)
 		(uuid "cb3e62a9-eeff-5c29-a6e8-ec78826a7ddf")
 		(property "Reference" "#PWR513"
-			(at 396.24 203.2 0)
+			(at 396.24 238.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8417,7 +9765,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 396.24 200.66 0)
+			(at 396.24 236.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8425,7 +9773,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 396.24 196.85 0)
+			(at 396.24 232.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8434,7 +9782,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 396.24 196.85 0)
+			(at 396.24 232.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8443,7 +9791,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 396.24 196.85 0)
+			(at 396.24 232.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8465,15 +9813,15 @@
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:R")
-		(at 375.92 222.25 0)
+		(at 375.92 257.81 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a2866ddd-13ac-5dcb-8ee2-cc62e3f2c4d7")
-		(property "Reference" "R519"
-			(at 380.66 220.98 0)
+		(uuid "6625eb38-a7dd-5489-ac76-cd463cf552eb")
+		(property "Reference" "R531"
+			(at 380.66 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8481,15 +9829,15 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 380.11 223.52 0)
+			(at 380.11 259.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 374.142 222.25 0)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 374.142 257.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8498,7 +9846,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 375.92 222.25 0)
+			(at 375.92 257.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8507,7 +9855,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 375.92 222.25 0)
+			(at 375.92 257.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8516,15 +9864,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "680622b0-e20d-544d-a2a5-29168bba9095")
+			(uuid "a546e4f3-3daa-5741-b17f-f8e946dd6fcd")
 		)
 		(pin "2"
-			(uuid "e06021d6-35f5-511e-b3a5-fb7470b9ce30")
+			(uuid "3c73f50c-ea0b-5012-9ceb-92d7fe9ebc69")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/2ed4c737-7183-5abb-8f55-2c8c6113fed8"
-					(reference "R519")
+					(reference "R531")
 					(unit 1)
 				)
 			)
@@ -8532,37 +9880,37 @@
 	)
 	(wire
 		(pts
-			(xy 375.92 218.44) (xy 375.92 215.9)
+			(xy 375.92 254) (xy 375.92 251.46)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d73707a0-bbbb-50dd-8a69-5b27fc47a4e9")
+		(uuid "3745cbc3-4c53-5da6-9e72-b0894ce05f5f")
 	)
 	(label "BFX"
-		(at 375.92 215.9 90)
+		(at 375.92 251.46 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "4f3807e0-71ce-5c0e-b533-31988767c86d")
+		(uuid "a5ca170c-f46a-5079-a662-ba6e4cb2223a")
 	)
 	(wire
 		(pts
-			(xy 375.92 226.06) (xy 375.92 228.6)
+			(xy 375.92 261.62) (xy 375.92 264.16)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d384fa61-1fdc-5719-8b46-d49f1d76874a")
+		(uuid "528346c9-45dc-5716-9981-2fa39a1b4de3")
 	)
 	(global_label "BFX2"
 		(shape passive)
-		(at 375.92 228.6 270)
+		(at 375.92 264.16 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8570,9 +9918,9 @@
 			)
 			(justify right)
 		)
-		(uuid "4c8992d1-12de-53a1-9f8d-88c69eb1c532")
+		(uuid "61c3ec73-e788-5cbb-bb6a-871c88c79df2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 375.92 228.6 0)
+			(at 375.92 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8584,7 +9932,7 @@
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:C_Polarized")
-		(at 396.24 243.84 0)
+		(at 396.24 279.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8592,7 +9940,7 @@
 		(dnp no)
 		(uuid "87346acc-8d8b-530f-a8e6-3ce324394264")
 		(property "Reference" "C509"
-			(at 400.98 242.57 0)
+			(at 400.98 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8600,15 +9948,15 @@
 			)
 		)
 		(property "Value" "22u/450V"
-			(at 403.18 245.11 0)
+			(at 403.18 280.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 397.2052 247.65 0)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
+			(at 397.2052 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8617,7 +9965,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 396.24 243.84 0)
+			(at 396.24 279.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8626,7 +9974,7 @@
 			)
 		)
 		(property "Description" "Polarized capacitor"
-			(at 396.24 243.84 0)
+			(at 396.24 279.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8651,17 +9999,17 @@
 	)
 	(wire
 		(pts
-			(xy 396.24 240.03) (xy 396.24 237.49)
+			(xy 396.24 275.59) (xy 396.24 273.05)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b64ef876-b852-56ff-adc4-cc6e5fba2fb6")
+		(uuid "5fa9a73f-e0b4-581f-b550-821d388c8ae3")
 	)
 	(global_label "BFX2"
 		(shape passive)
-		(at 396.24 237.49 90)
+		(at 396.24 273.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8669,9 +10017,9 @@
 			)
 			(justify left)
 		)
-		(uuid "15b4a642-36f6-5a90-b094-a5fc32e716a1")
+		(uuid "43eb684a-2335-546f-a871-aae2c9a6ec4b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 396.24 237.49 0)
+			(at 396.24 273.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8683,17 +10031,17 @@
 	)
 	(wire
 		(pts
-			(xy 396.24 247.65) (xy 396.24 250.19)
+			(xy 396.24 283.21) (xy 396.24 285.75)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "18016740-520c-59c4-ac04-44c5c3525230")
+		(uuid "08613cc8-4c61-5b46-9164-c0019cedb5f8")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 396.24 250.19 0)
+		(at 396.24 285.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8701,7 +10049,7 @@
 		(dnp no)
 		(uuid "3fbc2600-3e0a-5333-a8cb-b3ae166f5648")
 		(property "Reference" "#PWR514"
-			(at 396.24 256.54 0)
+			(at 396.24 292.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8710,7 +10058,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 396.24 254 0)
+			(at 396.24 289.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8718,7 +10066,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 396.24 250.19 0)
+			(at 396.24 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8727,7 +10075,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 396.24 250.19 0)
+			(at 396.24 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8736,7 +10084,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 396.24 250.19 0)
+			(at 396.24 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8758,18 +10106,18 @@
 	)
 	(text "Separate RC per FX triode (sim/fx_loop fix: shared decoupling leaked the dry into series mode at -64 dB)"
 		(exclude_from_sim no)
-		(at 355.6 151.13 0)
+		(at 355.6 190.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "451a6f47-4113-5491-a818-62dcf7a3bf8e")
+		(uuid "fa18bdfd-d19f-5273-8006-58dfb7e5af4a")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:ECC83")
-		(at 91.44 275.59 0)
+		(at 91.44 355.6 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8777,7 +10125,7 @@
 		(dnp no)
 		(uuid "eac5bafc-54a4-5159-9989-52114c63012a")
 		(property "Reference" "V1"
-			(at 94.742 267.716 0)
+			(at 94.742 347.726 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8785,7 +10133,7 @@
 			)
 		)
 		(property "Value" "12AX7"
-			(at 100.33 283.21 0)
+			(at 100.33 363.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8793,7 +10141,7 @@
 			)
 		)
 		(property "Footprint" "Valve:Valve_Noval_P"
-			(at 98.298 285.75 0)
+			(at 98.298 365.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8802,7 +10150,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.r-type.org/pdfs/ecc83.pdf"
-			(at 91.44 275.59 0)
+			(at 91.44 355.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8811,7 +10159,7 @@
 			)
 		)
 		(property "Description" "double triode"
-			(at 91.44 275.59 0)
+			(at 91.44 355.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8839,67 +10187,67 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 287.02) (xy 88.9 289.56)
+			(xy 88.9 367.03) (xy 88.9 369.57)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "407e0b80-a397-5645-8240-b98dbdd9ca67")
+		(uuid "aaa6d1c0-8d3e-59e2-8c45-365a61b5bf2b")
 	)
 	(label "HTR1"
-		(at 88.9 289.56 270)
+		(at 88.9 369.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "c6034f13-d39a-5a6d-afc7-91c20fd5da11")
+		(uuid "c8dde01e-a1ef-558e-ab69-c81a04453f9f")
 	)
 	(wire
 		(pts
-			(xy 93.98 287.02) (xy 93.98 289.56)
+			(xy 93.98 367.03) (xy 93.98 369.57)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e50aab6e-be41-5fb7-bb26-1410293ada00")
+		(uuid "2c62d9a1-4edc-54aa-b91f-a19bb77bfef7")
 	)
 	(label "HTR1"
-		(at 93.98 289.56 270)
+		(at 93.98 369.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "9c5677ad-3ea7-544d-b069-4102473d36a0")
+		(uuid "758fc89e-a90c-5bcd-a141-f9f301f95dd1")
 	)
 	(wire
 		(pts
-			(xy 91.44 287.02) (xy 91.44 289.56)
+			(xy 91.44 367.03) (xy 91.44 369.57)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b1993206-51c0-55a3-849d-7ee8b995d3cc")
+		(uuid "644a2af6-d092-5700-97d2-b5d2277b3e30")
 	)
 	(label "HTR2"
-		(at 91.44 289.56 270)
+		(at 91.44 369.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "595a16af-a4ad-5130-88eb-24c32e41890f")
+		(uuid "254277cd-9c68-5862-a2f6-f595a8b039b2")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:ECC83")
-		(at 132.08 275.59 0)
+		(at 132.08 355.6 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8907,7 +10255,7 @@
 		(dnp no)
 		(uuid "aa54cf39-a66f-5232-a6ce-79a9239fdfff")
 		(property "Reference" "V2"
-			(at 135.382 267.716 0)
+			(at 135.382 347.726 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8915,7 +10263,7 @@
 			)
 		)
 		(property "Value" "12AX7"
-			(at 140.97 283.21 0)
+			(at 140.97 363.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8923,7 +10271,7 @@
 			)
 		)
 		(property "Footprint" "Valve:Valve_Noval_P"
-			(at 138.938 285.75 0)
+			(at 138.938 365.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8932,7 +10280,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.r-type.org/pdfs/ecc83.pdf"
-			(at 132.08 275.59 0)
+			(at 132.08 355.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8941,7 +10289,7 @@
 			)
 		)
 		(property "Description" "double triode"
-			(at 132.08 275.59 0)
+			(at 132.08 355.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8969,74 +10317,74 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 287.02) (xy 129.54 289.56)
+			(xy 129.54 367.03) (xy 129.54 369.57)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e39a8e67-1699-5125-b79f-cccc4e74e06e")
+		(uuid "7229f25e-801a-54d3-8ffb-f8adc7701def")
 	)
 	(label "HTR1"
-		(at 129.54 289.56 270)
+		(at 129.54 369.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "6a5961be-3547-5f32-9095-e8eca6dd7f7f")
+		(uuid "42396c52-56c8-5521-aeec-de512e417d3c")
 	)
 	(wire
 		(pts
-			(xy 134.62 287.02) (xy 134.62 289.56)
+			(xy 134.62 367.03) (xy 134.62 369.57)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6b4d99e6-5639-57c5-831d-49669f979118")
+		(uuid "cd8ae526-0f6b-5575-a05b-596c5881f916")
 	)
 	(label "HTR1"
-		(at 134.62 289.56 270)
+		(at 134.62 369.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "c6d74b9f-f3fc-52a5-8dd2-15003aa41e4f")
+		(uuid "147920ef-5a31-5fd3-9f51-96f3df39d426")
 	)
 	(wire
 		(pts
-			(xy 132.08 287.02) (xy 132.08 289.56)
+			(xy 132.08 367.03) (xy 132.08 369.57)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "94a09bc1-7f51-5241-a73e-f9087a17194d")
+		(uuid "bf3b295e-1e58-5ac9-8761-edb51ddf8899")
 	)
 	(label "HTR2"
-		(at 132.08 289.56 270)
+		(at 132.08 369.57 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "bdba6616-91fa-5ffa-8d29-bcca2f68004c")
+		(uuid "2316020b-a587-5796-a6c8-3e51050d7ec9")
 	)
 	(text "Heaters 6.3 V parallel (pins 4+5 / 9). 0.6 A here + 0.9 A passed to the preamp = 1.5 A through J502"
 		(exclude_from_sim no)
-		(at 71.12 302.26 0)
+		(at 71.12 382.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "0a06847b-1d97-5acf-880c-6291744f74bc")
+		(uuid "d98f9d5d-7eca-540a-9a82-025aed35ca0a")
 	)
 	(sheet_instances
 		(path "/"

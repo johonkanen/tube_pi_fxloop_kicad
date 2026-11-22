@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Create the rev B KiCad project skeleton: kicad/tube_pi_fxloop_revb.kicad_pro, the root sheet with
-one sheet symbol per sub-sheet, empty sub-sheets (the sheet scripts fill them), the sym-lib-table.
+one sheet symbol per sub-sheet, empty sub-sheets (the sheet scripts fill them), the sym-lib-table and
+the fp-lib-table (local placeholder footprints, lib/tube_pi_fxloop_revb.pretty).
 Re-running keeps existing sub-sheets (their contents belong to the sheet scripts)."""
 import json
 import os
@@ -22,7 +23,7 @@ def u(k):
 
 
 def title(t):
-    return (f'\t(title_block\n\t\t(title "{t}")\n\t\t(company "Tube amplifier")\n\t\t(rev "rev B - first draft (IF-1 / IF-1.1)")\n'
+    return (f'\t(title_block\n\t\t(title "{t}")\n\t\t(company "Tube amplifier")\n\t\t(rev "rev B - second-pass draft (IF-1.2)")\n'
             f'\t\t(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")\n\t)\n')
 
 
@@ -49,6 +50,8 @@ def main():
     pro = {"meta": {"filename": f"{PROJECT}.kicad_pro", "version": 3}, "schematic": {}, "board": {},
            "sheets": [[u("root"), "Root"]] + [[u("sheet" + f), n] for f, n in SHEETS]}
     json.dump(pro, open(os.path.join(K, f"{PROJECT}.kicad_pro"), "w"), indent=2)
+    open(os.path.join(K, "fp-lib-table"), "w").write(
+        f'(fp_lib_table\n\t(version 7)\n\t(lib (name "{PROJECT}")(type "KiCad")(uri "${{KIPRJMOD}}/../lib/{PROJECT}.pretty")(options "")(descr "rev B placeholder footprints (tools/make_lib.py)"))\n)\n')
     open(os.path.join(K, "sym-lib-table"), "w").write(
         f'(sym_lib_table\n\t(version 7)\n\t(lib (name "{PROJECT}")(type "KiCad")(uri "${{KIPRJMOD}}/../lib/{PROJECT}.kicad_sym")(options "")(descr "rev B symbols, from KiCad stock libraries (tools/make_lib.py)"))\n)\n')
 

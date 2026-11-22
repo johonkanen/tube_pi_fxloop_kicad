@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube PI + FX loop rev B - Input buffer, FX send, return, mixer, return stage")
 		(company "Tube amplifier")
-		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(rev "rev B - second-pass draft (IF-1.2)")
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols
@@ -2255,7 +2255,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical"
 			(at 30.48 53.34 0)
 			(effects
 				(font
@@ -2495,7 +2495,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_IDC:IDC-Header_2x08_P2.54mm_Vertical"
 			(at 30.48 160.02 0)
 			(effects
 				(font
@@ -2899,25 +2899,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 38.1 157.48) (xy 40.64 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 38.1 157.48)
 		(uuid "9034e7c8-d06a-5583-8442-94cf7ae25369")
-	)
-	(label "RETURN_SIG"
-		(at 40.64 157.48 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9e737e01-4e26-5e3a-a6c7-979c16d91947")
 	)
 	(wire
 		(pts
@@ -2927,7 +2911,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5872f24e-9683-5554-a50a-28a4cbbed24e")
+		(uuid "9e737e01-4e26-5e3a-a6c7-979c16d91947")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -3002,72 +2986,17 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3049ee7e-52cc-5130-930e-f40269124c26")
+		(uuid "5872f24e-9683-5554-a50a-28a4cbbed24e")
 	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
+	(label "PAD_A"
 		(at 40.64 160.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f8a9a3d2-fb5b-5f50-9d5d-e20e89d009fd")
-		(property "Reference" "#PWR108"
-			(at 40.64 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify left bottom)
 		)
-		(property "Value" "GND"
-			(at 40.64 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 40.64 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 40.64 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 40.64 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3a77e55a-0876-5264-9aaa-605fd5c1d4ba")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
-					(reference "#PWR108")
-					(unit 1)
-				)
-			)
-		)
+		(uuid "3049ee7e-52cc-5130-930e-f40269124c26")
 	)
 	(wire
 		(pts
@@ -3087,8 +3016,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "36c308ea-abbd-5473-aa2e-b5523a012e31")
-		(property "Reference" "#PWR109"
+		(uuid "f8a9a3d2-fb5b-5f50-9d5d-e20e89d009fd")
+		(property "Reference" "#PWR108"
 			(at 22.86 168.91 0)
 			(effects
 				(font
@@ -3133,12 +3062,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "0651493d-9f31-58de-89e6-38e86560295a")
+			(uuid "3a77e55a-0876-5264-9aaa-605fd5c1d4ba")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
-					(reference "#PWR109")
+					(reference "#PWR108")
 					(unit 1)
 				)
 			)
@@ -3154,15 +3083,70 @@
 		)
 		(uuid "9ef175cc-523e-59d8-9369-037ecc9d14f7")
 	)
-	(label "PAD_A"
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
 		(at 40.64 162.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "36c308ea-abbd-5473-aa2e-b5523a012e31")
+		(property "Reference" "#PWR109"
+			(at 40.64 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
-			(justify left bottom)
 		)
-		(uuid "4c130877-6d31-5b6a-a35b-1a4d81951ca7")
+		(property "Value" "GND"
+			(at 40.64 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 40.64 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0651493d-9f31-58de-89e6-38e86560295a")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
+					(reference "#PWR109")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -3172,7 +3156,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "31220111-6b53-5fc2-92b4-dbdcbc0e77c8")
+		(uuid "4c130877-6d31-5b6a-a35b-1a4d81951ca7")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -3239,80 +3223,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 38.1 165.1) (xy 40.64 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4d626e0-faba-54b5-adba-1922edad97a2")
-	)
-	(symbol
-		(lib_id "tube_pi_fxloop_revb:GND")
-		(at 40.64 165.1 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "51afdfc2-77fc-5d71-93fe-56adc813f39e")
-		(property "Reference" "#PWR111"
-			(at 40.64 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 40.64 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 40.64 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 40.64 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 40.64 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "adf837ba-3fad-54ac-94e2-2a3f61c85c41")
-		)
-		(instances
-			(project "tube_pi_fxloop_revb"
-				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
-					(reference "#PWR111")
-					(unit 1)
-				)
-			)
-		)
+	(no_connect
+		(at 38.1 165.1)
+		(uuid "31220111-6b53-5fc2-92b4-dbdcbc0e77c8")
 	)
 	(wire
 		(pts
@@ -3322,7 +3235,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "090e7940-485c-5946-9ac0-fa4a8592d003")
+		(uuid "b4d626e0-faba-54b5-adba-1922edad97a2")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -3332,8 +3245,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "71c4af56-ffcf-5b2b-900b-cb0f3253d204")
-		(property "Reference" "#PWR112"
+		(uuid "51afdfc2-77fc-5d71-93fe-56adc813f39e")
+		(property "Reference" "#PWR111"
 			(at 22.86 173.99 0)
 			(effects
 				(font
@@ -3378,6 +3291,81 @@
 			)
 		)
 		(pin "1"
+			(uuid "adf837ba-3fad-54ac-94e2-2a3f61c85c41")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
+					(reference "#PWR111")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 38.1 167.64) (xy 40.64 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "090e7940-485c-5946-9ac0-fa4a8592d003")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 40.64 167.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "71c4af56-ffcf-5b2b-900b-cb0f3253d204")
+		(property "Reference" "#PWR112"
+			(at 40.64 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 40.64 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 40.64 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
 			(uuid "99558c3b-c608-5eed-b1ea-b94fd558bf17")
 		)
 		(instances
@@ -3389,10 +3377,6 @@
 			)
 		)
 	)
-	(no_connect
-		(at 38.1 167.64)
-		(uuid "134fa2b3-0c03-59dc-85ab-283f1fb84ff1")
-	)
 	(wire
 		(pts
 			(xy 25.4 170.18) (xy 22.86 170.18)
@@ -3401,7 +3385,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "38be37f7-fbd6-5c8d-86c0-0c3406c6a1e2")
+		(uuid "134fa2b3-0c03-59dc-85ab-283f1fb84ff1")
 	)
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:GND")
@@ -3468,11 +3452,27 @@
 			)
 		)
 	)
-	(no_connect
-		(at 38.1 170.18)
+	(wire
+		(pts
+			(xy 38.1 170.18) (xy 40.64 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38be37f7-fbd6-5c8d-86c0-0c3406c6a1e2")
+	)
+	(label "RETURN_SIG"
+		(at 40.64 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "00f4dc42-d537-510e-9cff-1732546c4444")
 	)
-	(text "J102 pin 12 PAD_B = GND (the pad switch grounds PAD_A); pins 14 / 16 RSVD1 / RSVD2 not connected"
+	(text "J102 (IF-1.2): 2 SEND_SRC, 8 PAD_A, 10 PAD_B = GND (the rear switch grounds PAD_A), 16 RETURN_SIG (far end from SEND_SRC, 1M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-230."
 		(exclude_from_sim no)
 		(at 30.48 200.66 0)
 		(effects
@@ -3508,7 +3508,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 60.96 76.708 0)
 			(effects
 				(font
@@ -3670,7 +3670,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 82.2452 57.15 0)
 			(effects
 				(font
@@ -3777,7 +3777,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 99.822 53.34 0)
 			(effects
 				(font
@@ -3884,7 +3884,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 121.92 76.708 0)
 			(effects
 				(font
@@ -4133,7 +4133,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 152.4 90.678 0)
 			(effects
 				(font
@@ -4240,7 +4240,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 152.4 117.348 0)
 			(effects
 				(font
@@ -4402,7 +4402,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm"
 			(at 183.8452 78.74 0)
 			(effects
 				(font
@@ -4509,7 +4509,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 203.2 90.678 0)
 			(effects
 				(font
@@ -4671,7 +4671,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 211.582 53.34 0)
 			(effects
 				(font
@@ -4778,7 +4778,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 211.582 115.57 0)
 			(effects
 				(font
@@ -4885,7 +4885,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 233.68 138.938 0)
 			(effects
 				(font
@@ -5058,7 +5058,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.2mm_W4.5mm_P5.00mm_FKS2_FKP2_MKS2_MKP2"
 			(at 82.2452 163.83 0)
 			(effects
 				(font
@@ -5165,7 +5165,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 99.822 160.02 0)
 			(effects
 				(font
@@ -5272,7 +5272,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 121.92 183.388 0)
 			(effects
 				(font
@@ -5434,7 +5434,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 142.24 183.388 0)
 			(effects
 				(font
@@ -5730,7 +5730,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 91.44 224.028 0)
 			(effects
 				(font
@@ -5892,7 +5892,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 74.93 221.2848 0)
 			(effects
 				(font
@@ -6054,7 +6054,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 109.982 205.74 0)
 			(effects
 				(font
@@ -6161,7 +6161,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 119.38 230.1748 0)
 			(effects
 				(font
@@ -6298,7 +6298,7 @@
 			)
 		)
 	)
-	(text "Pad: rear switch open (or W23 unplugged) = PAD_A at -15 V = JFET off = 0 dB; closed = PAD_A at GND = JFET on = 11k shunt = -20 dB. No audio node crosses the ribbon on PAD_A (rev B proposal, STATUS.md)."
+	(text "Pad (IF-1.2): rear switch open (or W23 unplugged) = PAD_A at -15 V = JFET off = 0 dB; closed = PAD_A at GND = JFET on = 11k shunt = -20 dB. Only the DC line PAD_A crosses the ribbon; 1M to -15 V and 100n at J102."
 		(exclude_from_sim no)
 		(at 71.12 252.73 0)
 		(effects
@@ -6468,7 +6468,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 272.542 62.23 0)
 			(effects
 				(font
@@ -6587,7 +6587,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 270.51 82.2452 0)
 			(effects
 				(font
@@ -6749,7 +6749,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 290.83 94.488 0)
 			(effects
 				(font
@@ -7045,7 +7045,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 313.182 88.9 0)
 			(effects
 				(font
@@ -7164,7 +7164,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 311.15 108.9152 0)
 			(effects
 				(font
@@ -7326,7 +7326,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 355.6 122.428 0)
 			(effects
 				(font
@@ -7488,7 +7488,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 374.142 71.12 0)
 			(effects
 				(font
@@ -7729,7 +7729,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 272.542 151.13 0)
 			(effects
 				(font
@@ -7848,7 +7848,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 270.51 171.1452 0)
 			(effects
 				(font
@@ -8010,7 +8010,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 290.83 183.388 0)
 			(effects
 				(font
@@ -8306,7 +8306,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 313.182 177.8 0)
 			(effects
 				(font
@@ -8425,7 +8425,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 311.15 197.8152 0)
 			(effects
 				(font
@@ -8587,7 +8587,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 355.6 211.328 0)
 			(effects
 				(font
@@ -8749,7 +8749,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 374.142 160.02 0)
 			(effects
 				(font
@@ -8878,7 +8878,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 406.4 130.048 0)
 			(effects
 				(font
@@ -9040,7 +9040,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 424.942 106.68 0)
 			(effects
 				(font
@@ -9277,7 +9277,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 457.2 81.788 0)
 			(effects
 				(font
@@ -9396,7 +9396,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 457.2 144.018 0)
 			(effects
 				(font
@@ -9503,7 +9503,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 457.2 170.688 0)
 			(effects
 				(font
@@ -9665,7 +9665,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 478.4852 172.72 0)
 			(effects
 				(font
@@ -9827,7 +9827,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W8.0mm_P15.00mm_FKS3_FKP3"
 			(at 498.8052 110.49 0)
 			(effects
 				(font
@@ -9946,7 +9946,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 518.16 130.048 0)
 			(effects
 				(font
@@ -10105,6 +10105,168 @@
 			(justify left bottom)
 		)
 		(uuid "f8578654-755b-523d-9d72-015a0dbdc17d")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:R")
+		(at 60.96 181.61 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2d9a07c7-8288-5187-ad5a-bbd08512676c")
+		(property "Reference" "R131"
+			(at 60.96 179.07 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1M"
+			(at 60.96 184.15 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 60.96 183.388 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 60.96 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 60.96 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a39a9758-b831-5791-bef9-43e74f9b2c87")
+		)
+		(pin "2"
+			(uuid "95b107e5-9598-542a-ac7c-9e8f985e367c")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
+					(reference "R131")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 57.15 181.61) (xy 54.61 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6cca7dbb-928d-568d-b026-0286fbe8683c")
+	)
+	(label "RETURN_SIG"
+		(at 54.61 181.61 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "80c4e169-3748-5867-8ff3-e6a346dbd0bf")
+	)
+	(wire
+		(pts
+			(xy 64.77 181.61) (xy 67.31 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa8acd55-52f3-58a7-8625-906816d5a5b5")
+	)
+	(symbol
+		(lib_id "tube_pi_fxloop_revb:GND")
+		(at 67.31 181.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2b16b93c-fa06-5dc5-b9eb-8fc79513ef3b")
+		(property "Reference" "#PWR135"
+			(at 67.31 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 67.31 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 67.31 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 67.31 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 67.31 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4efbb629-0bb0-5c92-823e-304f076193c5")
+		)
+		(instances
+			(project "tube_pi_fxloop_revb"
+				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/fb426ad8-3233-568e-84ef-4881a845c72f"
+					(reference "#PWR135")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(sheet_instances
 		(path "/"

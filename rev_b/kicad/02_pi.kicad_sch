@@ -7,7 +7,7 @@
 	(title_block
 		(title "Tube PI + FX loop rev B - PI-4 attenuator, phase inverter, grid drive")
 		(company "Tube amplifier")
-		(rev "rev B - first draft (IF-1 / IF-1.1)")
+		(rev "rev B - second-pass draft (IF-1.2)")
 		(comment 1 "From tube_amplifier_kicad sim/pi_nfb, sim/fx_loop, docs/interfaces.md; rev_b/sim")
 	)
 	(lib_symbols
@@ -666,7 +666,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_pi_fxloop_revb:G6K-2"
+		(symbol "tube_pi_fxloop_revb:G6K-2F-Y"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -683,7 +683,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "G6K-2"
+			(property "Value" "G6K-2F-Y"
 				(at 16.51 1.27 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -694,7 +694,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -750,7 +750,7 @@
 					)
 				)
 			)
-			(symbol "G6K-2_0_0"
+			(symbol "G6K-2F-Y_0_0"
 				(text "+"
 					(at -9.271 2.921 0)
 					(effects
@@ -760,7 +760,7 @@
 					)
 				)
 			)
-			(symbol "G6K-2_0_1"
+			(symbol "G6K-2F-Y_0_1"
 				(rectangle
 					(start -15.24 5.08)
 					(end 15.24 -5.08)
@@ -905,7 +905,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -2.54) (xy -1.905 3.81)
+						(xy 0 -2.54) (xy 1.905 3.81)
 					)
 					(stroke
 						(width 0.508)
@@ -1037,7 +1037,7 @@
 				)
 				(polyline
 					(pts
-						(xy 10.16 -2.54) (xy 8.255 3.81)
+						(xy 10.16 -2.54) (xy 12.065 3.81)
 					)
 					(stroke
 						(width 0.508)
@@ -1072,7 +1072,7 @@
 					)
 				)
 			)
-			(symbol "G6K-2_1_1"
+			(symbol "G6K-2F-Y_1_1"
 				(pin passive line
 					(at -10.16 7.62 270)
 					(length 2.54)
@@ -1893,10 +1893,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "tube_pi_fxloop_revb:Q_NMOS_Depletion"
-			(pin_numbers
-				(hide yes)
-			)
+		(symbol "tube_pi_fxloop_revb:DN2540N8-G"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -1917,7 +1914,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "Q_NMOS_Depletion"
+			(property "Value" "DN2540N8-G"
 				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1928,7 +1925,29 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3"
+				(at 0 -14.605 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/DN2540%20B060313.pdf"
+				(at 0 -12.065 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "150mA Ids, 400 Vds, Depletion-mode N-channel MOSFET, SOT-89"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1939,7 +1958,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "ki_keywords" "N-Channel Depletion-Mode MOSFET"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1950,7 +1969,7 @@
 					)
 				)
 			)
-			(property "Description" "Depletion-mode N-channel MOSFET"
+			(property "ki_fp_filters" "SOT?89*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1961,18 +1980,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "NMOS"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Q_NMOS_Depletion_0_1"
+			(symbol "DN2540N8-G_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905) (xy 0.254 -1.905)
@@ -2115,25 +2123,7 @@
 					)
 				)
 			)
-			(symbol "Q_NMOS_Depletion_1_1"
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
+			(symbol "DN2540N8-G_1_1"
 				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -2144,7 +2134,25 @@
 							)
 						)
 					)
-					(number "G"
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2162,7 +2170,7 @@
 							)
 						)
 					)
-					(number "S"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2174,7 +2182,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "02 PI-4 attenuator (five binary L-sections for Z0 = 49.9k, relay energised = section in; 0-18 dB used of 0-31) and the phase inverter: 12AX7 LTP, DN2540 CCS tail about 2 mA, equal 100k plates, feedback into the second grid (sim/pi_nfb). Plate DC goes out on W24; the coupling caps are on the power amp (interfaces.md 10)."
+	(text "02 PI-4 attenuator (five binary L-sections for Z0 = 49.9k, relay energised = section in (NO contacts), unpowered = 0 dB; 0-18 dB used of 0-31) and the phase inverter: 12AX7 LTP, DN2540 CCS tail about 2 mA, equal 100k plates, feedback into the second grid (sim/pi_nfb). Plate DC goes out on W24; the coupling caps are on the power amp (interfaces.md 10)."
 		(exclude_from_sim no)
 		(at 30.48 17.78 0)
 		(effects
@@ -2210,7 +2218,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_KK-396_A-41791-0005_1x05_P3.96mm_Vertical"
 			(at 518.16 177.8 0)
 			(effects
 				(font
@@ -2386,7 +2394,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 477.52 224.028 0)
 			(effects
 				(font
@@ -2548,7 +2556,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 501.65 221.2848 0)
 			(effects
 				(font
@@ -2732,7 +2740,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 49.022 53.34 0)
 			(effects
 				(font
@@ -2827,7 +2835,7 @@
 		(uuid "92c955dc-d9c7-5ca7-96f8-1a72f26bb8a5")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 63.5 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2853,7 +2861,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 63.5 92.71 0)
 			(effects
 				(font
@@ -3021,25 +3029,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 60.96 85.09) (xy 60.96 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 60.96 85.09)
 		(uuid "b69b59f9-b875-50db-a80b-13a132aa1613")
-	)
-	(label "ATT1"
-		(at 60.96 82.55 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e0e2fbc4-d1a3-5c61-9f3f-67d3fa9657a5")
 	)
 	(wire
 		(pts
@@ -3049,7 +3041,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c11d1ae8-6d1a-5e71-8ca3-2b1aab4dc94d")
+		(uuid "e0e2fbc4-d1a3-5c61-9f3f-67d3fa9657a5")
 	)
 	(global_label "ATT_IN"
 		(shape passive)
@@ -3061,7 +3053,7 @@
 			)
 			(justify right)
 		)
-		(uuid "6e8fe33c-178f-5d42-ba74-8e3593f04342")
+		(uuid "c11d1ae8-6d1a-5e71-8ca3-2b1aab4dc94d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 63.5 102.87 0)
 			(effects
@@ -3073,29 +3065,29 @@
 			)
 		)
 	)
-	(no_connect
-		(at 66.04 85.09)
-		(uuid "f174ee47-856a-5366-a675-bd299911fcc5")
-	)
 	(wire
 		(pts
-			(xy 76.2 85.09) (xy 76.2 82.55)
+			(xy 66.04 85.09) (xy 66.04 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dbaa5484-1a0e-5670-b871-b2b4b636be55")
+		(uuid "6e8fe33c-178f-5d42-ba74-8e3593f04342")
 	)
-	(label "ATP1"
-		(at 76.2 82.55 90)
+	(label "ATT1"
+		(at 66.04 82.55 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "cfbbd3cd-823c-590a-96a3-15dcef36463d")
+		(uuid "f174ee47-856a-5366-a675-bd299911fcc5")
+	)
+	(no_connect
+		(at 76.2 85.09)
+		(uuid "dbaa5484-1a0e-5670-b871-b2b4b636be55")
 	)
 	(wire
 		(pts
@@ -3105,7 +3097,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "50f26b75-ffd5-592a-a2c7-12df16ce3cbb")
+		(uuid "cfbbd3cd-823c-590a-96a3-15dcef36463d")
 	)
 	(label "ATT1"
 		(at 73.66 102.87 270)
@@ -3115,10 +3107,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "50f26b75-ffd5-592a-a2c7-12df16ce3cbb")
+	)
+	(wire
+		(pts
+			(xy 71.12 85.09) (xy 71.12 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "f527c6f1-51da-51c7-9094-6da93b494c78")
 	)
-	(no_connect
-		(at 71.12 85.09)
+	(label "ATP1"
+		(at 71.12 82.55 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "c5495be3-6707-57e7-ab11-0570358562c0")
 	)
 	(symbol
@@ -3146,7 +3154,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 91.44 135.128 0)
 			(effects
 				(font
@@ -3319,7 +3327,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 113.792 53.34 0)
 			(effects
 				(font
@@ -3402,7 +3410,7 @@
 		(uuid "782994b6-2e70-5ada-8e06-305c7aaa470a")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 128.27 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3428,7 +3436,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 128.27 92.71 0)
 			(effects
 				(font
@@ -3596,25 +3604,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 125.73 85.09) (xy 125.73 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 125.73 85.09)
 		(uuid "85e5973b-5008-5def-a8ec-ba363753c6e0")
-	)
-	(label "ATT2"
-		(at 125.73 82.55 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4bbdffe2-d98c-5442-a366-a4a1790d2df5")
 	)
 	(wire
 		(pts
@@ -3624,7 +3616,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d8b151fb-9349-5fde-9ed1-b1697891d077")
+		(uuid "4bbdffe2-d98c-5442-a366-a4a1790d2df5")
 	)
 	(label "ATT1"
 		(at 128.27 102.87 270)
@@ -3634,31 +3626,31 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "c3bc43b6-d362-564e-a246-029044ed4d18")
-	)
-	(no_connect
-		(at 130.81 85.09)
-		(uuid "332a4418-dd6c-5c6d-be23-840d774e62ee")
+		(uuid "d8b151fb-9349-5fde-9ed1-b1697891d077")
 	)
 	(wire
 		(pts
-			(xy 140.97 85.09) (xy 140.97 82.55)
+			(xy 130.81 85.09) (xy 130.81 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "94587161-4642-539e-a626-ef96736d0651")
+		(uuid "c3bc43b6-d362-564e-a246-029044ed4d18")
 	)
-	(label "ATP2"
-		(at 140.97 82.55 90)
+	(label "ATT2"
+		(at 130.81 82.55 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "23059f72-dbcb-5f30-ba67-03ea81c408a6")
+		(uuid "332a4418-dd6c-5c6d-be23-840d774e62ee")
+	)
+	(no_connect
+		(at 140.97 85.09)
+		(uuid "94587161-4642-539e-a626-ef96736d0651")
 	)
 	(wire
 		(pts
@@ -3668,7 +3660,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d64b260a-a48c-5a8e-848f-fa0d189d9b68")
+		(uuid "23059f72-dbcb-5f30-ba67-03ea81c408a6")
 	)
 	(label "ATT2"
 		(at 138.43 102.87 270)
@@ -3678,10 +3670,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "d64b260a-a48c-5a8e-848f-fa0d189d9b68")
+	)
+	(wire
+		(pts
+			(xy 135.89 85.09) (xy 135.89 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "5508c1c9-cc91-5ebd-903c-f4244b9eaf8f")
 	)
-	(no_connect
-		(at 135.89 85.09)
+	(label "ATP2"
+		(at 135.89 82.55 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "ef790296-8c08-57a4-8cc0-471974fa6783")
 	)
 	(symbol
@@ -3709,7 +3717,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 156.21 135.128 0)
 			(effects
 				(font
@@ -3882,7 +3890,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 178.562 53.34 0)
 			(effects
 				(font
@@ -3965,7 +3973,7 @@
 		(uuid "c10202ee-9180-5bf9-8c02-914355fd96e6")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 193.04 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3991,7 +3999,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 193.04 92.71 0)
 			(effects
 				(font
@@ -4159,25 +4167,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 190.5 85.09) (xy 190.5 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 190.5 85.09)
 		(uuid "92421b6a-f359-5317-b681-054ac4cc1292")
-	)
-	(label "ATT3"
-		(at 190.5 82.55 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1965cd3a-2966-5ddb-a5f3-b992788c39fa")
 	)
 	(wire
 		(pts
@@ -4187,7 +4179,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ae56ab0d-898e-5387-8737-93e4928e0640")
+		(uuid "1965cd3a-2966-5ddb-a5f3-b992788c39fa")
 	)
 	(label "ATT2"
 		(at 193.04 102.87 270)
@@ -4197,31 +4189,31 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "c42e6bca-16fb-5414-bc3c-bbea9e24d708")
-	)
-	(no_connect
-		(at 195.58 85.09)
-		(uuid "59685cab-db8f-540a-8454-0e2a4890ad2c")
+		(uuid "ae56ab0d-898e-5387-8737-93e4928e0640")
 	)
 	(wire
 		(pts
-			(xy 205.74 85.09) (xy 205.74 82.55)
+			(xy 195.58 85.09) (xy 195.58 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "32572cc5-7059-55dd-aa03-b3a8b3a6d98a")
+		(uuid "c42e6bca-16fb-5414-bc3c-bbea9e24d708")
 	)
-	(label "ATP4"
-		(at 205.74 82.55 90)
+	(label "ATT3"
+		(at 195.58 82.55 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "2f652c95-5904-5450-9a8f-d37e35c754b1")
+		(uuid "59685cab-db8f-540a-8454-0e2a4890ad2c")
+	)
+	(no_connect
+		(at 205.74 85.09)
+		(uuid "32572cc5-7059-55dd-aa03-b3a8b3a6d98a")
 	)
 	(wire
 		(pts
@@ -4231,7 +4223,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "afd9ccf1-e2f6-540e-9fa2-846f3d6432e7")
+		(uuid "2f652c95-5904-5450-9a8f-d37e35c754b1")
 	)
 	(label "ATT3"
 		(at 203.2 102.87 270)
@@ -4241,10 +4233,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "afd9ccf1-e2f6-540e-9fa2-846f3d6432e7")
+	)
+	(wire
+		(pts
+			(xy 200.66 85.09) (xy 200.66 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "a649f430-1dc9-599e-94c6-34e97baef066")
 	)
-	(no_connect
-		(at 200.66 85.09)
+	(label "ATP4"
+		(at 200.66 82.55 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "c8490842-dd44-56e9-9d69-9dfa6d6620a8")
 	)
 	(symbol
@@ -4272,7 +4280,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 220.98 135.128 0)
 			(effects
 				(font
@@ -4445,7 +4453,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 244.602 53.34 0)
 			(effects
 				(font
@@ -4528,7 +4536,7 @@
 		(uuid "72dee1a6-8bb0-5842-af71-bf56bf829fec")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 257.81 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4554,7 +4562,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 257.81 92.71 0)
 			(effects
 				(font
@@ -4722,25 +4730,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 255.27 85.09) (xy 255.27 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 255.27 85.09)
 		(uuid "e240fc12-8db9-5112-adbb-d3987404465c")
-	)
-	(label "ATT4"
-		(at 255.27 82.55 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "86f571c1-312e-54cf-9690-32cb91830d42")
 	)
 	(wire
 		(pts
@@ -4750,7 +4742,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8c06252b-56a5-52a1-9d61-b65965e1a40d")
+		(uuid "86f571c1-312e-54cf-9690-32cb91830d42")
 	)
 	(label "ATT3"
 		(at 257.81 102.87 270)
@@ -4760,31 +4752,31 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "52fd8259-1c00-5d8f-9829-d53afb7c0a25")
-	)
-	(no_connect
-		(at 260.35 85.09)
-		(uuid "ab3ff162-3b8e-5057-9f0e-3b5a0cb01430")
+		(uuid "8c06252b-56a5-52a1-9d61-b65965e1a40d")
 	)
 	(wire
 		(pts
-			(xy 270.51 85.09) (xy 270.51 82.55)
+			(xy 260.35 85.09) (xy 260.35 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "56b66c16-ff37-56b7-bd8c-c0f2b6019f83")
+		(uuid "52fd8259-1c00-5d8f-9829-d53afb7c0a25")
 	)
-	(label "ATP8"
-		(at 270.51 82.55 90)
+	(label "ATT4"
+		(at 260.35 82.55 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "873e3250-aaa3-5a1c-b4a3-d9f4375a7b36")
+		(uuid "ab3ff162-3b8e-5057-9f0e-3b5a0cb01430")
+	)
+	(no_connect
+		(at 270.51 85.09)
+		(uuid "56b66c16-ff37-56b7-bd8c-c0f2b6019f83")
 	)
 	(wire
 		(pts
@@ -4794,7 +4786,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f174f821-a858-5316-8415-39561da87494")
+		(uuid "873e3250-aaa3-5a1c-b4a3-d9f4375a7b36")
 	)
 	(label "ATT4"
 		(at 267.97 102.87 270)
@@ -4804,10 +4796,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "f174f821-a858-5316-8415-39561da87494")
+	)
+	(wire
+		(pts
+			(xy 265.43 85.09) (xy 265.43 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "c1976dcd-e9c3-508c-be58-d0bc8d517fbc")
 	)
-	(no_connect
-		(at 265.43 85.09)
+	(label "ATP8"
+		(at 265.43 82.55 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "e8930b0f-45ca-5925-ba56-fa20c9886afd")
 	)
 	(symbol
@@ -4835,7 +4843,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 287.02 135.128 0)
 			(effects
 				(font
@@ -5008,7 +5016,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 309.372 53.34 0)
 			(effects
 				(font
@@ -5091,7 +5099,7 @@
 		(uuid "e029c4e4-76dd-5915-88e7-77b6b14daa44")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:G6K-2")
+		(lib_id "tube_pi_fxloop_revb:G6K-2F-Y")
 		(at 322.58 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5117,7 +5125,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y"
 			(at 322.58 92.71 0)
 			(effects
 				(font
@@ -5285,25 +5293,9 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 320.04 85.09) (xy 320.04 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 320.04 85.09)
 		(uuid "fcf11a2b-20e8-50f7-955a-7f4b63169b80")
-	)
-	(label "ATT_OUT"
-		(at 320.04 82.55 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ea496104-7181-5c00-88d1-7a81f4581632")
 	)
 	(wire
 		(pts
@@ -5313,7 +5305,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b9c005a-4aa4-5c53-8b25-63f0a18cda9e")
+		(uuid "ea496104-7181-5c00-88d1-7a81f4581632")
 	)
 	(label "ATT4"
 		(at 322.58 102.87 270)
@@ -5323,31 +5315,31 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "45f4374e-bc8f-5765-8c50-68be3609363f")
-	)
-	(no_connect
-		(at 325.12 85.09)
-		(uuid "44950780-e63f-5b77-b166-7c1ba29fa6b8")
+		(uuid "6b9c005a-4aa4-5c53-8b25-63f0a18cda9e")
 	)
 	(wire
 		(pts
-			(xy 335.28 85.09) (xy 335.28 82.55)
+			(xy 325.12 85.09) (xy 325.12 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e3082a3c-daff-53b5-ab3e-0d9f6a9fd622")
+		(uuid "45f4374e-bc8f-5765-8c50-68be3609363f")
 	)
-	(label "ATP16"
-		(at 335.28 82.55 90)
+	(label "ATT_OUT"
+		(at 325.12 82.55 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "a5113c39-b3fd-50d9-b63e-0cc5640d2393")
+		(uuid "44950780-e63f-5b77-b166-7c1ba29fa6b8")
+	)
+	(no_connect
+		(at 335.28 85.09)
+		(uuid "e3082a3c-daff-53b5-ab3e-0d9f6a9fd622")
 	)
 	(wire
 		(pts
@@ -5357,7 +5349,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "194462d8-5f9b-588f-a085-f65fb11bcaa3")
+		(uuid "a5113c39-b3fd-50d9-b63e-0cc5640d2393")
 	)
 	(label "ATT_OUT"
 		(at 332.74 102.87 270)
@@ -5367,10 +5359,26 @@
 			)
 			(justify right bottom)
 		)
+		(uuid "194462d8-5f9b-588f-a085-f65fb11bcaa3")
+	)
+	(wire
+		(pts
+			(xy 330.2 85.09) (xy 330.2 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "ad7175e9-2577-5f64-b24f-2ea4d92fe568")
 	)
-	(no_connect
-		(at 330.2 85.09)
+	(label "ATP16"
+		(at 330.2 82.55 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
 		(uuid "474f3be4-d8a7-5158-ba0c-d3d9ed6ecad8")
 	)
 	(symbol
@@ -5398,7 +5406,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 351.79 135.128 0)
 			(effects
 				(font
@@ -5560,7 +5568,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 375.92 76.708 0)
 			(effects
 				(font
@@ -5722,7 +5730,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4"
 			(at 397.2052 57.15 0)
 			(effects
 				(font
@@ -5829,7 +5837,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 426.72 76.708 0)
 			(effects
 				(font
@@ -5936,7 +5944,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 424.942 53.34 0)
 			(effects
 				(font
@@ -6173,7 +6181,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 457.2 37.338 0)
 			(effects
 				(font
@@ -6422,7 +6430,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 457.2 117.348 0)
 			(effects
 				(font
@@ -6541,7 +6549,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 424.942 142.24 0)
 			(effects
 				(font
@@ -6648,7 +6656,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 406.4 166.878 0)
 			(effects
 				(font
@@ -6755,7 +6763,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4"
 			(at 387.0452 146.05 0)
 			(effects
 				(font
@@ -6849,7 +6857,7 @@
 		)
 		(uuid "92b0c35c-b57c-535e-8cc2-36a381adc937")
 	)
-	(text "Second-grid cap 22n (pi_nfb); open-load LF margin: rev_b/sim/pi_nfb/results/open_load.md"
+	(text "Second-grid cap 22n (pi_nfb); open-load LF margin: rev_b/sim/pi_nfb/results/open_load.md. The power-tube coupling caps and grid leaks (47n / 100n, 100k / 220k) are OPEN and on the power amp, not here."
 		(exclude_from_sim no)
 		(at 335.28 181.61 0)
 		(effects
@@ -6885,7 +6893,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 487.68 94.488 0)
 			(effects
 				(font
@@ -6968,7 +6976,7 @@
 		(uuid "7657ca1b-14f0-5473-bc7c-48621fafbf11")
 	)
 	(symbol
-		(lib_id "tube_pi_fxloop_revb:Q_NMOS_Depletion")
+		(lib_id "tube_pi_fxloop_revb:DN2540N8-G")
 		(at 487.68 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6994,7 +7002,25 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3"
+			(at 487.68 139.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/DN2540%20B060313.pdf"
+			(at 487.68 136.525 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "150mA Ids, 400 Vds, Depletion-mode N-channel MOSFET, SOT-89"
 			(at 487.68 124.46 0)
 			(effects
 				(font
@@ -7003,32 +7029,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 487.68 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "1"
+			(uuid "82e252e4-fc16-51c9-9523-8611f90cd8aa")
 		)
-		(property "Description" "Depletion-mode N-channel MOSFET"
-			(at 487.68 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "2"
+			(uuid "7a3490e8-637e-5c15-bcf8-f93ed990edde")
 		)
-		(pin "D"
-			(uuid "6608884e-9b3d-57ff-9e14-dd107c1c530e")
-		)
-		(pin "G"
-			(uuid "f243b584-739f-5464-ac92-9bed939974da")
-		)
-		(pin "S"
-			(uuid "955b0574-8f3d-5acc-bff0-c63f94ab59b9")
+		(pin "3"
+			(uuid "3636946a-363e-5aed-b83a-37d127c2fab2")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
@@ -7124,7 +7132,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 467.36 154.178 0)
 			(effects
 				(font
@@ -7286,7 +7294,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 508 154.178 0)
 			(effects
 				(font
