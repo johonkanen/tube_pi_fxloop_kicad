@@ -11,7 +11,7 @@ sim/fx_loop/fx.py (copied here as fx_ref.py) with the rev B changes:
   wiper -> W23 RETURN_SIG -> Cr 220n -> Rp1 (pad series) -> W ; W -> Rp2 -> PAD_A ; the rear pad
   switch closes PAD_A to PAD_B = GND for -20 dB. W -> 1M to GND (defined when unplugged).
   Second pass (IF-1.2): PAD_A is a DC line driving a JFET for the 11k shunt (modelled as the
-  switched Rp2); RETURN_SIG gets a 1M bleed at the connector (rret_bleed) so the ribbon side of Cr
+  switched Rp2); RETURN_SIG gets a 2.2M bleed at the connector (rret_bleed) so the ribbon side of Cr
   never floats with W23 unplugged.
 - Mixer: series-shunt NJFETs per branch as fx.py, branch resistors Rmx, Rm to GND, V1b grid.
 - Return stage V1b: 100k plate, cathode 680R unbypassed + 820R / 100u (rev B: the dry level P is
@@ -33,7 +33,7 @@ D = dict(rsrc=140e3, cin_ext=45e-12,           # preamp source; cable (40 pF) + 
          rk2=22e3, rd1=47e3, rd2=4.7e3,         # CF cathode R; dry divider
          send_pot=1.0, send_load=10e3, send_cab=300e-12,
          ret_pot=1.0, ret_taper='log', pad=False, rp1=100e3, rp2=11e3,
-         rret_bleed=1e6, rmx=100e3, rm=220e3, rku=680.0, rkb=820.0, z0=49.9e3, att=0, ccpl=0.0, pre_cap=5e-12,
+         rret_bleed=2.2e6, rmx=100e3, rm=220e3, rku=680.0, rkb=820.0, z0=49.9e3, att=0, ccpl=0.0, pre_cap=5e-12,
          unit_gain=1.0, unit_rout=100.0)
 ATT = (1, 2, 4, 8, 16)
 

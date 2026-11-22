@@ -222,7 +222,7 @@ def sheet01(d):
                                               13: "GND", 14: "GND", 15: "GND", 16: "RETURN_SIG"}, value="FX (W23-a)",
            fp="IDC2x8")
     d.text("J102 (IF-1.2): 2 SEND_SRC, 8 PAD_A, 10 PAD_B = GND (the rear switch grounds PAD_A), 16 RETURN_SIG "
-           "(far end from SEND_SRC, 1M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-230.", 0, 9.3)
+           "(far end from SEND_SRC, 2.2M bleed here); 6 / 12 RSVD1 / RSVD2 not connected. Place at the rear edge, x 170-230.", 0, 9.3)
     # input network and send cathode follower (V1 pins 1-3)
     R(d, 1.5, 2.2, "PRE_IN", "GND", "2.2M")
     C(d, 2.5, 1, "PRE_IN", "CI", "100n/250V film", rot=0, fp="FILM5")
@@ -273,9 +273,10 @@ def sheet01(d):
     d.text("Return stage: 680R unbypassed sets the bypass gain preamp -> PI input to -3.8 dB (20 V peak in = 13 V at the PI, "
            "under the 18 V limit of PI-4)", 18, 9.5)
     # Second pass (IF-1.2, interfaces.md 10.1): RETURN_SIG bleed at J102, so the ribbon side of the 220n never floats
-    # with W23 unplugged (the grid side is held by the 1M on NW and the 220k on M). 1M: the return law moves <= 0.2 dB
+    # with W23 unplugged (the grid side is held by the 1M on NW and the 220k on M). 2.2M keeps the pad-on load >= 100k
+    # (1M would give 99k); the return law moves < 0.1 dB
     # (rev_b/sim/fx_loop, rret_bleed). The SEND_SRC side is bled by the 1M on CFO through the 1k.
-    R(d, 1.5, 8.2, "RETURN_SIG", "GND", "1M")
+    R(d, 1.5, 8.2, "RETURN_SIG", "GND", "2.2M")
 
 
 # ------------------------------------------------------------------ sheet 02
