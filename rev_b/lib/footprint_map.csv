@@ -51,9 +51,9 @@ C503,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4
 C504,Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4
 C505,Capacitor_THT:CP_Radial_D18.0mm_P7.50mm
 C506,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4
-C507,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm
-C508,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm
-C509,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm
+C507,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm
+C508,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm
+C509,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm
 D501,Diode_SMD:D_SMA
 D502,Diode_SMD:D_SMA
 D503,Diode_SMD:D_SMA

@@ -1,5 +1,26 @@
 # PI + FX loop rev B: status
 
+## Fourth pass (2026-11-23): 500 V B+ electrolytics
+
+User, 2026-11-23: B+ output electrolytics 500 V if they can be sourced. If a pass device fails
+short, B+PI / B+FX go to the raw rail (up to 480 V). They can be sourced, so all five changed:
+
+| Ref | Was | Now | Size (D x L), pitch | Rating | Source (2026-11-23) |
+|---|---|---|---|---|---|
+| C502, C505 (B+PI / B+FX reservoir) | 47u / 450 V (EG22WM470L26OTMO) | **47u / 500 V Nichicon UCY2H470MHD6** | 18 x 31.5 mm (33 mm seated), P7.5: same footprint `CP_Radial_D18.0mm_P7.50mm` | 105 °C, 12000 h, 440 mA at 120 Hz | DigiKey (448 in stock, about GBP 4.3 each), RS; second source Rubycon 500LXW47MEFR18X25 (18 x 25, 12000 h, DigiKey) |
+| C507, C508, C509 (per-stage decoupling) | 22u / 450 V, Ø12.5 P5 (EWH2WM220L20C33T) | **22u / 500 V Nichicon UCY2H220MHD6** | 16 x 25 mm (26.5 mm seated), P7.5: footprint `CP_Radial_D16.0mm_P7.50mm` | 105 °C, 12000 h, 280 mA at 120 Hz | DigiKey (562 in stock, about GBP 2.8 each) |
+
+- Neither part is at LCSC / JLC (only the 400 V UCY2G470MHD, C225862): hand-soldered, like the
+  noval sockets. Long factory lead times (22-41 weeks) are listed, so buy from stock.
+- Board area: the 47 µF footprints are unchanged; each 22 µF grows from Ø12.5 to Ø16 (+0.8 cm² of
+  body outline each, about +2.4 cm² for the three). Height: 33 mm max against 66 mm free.
+- No series pairs needed. The 2.2 µF / 630 V reference films and the 100 n / 630 V films were already
+  ≥ 500 V.
+- **Preamp equivalent (same regulator, for the preamp session):** C502 47u/450V → Nichicon
+  UCY2H470MHD6 (same Ø18 P7.5 footprint); C510-C513 22u/450V (Ø12.5) → Nichicon UCY2H220MHD6
+  (Ø16, P7.5). C501 (2.2 µF / 450 V on the zener-clamped 390 V reference) and C520 (VB90) do not see
+  the raw rail in that fault and can stay.
+
 ## Third pass (2026-11-23)
 
 Scope: the user's decisions of 2026-11-23 (the coordinator's decisions_1123 list; interfaces.md

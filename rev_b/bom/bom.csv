@@ -14,9 +14,9 @@ Qty,Refs,Value,Footprint,Candidate MPN,LCSC,DNP,Note
 1,C319,DNP (step C),Capacitor_SMD:C_0805_2012Metric,,,yes,
 1,C411,10u/16V,Capacitor_SMD:C_0805_2012Metric,,,,
 2,C501 C504,2.2u/630V film,Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4,,,,PP film 630 V (preamp_regulator.md)
-2,C502 C505,47u/450V,Capacitor_THT:CP_Radial_D18.0mm_P7.50mm,EG22WM470L26OTMO,C2841612,,105 C electrolytic
+2,C502 C505,47u/500V,Capacitor_THT:CP_Radial_D18.0mm_P7.50mm,"Nichicon UCY2H470MHD6 (18 x 31.5, P7.5; alt. Rubycon 500LXW47MEFR18X25)",,,"105 C, 12000 h, not at LCSC: hand-solder"
 2,C503 C506,100n/630V,Capacitor_THT:C_Rect_L13.0mm_W5.0mm_P10.00mm_FKS3_FKP3_MKS4,CBB21-630V104JP10,C2888191,,film 630 V
-3,C507 C508 C509,22u/450V,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,EWH2WM220L20C33T,C2923777,,105 C electrolytic
+3,C507 C508 C509,22u/500V,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,"Nichicon UCY2H220MHD6 (16 x 25, P7.5)",,,"105 C, 12000 h, not at LCSC: hand-solder"
 3,D501 D502 D503,130V,Diode_SMD:D_SMA,1SMA5952B,C48578686,,
 2,D504 D508,1N4007 (M7),Diode_SMD:D_SMA,M7,C7420350,,
 2,D505 D509,15V,Diode_SMD:D_SOD-123,BZT52C15,C2891782,,

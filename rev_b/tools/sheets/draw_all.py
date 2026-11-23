@@ -62,7 +62,7 @@ FP = {
     "FILM15": "Capacitor_THT:C_Rect_L18.0mm_W8.0mm_P15.00mm_FKS3_FKP3",
     "FILM27": "Capacitor_THT:C_Rect_L31.5mm_W17.0mm_P27.50mm_MKS4",
     "CPD8": "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm", "CPD12": "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm",
-    "CPD18": "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm", "CPE6": "Capacitor_SMD:CP_Elec_6.3x7.7",
+    "CPD16": "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm", "CPD18": "Capacitor_THT:CP_Radial_D18.0mm_P7.50mm", "CPE6": "Capacitor_SMD:CP_Elec_6.3x7.7",
     "CPE5": "Capacitor_SMD:CP_Elec_5x5.4",
     "SMA": "Diode_SMD:D_SMA", "SOD123": "Diode_SMD:D_SOD-123",
     "DPAK": "Package_TO_SOT_SMD:TO-252-2", "SOT89": "Package_TO_SOT_SMD:SOT-89-3",
@@ -472,7 +472,7 @@ def regulator(d, c0, r0, tag, out, zeners, rs, note):
     R(d, c0 + 7.5, r0 + 5.2, f"SRC_{tag}", f"QB_{tag}", "1k", rot=0, fp="R1206")
     R(d, c0 + 9.5, r0 + 5.2, f"QB_{tag}", out, "10k", rot=0, fp="R1206")
     R(d, c0 + 8.5, r0 + 6.2, "BP_RAW", f"FBA_{tag}", "270k", rot=0, fp="R2512")
-    CP(d, c0 + 10, r0 + 2.2, out, "GND", "47u/450V", fp="CPD18")
+    CP(d, c0 + 10, r0 + 2.2, out, "GND", "47u/500V", fp="CPD18")
     C(d, c0 + 11, r0 + 2.2, out, "GND", "100n/630V", fp="FILM10")
     R(d, c0 + 12, r0 + 2.2, out, f"BL1_{tag}", "150k", fp="R2512")
     # the rest of the split HV strings (drawn after, so the refs above keep their order)
@@ -502,11 +502,11 @@ def sheet05(d):
     regulator(d, 2, 9.5, "FX", "BFX", ("150V", "180V"), "16R",
               "B+FX about 328 V (150 V + 180 V), limit 27 mA (20 mA with Q at 70 C), short 10 mA cold, about 0.6 W steady")
     R(d, 17, 1, "BPI", "BPI_P", "2.2k", rot=0, fp="R1206")
-    CP(d, 18, 2.2, "BPI_P", "GND", "22u/450V", fp="CPD12")
+    CP(d, 18, 2.2, "BPI_P", "GND", "22u/500V", fp="CPD16")
     R(d, 17, 9.5, "BFX", "BFX1", "10k", rot=0, fp="R1206")
-    CP(d, 18, 10.7, "BFX1", "GND", "22u/450V", fp="CPD12")
+    CP(d, 18, 10.7, "BFX1", "GND", "22u/500V", fp="CPD16")
     R(d, 17, 12.5, "BFX", "BFX2", "10k", rot=0, fp="R1206")
-    CP(d, 18, 13.7, "BFX2", "GND", "22u/450V", fp="CPD12")
+    CP(d, 18, 13.7, "BFX2", "GND", "22u/500V", fp="CPD16")
     d.text("Separate RC per FX triode (sim/fx_loop fix: shared decoupling leaked the dry into series mode at -64 dB)", 16, 8.7)
     for i, v in enumerate(("V1", "V2")):
         d.part("ECC83", v, 3 + i * 2, 18, {4: "HTR1", 5: "HTR1", 9: "HTR2"}, value="12AX7", unit=3)
@@ -534,7 +534,11 @@ KNOWN = {
     ("100n/630V", "FILM10"): ("CBB21-630V104JP10", "C2888191"),
     ("22n/630V film", "FILM10"): ("MPE223J2JB050C030ZR", "C53224144"),
     ("470n/400V film", "FILM15"): ("CBB21-400V474JP15", "C2888194"),
-    ("47u/450V", "CPD18"): ("EG22WM470L26OTMO", "C2841612"), ("22u/450V", "CPD12"): ("EWH2WM220L20C33T", "C2923777"),
+    # B+ electrolytics 500 V (user, 2026-11-23: a shorted pass device puts the raw rail, up to 480 V, on B+):
+    # Nichicon UCY (105 C, 12000 h), DigiKey / RS stock; not at LCSC (hand-solder). 47u second source Rubycon
+    # 500LXW47MEFR18X25 (18 x 25, 12000 h).
+    ("47u/500V", "CPD18"): ("Nichicon UCY2H470MHD6 (18 x 31.5, P7.5; alt. Rubycon 500LXW47MEFR18X25)", ""),
+    ("22u/500V", "CPD16"): ("Nichicon UCY2H220MHD6 (16 x 25, P7.5)", ""),
     ("130V", "SMA"): ("1SMA5952B", "C48578686"), ("150V", "SMA"): ("1SMA5953B", ""), ("180V", "SMA"): ("1SMA5955B", ""),
     ("15V", "SOD123"): ("BZT52C15", "C2891782"), ("1N4007 (M7)", "SMA"): ("M7", "C7420350"),
     ("MMBFJ113", None): ("MMBFJ113", "C891686"), ("LND150N8", "SOT89"): ("LND150N8-G", "C629123"),
@@ -552,7 +556,7 @@ KNOWN = {
 }
 NOTES = {
     "FILM5": "film >= 100 V (PET / PP)", "FILM10": "film 630 V", "FILM15": "film >= 400 V", "FILM27": "PP film 630 V (preamp_regulator.md)",
-    "CPD8": "105 C electrolytic", "CPE6": "105 C electrolytic", "CPE5": "105 C electrolytic", "CPD12": "105 C electrolytic", "CPD18": "105 C electrolytic",
+    "CPD8": "105 C electrolytic", "CPE6": "105 C electrolytic", "CPE5": "105 C electrolytic", "CPD12": "105 C electrolytic", "CPD16": "105 C, 12000 h, not at LCSC: hand-solder", "CPD18": "105 C, 12000 h, not at LCSC: hand-solder",
     "R2512": "2512, 1 W, 200 V", "TAB48": "PLACEHOLDER footprint", "TAB63": "PLACEHOLDER footprint",
     "MFJ2x3": "W24: Mini-Fit Jr 600 V (V5); 2x3 with position 6 unused, same mapping on the power amp",
 }
