@@ -39,6 +39,13 @@ else
         --intent "$L/intent.json" --seed "$SEED" --halo-coef ${HALO:-0.5} --json "$B/placed.json" ${PLACE_ARGS:-} | grep -v "^  " | tail -5
 fi
 "$L/../../tools/p2k/bin/kipy" "$L/fix_place.py" "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" 2>&1 | grep -v "memory leak\|^$"
-# re-legalise after the nudges (moves only what a nudge made illegal)
-cd "$KRT" && $PY py_placer/place_simple.py "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --groups "$L/groups.json" --intent "$L/intent.json" \
-    --seed "$SEED" --halo-coef "$HALO" --legalise-only --json "$B/placed_legal.json" | grep -o '"illegal": \[[^]]*\]' | head -1
+# re-legalise after the nudges, then the class-clearance pushes and a legalise again (three rounds)
+for round in 1 2 3; do
+    ( cd "$KRT" && $PY py_placer/place_simple.py "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --groups "$L/groups.json" --intent "$L/intent.json" \
+        --seed "$SEED" --halo-coef "$HALO" --legalise-only --json "$B/placed_legal.json" | grep -o '"illegal": \[[^]]*\]' | head -1 ) || true
+    "$L/../../tools/p2k/bin/kipy" "$L/fix_place.py" "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --push 2>&1 | grep -v "memory leak\|^$" | tail -1 || true
+done
+( cd "$KRT" && $PY py_placer/place_simple.py "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --groups "$L/groups.json" --intent "$L/intent.json" \
+    --seed "$SEED" --halo-coef "$HALO" --legalise-only --json "$B/placed_legal.json" | grep -o '"illegal": \[[^]]*\]' | head -1 ) || true
+# a last class push (small moves; DRC judges the courtyards)
+"$L/../../tools/p2k/bin/kipy" "$L/fix_place.py" "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --push 2>&1 | grep -v "memory leak\|^$" | tail -1 || true

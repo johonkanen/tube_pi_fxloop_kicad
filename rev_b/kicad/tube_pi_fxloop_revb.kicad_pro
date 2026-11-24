@@ -306,7 +306,7 @@
         "via_drill": 0.3
       },
       {
-        "clearance": 0.3,
+        "clearance": 0.6,
         "name": "HV",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
@@ -317,7 +317,7 @@
         "via_drill": 0.4
       },
       {
-        "clearance": 0.3,
+        "clearance": 0.6,
         "name": "MV",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 1,
@@ -373,14 +373,6 @@
       {
         "netclass": "HV",
         "pattern": "*/ZT_FX"
-      },
-      {
-        "netclass": "HV",
-        "pattern": "Z1_PI"
-      },
-      {
-        "netclass": "HV",
-        "pattern": "*/Z1_PI"
       },
       {
         "netclass": "HV",
@@ -552,14 +544,6 @@
       },
       {
         "netclass": "HV",
-        "pattern": "BL1_PI"
-      },
-      {
-        "netclass": "HV",
-        "pattern": "*/BL1_PI"
-      },
-      {
-        "netclass": "HV",
         "pattern": "DRV_A"
       },
       {
@@ -576,6 +560,14 @@
       },
       {
         "netclass": "MV",
+        "pattern": "Z1_PI"
+      },
+      {
+        "netclass": "MV",
+        "pattern": "*/Z1_PI"
+      },
+      {
+        "netclass": "MV",
         "pattern": "Z2_PI"
       },
       {
@@ -589,6 +581,14 @@
       {
         "netclass": "MV",
         "pattern": "*/Z1_FX"
+      },
+      {
+        "netclass": "MV",
+        "pattern": "BL1_PI"
+      },
+      {
+        "netclass": "MV",
+        "pattern": "*/BL1_PI"
       },
       {
         "netclass": "MV",

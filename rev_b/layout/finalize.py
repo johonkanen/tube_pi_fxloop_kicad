@@ -25,19 +25,22 @@ def main():
     pats = [p["pattern"] for p in json.load(open(PRO))["net_settings"]["netclass_patterns"] if p["netclass"] == "HIZ"]
 
     hiz = lambda n: any(fnmatch.fnmatchcase(n, p) for p in pats)
-    other = {pcbnew.F_Cu: pcbnew.B_Cu, pcbnew.B_Cu: pcbnew.F_Cu}
+    other = {pcbnew.F_Cu: [pcbnew.B_Cu], pcbnew.B_Cu: [pcbnew.F_Cu], pcbnew.In1_Cu: [pcbnew.F_Cu, pcbnew.B_Cu],
+             pcbnew.In2_Cu: [pcbnew.F_Cu, pcbnew.B_Cu]}
     cut = {pcbnew.F_Cu: pcbnew.SHAPE_POLY_SET(), pcbnew.B_Cu: pcbnew.SHAPE_POLY_SET()}
     err = mm(0.05)
     n = 0
     for t in b.GetTracks():
         if t.GetClass() == "PCB_TRACK" and hiz(t.GetNetname()):
-            t.TransformShapeToPolygon(cut[other[t.GetLayer()]], t.GetLayer(), mm(HIZ_POUR), err, pcbnew.ERROR_OUTSIDE)
+            for o in other[t.GetLayer()]:
+                t.TransformShapeToPolygon(cut[o], t.GetLayer(), mm(HIZ_POUR), err, pcbnew.ERROR_OUTSIDE)
             n += 1
     for f in b.GetFootprints():
         for p in f.Pads():
             if hiz(p.GetNetname()) and p.GetAttribute() == pcbnew.PAD_ATTRIB_SMD:
                 lay = pcbnew.B_Cu if f.IsFlipped() else pcbnew.F_Cu
-                p.TransformShapeToPolygon(cut[other[lay]], lay, mm(HIZ_POUR), err, pcbnew.ERROR_OUTSIDE)
+                for o in other[lay]:
+                    p.TransformShapeToPolygon(cut[o], lay, mm(HIZ_POUR), err, pcbnew.ERROR_OUTSIDE)
     for lay, poly in cut.items():
         poly.Simplify()
         for i in range(poly.OutlineCount()):

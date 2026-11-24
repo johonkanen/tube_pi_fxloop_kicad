@@ -1,10 +1,10 @@
 """Net classes of the PI + FX rev B (one list, read by tools/make_pcb.py and make_routing.py)."""
 
 # Net classes by the DC voltage a net reaches (normal use, start-up, a short; raw rail 480 V transient).
-HV = ["BP_RAW", "CS_PI", "CS_FX", "ZT_PI", "ZT_FX", "Z1_PI", "RF1_PI", "RF2_PI", "RF1_FX", "RF2_FX", "GF_PI", "GF_FX",
+HV = ["BP_RAW", "CS_PI", "CS_FX", "ZT_PI", "ZT_FX", "RF1_PI", "RF2_PI", "RF1_FX", "RF2_FX", "GF_PI", "GF_FX",
       "GP_PI", "GP_FX", "SRC_PI", "SRC_FX", "QB_PI", "QB_FX", "FBA_PI", "FBB_PI", "FBA_FX", "FBB_FX",
-      "BPI", "BPI_P", "BFX", "BFX1", "BFX2", "BL1_PI", "DRV_A", "DRV_B"]          # 250-480 V
-MV = ["Z2_PI", "Z1_FX", "BL2_PI", "BL1_FX", "BL2_FX", "PIR_M", "P1B"]          # 100-250 V
+      "BPI", "BPI_P", "BFX", "BFX1", "BFX2", "DRV_A", "DRV_B"]          # 280-480 V
+MV = ["Z1_PI", "Z2_PI", "Z1_FX", "BL1_PI", "BL2_PI", "BL1_FX", "BL2_FX", "PIR_M", "P1B"]   # 100-260 V
 HEATER = ["HTR1", "HTR2"]
 # High-impedance audio nodes (>= 47 kOhm or a grid): pours keep away, the opposite pour is cut under them.
 HIZ = ["PRE_IN", "CI", "G1A", "SB", "RETURN_SIG", "RC", "NW", "DMX", "WMX", "M", "G1B", "ATT_IN", "ATT1", "ATT2", "ATT3",

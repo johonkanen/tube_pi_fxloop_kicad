@@ -27,7 +27,7 @@ CTL_B = rng("R", 401, 427) + rng("C", 401, 411)
 
 # name, refs, chassis zone (x0, y0, x1, y1), near, why
 G = [
-    ("reg_fx", "Q504 R515 D506 D507 R516 R523 R524 C504 R517 D508 Q505 D509 R518 Q506 R519 R520 R521 R525 R526 C505 C506 "
+    ("reg_fx", "Q504 R515 R516 R523 R524 C504 R517 D508 Q505 D509 R518 Q506 R519 R520 R521 R525 R526 C505 C506 "
                "R522 R527 R528".split(), (54.0, 104.0, 125.0, 162.0), ["reg_pi"],
      "B+FX regulator (raw from J501): LND150 CCS, zener string, Rf string + 2.2u film, DPAK on its pour, foldback, 47u, bleed"),
     ("reg_pi", "Q501 R501 D501 D502 D503 R502 R509 R510 C501 R503 D504 Q502 D505 R504 Q503 R505 R506 R507 R511 R512 C502 "
@@ -55,6 +55,7 @@ G = [
 ]
 SMALL = []
 B_GROUPS = [
+    ("reg_b", ["D506", "D507"], (60.0, 125.0, 102.0, 143.5), ["reg_fx"], "B+FX zener string on B under C504 (no room on F)"),
     ("ctl_b", CTL_B, (200.0, 110.0, 278.6, 152.0), ["ctl"], "logic passives under the DGND island (B side)"),
     ("mix_b", MIX_B, (60.0, 128.0, 200.0, 171.0), ["mixer", "fxio"], "mixer and pad JFET gate RC networks (B side)"),
     ("fb_b", FB_B, (175.0, 110.0, 262.0, 150.0), ["fb"], "feedback T-switch gate RC networks (B side)"),
@@ -77,6 +78,12 @@ def main():
     global SMALL
     SMALL = [r for r in allrefs if r[0] in "RCQD" and r not in TALL and not r.startswith(("Q50", "Q20"))]
     ko = []
+    # HV / MV parts keep their pads 2.5 mm (HV copper to the edge) + a pad from every edge: strips closed to the
+    # parts with an HV / MV pad (tools/make_pcb.py writes hv_refs.json); fix_place.edge_push repairs the anneal
+    hv = set(json.load(open(os.path.join(HERE, "hv_refs.json"))))
+    ok = [x for _n, refs, _z, _nr, _w in G + B_GROUPS for x in refs if x not in hv] + list(P.CONNECTORS) \
+        + list(P.PINNED) + list(P.PINNED_PIN1)
+    # strip width 2.3 mm: a courtyard reaches >= 0.25 mm past its pads, so the pad keeps the 2.5 mm
     for h, (bx, by) in P.HOLES_BOARD.items():
         if h not in P.HOLE_DROPPED:
             ko.append({"name": f"{h} standoff", "circle": [bx, by, 4.2], "sides": ["F", "B"], "allow": [h],
@@ -100,7 +107,10 @@ def main():
     ko.append({"name": "front of J302-J304", "rect": list(P.rect_board(192.0, 103.9, 259.0, 105.4)), "sides": ["F"],
                "why": "W30-W32 enter from the front"})
     # regulator F pours (draw_pours.py): only the pass device and its foldback transistor
-    # HV / MV pads near the edges: fix_place.edge_push after the anneal (strips here cost too much area)
+    for name, r in (("front", (53.3, 103.9, 278.7, 106.28)), ("west", (53.2, 103.9, 55.57, 175.8)),
+                    ("east", (276.39, 103.9, 278.8, 175.8)), ("rear", (53.2, 173.43, 278.7, 175.8))):
+        ko.append({"name": f"HV edge {name}", "rect": list(P.rect_board(*r)), "sides": ["F"], "allow": ok,
+                   "why": "HV copper 2.5 mm from the board edge"})
     for q, r in P.POUR_B.items():
         ko.append({"name": f"{q} pour B", "rect": list(P.rect_board(*r)), "sides": ["B"], "why": "BP_RAW drain pour (B), HV",
                    "allow": [x for _n, refs, _z, _nr, _w in G for x in refs]})

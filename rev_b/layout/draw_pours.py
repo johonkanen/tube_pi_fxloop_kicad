@@ -30,7 +30,7 @@ def zone(b, net, layer, rect_c, hole=None, prio=10, name=""):
     z.SetLayer(layer); z.SetNet(net); z.SetAssignedPriority(prio)
     z.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL)
     z.SetMinThickness(mm(0.3)); z.SetLocalClearance(mm(0.3))
-    z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_NEVER)
+    z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
     z.SetZoneName(name)
     o = z.Outline(); o.NewOutline()
     x0, y0, x1, y1 = P.rect_board(*rect_c)
@@ -55,30 +55,24 @@ def main():
         tx, ty = pcbnew.ToMM(c.x), pcbnew.ToMM(c.y)
         zone(b, net, pcbnew.F_Cu, P.POUR_F[q], (tx - CUT, ty - CUT, tx + CUT, ty + CUT), name=f"{q} drain F")
         zone(b, net, pcbnew.B_Cu, P.POUR_B[q], name=f"{q} drain B")
-        x0, y0, x1, y1 = P.rect_board(*P.POUR_F[q])
-        y = y0 + 1.5
-        while y < y1 - 1.0:
-            x = x0 + 1.5
-            while x < x1 - 1.0:
-                ok = not (abs(x - tx) < CUT + 1.0 and abs(y - ty) < CUT + 1.0)
-                for p in pads:
-                    if not ok:
-                        break
-                    bb = p.GetBoundingBox()
-                    same = p.GetNetCode() == net.GetNetCode()
-                    m = 0.4 if same and p.GetAttribute() == pcbnew.PAD_ATTRIB_SMD else (0.8 if same else 2.0)
-                    ok = not (pcbnew.ToMM(bb.GetLeft()) - m < x < pcbnew.ToMM(bb.GetRight()) + m and
-                              pcbnew.ToMM(bb.GetTop()) - m < y < pcbnew.ToMM(bb.GetBottom()) + m)
-                if ok:
-                    v = pcbnew.PCB_VIA(b)
-                    v.SetPosition(pcbnew.VECTOR2I(mm(x), mm(y))); v.SetWidth(mm(1.0)); v.SetDrill(mm(0.5))
-                    v.SetNet(net); v.SetLocked(True); b.Add(v); n += 1
-                x += 2.0
-            y += 2.0
+        # thermal vias in the tab pad (0.3 mm, 1.2 mm pitch): F pour -> tab -> B pour; filled and capped
+        # (IPC-4761 type VII) on the fab order, or accept some solder wicking
+        tab = fp[q].FindPadByNumber("2")
+        tb = tab.GetBoundingBox()
+        tx0, ty0, tx1, ty1 = (pcbnew.ToMM(v) for v in (tb.GetLeft(), tb.GetTop(), tb.GetRight(), tb.GetBottom()))
+        yy = ty0 + 1.0
+        while yy < ty1 - 0.8:
+            xx = tx0 + 1.0
+            while xx < tx1 - 0.8:
+                v = pcbnew.PCB_VIA(b)
+                v.SetPosition(pcbnew.VECTOR2I(mm(xx), mm(yy))); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3))
+                v.SetNet(net); v.SetLocked(True); b.Add(v); n += 1
+                xx += 1.2
+            yy += 1.2
     zones = b.Zones()
     pcbnew.ZONE_FILLER(b).Fill(zones)
     b.Save(sys.argv[2])
-    print(f"BP_RAW drain pours F/B x2, {n} stitching vias")
+    print(f"BP_RAW drain pours F/B x2, {n} thermal vias in the tabs")
 
 
 if __name__ == "__main__":

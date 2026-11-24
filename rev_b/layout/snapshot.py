@@ -24,7 +24,7 @@ def main():
     n = 0
     for f in b.GetFootprints():
         r = f.GetReference()
-        if r not in d:
+        if r not in d or f.IsLocked():          # fixed parts (connectors, pinned) come from placement.py
             continue
         x, y, rot, side = d[r]
         if (side == "B") != f.IsFlipped():

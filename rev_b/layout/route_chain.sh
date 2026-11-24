@@ -20,7 +20,13 @@ step() {   # step N NAME GROUP [route.py opts]
     python3 -I "$S/route_step.py" "$in" "$out" "$grp" "$@" || true
     [ -f "$out" ] || cp "$in" "$out"
     sib "$out"
-    source "$S/kenv.sh"; kpy "$S/lock_tracks.py" "$out" lock "$grp" >/dev/null
+    source "$S/kenv.sh"
+    for g in ${grp//,/ }; do kpy "$S/lock_tracks.py" "$out" lock "$g" >/dev/null || true; done
+}
+unlock() {   # unlock N GROUP...: unlock the given groups on the previous step's board (in place)
+    local in; in=$(prev "$1"); shift
+    [ -n "$in" ] || return 0
+    $KP "$L/unlock_groups.py" "$in" "$@" 2>&1 | grep -v "memory leak\|^$"
 }
 if [ "$FROM" -le 0 ] && [ "$LAST" -ge 0 ]; then
     echo "== 0 prep: heater pair, drain pours"
@@ -29,30 +35,39 @@ if [ "$FROM" -le 0 ] && [ "$LAST" -ge 0 ]; then
     $KP "$L/draw_heater.py" "$PLACED" "$out" 2>&1 | grep -v "memory leak"
     $KP "$L/draw_pours.py" "$out" "$out" 2>&1 | grep -v "memory leak"
 fi
-step 1 hv hv --via-cost 100
-step 2 mv mv --via-cost 100
+step 1 hv hv --via-cost 100 --layers F.Cu B.Cu --layer-costs 1 1.5
+step 2 mv mv --via-cost 100 --layers F.Cu B.Cu --layer-costs 1 1.5
 step 3 hiz hiz --via-cost 60
 step 4 audio audio
 step 5 supply supply --grid-step 0.05 --power-nets "+5V" "+15V" "-15V" "GNDD" --power-nets-widths 0.5 0.4 0.4 0.5
 step 6 logic logic --grid-step 0.05
 step 7 coil coil
 step 8 gate gate --grid-step 0.05
-step 9 leftover hv,mv,hiz,audio,coil,gate,logic,supply --max-iterations 20000000 --layer-costs 1 1
+# leftovers: the logic and gate nets unlocked so KRT may rip and re-route them around the last opens
+if [ 9 -ge "$FROM" ] && [ 9 -le "$LAST" ]; then unlock 9 logic gate coil supply; fi
+KICAD_RIP_PREEXISTING=1 step 9 leftover logic,gate,coil,supply,hiz,audio --max-iterations 20000000 --layer-costs 1 1 1 1 --grid-step 0.05
+step 10 leftover_hv hv,mv --max-iterations 20000000 --layers F.Cu B.Cu --layer-costs 1 1
 # GND pours on F and B (KRT route_planes), then repair islands, HIZ cuts, refill (finalize.py)
-if [ 10 -ge "$FROM" ] && [ 10 -le "$LAST" ]; then
-    echo "== 10 gnd pours"
-    in=$(prev 10); out="$R/10_gnd.kicad_pcb"; sib "$out"
+if [ 11 -ge "$FROM" ] && [ 11 -le "$LAST" ]; then
+    echo "== 11 gnd pours"
+    in=$(prev 11); out="$R/11_gnd.kicad_pcb"; sib "$out"
     ( cd ~/dev/KiCadRoutingTools && .venv/bin/python -X utf8 py_router/route_planes.py "$in" "$out" \
         --nets GND GND --plane-layers F.Cu B.Cu --stitch-vias --stitch-pitch 8 --via-size 0.8 --via-drill 0.3 \
         --escalation board --no-fix-drc-settings > "${out%.kicad_pcb}.log" 2>&1 ) || { tail -20 "${out%.kicad_pcb}.log"; exit 1; }
     grep -E "^(Total|Planes|.*islands?|.*unconnected)" "${out%.kicad_pcb}.log" | tail -6 || true
 fi
-if [ 11 -ge "$FROM" ] && [ 11 -le "$LAST" ]; then
-    echo "== 11 gnd repair + finalize"
-    in=$(prev 11); out="$R/11_final.kicad_pcb"; sib "$out"
+if [ 12 -ge "$FROM" ] && [ 12 -le "$LAST" ]; then
+    echo "== 12 gnd repair + finalize"
+    in=$(prev 12); out="$R/12_final.kicad_pcb"; sib "$out"
     ( cd ~/dev/KiCadRoutingTools && .venv/bin/python -X utf8 py_router/repair_planes.py "$in" --output "$out" \
         --nets GND GND --plane-layers F.Cu B.Cu --via-size 0.8 --via-drill 0.3 --escalation board --no-fix-drc-settings \
         > "${out%.kicad_pcb}.log" 2>&1 ) || { tail -20 "${out%.kicad_pcb}.log"; cp "$in" "$out"; }
     $KP "$L/finalize.py" "$out" "$out" 2>&1 | grep -v "memory leak"
+fi
+# GND pads the pours could not reach (parts walled in on B): tracks, then a refill
+step 13 gnd_tracks GND --power-nets GND --power-nets-widths 0.4 --max-iterations 5000000
+if [ 13 -ge "$FROM" ] && [ 13 -le "$LAST" ]; then
+    out="$R/13_gnd_tracks.kicad_pcb"
+    source "$S/kenv.sh"; kpy "$S/fill_zones.py" "$out" "$out" >/dev/null 2>&1 || true
     cp "$out" "$R/../routed.kicad_pcb"; sib "$R/../routed.kicad_pcb"
 fi

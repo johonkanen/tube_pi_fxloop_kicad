@@ -6,7 +6,7 @@ Run with KiCad's python:  tools/p2k/bin/kipy rev_b/tools/make_pcb.py [--force | 
 Pattern: tube_preamp_kicad rev_b/tools/make_pcb.py. What it does (decisions: STATUS.md "Layout"):
 - outline, mounting holes and noval positions of rev A (kicad/tube_pi_fxloop.kicad_pcb at the repo
   root, same frame): chassis = (154.87 - x, 182.08 - y) (rev_b/layout/placement.py);
-- 2 copper layers, net classes and the clearance rules (kicad_pro + kicad_dru; IPC-2221B B2);
+- 4 copper layers (inner = low-voltage signal layers, no plane), net classes and the clearance rules (kicad_pro + kicad_dru; IPC-2221B B2);
 - every schematic part with its footprint, nets and schematic link (UUID);
 - the parts whose position is an interface or mechanical decision placed: V1 / V2, H2-H10, every
   connector and tab (placement.py: the agreed pin-1 positions, interfaces.md 12.5), the two pass
@@ -52,18 +52,16 @@ DRU_HEAD = """(version 1)
 # conductors, uncoated, sea level to 3050 m), the same basis as the preamp rev B (review N57);
 # pollution degree 2, functional insulation only (no safety barrier on this board; the chassis
 # is reached only through the unplated standoff holes).
-#   HV = nets at 250-480 V (raw rail, regulators, B+PI / B+FX and their decoupled rails, the PI
-#        plates on W24), MV = 100-250 V (string midpoints, PI_REF divider, the return plate).
-#   301-500 V: 2.5 mm; 151-300 V: 1.25 mm. An HV net to another HV net: 1.25 mm (the split
-#   resistor strings put <= 200 V across each part, so two different HV nets are at most 200 V
-#   apart in normal use; the pass device's own pads are listed below).
+#   HV = nets at 280-480 V (raw rail, regulators, B+PI / B+FX and their decoupled rails, the PI
+#        plates on W24), MV = 100-260 V (string midpoints, PI_REF divider, the return plate).
+#   301-500 V: 2.5 mm; 151-300 V: 1.25 mm; 51-150 V: 0.6 mm. HV to HV and MV to MV (different nets):
+#   0.6 mm (net class clearance): every pair of HV nets is within 150 V in normal use (raw 430-480 V
+#   to B+FX 328 V is the widest), and the split strings put <= 130 V across a part in normal use
+#   (160 V across an R3 part only into a shorted output, a fault).
 # Unconnected pads (open relay contacts, spare switch pins) are left out.
 (rule "HV to LV"
   (condition "A.NetClass == 'HV' && B.NetClass != 'HV' && B.NetClass != 'MV' && B.NetName != 'unconnected-*' && B.Pad_Type != 'NPTH, mechanical'")
   (constraint clearance (min 2.5mm)))
-(rule "HV to HV"
-  (condition "A.NetClass == 'HV' && B.NetClass == 'HV' && A.NetName != B.NetName")
-  (constraint clearance (min 1.25mm)))
 (rule "HV to MV"
   (condition "A.NetClass == 'HV' && B.NetClass == 'MV'")
   (constraint clearance (min 1.25mm)))
@@ -71,22 +69,23 @@ DRU_HEAD = """(version 1)
   (condition "A.NetClass == 'MV' && B.NetClass != 'HV' && B.NetClass != 'MV' && B.NetName != 'unconnected-*' && B.Pad_Type != 'NPTH, mechanical'")
   (constraint clearance (min 1.25mm)))
 # Board edges and the standoffs (chassis potential through the metal standoff and screw): HV copper
-# 2.5 mm from the edge and from an M3 head (5.5 mm) at a hole, MV 1.25 mm.
+# 2.5 mm from the edge and from an M3 head (5.5 mm) at a hole, MV 1.25 mm. (KiCad: the last matching
+# rule wins, so the general standoff rule comes first.)
 (rule "HV to board edge"
   (condition "A.NetClass == 'HV'")
   (constraint edge_clearance (min 2.5mm)))
 (rule "MV to board edge"
   (condition "A.NetClass == 'MV'")
   (constraint edge_clearance (min 1.25mm)))
-(rule "HV to standoff"
-  (condition "A.NetClass == 'HV' && B.Pad_Type == 'NPTH, mechanical'")
-  (constraint hole_clearance (min 3.65mm)))
-(rule "MV to standoff"
-  (condition "A.NetClass == 'MV' && B.Pad_Type == 'NPTH, mechanical'")
-  (constraint hole_clearance (min 2.4mm)))
 (rule "LV to standoff"
   (condition "B.Pad_Type == 'NPTH, mechanical'")
   (constraint hole_clearance (min 1.2mm)))
+(rule "MV to standoff"
+  (condition "A.NetClass == 'MV' && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 2.4mm)))
+(rule "HV to standoff"
+  (condition "A.NetClass == 'HV' && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 3.65mm)))
 # High-impedance audio nets: ground pours keep away (stray capacitance; the preamp rule).
 (rule "HIZ to pour"
   (condition "A.NetClass == 'HIZ' && B.Type == 'Zone'")
@@ -109,8 +108,8 @@ def need(ca, cb, na, nb):
     if na == nb or na.startswith("unconnected") or nb.startswith("unconnected"):
         return 0.0
     s = {ca, cb}
-    if s == {"HV"}:
-        return 1.25
+    if s in ({"HV"}, {"MV"}):
+        return 0.6
     if "HV" in s:
         return 1.25 if "MV" in s else 2.5
     if "MV" in s:
@@ -209,12 +208,39 @@ def note(board, s, x, y, size=1.2, layer=pcbnew.Cmts_User):
     board.Add(t)
 
 
+def _ring(board, x, y, r, layers, vias):
+    z = pcbnew.ZONE(board)
+    z.SetIsRuleArea(True)
+    z.SetDoNotAllowTracks(True)
+    z.SetDoNotAllowVias(vias)
+    z.SetDoNotAllowZoneFills(False)
+    z.SetDoNotAllowPads(False)
+    z.SetDoNotAllowFootprints(False)
+    ls = pcbnew.LSET()
+    for l in layers:
+        ls.AddLayer(l)
+    z.SetLayerSet(ls)
+    o = z.Outline()
+    o.NewOutline()
+    for i in range(32):
+        a = 2 * math.pi * i / 32
+        o.Append(mm(x + r * math.cos(a)), mm(y + r * math.sin(a)))
+    board.Add(z)
+
+
+def hole_keepouts(board, x, y):
+    """Track / via keep-outs round a standoff hole: outer layers 5.3 mm (HV copper 2.5 mm from the M3 head;
+    the router does not apply class-scoped hole rules), inner layers 2.9 mm (LV only there)."""
+    _ring(board, x, y, 5.3, (pcbnew.F_Cu, pcbnew.B_Cu), True)
+    _ring(board, x, y, 2.9, (pcbnew.In1_Cu, pcbnew.In2_Cu), False)
+
+
 def project_settings(board=None):
     pro = json.load(open(PRO))
     classes = [
         {"name": "Default", "clearance": 0.2, "track_width": 0.3, "via_diameter": 0.8, "via_drill": 0.3, "priority": 2147483647},
-        {"name": "HV", "clearance": 0.3, "track_width": 0.5, "via_diameter": 1.0, "via_drill": 0.4, "priority": 0},
-        {"name": "MV", "clearance": 0.3, "track_width": 0.4, "via_diameter": 0.9, "via_drill": 0.4, "priority": 1},
+        {"name": "HV", "clearance": 0.6, "track_width": 0.5, "via_diameter": 1.0, "via_drill": 0.4, "priority": 0},
+        {"name": "MV", "clearance": 0.6, "track_width": 0.4, "via_diameter": 0.9, "via_drill": 0.4, "priority": 1},
         {"name": "HEATER", "clearance": 0.4, "track_width": 1.5, "via_diameter": 1.2, "via_drill": 0.6, "priority": 2},
         {"name": "HIZ", "clearance": 0.2, "track_width": 0.3, "via_diameter": 0.8, "via_drill": 0.3, "priority": 3},
     ]
@@ -274,7 +300,7 @@ def main():
     reva = pcbnew.LoadBoard(REVA)
     rev_a = {f.GetReference(): f for f in reva.GetFootprints()}
     board = pcbnew.NewBoard(PCB)
-    board.SetCopperLayerCount(2)
+    board.SetCopperLayerCount(4)   # 2 outer (2 oz option) + 2 inner signal layers, no plane (STATUS: why 4)
     ds = board.GetDesignSettings()
     ds.SetBoardThickness(mm(1.6))
     ds.m_TrackMinWidth = mm(0.2)
@@ -334,6 +360,7 @@ def main():
         m.SetPosition(pt(bx, by))
         m.SetBoardOnly(True)
         board.Add(m)
+        hole_keepouts(board, bx, by)
     for ref, (_cable, _mate, _lib, _name, side, rot, pin1, _note) in P.CONNECTORS.items():
         place_pin1(fps[ref], rot, pin1)
         fixed.add(ref)
@@ -374,6 +401,9 @@ def main():
         box(board, bx0, by0, bx1, by1, pcbnew.Cmts_User, 0.15)
         note(board, name, bx0 + 0.5, by0 + 1.5, 1.2)
     project_settings(board)
+    hvrefs = sorted({f.GetReference() for f in board.GetFootprints() for p in f.Pads()
+                     if cls(p.GetNetname()) in ("HV", "MV") and f.GetReference()[0] not in "JVH"})
+    json.dump(hvrefs, open(os.path.join(RB, "layout", "hv_refs.json"), "w"))   # for make_groups' edge strips
     pcbnew.SaveBoard(PCB, board)
     print(f"{PCB}: {len(fps)} parts ({len(fixed)} placed), {len(nets)} pin-net links")
 

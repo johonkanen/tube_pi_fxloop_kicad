@@ -75,9 +75,9 @@ CONNECTORS = {
     "J301": ("W25", "output transformer 8 ohm / COM", STOCK + "/Connector_Molex.pretty", "Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical",
              "F", 90, (272.50, 138.46), "east edge, twisted pair from the OT lead hole"),
     "J501": ("W03-b", "HV supplies J103 (RAW_SS)", TABLIB, "Faston_Tab_4.8mm_x2_P15.00mm",
-             "F", 90, (64.50, 116.00), "pad 1 BP_RAW, pad 2 GND = the board's star"),
+             "F", 90, (64.50, 118.00), "pad 1 BP_RAW, pad 2 GND = the board's star"),
     "J502": ("W07-b", "tube PSU HT tabs (piggy-back lead)", TABLIB, "Faston_Tab_6.3mm_x2_P12.70mm",
-             "F", 90, (64.50, 143.50), "heater in, 1.5 A"),
+             "F", 90, (64.50, 145.50), "heater in, 1.5 A"),
     "J503": ("W08-a", "preamp J502 (x 290 / 303)", TABLIB, "Faston_Tab_6.3mm_x2_P12.70mm",
              "F", 0, (85.50, 169.00), "heater out to the preamp, 0.9 A"),
 }
@@ -94,7 +94,7 @@ PINNED = {
 # big parts pinned by pad 1 (KiCad rot, chassis xy of pad 1); rot 180 = pad 2 east of pad 1
 PINNED_PIN1 = {
     "C504": (180, (70.5, 134.3)),   # B+FX 2.2u/630V film (GF_FX west, GND east next to H8)
-    "C501": (180, (129.0, 133.8)),  # B+PI 2.2u/630V film
+    "C501": (180, (129.5, 133.8)),  # B+PI 2.2u/630V film
     "C506": (180, (110.8, 126.8)),  # B+FX 100n/630V film
     "C111": (180, (109.6, 134.7)),  # return stage 470n/400V film (P1B west, ATT_IN east)
     "C110": (90, (90.6, 146.1)),    # return stage cathode bypass 100u/25V
@@ -107,7 +107,7 @@ PINNED_PIN1 = {
 # DPAK tab and the MMBTA42 in a cut-out; B: the heat spreader under the regulator, stitched to F.
 # preamp_regulator.md / sim/preamp_supply assume 30-50 K/W pour to ambient per pass device.
 POUR_F = {"Q505": (71.5, 106.5, 84.6, 122.5), "Q502": (124.5, 106.5, 137.6, 122.5)}
-POUR_B = {"Q505": (66.5, 106.5, 90.0, 126.0), "Q502": (119.5, 106.5, 143.0, 126.0)}
+POUR_B = {"Q505": (57.0, 106.5, 90.0, 126.0), "Q502": (119.5, 106.5, 143.0, 126.0)}
 
 # ---- neighbours (chassis frame) --------------------------------------------------------------
 PREAMP = (3.37, 16.18, 386.16, 88.08)          # chassis_view.kicad_pcb User.1

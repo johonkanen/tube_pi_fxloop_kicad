@@ -8,8 +8,6 @@
    "refs": [
     "Q504",
     "R515",
-    "D506",
-    "D507",
     "R516",
     "R523",
     "R524",
@@ -293,6 +291,19 @@
    ],
    "side": "F",
    "why": "DGND island at J401: expander, DG412 x3, LVC1G11 x2, ULN2803A, soft tie"
+  },
+  {
+   "name": "reg_b",
+   "role": "core",
+   "refs": [
+    "D506",
+    "D507"
+   ],
+   "near": [
+    "reg_fx"
+   ],
+   "side": "B",
+   "why": "B+FX zener string on B under C504 (no room on F)"
   },
   {
    "name": "ctl_b",
