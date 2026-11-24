@@ -117,6 +117,13 @@ def main():
         open(os.path.join(pretty, name + ".kicad_mod"), "w").write(text)
     # rev A's noval socket (matches the chassis holes), copied unchanged from the frozen rev A library
     open(os.path.join(pretty, "Valve_Noval_Belton_PCD21.00mm.kicad_mod"), "w").write(open(BELTON).read())
+    # V2's variant: pin 6 (the PI plate, next to standoff H3) on a 3.8 mm pad (drill 1.727 mm, ring 1.04 mm), so
+    # its copper stays 2.5 mm from a metal M3 head at H3 (STATUS "Layout, third pass")
+    t = open(BELTON).read().replace('(footprint "Valve_Noval_Belton_PCD21.00mm"', '(footprint "Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm"')
+    a = t.index('(pad "6" thru_hole circle')
+    b = t.index("(size 4.318 4.318)", a)
+    t = t[:b] + "(size 3.8 3.8)" + t[b + len("(size 4.318 4.318)"):]
+    open(os.path.join(pretty, "Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm.kicad_mod"), "w").write(t)
     lib = [Sym("kicad_symbol_lib"), [Sym("version"), 20251024], [Sym("generator"), "make_lib"],
            [Sym("generator_version"), "10.0"]]
     for libname, name in WANT:

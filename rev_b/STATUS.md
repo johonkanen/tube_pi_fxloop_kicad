@@ -1,5 +1,20 @@
 # PI + FX loop rev B: status
 
+## Layout, third pass (2026-11-24)
+
+- **Zone fills saved:** the committed board was saved with fills from before the step 15-18 reroutes (plain DRC
+  without `--refill-zones` gave 430 clearance + 21 hole-clearance errors against stale GND fills). Refilled and
+  saved: `kicad-cli pcb drc --severity-all --schematic-parity` on the committed file, **without refill**, gives
+  0 errors, 0 warnings (5 silkscreen from footprint outlines), 0 unconnected, parity 0, 2 excluded.
+- **Fab outputs:** the earlier `rev_b/fab` zip was plotted from the same stored (stale) fills; regenerated.
+  `layout/fab_outputs.sh` now refills and saves the board first and stops if DRC without refill is not clean.
+- **V2 pin 6 pad 3.8 mm** (was 4.32; drill 1.727 mm, annular ring 1.04 mm): a local socket variant
+  `Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm` for V2 only (`make_lib.py`, `draw_all.py`; ERC 0, verify 0
+  mismatches). Pin 6 (PI plate) is now 3.66 mm from H3's hole and 2.52 mm from a metal M3 head: **H3 takes the
+  standard metal standoff and screw**; the nylon notes and that DRC exclusion are removed (2 exclusions left:
+  H3 / H4 inside the socket outlines, rev A geometry). This supersedes the H3 rows of the second pass and of
+  "Layout, first pass" L3 / L12.
+
 ## Layout, second pass (2026-11-24)
 
 The coordinator's list after the first pass (decided by the coordinator pending the user's word: 4 layers,

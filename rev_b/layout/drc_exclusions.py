@@ -24,10 +24,6 @@ RULES = [
      "rev A geometry (as built): standoff H3 sits at the edge of V2's socket outline; the socket body clears the standoff"),
     ("npth_inside_courtyard", [r"NPTH pad of H4", r"Footprint V1"],
      "rev A geometry (as built): standoff H4 sits at the edge of V1's socket outline; the socket body clears the standoff"),
-    ("hole_clearance", [r"PTH pad 6 \[.*DRV_A\] of V2", r"NPTH pad of H3"],
-     "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an "
-     "M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under "
-     "the head, needed (STATUS L12, for the user)"),
 ]
 
 

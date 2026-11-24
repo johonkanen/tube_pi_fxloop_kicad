@@ -79,4 +79,4 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "R427","100k","R_0603_1608Metric",-95.209500,-41.050800,-90.000000,bottom
 "R522","150k","R_2512_6332Metric",57.270000,-53.080000,0.000000,bottom
 "V1","12AX7","Valve_Noval_Belton_PCD21.00mm",45.956000,-24.944500,180.000000,bottom
-"V2","12AX7","Valve_Noval_Belton_PCD21.00mm",-76.589900,-25.215800,180.000000,bottom
+"V2","12AX7","Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm",-76.589900,-25.215800,180.000000,bottom

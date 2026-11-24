@@ -251,4 +251,4 @@ U405,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm
 U406,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm
 U407,Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm
 V1,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm
-V2,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm
+V2,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm

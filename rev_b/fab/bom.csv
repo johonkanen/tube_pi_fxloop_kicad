@@ -87,4 +87,5 @@ Qty,Refs,Value,Footprint,Candidate MPN,LCSC,DNP,Note
 2,U402 U403,74LVC1G11,Package_TO_SOT_SMD:SOT-23-6,"74LVC1G11GV,125",,,
 3,U404 U405 U406,DG412DY,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm,DG412DY-T1-E3,C553989,,
 1,U407,ULN2803A,Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm,ULN2803ADWR,,,check the 70 C design temperature against the bought part's rating (ENV-2)
-2,V1 V2,12AX7,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm,,,,"noval PCB socket on the solder side (rev A part; rev A footprint Valve_Noval_Belton_PCD21.00mm, matches the chassis holes); tubes not on the BOM"
+1,V1,12AX7,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm,,,,"noval PCB socket on the solder side (rev A part; rev A footprint Valve_Noval_Belton_PCD21.00mm, matches the chassis holes); tubes not on the BOM"
+1,V2,12AX7,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm,,,,"noval PCB socket on the solder side (rev A part; rev A footprint Valve_Noval_Belton_PCD21.00mm, matches the chassis holes); tubes not on the BOM"

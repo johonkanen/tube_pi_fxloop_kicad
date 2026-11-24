@@ -10270,7 +10270,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm"
+		(property "Footprint" "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm"
 			(at 138.938 365.76 0)
 			(effects
 				(font

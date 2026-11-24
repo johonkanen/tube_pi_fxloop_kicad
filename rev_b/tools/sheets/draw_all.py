@@ -77,6 +77,7 @@ FP = {
     "TAB48": "tube_pi_fxloop_revb:Faston_Tab_4.8mm_x2_P15.00mm",
     "TAB63": "tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm",
     "NOVAL": "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm",   # rev A's socket: matches the chassis holes
+    "NOVAL_V2": "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm_Pin6_3.8mm",   # pin 6 pad 3.8 mm (H3 clearance)
 }
 
 
@@ -604,7 +605,7 @@ def footprint_of(ref):
     if key:
         return FP.get(key, key)
     if sym == "ECC83":
-        return FP["NOVAL"]
+        return FP["NOVAL_V2"] if ref == "V2" else FP["NOVAL"]
     prop = [p for p in find_all(lib()[sym], "property") if p[1] == "Footprint"]
     return prop[0][2] if prop else ""
 

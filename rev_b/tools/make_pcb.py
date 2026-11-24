@@ -357,6 +357,7 @@ def main():
         f.Flip(ra.GetPosition(), pcbnew.FLIP_DIRECTION_LEFT_RIGHT)
         f.SetOrientation(ra.GetOrientation())
         fixed.add(v)
+    # V2 uses the socket variant with pin 6 on a 3.8 mm pad (make_lib.py): 3.66 mm from H3, 2.52 mm from an M3 head
     for h, (bx, by) in P.HOLES_BOARD.items():
         if h in P.HOLE_DROPPED:
             continue
