@@ -11,7 +11,9 @@ return) in section "Third pass (2026-11-23)". Rev A (the 2010 board,
 converted) at the repo root is not touched; `rev_b/` is its own p2k board root
 (`p2k_config.py`, PROJECT `tube_pi_fxloop_revb`), the same pattern as tube_preamp_kicad `rev_b/`.
 
-Status and the interface check: [STATUS.md](STATUS.md).
+Status and the interface check: [STATUS.md](STATUS.md). **Layout sketch (2026-11-24):** the
+interfaces to the other boards, STATUS.md "Layout sketch: interfaces", drawing
+[docs/layout_sketch.png](docs/layout_sketch.png), scripts in `layout/` (`placement.py` = every figure).
 
 ## Build
 

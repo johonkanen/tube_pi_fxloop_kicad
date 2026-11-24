@@ -1,5 +1,122 @@
 # PI + FX loop rev B: status
 
+## Layout sketch: interfaces (2026-11-24)
+
+Scope (coordinator, from the user): define every interface to the other boards before placement
+and routing. **No placement or routing yet**; this is the sketch to agree the connectors on.
+Drawing: [docs/layout_sketch.png](docs/layout_sketch.png) (A: chassis plan with every cable; B: the
+board with zones, connectors at their real footprints, pin 1, keep-outs; C / D: sections at x 175 and
+x 247). Generated: `rev_b/layout/placement.py` holds every figure (chassis frame), then
+`tools/p2k/bin/kipy rev_b/layout/sketch_geom.py` (places the real footprints, prints the pin table,
+writes `build/layout/sketch_geom.json`) and `python3 rev_b/layout/sketch_draw.py`.
+
+Setup done in the same step (commit 95b5163): J501-J503 are real footprints (Faston 4.8 mm x2 P15 and
+6.3 mm x2 P12.7, the preamp rev B's footprint, generated in `make_lib.py`), V1 / V2 use rev A's
+Belton socket; ERC 0, `verify.py` 0 mismatches.
+
+### Frame and fixed geometry
+
+- **Board frame = rev A's KiCad frame**, so outline, holes and sockets are rev A's exactly.
+  Chassis (D748, mm, seen from above) = **(154.87 - x_board, 182.08 - y_board)** (mechanical/README.md:
+  mirrored + (154.87, 182.08); with KiCad's y-down frame that is a 180° turn). Outline chassis
+  **x 53.27-278.70, y 103.98-175.73** (225.43 x 71.76).
+- Board 15.0-16.6 mm below the plate, components down (F.Cu faces the floor), sockets on B.Cu.
+  Parts to 33 mm (depth 49.6); cables under the board run at depth >= 52; floor 82.5.
+- Holes H1-H10 at rev A's positions (chassis: H1 273.87/171.08, H2 57.87/171.08, H3 217.87/168.08,
+  H4 94.87/168.08, H5 248.87/163.58, H6 125.87/163.58, H7 223.87/141.08, H8 103.87/141.08,
+  H9 273.87/109.08, H10 57.87/109.08), **3.2 mm unplated, no net**; part keep-out r 3.75 mm (M3 head),
+  HV copper r 5.25 mm (head + 2.5 mm). H1 has no plate hole (kept unless the corner is needed).
+- Sockets: U4 centre (108.91, 157.14), U5 (231.46, 156.86) (rev A to 0.02 mm on the 21 mm holes).
+  **V1 (FX) in U4 (west), V2 (PI) in U5 (east)**, as rev A: the feedback networks, J302-J304, W24 and
+  W25 are all at the east end. Pins in chassis: triode pins 1-3 on the east side of each socket,
+  6-8 on the west, heater 4 / 5 at the rear (y 167), pin 9 at the front.
+
+### Connectors and tabs (all on the downward face, F.Cu; positions from the placed footprints)
+
+| Ref | Cable, mating | Part | Pin 1 (chassis) | Long axis, other pins | Key / rows | Cable leaves |
+|---|---|---|---|---|---|---|
+| J102 | W23, rear I/O J101 | 2x8 IDC shrouded, vertical | **(183.89, 160.50)** | along x, pin 16 (166.11, 163.04); pins at x 166.11-183.89 = J101's | odd (GND) row y 160.50 (front), signals y 163.04; courtyard x 160.5-189.5, y 156.8-166.7 | socket bottom at depth 34.6, ribbon to the rear (+y) under the board's rear strip, one 90° bend down onto J101's plug face (y 179.7). **Straight 1:1, 0 folds, conductor 1 = pin 1 at both (east) ends**; 80 mm with slack (J101 is directly behind, same x) |
+| J302 / J303 / J304 | W30 / W31 / W32, front panel J4 / J5 / J6 | 2x5 IDC shrouded, vertical | **(208.50, 109.00) / (230.50, 109.00) / (252.50, 109.00)** | along x, pin 1 east, pin 10 at x - 10.16, y 111.54 | odd row y 109.00 (front), signals y 111.54; courtyards x 192.7-258.1, y 105.3-115.2 (CL / CR / LD left to right) | ribbon enters from the front edge. Route: from J4-J6 straight back along x 388-400 and west in the gap at y 93-100 **on edge** (vertical sheet, 12.7 mm at depth about 38-51, conductor 1 at the bottom as J4-J6's pin 1 is at the bottom), then **one 45° fold up** below each header and a bend into the socket. **Straight 1:1, 1 fold, conductor 1 = pin 1 at both ends.** Lengths 0.28 / 0.26 / 0.24 m (limit 0.30) |
+| J401 | W13, control board J3 | 2x7 IDC shrouded, vertical | **(265.50, 124.84)** | along y, pin 14 (262.96, 109.60): **J3 translated** (pin 1 north end, odd row east x 265.50, even x 262.96) | courtyard x 259.3-269.2, y 104.0-130.4 (body flush with the front edge, inside) | from the east. Route: down at J3 to depth >= 55 (it would otherwise pass 0-14 mm under the OT lead hole), **Z-jog with 2 folds** east of the preamp (x about 404-422, y 91-117), west at y 108-126 (0.9 mm in front of the power amp's edge at y 127.05), up inside this board's corridor x 269-279, y 107-127 and into the socket. **Straight 1:1, 2 folds, conductor 1 = pin 1 at both ends**; about 0.30 m |
+| J101 | W22, preamp J507 | Molex KK-254 1x3 vertical | **(136.00, 146.00)** | along x, pin 3 (130.92, 146.00) | 1 IN, 2 GND, 3 shield (solid here) | shielded lead down from the housing to depth >= 55, east under the board's front at y about 106, north across the gap (about 40 mm above the Ethernet cable, at right angles) and up to J507. About 0.30 m: 30 pF at 100 pF/m + about 8 pF board = **38 pF of the 50 pF** (input 1.52 MΩ unchanged). 14 mm from V1 pin 2 (the send follower's grid), 42 mm from the front edge |
+| J201 | W24, power amp J105 | Molex Mini-Fit Jr 5566-06A 2x3 vertical | **(271.50, 150.40)** | row 1 (1 GND, 2 DRV_A, 3 GND) along +y at x 271.50 (y 150.40 / 154.60 / 158.80); row 2 (4 DRV_B, 5 GND, 6 NC) at x 266.00 | latch side west; courtyard x 262.3-274.3, y 147.2-162.0; DRV pads >= 7 mm from the edge | harness straight down to the floor, east under the power amp, up into J105. Discrete wires (two twisted pairs 2 / 3 and 4 / 5, >= 600 V insulation, AWG 22), circuit n to circuit n: orientation only sets the lead dress. About 0.15 m if J105 is at the power amp's west end. **Proposal**: the power amp has not published J105 yet |
+| J301 | W25, OT 8 Ω tap / COM | Molex KK-396 1x2 vertical | **(272.50, 138.46)** (1 FB_8R) | along y, pin 2 FB_RTN (272.50, 142.42) | courtyard x 267.1-278.1, y 136.1-144.8 | twisted pair from the OT lead hole (415.5, 90.1) down to depth >= 50, west in the strip at y about 122, up into J301 from below. About 0.3 m below the plate. FB_RTN is referenced only here |
+| J501 | W03-b, HV supplies J103 (RAW_SS) | 2x 4.8 mm blade tab, P15 | pad 1 BP_RAW legs (64.50 / 59.50, 116.00) | pad 2 GND (the board's **star**) at y 131.00 | courtyard x 56.0-68.0, y 111.8-135.3; HV legs 6.2 mm from the edge, 7.1 mm from H10 | fully insulated receptacles, wire straight down; route on the floor: west in front of the control board (cable rule), north through the strip x 405-410, west under this board to the west end. **About 0.7 m**, silicone / PTFE >= 600 V, 0.5 mm², twisted with its return |
+| J502 | W07-b, tube PSU HT tabs (piggy-back lead) | 2x 6.3 mm tab, P12.7 | pad 1 HTR1 (64.50, 143.50) | pad 2 HTR2 at y 156.20 | courtyard x 56.0-68.0, y 139.3-160.5 | twisted pair 0.75 mm², down to the floor, same route as W03 (not bundled with ribbons); length set by the PSU's cable hole (about 0.8 m) |
+| J503 | W08-a, preamp J502 (x 290 / 303, y 81) | 2x 6.3 mm tab, P12.7 | pad 1 HTR1 (85.50, 169.00) | pad 2 HTR2 at x 72.80 | courtyard x 68.6-89.8, y 160.5-172.5 | twisted pair 0.75 mm² (0.9 A), down to the floor, diagonally under this board and across the gap to the preamp's tabs: about 0.38 m |
+
+Heater pair on the board: J502 → J503 local (1.5 A through), own 0.6 A along the rear strip
+y 172-174.5 (broadside on both layers) to V1 and V2's pins 4 / 5: 15 mm from every grid pin.
+
+### Block zones (chassis rectangles, drawn in B)
+
+| Zone | x, y | Contents |
+|---|---|---|
+| REG | 54-120, 104.5-140 | B+PI / B+FX regulators, STD4N80K5 on pours >= 6 cm² each (30-50 K/W assumed by the thermal sim; 2 oz, both layers), MMBTA42 on each pour, HV strings (<= 200 V per part), 47 µF Ø18 x2, 2.2 µF / 630 V x2; J501 = star, AGND from there |
+| FX-RET | 67-98, 140-166 | return stage (V1 pins 6-8), pad JFET, mixer JFETs |
+| FX-SEND | 122-158, 138-166 | send follower (V1 pins 1-3), J101, dry divider |
+| FX-IO | 158-192, 138-166 | J102, SEND_SRC out, RETURN_SIG in, bleeds |
+| ATT | 120-190, 104.5-138 | PI-4 attenuator, 5 G6K-2F-Y |
+| PI | 192-262, 138-176 | V2, CCS, PI_REF (22 V, decoupled), plate loads, B+PI decoupling; J201 next to it |
+| FB | 192-240, 115.5-138 | three feedback networks, relays at the 8 Ω end, T-switches at the node (second grid on V2's east side once the units are swapped) |
+| DGND | 240-279, 115.5-132 | MCP23S17, ULN2803A, 3x DG412, 2x LVC1G11, soft tie (10 Ω ∥ 100 nF) next to J401 |
+
+Area: tight. The REG zone (23 cm²) needs about 30-35 cm² for the pours, the two 31.5 x 17 mm films,
+the Ø18 electrolytics and the strings, so it spills into the ATT zone's west end; placement decides.
+
+### Keep-outs
+
+From the neighbours (all checked against their published figures):
+- **Rear edge** (y 175.73): nothing past it over x 160-278.7. Rear I/O W23 / W19 plugs at y 179.7
+  (3.7 mm), jack board tails at y 182.6 (6.6 mm). W19's plug (x 260-270) is clear.
+- **East edge** (x 278.70): power amp at x 280.33 for y 127.05-187.4 (**1.64 mm**): nothing past the
+  edge; J201 / J301 harnesses go straight down.
+- **Front edge** (y 103.98): preamp rear edge y 88.08 (gap 15.9 mm). In the gap: W30-W32 on edge
+  (depth about 38-51), W22 and W08 crossing at depth >= 55, the Ethernet cable on the floor at y about
+  96. Nothing of this board past the front edge; the input (J101) is 42 mm and the PI grids
+  >= 37 mm from it.
+- **West end**: Ethernet passes west of the board (x < 53) to the rear panel coupler at x 34.6.
+
+On this board (for the full layout):
+- W23 corridor x 160.5-189.5, y 166.7-175.7: parts <= 15 mm (the ribbon passes at depth 34.6).
+- W13 corridor x 269.2-278.7, y 107-127: no parts below the board (the ribbon rises there).
+- In front of J302-J304 (y 104-105.3): nothing; the sockets are entered from the front.
+- Column around J101 for the shielded lead coming up from below.
+
+What this board needs from the neighbours (requests):
+- **Front panel:** run W30-W32 **on edge** (no fold) from J4-J6 to the gap, as above; the PI + FX
+  makes the one fold under each header. If the front panel prefers them folded flat in the gap, say
+  so: the fold count and pin 1 end change (then pin 1 at the west end, still 1:1).
+- **Control board:** W13 drops to depth >= 55 within about 10 mm west of J3 and Z-jogs east of x 404,
+  because J3's ribbon otherwise passes under the OT lead hole (14 mm west of J3). Better, if the
+  control board can still move J3 away from the hole; J401 then follows (it is J3 translated).
+- **Power amp:** J105 at its west end, vertical on its downward face, inside x 285-320, y 130-185
+  (W24 about 0.15 m); its front-west corner (x 280-300, y 127.05) must stay inside its outline (W13
+  passes 0.9 mm in front of it at depth about 60).
+- **HV supplies:** W03 is about 0.7 m to the west end (J501), not an east-end tab.
+- **Preamp:** nothing new (W22 leaves J507 downward; W08 lands on its J502 tabs).
+- **Rear I/O:** nothing new (J101 as laid out).
+
+### Open choices (both options, preference first)
+
+1. **Tube positions:** PI in U5 (east), FX in U4 (west), as rev A (preferred: networks, J302-J304,
+   W24, W25 together). Swapped, the 12 pot-ribbon lines and W24 would cross the board.
+2. **J101 position:** near V1 (preferred: 14 mm board trace, 0.30 m lead, 38 pF) vs. at the east end
+   next to J507 (0.12 m lead, but about 120 mm of guarded input trace through the PI and feedback
+   zones: coupling from the PI plates and the resonance lines into the input closes a loop around the
+   power section).
+3. **Power entry (J501-J503) at the west end** (preferred: raw HV and heaters away from the PI, the
+   feedback networks and the logic; W03 about 0.7 m) vs. the east end (W03 about 0.4 m), which has no
+   room left.
+4. **W30-W32 pin 1 east** (one fold up; preferred) vs. pin 1 west (one fold down and an S-bend up).
+5. **J102 8 mm in from the rear edge** (preferred: the heater pair runs behind it, 15 mm from the
+   grids) vs. at the edge (the pair must pass in front of it, closer to V1's and V2's grids).
+6. **H1** (no plate hole): keep it as an unplated hole (default) or drop it to free the corner.
+7. V2's units swapped in the schematic at layout (input grid on pin 7 facing the attenuator, second
+   grid on pin 2 facing the feedback networks): a refdes-level change in `draw_all.py`, no circuit
+   change.
+8. Layer count: 2 layers, 2 oz intended (as the preamp); decided at placement.
+
 ## Fourth pass (2026-11-23): 500 V B+ electrolytics
 
 User, 2026-11-23: B+ output electrolytics 500 V if they can be sourced. If a pass device fails
