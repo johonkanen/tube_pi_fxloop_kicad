@@ -30,9 +30,9 @@ Qty,Refs,Value,Footprint,Candidate MPN,LCSC,DNP,Note
 1,J303,PRES/RES CR (W31-b),Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical,,,,
 1,J304,PRES/RES LD (W32-b),Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical,,,,
 1,J401,CONTROL (W13-b),Connector_IDC:IDC-Header_2x07_P2.54mm_Vertical,HY2541WV-N-2x7P,C17179454,,
-1,J501,"RAW HV (W03-b, 4.8 mm tabs)",tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_4.8mm_Legs_P5.00mm_D1.4mm,2x BTC-3-PCB484608T,C20626099,,PLACEHOLDER footprint
-1,J502,"HEATER IN (W07-b, 6.3 mm tabs)",tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm,2x BTC-3-PCB485005D,C20626100,,PLACEHOLDER footprint
-1,J503,"HEATER OUT (W08-a, 6.3 mm tabs)",tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm,2x BTC-3-PCB485005D,C20626100,,PLACEHOLDER footprint
+1,J501,"RAW HV (W03-b, 4.8 mm tabs)",tube_pi_fxloop_revb:Faston_Tab_4.8mm_x2_P15.00mm,2x BTC-3-PCB484608T,C20626099,,PCB blade tab 4.8 mm x2 (HV: fully insulated receptacle)
+1,J502,"HEATER IN (W07-b, 6.3 mm tabs)",tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm,2x BTC-3-PCB485005D,C20626100,,PCB blade tab 6.3 mm x2
+1,J503,"HEATER OUT (W08-a, 6.3 mm tabs)",tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm,2x BTC-3-PCB485005D,C20626100,,PCB blade tab 6.3 mm x2
 8,K201 K202 K203 K204 K205 K301 K302 K303,G6K-2F-Y 5VDC,Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y,G6K-2F-Y-TR DC5,C47190,,"coil + 1 / - 8; NC 4 / 5, NO 2 / 7 (Omron datasheet)"
 14,Q101 Q102 Q103 Q104 Q105 Q301 Q302 Q303 Q304 Q305 Q306 Q307 Q308 Q309,MMBFJ113,Package_TO_SOT_SMD:SOT-23,MMBFJ113,C891686,,
 1,Q201,DN2540N8,Package_TO_SOT_SMD:SOT-89-3,DN2540N8-G,,,
@@ -87,4 +87,4 @@ Qty,Refs,Value,Footprint,Candidate MPN,LCSC,DNP,Note
 2,U402 U403,74LVC1G11,Package_TO_SOT_SMD:SOT-23-6,"74LVC1G11GV,125",,,
 3,U404 U405 U406,DG412DY,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm,DG412DY-T1-E3,C553989,,
 1,U407,ULN2803A,Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm,ULN2803ADWR,,,check the 70 C design temperature against the bought part's rating (ENV-2)
-2,V1 V2,12AX7,Valve:Valve_Noval_P,,,,"noval PCB socket on the solder side (rev A part; rev A footprint tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm matches the chassis holes, use it at layout); tubes not on the BOM"
+2,V1 V2,12AX7,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm,,,,"noval PCB socket on the solder side (rev A part; rev A footprint Valve_Noval_Belton_PCD21.00mm, matches the chassis holes); tubes not on the BOM"

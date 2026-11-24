@@ -2628,7 +2628,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_4.8mm_Legs_P5.00mm_D1.4mm"
+		(property "Footprint" "tube_pi_fxloop_revb:Faston_Tab_4.8mm_x2_P15.00mm"
 			(at 30.48 53.34 0)
 			(effects
 				(font
@@ -2790,7 +2790,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm"
+		(property "Footprint" "tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm"
 			(at 30.48 195.58 0)
 			(effects
 				(font
@@ -2897,7 +2897,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm"
+		(property "Footprint" "tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm"
 			(at 30.48 231.14 0)
 			(effects
 				(font
@@ -10140,7 +10140,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Valve:Valve_Noval_P"
+		(property "Footprint" "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm"
 			(at 98.298 365.76 0)
 			(effects
 				(font
@@ -10270,7 +10270,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Valve:Valve_Noval_P"
+		(property "Footprint" "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm"
 			(at 138.938 365.76 0)
 			(effects
 				(font

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build lib/tube_pi_fxloop_revb.kicad_sym from KiCad's standard symbol libraries: the symbols the
 rev B sheets use, flattened (KiCad's derived 'extends' symbols resolved, since a schematic's
-lib_symbols needs them whole); the G6K-2F-Y redrawn to the Omron datasheet; and the placeholder
-footprints in lib/tube_pi_fxloop_revb.pretty (the power tabs: no KiCad stock part)."""
+lib_symbols needs them whole); the G6K-2F-Y redrawn to the Omron datasheet; and the local
+footprints in lib/tube_pi_fxloop_revb.pretty (the power tabs: no KiCad stock part; rev A's noval socket)."""
 import copy
 import os
 import sys
@@ -75,33 +75,48 @@ def g6k_2f_y():
     return s
 
 
-def tab_footprint(width, gap):
-    """PLACEHOLDER (no KiCad stock part): two PCB blade tabs (interfaces.md 4.1: 2 legs on 5.00 mm,
-    1.4 mm drill), pad 1 = tab 1, pad 2 = tab 2, tabs `gap` mm apart. Replace with the chosen tab's
-    drawing (BTC-3 class) before layout."""
-    name = f"PLACEHOLDER_Tab_x2_{width}mm_Legs_P5.00mm_D1.4mm"
-    L = [f'(footprint "{name}"', '\t(version 20241229)', '\t(generator "make_lib")', '\t(layer "F.Cu")',
-         f'\t(descr "PLACEHOLDER: 2x {width} mm PCB blade tab, 2 legs on 5.00 mm, 1.4 mm drill, {gap} mm apart. '
-         'Replace with the chosen part before layout.")', '\t(attr through_hole)',
-         '\t(property "Reference" "REF**" (at 0 -4 0) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.15))))',
-         f'\t(property "Value" "{name}" (at 0 4 0) (layer "F.Fab") (effects (font (size 1 1) (thickness 0.15))))',
-         '\t(fp_text user "PLACEHOLDER" (at 0 6 0) (layer "F.Fab") (effects (font (size 1 1) (thickness 0.15))))']
-    for n, x in ((1, -gap / 2), (2, gap / 2)):
-        L.append(f'\t(fp_rect (start {x - width / 2 - 0.5:.2f} -1.2) (end {x + width / 2 + 0.5:.2f} 1.2) '
-                 '(stroke (width 0.12) (type solid)) (fill no) (layer "F.SilkS"))')
-        for dx in (-2.5, 2.5):
-            L.append(f'\t(pad "{n}" thru_hole circle (at {x + dx:.2f} 0) (size 2.6 2.6) (drill 1.4) '
-                     '(layers "*.Cu" "*.Mask"))')
-    L.append(')')
-    return name, "\n".join(L) + "\n"
+def faston(width, n, pitch):
+    """PCB blade (Faston) tabs, as the preamp rev B's make_footprints.py (tube_preamp_kicad rev_b,
+    same footprint, same name): n tabs of the given width side by side along x at `pitch`, one pad
+    number per tab (both legs), legs on 5.00 mm along the blade, 1.4 mm drill, 2.8 mm pads
+    (interfaces.md 4.1); the courtyard leaves room for an insulated push-on receptacle."""
+    def rect(x0, y0, x1, y1, layer, w):
+        pts = ((x0, y0, x1, y0), (x1, y0, x1, y1), (x1, y1, x0, y1), (x0, y1, x0, y0))
+        return "".join(f'\t(fp_line (start {a:.3f} {b:.3f}) (end {c:.3f} {d:.3f})\n'
+                       f'\t\t(stroke (width {w}) (type solid)) (layer "{layer}"))\n' for a, b, c, d in pts)
+    name = f"Faston_Tab_{width}mm_x{n}_P{pitch:.2f}mm"
+    s = (f'(footprint "{name}"\n\t(version 20241229)\n\t(generator "make_lib")\n\t(layer "F.Cu")\n'
+         f'\t(descr "PCB blade (Faston) tab {width} mm, 2 legs on 5.00 mm, 1.4 mm drill (interfaces.md 4.1); {n} tab(s)")\n'
+         '\t(tags "faston quick connect blade tab")\n'
+         '\t(property "Reference" "REF**" (at 0.000 -7.200 0) (layer "F.SilkS")\n\t\t(effects (font (size 1 1) (thickness 0.15))))\n'
+         f'\t(property "Value" "{name}" (at 0.000 7.500 0) (layer "F.Fab")\n\t\t(effects (font (size 1 1) (thickness 0.15))))\n'
+         '\t(attr through_hole)\n')
+    for i in range(n):
+        x = i * pitch
+        s += rect(x - 0.4, -width / 2, x + 0.4, width / 2, "F.Fab", 0.1)
+        s += rect(x - 4.1, -5.85, x + 4.1, 5.85, "F.SilkS", 0.12)
+        s += rect(x - 4.25, -6.0, x + 4.25, 6.0, "F.CrtYd", 0.05)
+        for y in (-2.5, 2.5):
+            s += (f'\t(pad "{i + 1}" thru_hole circle (at {x:.3f} {y:.3f}) (size 2.8 2.8) (drill 1.4)\n'
+                  '\t\t(layers "*.Cu" "*.Mask"))\n')
+    s += '\t(fp_text user "1" (at -3.0 0 0) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.15))))\n)\n'
+    return name, s
+
+
+BELTON = os.path.join(HERE, "..", "lib", "tube_pi_fxloop.pretty", "Valve_Noval_Belton_PCD21.00mm.kicad_mod")
 
 
 def main():
     pretty = os.path.join(HERE, "lib", "tube_pi_fxloop_revb.pretty")
     os.makedirs(pretty, exist_ok=True)
-    for w, gap in ((4.8, 10.0), (6.3, 12.0)):
-        name, text = tab_footprint(w, gap)
+    for f in os.listdir(pretty):
+        if f.startswith("PLACEHOLDER_"):
+            os.remove(os.path.join(pretty, f))
+    for w, pitch in ((4.8, 15.0), (6.3, 12.7)):
+        name, text = faston(w, 2, pitch)
         open(os.path.join(pretty, name + ".kicad_mod"), "w").write(text)
+    # rev A's noval socket (matches the chassis holes), copied unchanged from the frozen rev A library
+    open(os.path.join(pretty, "Valve_Noval_Belton_PCD21.00mm.kicad_mod"), "w").write(open(BELTON).read())
     lib = [Sym("kicad_symbol_lib"), [Sym("version"), 20251024], [Sym("generator"), "make_lib"],
            [Sym("generator_version"), "10.0"]]
     for libname, name in WANT:

@@ -16,8 +16,8 @@ Sources (tube_amplifier_kicad, read only, and this repo's rev_b/sim):
   NC 5, NO 7. Every function is on a NO contact; unpowered = 0 dB, no feedback network.
 - Interfaces: docs/interfaces.md IF-1.2 (connector pinouts as the contract; W23 per section 10.1).
 
-Footprints: every part gets one (KiCad stock libraries; the power tabs are local PLACEHOLDER
-footprints, lib/tube_pi_fxloop_revb.pretty). draw_all.py writes lib/footprint_map.csv (read by
+Footprints: every part gets one (KiCad stock libraries; the power tabs and rev A's noval socket are
+local footprints, lib/tube_pi_fxloop_revb.pretty). draw_all.py writes lib/footprint_map.csv (read by
 p2k's sch_builder) and bom/bom.csv (refs, value, footprint, candidate part).
 
 Netlist-first drawing, as tube_preamp_kicad rev_b: every part on a grid, a wire stub and a label
@@ -48,7 +48,7 @@ GRID = 2.54
 INTENDED = {}          # (ref, pin) -> net
 PARTS = {}             # ref -> (symbol, value, footprint key or full name)
 
-# Footprint keys (KiCad 10 stock libraries unless marked PLACEHOLDER). Package rules: 0603 logic and
+# Footprint keys (KiCad 10 stock libraries unless local: tube_pi_fxloop_revb). Package rules: 0603 logic and
 # gate drive; 0805 low-voltage audio; 1206 where a node sits at 100-430 V (creepage) or for > 0.1 W;
 # 2512 (200 V, 1 W) for plate loads and every resistor string across HV (no SMD resistor over 200 V);
 # C0G for audio capacitors; film (THT) where an audio cap sees DC above 50 V.
@@ -74,8 +74,9 @@ FP = {
     "KK254x3": "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical",
     "KK396x2": "Connector_Molex:Molex_KK-396_A-41791-0002_1x02_P3.96mm_Vertical",
     "MFJ2x3": "Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical",
-    "TAB48": "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_4.8mm_Legs_P5.00mm_D1.4mm",
-    "TAB63": "tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm",
+    "TAB48": "tube_pi_fxloop_revb:Faston_Tab_4.8mm_x2_P15.00mm",
+    "TAB63": "tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm",
+    "NOVAL": "tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm",   # rev A's socket: matches the chassis holes
 }
 
 
@@ -557,12 +558,12 @@ KNOWN = {
 NOTES = {
     "FILM5": "film >= 100 V (PET / PP)", "FILM10": "film 630 V", "FILM15": "film >= 400 V", "FILM27": "PP film 630 V (preamp_regulator.md)",
     "CPD8": "105 C electrolytic", "CPE6": "105 C electrolytic", "CPE5": "105 C electrolytic", "CPD12": "105 C electrolytic", "CPD16": "105 C, 12000 h, not at LCSC: hand-solder", "CPD18": "105 C, 12000 h, not at LCSC: hand-solder",
-    "R2512": "2512, 1 W, 200 V", "TAB48": "PLACEHOLDER footprint", "TAB63": "PLACEHOLDER footprint",
+    "R2512": "2512, 1 W, 200 V", "TAB48": "PCB blade tab 4.8 mm x2 (HV: fully insulated receptacle)", "TAB63": "PCB blade tab 6.3 mm x2",
     "MFJ2x3": "W24: Mini-Fit Jr 600 V (V5); 2x3 with position 6 unused, same mapping on the power amp",
 }
 SYM_NOTES = {
-    "ECC83": "noval PCB socket on the solder side (rev A part; rev A footprint tube_pi_fxloop:Valve_Noval_Belton_PCD21.00mm "
-             "matches the chassis holes, use it at layout); tubes not on the BOM",
+    "ECC83": "noval PCB socket on the solder side (rev A part; rev A footprint Valve_Noval_Belton_PCD21.00mm, "
+             "matches the chassis holes); tubes not on the BOM",
     "ULN2803A": "check the 70 C design temperature against the bought part's rating (ENV-2)",
     "G6K-2F-Y": "coil + 1 / - 8; NC 4 / 5, NO 2 / 7 (Omron datasheet)",
     "Q_NMOS_GDS": "DPAK on a copper pour; Q MMBTA42 on the same pour (thermal foldback)",
@@ -599,6 +600,8 @@ def footprint_of(ref):
     sym, value, key = PARTS[ref]
     if key:
         return FP.get(key, key)
+    if sym == "ECC83":
+        return FP["NOVAL"]
     prop = [p for p in find_all(lib()[sym], "property") if p[1] == "Footprint"]
     return prop[0][2] if prop else ""
 

@@ -71,9 +71,9 @@ J302,Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical
 J303,Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical
 J304,Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical
 J401,Connector_IDC:IDC-Header_2x07_P2.54mm_Vertical
-J501,tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_4.8mm_Legs_P5.00mm_D1.4mm
-J502,tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm
-J503,tube_pi_fxloop_revb:PLACEHOLDER_Tab_x2_6.3mm_Legs_P5.00mm_D1.4mm
+J501,tube_pi_fxloop_revb:Faston_Tab_4.8mm_x2_P15.00mm
+J502,tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm
+J503,tube_pi_fxloop_revb:Faston_Tab_6.3mm_x2_P12.70mm
 K201,Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y
 K202,Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y
 K203,Relay_SMD:Relay_DPDT_Omron_G6K-2F-Y
@@ -250,5 +250,5 @@ U404,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm
 U405,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm
 U406,Package_SO:SOIC-16_3.9x9.9mm_P1.27mm
 U407,Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm
-V1,Valve:Valve_Noval_P
-V2,Valve:Valve_Noval_P
+V1,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm
+V2,tube_pi_fxloop_revb:Valve_Noval_Belton_PCD21.00mm
