@@ -6242,12 +6242,12 @@
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:ECC83")
 		(at 457.2 62.23 0)
-		(unit 2)
+		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "989bf31c-c0f1-59a2-ba80-e33d700b2758")
+		(uuid "f426cc17-9a23-5403-9982-0738911f7dae")
 		(property "Reference" "V2"
 			(at 460.502 54.356 0)
 			(effects
@@ -6291,20 +6291,20 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "6a0a05cf-b5e8-5602-9dd6-eb4a981cfd8a")
+		(pin "6"
+			(uuid "ff4587ed-eec4-5e4f-b3ed-3f559b7d9de0")
 		)
-		(pin "2"
-			(uuid "e1717db9-6eef-59a9-b8b3-ee9726505833")
+		(pin "7"
+			(uuid "c32a503e-353c-54cc-8fc1-8dfc33f1ddc0")
 		)
-		(pin "3"
-			(uuid "fa080913-25a5-5f31-9abe-b79f59197bdd")
+		(pin "8"
+			(uuid "4c46f96c-f5ea-5770-829f-d8173592b572")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
 					(reference "V2")
-					(unit 2)
+					(unit 1)
 				)
 			)
 		)
@@ -6491,12 +6491,12 @@
 	(symbol
 		(lib_id "tube_pi_fxloop_revb:ECC83")
 		(at 457.2 142.24 0)
-		(unit 1)
+		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f426cc17-9a23-5403-9982-0738911f7dae")
+		(uuid "989bf31c-c0f1-59a2-ba80-e33d700b2758")
 		(property "Reference" "V2"
 			(at 460.502 134.366 0)
 			(effects
@@ -6540,20 +6540,20 @@
 				(hide yes)
 			)
 		)
-		(pin "6"
-			(uuid "ff4587ed-eec4-5e4f-b3ed-3f559b7d9de0")
+		(pin "1"
+			(uuid "6a0a05cf-b5e8-5602-9dd6-eb4a981cfd8a")
 		)
-		(pin "7"
-			(uuid "c32a503e-353c-54cc-8fc1-8dfc33f1ddc0")
+		(pin "2"
+			(uuid "e1717db9-6eef-59a9-b8b3-ee9726505833")
 		)
-		(pin "8"
-			(uuid "4c46f96c-f5ea-5770-829f-d8173592b572")
+		(pin "3"
+			(uuid "fa080913-25a5-5f31-9abe-b79f59197bdd")
 		)
 		(instances
 			(project "tube_pi_fxloop_revb"
 				(path "/4bce18c3-be74-560a-bbe8-6ba9762bb174/a56163f7-4885-5ca6-9084-3746aa956f44"
 					(reference "V2")
-					(unit 1)
+					(unit 2)
 				)
 			)
 		)

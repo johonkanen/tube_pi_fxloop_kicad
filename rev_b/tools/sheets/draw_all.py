@@ -312,9 +312,12 @@ def sheet02(d):
     C(d, 18, 1, "ATT_OUT", "PIX", "10n/630V film", rot=0, fp="FILM10")
     R(d, 19.5, 2.2, "PIX", "PI_REF", "1M")
     R(d, 19.5, 1, "PIX", "G2A", "1k", rot=0)
-    d.part("ECC83", "V2", 21, 1.5, {1: "DRV_A", 2: "G2A", 3: "PK"}, value="12AX7", unit=2)
+    # Units swapped for the layout (2026-11-24): the input triode on pins 6-8 (grid pin 7 on the socket's west
+    # side, toward the attenuator), the second-grid triode on pins 1-3 (grid pin 2 on the east side, toward the
+    # feedback networks). No circuit change.
+    d.part("ECC83", "V2", 21, 1.5, {6: "DRV_A", 7: "G2A", 8: "PK"}, value="12AX7", unit=1)
     R(d, 21, 0, "BPI_P", "DRV_A", "100k 1W", fp="R2512")
-    d.part("ECC83", "V2", 21, 6, {6: "DRV_B", 7: "G2B", 8: "PK"}, value="12AX7", unit=1)
+    d.part("ECC83", "V2", 21, 6, {1: "DRV_B", 2: "G2B", 3: "PK"}, value="12AX7", unit=2)
     R(d, 21, 4.5, "BPI_P", "DRV_B", "100k 1W", fp="R2512")
     R(d, 19.5, 6, "G2BX", "G2B", "1k", rot=0)
     R(d, 18.5, 7.3, "G2BX", "PI_REF", "1M")
