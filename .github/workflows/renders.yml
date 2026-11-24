@@ -33,12 +33,12 @@ jobs:
       image: kicad/kicad:10.0.7-full
       options: --user root
     steps:
-      - name: Install git and an SVG rasterizer
+      - name: Install git, an SVG rasterizer and ImageMagick
         run: |
           apt-get update -qq
-          DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends git librsvg2-bin ca-certificates >/dev/null
+          DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends git librsvg2-bin imagemagick ca-certificates >/dev/null
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Render boards
         shell: bash
@@ -51,8 +51,10 @@ jobs:
           BG='#001023'
           fail=0
 
-          svg2png() {  # svg2png <svg> <png>
-            rsvg-convert -w 2400 --keep-aspect-ratio -b "$BG" -o "$2" "$1" && rm -f "$1"
+          IM=$(command -v magick || command -v convert)
+          svg2png() {  # svg2png <svg> <png>: board-area SVG -> 2400 px wide PNG with a margin
+            rsvg-convert -w 2304 --keep-aspect-ratio -b "$BG" -o "$2" "$1" \
+              && "$IM" "$2" -bordercolor "$BG" -border 48 "$2" && rm -f "$1"
           }
           plot() {     # plot <board> <png> <layers> [--mirror]
             local svg="${2%.png}.svg"
@@ -63,9 +65,16 @@ jobs:
           }
           render3d() { # render3d <board> <png> <args...>
             local b="$1" png="$2"; shift 2
-            kicad-cli pcb render "$b" -o "$png" --width 1600 --height 1000 --background opaque \
-              --quality high "$@" 2>&1 | grep -viE '^Rendering|could not|not found|missing' || true
-            [ -s "$png" ] || { echo "::error::3D render failed: $png"; fail=1; }
+            # Render at 2x on a transparent background, trim to the board, add a margin on
+            # the common background colour and downscale (anti-aliasing) to 1600 px wide.
+            # Footprints without a 3D model are simply drawn without one.
+            kicad-cli pcb render "$b" -o "$png.raw.png" --width 3200 --height 2000 \
+              --background transparent --quality basic "$@" 2>&1 | grep -vE '^Rendering' || true
+            [ -s "$png.raw.png" ] || { echo "::error::3D render failed: $png"; fail=1; return; }
+            "$IM" "$png.raw.png" -trim +repage -bordercolor none -border 80 \
+              -background "$BG" -flatten -resize 1600x "$png" \
+              || { echo "::error::3D post-processing failed: $png"; fail=1; }
+            rm -f "$png.raw.png"
           }
 
           for board in $BOARDS; do
@@ -81,7 +90,7 @@ jobs:
             plot "$board" "$d/assembly_bottom.png" "B.Cu,B.Silkscreen,Edge.Cuts" --mirror
             render3d "$board" "$d/3d_top.png"    --side top
             render3d "$board" "$d/3d_bottom.png" --side bottom
-            render3d "$board" "$d/3d_iso.png"    --side top --rotate '-45,0,45' --perspective --zoom 1.3
+            render3d "$board" "$d/3d_iso.png"    --side top --rotate '-45,0,45' --perspective --zoom 0.9
             echo "::endgroup::"
           done
 
@@ -104,7 +113,7 @@ jobs:
           ls -lR "$OUT"
           exit $fail
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
           name: renders
