@@ -94,7 +94,10 @@ PINNED = {
 # big parts pinned by pad 1 (KiCad rot, chassis xy of pad 1); rot 180 = pad 2 east of pad 1
 PINNED_PIN1 = {
     "C504": (180, (70.5, 134.3)),   # B+FX 2.2u/630V film (GF_FX west, GND east next to H8)
-    "C501": (180, (128.0, 133.8)),  # B+PI 2.2u/630V film
+    "C501": (180, (129.0, 133.8)),  # B+PI 2.2u/630V film
+    "C506": (180, (110.8, 126.8)),  # B+FX 100n/630V film
+    "C111": (180, (109.6, 134.7)),  # return stage 470n/400V film (P1B west, ATT_IN east)
+    "C110": (90, (90.6, 146.1)),    # return stage cathode bypass 100u/25V
     "C505": (180, (109.54, 113.8)), # B+FX 47u/500V
     "C502": (180, (171.94, 113.8)), # B+PI 47u/500V
     "C509": (180, (74.54, 151.7)),  # BFX2 22u/500V (return stage plate supply), rear-west
@@ -104,7 +107,7 @@ PINNED_PIN1 = {
 # DPAK tab and the MMBTA42 in a cut-out; B: the heat spreader under the regulator, stitched to F.
 # preamp_regulator.md / sim/preamp_supply assume 30-50 K/W pour to ambient per pass device.
 POUR_F = {"Q505": (71.5, 106.5, 84.6, 122.5), "Q502": (124.5, 106.5, 137.6, 122.5)}
-POUR_B = {"Q505": (57.0, 106.5, 102.5, 140.0), "Q502": (104.5, 106.5, 165.0, 140.0)}
+POUR_B = {"Q505": (66.5, 106.5, 90.0, 126.0), "Q502": (119.5, 106.5, 143.0, 126.0)}
 
 # ---- neighbours (chassis frame) --------------------------------------------------------------
 PREAMP = (3.37, 16.18, 386.16, 88.08)          # chassis_view.kicad_pcb User.1

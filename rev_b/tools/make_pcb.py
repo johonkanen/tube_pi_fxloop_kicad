@@ -30,6 +30,7 @@ RB = os.path.dirname(HERE)
 REPO = os.path.dirname(RB)
 sys.path.insert(0, os.path.join(RB, "layout"))
 import placement as P  # noqa: E402
+import make_groups as MG  # noqa: E402
 
 PROJECT = "tube_pi_fxloop_revb"
 K = os.path.join(RB, "kicad")
@@ -343,6 +344,9 @@ def main():
         place_pin1(fps[ref], rot, xy)
         fixed.add(ref)
 
+    bside = {r for _n, refs, _z, _near, _w in MG.B_GROUPS for r in refs}
+    for r in bside:                                # LV 0603 parts on the plate side (make_groups.B_GROUPS)
+        fps[r].Flip(fps[r].GetPosition(), pcbnew.FLIP_DIRECTION_LEFT_RIGHT)
     # parked: below the board (board y > Y1 is in front of the front edge in the chassis), by sheet
     y = Y1 + 12.0
     for sheet in sorted(parked):

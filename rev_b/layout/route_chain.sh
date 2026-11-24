@@ -4,7 +4,7 @@
 # One KRT step per net group (routing.json, from make_routing.py); each step's nets locked before the next.
 #   ./route_chain.sh [FROM [LAST]]   (step numbers; resumes from build/route/<FROM-1>_*.kicad_pcb)
 set -euo pipefail
-L="$(cd "$(dirname "$0")" && pwd)"; R="$L/build/route"; S=~/.claude/skills/kicad-agentic-routing/scripts
+L="$(cd "$(dirname "$0")" && pwd)"; R="${RDIR:-$L/build/route}"; PLACED="${PLACED:-$L/build/placed.kicad_pcb}"; S=~/.claude/skills/kicad-agentic-routing/scripts
 REPO="$(cd "$L/../.." && pwd)"; P=tube_pi_fxloop_revb; KP="$REPO/tools/p2k/bin/kipy"
 export ROUTING_CONFIG="$L/routing.json" KICAD_PYTHON="$KP"
 FROM=${1:-0}; LAST=${2:-99}
@@ -26,17 +26,17 @@ if [ "$FROM" -le 0 ] && [ "$LAST" -ge 0 ]; then
     echo "== 0 prep: heater pair, drain pours"
     rm -f "$R"/[0-9][0-9]_*
     out="$R/00_prep.kicad_pcb"; sib "$out"
-    $KP "$L/draw_heater.py" "$L/build/placed.kicad_pcb" "$out" 2>&1 | grep -v "memory leak"
+    $KP "$L/draw_heater.py" "$PLACED" "$out" 2>&1 | grep -v "memory leak"
     $KP "$L/draw_pours.py" "$out" "$out" 2>&1 | grep -v "memory leak"
 fi
 step 1 hv hv --via-cost 100
 step 2 mv mv --via-cost 100
 step 3 hiz hiz --via-cost 60
 step 4 audio audio
-step 5 coil coil
-step 6 gate gate --grid-step 0.05
-step 7 logic logic --grid-step 0.05
-step 8 supply supply --grid-step 0.05 --power-nets "+5V" "+15V" "-15V" "GNDD" --power-nets-widths 0.5 0.4 0.4 0.5
+step 5 supply supply --grid-step 0.05 --power-nets "+5V" "+15V" "-15V" "GNDD" --power-nets-widths 0.5 0.4 0.4 0.5
+step 6 logic logic --grid-step 0.05
+step 7 coil coil
+step 8 gate gate --grid-step 0.05
 step 9 leftover hv,mv,hiz,audio,coil,gate,logic,supply --max-iterations 20000000 --layer-costs 1 1
 # GND pours on F and B (KRT route_planes), then repair islands, HIZ cuts, refill (finalize.py)
 if [ 10 -ge "$FROM" ] && [ 10 -le "$LAST" ]; then
@@ -54,5 +54,5 @@ if [ 11 -ge "$FROM" ] && [ 11 -le "$LAST" ]; then
         --nets GND GND --plane-layers F.Cu B.Cu --via-size 0.8 --via-drill 0.3 --escalation board --no-fix-drc-settings \
         > "${out%.kicad_pcb}.log" 2>&1 ) || { tail -20 "${out%.kicad_pcb}.log"; cp "$in" "$out"; }
     $KP "$L/finalize.py" "$out" "$out" 2>&1 | grep -v "memory leak"
-    cp "$out" "$L/build/routed.kicad_pcb"; sib "$L/build/routed.kicad_pcb"
+    cp "$out" "$R/../routed.kicad_pcb"; sib "$R/../routed.kicad_pcb"
 fi

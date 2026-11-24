@@ -18,6 +18,13 @@ def rng(p, a, b):
     return [f"{p}{i}" for i in range(a, b + 1)]
 
 
+# Low-voltage 0603 parts placed on B (the plate side, 13.4 mm to the plate, <= 1 mm tall): the logic island's
+# passives and the JFET gate RC networks. Single-sided placement does not fit the rev A outline with the HV
+# spacing (STATUS "Layout, first pass": about 75 % of the board committed before routing); needs the user's OK.
+FB_B = rng("R", 305, 309) + rng("R", 313, 317) + rng("R", 321, 325) + rng("C", 304, 306) + rng("C", 310, 312) + rng("C", 316, 318)
+MIX_B = ["R113", "R114", "C104", "C105", "R115", "R116", "R117", "R120", "R121", "R122", "C106", "C107", "C108", "C109"]
+CTL_B = rng("R", 401, 427) + rng("C", 401, 411)
+
 # name, refs, chassis zone (x0, y0, x1, y1), near, why
 G = [
     ("reg_fx", "Q504 R515 D506 D507 R516 R523 R524 C504 R517 D508 Q505 D509 R518 Q506 R519 R520 R521 R525 R526 C505 C506 "
@@ -30,22 +37,28 @@ G = [
      "per-triode RC decoupling of B+FX (V1 plates)"),
     ("send", rng("R", 101, 109) + ["C101", "C102"], (112.0, 140.0, 165.0, 171.0), ["fxio", "mixer"],
      "input network (J101), send cathode follower V1 pins 1-3, SEND_SRC, dry divider"),
-    ("fxio", "R131 C103 R110 R111 R112 Q101 R113 R114 C104 C105".split(), (140.0, 140.0, 195.0, 171.0), ["mixer", "send"],
+    ("fxio", "R131 C103 R110 R111 R112 Q101".split(), (140.0, 140.0, 195.0, 171.0), ["mixer", "send"],
      "return input at J102: bleed, 220n, pad (JFET on PAD_A)"),
-    ("mixer", rng("Q", 102, 105) + rng("R", 115, 126) + rng("C", 106, 109), (60.0, 140.0, 170.0, 171.0), ["ret", "fxio", "send"],
+    ("mixer", rng("Q", 102, 105) + ["R118", "R119", "R123", "R124", "R125", "R126"], (60.0, 140.0, 170.0, 171.0), ["ret", "fxio", "send"],
      "series-shunt JFET mixer, 220k, the 1k stopper at V1 pin 7"),
-    ("ret", "R127 R128 R129 C110 C111 R130".split(), (60.0, 140.0, 125.0, 171.0), ["mixer", "att"],
+    ("ret", "R127 R128 R129 C110 C111 R130".split(), (60.0, 125.0, 128.0, 171.0), ["mixer", "att"],
      "return stage V1 pins 6-8: plate load, cathode, 470n to the attenuator"),
     ("att", rng("K", 201, 205) + rng("R", 202, 212), (140.0, 104.0, 217.0, 171.0), ["fxio", "pi"],
      "PI-4 attenuator: five relays and L-sections, ATT_IN from the return stage to ATT_OUT at the PI"),
     ("pi", "C202 R213 R214 R215 R216 R217 R218 R219 Q201 R220 R221 C203 R222 R223 R224 C204 R529 C507 C201 R201".split(),
      (190.0, 125.0, 266.0, 175.6), ["att", "fb"], "PI: 10n in, grid stoppers, CCS, plate loads, PI_REF, B+PI decoupling, W24 soft tie"),
-    ("fb", rng("K", 301, 303) + rng("R", 301, 327) + rng("C", 301, 319) + rng("Q", 301, 309), (175.0, 110.0, 262.0, 145.0),
+    ("fb", rng("K", 301, 303) + [r for r in rng("R", 301, 327) + rng("C", 301, 319) if r not in FB_B] + rng("Q", 301, 309),
+     (175.0, 110.0, 262.0, 145.0),
      ["pi"], "three feedback networks between J302-J304 and the second grid; relays near J301"),
-    ("ctl", rng("U", 401, 407) + rng("C", 401, 411) + rng("R", 401, 427), (200.0, 110.0, 278.6, 150.0), ["fb"],
+    ("ctl", rng("U", 401, 407), (200.0, 110.0, 278.6, 150.0), ["fb"],
      "DGND island at J401: expander, DG412 x3, LVC1G11 x2, ULN2803A, soft tie"),
 ]
 SMALL = []
+B_GROUPS = [
+    ("ctl_b", CTL_B, (200.0, 110.0, 278.6, 152.0), ["ctl"], "logic passives under the DGND island (B side)"),
+    ("mix_b", MIX_B, (60.0, 128.0, 200.0, 171.0), ["mixer", "fxio"], "mixer and pad JFET gate RC networks (B side)"),
+    ("fb_b", FB_B, (175.0, 110.0, 262.0, 150.0), ["fb"], "feedback T-switch gate RC networks (B side)"),
+]
 TALL = {"C501", "C502", "C504", "C505", "C507", "C508", "C509", "C102", "C111", "C202", "C203", "C503", "C506",
         "C101", "C103"}
 
@@ -53,11 +66,14 @@ TALL = {"C501", "C502", "C504", "C505", "C507", "C508", "C509", "C102", "C111", 
 def main():
     intent = json.load(open(sys.argv[1]))
     groups = [{"name": n, "role": "core", "refs": r, "near": near, "side": "F", "why": w} for n, r, _z, near, w in G]
+    groups += [{"name": n, "role": "core", "refs": r, "near": near, "side": "B", "why": w} for n, r, _z, near, w in B_GROUPS]
     json.dump({"schema": 1, "board": "rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb", "groups": groups},
               open(os.path.join(HERE, "groups.json"), "w"), indent=1)
     intent["blocks"] = [{"name": n, "refs": r, "zone": list(P.rect_board(*z)), "side": "F", "note": w}
                         for n, r, z, _near, w in G]
-    allrefs = [r for _, refs, _, _, _ in G for r in refs]
+    intent["blocks"] += [{"name": n, "refs": r, "zone": list(P.rect_board(*z)), "side": "B", "note": w}
+                         for n, r, z, _near, w in B_GROUPS]
+    allrefs = [r for _, refs, _, _, _ in G + B_GROUPS for r in refs]
     global SMALL
     SMALL = [r for r in allrefs if r[0] in "RCQD" and r not in TALL and not r.startswith(("Q50", "Q20"))]
     ko = []
@@ -84,6 +100,10 @@ def main():
     ko.append({"name": "front of J302-J304", "rect": list(P.rect_board(192.0, 103.9, 259.0, 105.4)), "sides": ["F"],
                "why": "W30-W32 enter from the front"})
     # regulator F pours (draw_pours.py): only the pass device and its foldback transistor
+    # HV / MV pads near the edges: fix_place.edge_push after the anneal (strips here cost too much area)
+    for q, r in P.POUR_B.items():
+        ko.append({"name": f"{q} pour B", "rect": list(P.rect_board(*r)), "sides": ["B"], "why": "BP_RAW drain pour (B), HV",
+                   "allow": [x for _n, refs, _z, _nr, _w in G for x in refs]})
     for name, refs, r in POURS_F:
         ko.append({"name": name, "rect": list(P.rect_board(*r)), "sides": ["F"], "allow": refs, "why": "BP_RAW drain pour (F)"})
     intent["keepouts"] = ko
