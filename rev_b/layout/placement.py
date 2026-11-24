@@ -28,6 +28,11 @@ def to_chassis(kx, ky):
     return OX - kx, OY - ky
 
 
+def rect_board(cx0, cy0, cx1, cy1):
+    """A chassis rectangle in the board frame (x0, y0, x1, y1), ordered."""
+    return OX - cx1, OY - cy1, OX - cx0, OY - cy0
+
+
 # ---- rev A, frozen (board frame) ------------------------------------------------------------
 REVA_PCB = "kicad/tube_pi_fxloop.kicad_pcb"                     # repo root, read only
 OUTLINE_BOARD = (-123.825, 6.35, 101.6, 78.105)                  # x0, y0, x1, y1 (board frame)
@@ -36,7 +41,8 @@ HOLES_BOARD = {                                                  # rev A H1-H10,
     "H1": (-119, 11), "H2": (97, 11), "H3": (-63, 14), "H4": (60, 14), "H5": (-94, 18.5),
     "H6": (29, 18.5), "H7": (-69, 41), "H8": (51, 41), "H9": (-119, 73), "H10": (97, 73),
 }
-HOLE_NO_CHASSIS = {"H1"}          # mechanical/README.md: 9 of 10 match; H1 has no plate hole (nearest 4 mm off)
+HOLE_NO_CHASSIS = {"H1"}
+HOLE_DROPPED = {"H1"}              # rev B: no standoff can go there; the corner is used (user: "H1 your call")          # mechanical/README.md: 9 of 10 match; H1 has no plate hole (nearest 4 mm off)
 HOLE_DRILL = 3.2                   # rev B: not plated, no net (grounding.md), M3 clearance
 HOLE_KEEPOUT_LV = 3.75             # radius: M3 pan head 5.5 mm + 1 mm
 HOLE_KEEPOUT_HV = 5.25             # radius: head + 2.5 mm (the screw / standoff is at chassis potential)
@@ -75,6 +81,30 @@ CONNECTORS = {
     "J503": ("W08-a", "preamp J502 (x 290 / 303)", TABLIB, "Faston_Tab_6.3mm_x2_P12.70mm",
              "F", 0, (85.50, 169.00), "heater out to the preamp, 0.9 A"),
 }
+
+# ---- parts pinned before the automatic placement: (KiCad rot, chassis xy of the footprint origin) ----
+# The pass devices sit on their BP_RAW drain pours (draw_pours.py), the foldback MMBTA42 on the same
+# pour (in a cut-out of the F pour, over the B pour: thermal coupling, electrically separate).
+PINNED = {
+    "Q505": (0, (80.0, 113.0)),     # B+FX pass device, STD4N80K5 DPAK: tab west, pins east
+    "Q506": (0, (78.5, 119.0)),     # B+FX foldback MMBTA42
+    "Q502": (0, (133.0, 113.0)),    # B+PI pass device
+    "Q503": (0, (131.5, 119.0)),    # B+PI foldback MMBTA42
+}
+# big parts pinned by pad 1 (KiCad rot, chassis xy of pad 1); rot 180 = pad 2 east of pad 1
+PINNED_PIN1 = {
+    "C504": (180, (70.5, 134.3)),   # B+FX 2.2u/630V film (GF_FX west, GND east next to H8)
+    "C501": (180, (128.0, 133.8)),  # B+PI 2.2u/630V film
+    "C505": (180, (109.54, 113.8)), # B+FX 47u/500V
+    "C502": (180, (171.94, 113.8)), # B+PI 47u/500V
+    "C509": (180, (74.54, 151.7)),  # BFX2 22u/500V (return stage plate supply), rear-west
+}
+
+# Regulator drain pours, BP_RAW (chassis rectangles x0, y0, x1, y1), drawn by draw_pours.py. F: the
+# DPAK tab and the MMBTA42 in a cut-out; B: the heat spreader under the regulator, stitched to F.
+# preamp_regulator.md / sim/preamp_supply assume 30-50 K/W pour to ambient per pass device.
+POUR_F = {"Q505": (71.5, 106.5, 84.6, 122.5), "Q502": (124.5, 106.5, 137.6, 122.5)}
+POUR_B = {"Q505": (57.0, 106.5, 102.5, 140.0), "Q502": (104.5, 106.5, 165.0, 140.0)}
 
 # ---- neighbours (chassis frame) --------------------------------------------------------------
 PREAMP = (3.37, 16.18, 386.16, 88.08)          # chassis_view.kicad_pcb User.1

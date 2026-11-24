@@ -1,0 +1,74 @@
+(version 1)
+# PI + FX rev B clearance rules (tools/make_pcb.py). Standard: IPC-2221B table 6-1, B2 (external
+# conductors, uncoated, sea level to 3050 m), the same basis as the preamp rev B (review N57);
+# pollution degree 2, functional insulation only (no safety barrier on this board; the chassis
+# is reached only through the unplated standoff holes).
+#   HV = nets at 250-480 V (raw rail, regulators, B+PI / B+FX and their decoupled rails, the PI
+#        plates on W24), MV = 100-250 V (string midpoints, PI_REF divider, the return plate).
+#   301-500 V: 2.5 mm; 151-300 V: 1.25 mm. An HV net to another HV net: 1.25 mm (the split
+#   resistor strings put <= 200 V across each part, so two different HV nets are at most 200 V
+#   apart in normal use; the pass device's own pads are listed below).
+# Unconnected pads (open relay contacts, spare switch pins) are left out.
+(rule "HV to LV"
+  (condition "A.NetClass == 'HV' && B.NetClass != 'HV' && B.NetClass != 'MV' && B.NetName != 'unconnected-*' && B.Pad_Type != 'NPTH, mechanical'")
+  (constraint clearance (min 2.5mm)))
+(rule "HV to HV"
+  (condition "A.NetClass == 'HV' && B.NetClass == 'HV' && A.NetName != B.NetName")
+  (constraint clearance (min 1.25mm)))
+(rule "HV to MV"
+  (condition "A.NetClass == 'HV' && B.NetClass == 'MV'")
+  (constraint clearance (min 1.25mm)))
+(rule "MV to LV"
+  (condition "A.NetClass == 'MV' && B.NetClass != 'HV' && B.NetClass != 'MV' && B.NetName != 'unconnected-*' && B.Pad_Type != 'NPTH, mechanical'")
+  (constraint clearance (min 1.25mm)))
+# Board edges and the standoffs (chassis potential through the metal standoff and screw): HV copper
+# 2.5 mm from the edge and from an M3 head (5.5 mm) at a hole, MV 1.25 mm.
+(rule "HV to board edge"
+  (condition "A.NetClass == 'HV'")
+  (constraint edge_clearance (min 2.5mm)))
+(rule "MV to board edge"
+  (condition "A.NetClass == 'MV'")
+  (constraint edge_clearance (min 1.25mm)))
+(rule "HV to standoff"
+  (condition "A.NetClass == 'HV' && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 3.65mm)))
+(rule "MV to standoff"
+  (condition "A.NetClass == 'MV' && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 2.4mm)))
+(rule "LV to standoff"
+  (condition "B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 1.2mm)))
+# High-impedance audio nets: ground pours keep away (stray capacitance; the preamp rule).
+(rule "HIZ to pour"
+  (condition "A.NetClass == 'HIZ' && B.Type == 'Zone'")
+  (constraint clearance (min 1.0mm)))
+# Exceptions inside a part (generated: the part's own pad spacing is below the class rule;
+# the part's rating covers it). One rule per part, at its own pad gap.
+# Q506 (MMBTA42): BFX to GP_FX 0.66 mm inside the part (class rule 1.25 mm)
+(rule "Q506 own pads"
+  (condition "A.memberOfFootprint('Q506') && B.memberOfFootprint('Q506')")
+  (constraint clearance (min 0.63mm)))
+# Q504 (LND150N8): ZT_FX to BP_RAW 0.35 mm inside the part (class rule 1.25 mm)
+(rule "Q504 own pads"
+  (condition "A.memberOfFootprint('Q504') && B.memberOfFootprint('Q504')")
+  (constraint clearance (min 0.32mm)))
+# Q503 (MMBTA42): BPI to GP_PI 0.66 mm inside the part (class rule 1.25 mm)
+(rule "Q503 own pads"
+  (condition "A.memberOfFootprint('Q503') && B.memberOfFootprint('Q503')")
+  (constraint clearance (min 0.63mm)))
+# Q501 (LND150N8): ZT_PI to BP_RAW 0.35 mm inside the part (class rule 1.25 mm)
+(rule "Q501 own pads"
+  (condition "A.memberOfFootprint('Q501') && B.memberOfFootprint('Q501')")
+  (constraint clearance (min 0.32mm)))
+# V2 (12AX7): DRV_A to G2A 2.17 mm inside the part (class rule 2.5 mm)
+(rule "V2 own pads"
+  (condition "A.memberOfFootprint('V2') && B.memberOfFootprint('V2')")
+  (constraint clearance (min 2.15mm)))
+# J201 (DRIVE (W24-a, Mini-Fit Jr)): DRV_A to GND_DRV 1.50 mm inside the part (class rule 2.5 mm)
+(rule "J201 own pads"
+  (condition "A.memberOfFootprint('J201') && B.memberOfFootprint('J201')")
+  (constraint clearance (min 1.48mm)))
+# V1 (12AX7): BFX1 to G1A 2.18 mm inside the part (class rule 2.5 mm)
+(rule "V1 own pads"
+  (condition "A.memberOfFootprint('V1') && B.memberOfFootprint('V1')")
+  (constraint clearance (min 2.15mm)))

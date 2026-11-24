@@ -42,7 +42,8 @@ OUTPUTS = {
 TEMPS = [0, 27, 50, 70, 85, 100, 115, 130, 145]
 TESTS = ['load', 'short', 'startup']
 # Thermal model (estimates, to confirm on the bench):
-RTH_PA = (30.0, 40.0, 50.0)   # pour to ambient, K/W (a few cm2 of 2 oz copper, components-down board)
+RTH_PA = tuple(float(x) for x in os.environ.get('RTH_PA', '30,40,50').split(','))  # pour to ambient, K/W
+# (a few cm2 of 2 oz copper, components-down board; layout first pass: RTH_PA=15,20,25 -> thermal_foldback_layout.md)
 K_COUPLE = 0.8                # Q1 rise as a fraction of the pour rise (SOT-23 on the same pour)
 RTH_JP = 3.0                  # junction to pour, K/W (2.08 K/W junction-case plus the solder joint)
 TAMB = (25.0, 50.0, 60.0, 70.0)  # room to 70 C under the plate (review U17 / N61 design figure)
@@ -123,7 +124,7 @@ def main():
                 starts = bool(above) and above[0]
                 L.append(f'| {n} | {ta:.0f} | {rth:.0f} | {pn:.2f} | {rdr * p["iload"] ** 2:.2f} | {tq:.0f} | '
                          f'{np.interp(tq, T, lim) * 1e3:.1f} | {p["iload"] * 1e3:.0f} | {"yes" if starts else "NO"} |')
-    with open(os.path.join(RES, 'thermal_foldback.md'), 'w') as f:
+    with open(os.path.join(RES, os.environ.get('RESULT', 'thermal_foldback.md')), 'w') as f:
         f.write('\n'.join(L) + '\n')
     print('\n'.join(L))
 
