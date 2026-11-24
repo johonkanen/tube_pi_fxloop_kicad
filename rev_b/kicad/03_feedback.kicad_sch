@@ -11934,7 +11934,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "8ad8d4c5-7bf3-58ab-b477-9cacbe93e007")
 		(property "Reference" "R327"
 			(at 482.26 105.41 0)
@@ -12053,7 +12053,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "d3801292-3b02-5844-82d4-c4c1e3f00f49")
 		(property "Reference" "C319"
 			(at 497.84 125.73 270)

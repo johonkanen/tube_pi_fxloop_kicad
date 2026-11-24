@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-24T21:05:44",
+    "date": "2026-11-24T21:39:04",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -25,81 +25,229 @@
         }
     ],
     "included_severities": [
-        "error"
+        "error",
+        "warning",
+        "exclusion"
     ],
     "kicad_version": "10.0.7",
     "schematic_parity": [],
     "source": "tube_pi_fxloop_revb.kicad_pcb",
-    "unconnected_items": [
+    "unconnected_items": [],
+    "violations": [
         {
-            "description": "Missing connection between items",
+            "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Zone [GND] on B.Cu, priority 21",
+                    "description": "Segment of C502 on F.Silkscreen",
                     "pos": {
-                        "x": -123.325,
-                        "y": 6.85
+                        "x": -11.060559,
+                        "y": 73.395
                     },
-                    "uuid": "e59cdb72-298b-4a59-9d73-686bb024e151"
+                    "uuid": "6f4b7d32-e2fc-4e6c-922d-4e57117d2169"
                 },
                 {
-                    "description": "Zone [GND] on B.Cu, priority 21",
+                    "description": "Segment of D502 on F.Silkscreen",
                     "pos": {
-                        "x": -123.325,
-                        "y": 6.85
+                        "x": -11.1972,
+                        "y": 68.2262
                     },
-                    "uuid": "e59cdb72-298b-4a59-9d73-686bb024e151"
+                    "uuid": "cc9ec170-dd19-4644-9189-6e8311de89d8"
                 }
             ],
-            "severity": "error",
-            "type": "unconnected_items"
+            "severity": "warning",
+            "type": "silk_overlap"
         },
         {
-            "description": "Missing connection between items",
+            "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Zone [GND] on B.Cu, priority 21",
+                    "description": "Segment of C505 on F.Silkscreen",
                     "pos": {
-                        "x": -123.325,
-                        "y": 6.85
+                        "x": 51.33944,
+                        "y": 73.395
                     },
-                    "uuid": "e59cdb72-298b-4a59-9d73-686bb024e151"
+                    "uuid": "c83db91c-16b8-4f32-bbfd-3d222ed15c38"
                 },
                 {
-                    "description": "Zone [GND] on F.Cu, priority 21",
+                    "description": "Pad 1 [/05 B+PI and B+FX regulators, decoupling, heaters, power tabs/FBB_FX] of R526 on F.Cu",
                     "pos": {
-                        "x": -123.325,
-                        "y": 6.85
+                        "x": 51.8744,
+                        "y": 73.5992
                     },
-                    "uuid": "90456309-39a3-4724-b548-31150b0811f0"
+                    "uuid": "55057211-3c9c-45bc-99f2-abad132bd4a2"
                 }
             ],
-            "severity": "error",
-            "type": "unconnected_items"
+            "severity": "warning",
+            "type": "silk_over_copper"
         },
         {
-            "description": "Missing connection between items",
+            "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Pad 2 [GND] of Q101 on F.Cu",
+                    "description": "Segment of V1 on B.Silkscreen",
                     "pos": {
-                        "x": -18.1697,
-                        "y": 35.2836
+                        "x": 59.179,
+                        "y": 37.649
                     },
-                    "uuid": "42c86886-2635-4437-a0b5-a9a72328d738"
+                    "uuid": "52ec355d-d074-44ef-9c1b-79b1deaba995"
                 },
                 {
-                    "description": "Pad 2 [GND] of C105 on B.Cu",
+                    "description": "NPTH pad of H4",
                     "pos": {
-                        "x": -18.0985,
-                        "y": 33.5564
+                        "x": 60.0,
+                        "y": 14.0
                     },
-                    "uuid": "95d5f537-bfc2-4a39-b299-37380047cd1f"
+                    "uuid": "058ed069-e748-4e7b-97ae-b9838ea06d05"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segment of V2 on B.Silkscreen",
+                    "pos": {
+                        "x": -63.3669,
+                        "y": 12.5123
+                    },
+                    "uuid": "c6144a7b-af46-4215-b55c-fb340a3cfe19"
+                },
+                {
+                    "description": "NPTH pad of H3",
+                    "pos": {
+                        "x": -63.0,
+                        "y": 14.0
+                    },
+                    "uuid": "abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Segment of V2 on B.Silkscreen",
+                    "pos": {
+                        "x": -63.3669,
+                        "y": 37.9203
+                    },
+                    "uuid": "5283f24e-576b-46a2-9c0a-494c5f50c42f"
+                },
+                {
+                    "description": "NPTH pad of H3",
+                    "pos": {
+                        "x": -63.0,
+                        "y": 14.0
+                    },
+                    "uuid": "abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "comment": "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)",
+            "description": "Hole clearance violation (rule 'HV to standoff' clearance 3.6500 mm; actual 3.4169 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad 6 [/02 PI-4 attenuator, phase inverter, grid drive/DRV_A] of V2",
+                    "pos": {
+                        "x": -68.0979,
+                        "y": 19.0503
+                    },
+                    "uuid": "39549208-d6af-489f-bd7d-c081d3b6f1a9"
+                },
+                {
+                    "description": "NPTH pad of H3",
+                    "pos": {
+                        "x": -63.0,
+                        "y": 14.0
+                    },
+                    "uuid": "abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7"
                 }
             ],
             "severity": "error",
-            "type": "unconnected_items"
+            "type": "hole_clearance"
+        },
+        {
+            "comment": "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)",
+            "description": "Hole clearance violation (rule 'HV to standoff' clearance 3.6500 mm; actual 3.4169 mm)",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "PTH pad 6 [/02 PI-4 attenuator, phase inverter, grid drive/DRV_A] of V2",
+                    "pos": {
+                        "x": -68.0979,
+                        "y": 19.0503
+                    },
+                    "uuid": "39549208-d6af-489f-bd7d-c081d3b6f1a9"
+                },
+                {
+                    "description": "NPTH pad of H3",
+                    "pos": {
+                        "x": -63.0,
+                        "y": 14.0
+                    },
+                    "uuid": "abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "comment": "rev A geometry (as built): standoff H3 sits at the edge of V2's socket outline; the socket body clears the standoff",
+            "description": "NPTH inside courtyard",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "NPTH pad of H3",
+                    "pos": {
+                        "x": -63.0,
+                        "y": 14.0
+                    },
+                    "uuid": "abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7"
+                },
+                {
+                    "description": "Footprint V2",
+                    "pos": {
+                        "x": -76.5899,
+                        "y": 25.2158
+                    },
+                    "uuid": "82d3bb72-9383-4a8b-a498-b91943aae243"
+                }
+            ],
+            "severity": "error",
+            "type": "npth_inside_courtyard"
+        },
+        {
+            "comment": "rev A geometry (as built): standoff H4 sits at the edge of V1's socket outline; the socket body clears the standoff",
+            "description": "NPTH inside courtyard",
+            "excluded": true,
+            "items": [
+                {
+                    "description": "NPTH pad of H4",
+                    "pos": {
+                        "x": 60.0,
+                        "y": 14.0
+                    },
+                    "uuid": "058ed069-e748-4e7b-97ae-b9838ea06d05"
+                },
+                {
+                    "description": "Footprint V1",
+                    "pos": {
+                        "x": 45.956,
+                        "y": 24.9445
+                    },
+                    "uuid": "b0442ebb-5b01-4eff-9037-fd89568ef960"
+                }
+            ],
+            "severity": "error",
+            "type": "npth_inside_courtyard"
         }
-    ],
-    "violations": []
+    ]
 }

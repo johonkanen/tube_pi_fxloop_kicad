@@ -108,7 +108,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "1342536e-7ead-5c2e-b2e5-71e5f38cc031")
-		(property "Sheetname" "03 Per-channel feedback networks (presence / resonance)"
+		(property "Sheetname" "03 Per-channel feedback networks (presence and resonance)"
 			(at 279.4 37.4 0)
 			(effects
 				(font
@@ -190,7 +190,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "2ed4c737-7183-5abb-8f55-2c8c6113fed8")
-		(property "Sheetname" "05 B+PI / B+FX regulators, decoupling, heaters, power tabs"
+		(property "Sheetname" "05 B+PI and B+FX regulators, decoupling, heaters, power tabs"
 			(at 152.4 78.04 0)
 			(effects
 				(font

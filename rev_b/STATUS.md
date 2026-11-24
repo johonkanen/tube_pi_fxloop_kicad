@@ -1,5 +1,26 @@
 # PI + FX loop rev B: status
 
+## Layout, second pass (2026-11-24)
+
+The coordinator's list after the first pass (decided by the coordinator pending the user's word: 4 layers,
+two-sided assembly with the 79 plate-side parts, a nylon standoff and screw at H3). Only what changed:
+
+| Item | Result |
+|---|---|
+| DRC (`layout/drc.sh`, now every severity) | **0 errors, 0 warnings**; silkscreen 5 (footprint outlines only: C502's outline touches D502's, C505's crosses an FBB_FX pad, the socket outlines cross H3 / H4; clipped at fab); 4 excluded as before (L3) |
+| Schematic parity (every severity) | **0**. Was 201 warnings: 199 net conflicts from the "/" in two sheet names (schematic "{slash}", board "/"): sheets renamed "05 B+PI and B+FX regulators, ..." and "03 Per-channel feedback networks (presence and resonance)" (`tools/make_project.py`, which now keeps the project's board settings); 2 "Do not populate" mismatches: C319 / R327 now carry the schematic's DNP flag (`draw_all.py` marks every part whose value says DNP) |
+| Unconnected | **0** (were 3 GND): the second GND pass (step 17) joins Q101 / C105; the shunt-gate pulls R419 / R421 (B side, walled in under U404 with no GND reach) moved to the mixer end of their gate lines (183.0, 139.3) / (179.9, 139.55), next to R117 / R122, and their gate lines rerouted |
+| Dangling copper | the via and the track removed (`layout/remove_dangling.py`, by the DRC's own flags) |
+| K1A / G1B | G1B (return grid) rerouted on In2 only, K1A (send follower cathode) on F only: never on the same or adjacent layers; no parallel run within 6 mm (was 33 mm within 2 mm on adjacent layers); one crossing, 0.13 mm², F to In2 about 1.3 mm: about 0.004 pF, taken as **<= 0.02 pF** with fringing. Against the about 50 kΩ at the mixer / return grid: **<= -84 dB at 10 kHz, at least 24 dB below the R5 target (-60 dB)**. K1A now runs beside its own follower's grid network (G1A, SB, CI: in phase, gain < 1, harmless); SEND_SRC to RETURN_SIG keeps 4.2 mm (16 mm, at J102) |
+| Silkscreen | `layout/silk_tidy.py`: values on the fab layers; connectors first (refs and cable-ID values, on the other side's silk when their own side is full, mirrored); every reference 1.0 mm (0.8 mm where tight, JLC minimum height) at the first position clear of pads (0.2 mm), other silk and the edge; **157 texts on silk, 115 references on the fab layers only** (the dense SMD fields; the placement files and the fab drawing carry them). J302 / J303's cable-ID values found no room |
+| H3 | **nylon M3 standoff and nylon screw** noted on F.Fab, B.Fab and User.Comments next to H3 (the assembly drawing) and here. Cheap alternative, not applied: V2 pin 6's pad from 4.32 to 3.8 mm (annulus 1.04 mm) puts its copper 2.52 mm from a metal M3 pan head and 3.66 mm from the hole, which meets the rule without the nylon parts (a one-pad change to rev A's socket footprint; the socket position stays) |
+| Interface sketch | `docs/layout_sketch.png` regenerated from `layout/placement.py`: J501 / J502 at their laid-out positions (2 mm north); its zones (panel B) are the sketch's, the layout itself is in `docs/layout_*.png` |
+| Fab outputs | `layout/fab_outputs.sh` -> `rev_b/fab/`: `tube_pi_fxloop_revb-gerbers.zip` (4 copper layers, paste, silk, mask, outline, Excellon PTH / NPTH with maps, 0.58 MB), `-pos-top.csv` (component side F) / `-pos-bottom.csv` (plate side B), `bom.csv`. The zip, the placement files and the BOM are committed; the loose `fab/gerber/` folder is not. Not reviewed against JLC's DFM tool yet |
+| Chain | steps 15-18 added to `layout/route_chain.sh` (G1B / K1A reroute, the second GND pass, dangling copper, silkscreen); the placement snapshot carries R419 / R421's new places. The committed board is the first pass's chain output plus these steps; a full re-run reproduces the steps, its autorouted copper can differ in detail |
+
+Still open from the first pass: the plate-side parts and 4 layers (now decided by the coordinator, pending
+the user), the regulator pours' bench check (L9), the part checks of L12 item 8.
+
 ## Layout, first pass (2026-11-24)
 
 Scope: the PCB layout to a first complete, reviewable state (nothing ordered), on the interfaces agreed

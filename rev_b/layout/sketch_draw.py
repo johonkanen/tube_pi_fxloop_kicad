@@ -5,6 +5,8 @@ sketch_geom.py wrote (rev_b/build/layout/sketch_geom.json). Plain python3 + matp
     tools/p2k/bin/kipy rev_b/layout/sketch_geom.py && python3 rev_b/layout/sketch_draw.py
 
 A: the chassis under the plate (plan, seen from above) with every cable that leaves the board.
+Regenerated 2026-11-24 after the layout (J501 / J502 2 mm north); the zones in B are the sketch's, the layout's
+placement is in docs/layout_*.png.
 B: the board (plan, seen from above = solder side; parts hang below): zones, connectors with pin 1,
    holes with keep-outs, the heater pair, the neighbours' edges.
 C / D: sections (y against depth below the plate) at x 175 (W23) and x 247 (W32 entering J304).

@@ -12,9 +12,9 @@ K = os.path.join(HERE, "kicad")
 PROJECT = "tube_pi_fxloop_revb"
 SHEETS = [("01_fx_loop", "01 Input buffer, FX send, return, mixer, return stage"),
           ("02_pi", "02 PI-4 attenuator, phase inverter, grid drive"),
-          ("03_feedback", "03 Per-channel feedback networks (presence / resonance)"),
+          ("03_feedback", "03 Per-channel feedback networks (presence and resonance)"),
           ("04_control", "04 Switch control"),
-          ("05_supply", "05 B+PI / B+FX regulators, decoupling, heaters, power tabs")]
+          ("05_supply", "05 B+PI and B+FX regulators, decoupling, heaters, power tabs")]
 NS = uuid.uuid5(uuid.NAMESPACE_URL, PROJECT)
 
 
@@ -47,8 +47,10 @@ def main():
             open(p, "w").write(f'(kicad_sch\n\t(version 20260101)\n\t(generator "eeschema")\n\t(generator_version "10.0")\n'
                                f'\t(uuid "{u("file" + f)}")\n\t(paper "A2")\n' + title("Tube PI + FX loop rev B - " + name[3:]) +
                                '\t(lib_symbols)\n\t(sheet_instances\n\t\t(path "/"\n\t\t\t(page "1")\n\t\t)\n\t)\n\t(embedded_fonts no)\n)\n')
-    pro = {"meta": {"filename": f"{PROJECT}.kicad_pro", "version": 3}, "schematic": {}, "board": {},
-           "sheets": [[u("root"), "Root"]] + [[u("sheet" + f), n] for f, n in SHEETS]}
+    pp = os.path.join(K, f"{PROJECT}.kicad_pro")
+    pro = json.load(open(pp)) if os.path.exists(pp) else {     # keep the board settings (net classes, exclusions)
+        "meta": {"filename": f"{PROJECT}.kicad_pro", "version": 3}, "schematic": {}, "board": {}}
+    pro["sheets"] = [[u("root"), "Root"]] + [[u("sheet" + f), n] for f, n in SHEETS]
     json.dump(pro, open(os.path.join(K, f"{PROJECT}.kicad_pro"), "w"), indent=2)
     open(os.path.join(K, "fp-lib-table"), "w").write(
         f'(fp_lib_table\n\t(version 7)\n\t(lib (name "{PROJECT}")(type "KiCad")(uri "${{KIPRJMOD}}/../lib/{PROJECT}.pretty")(options "")(descr "rev B placeholder footprints (tools/make_lib.py)"))\n)\n')

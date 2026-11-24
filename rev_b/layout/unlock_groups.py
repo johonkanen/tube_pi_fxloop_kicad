@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unlock the tracks and vias of the nets of some routing groups (routing.json): kipy unlock_groups.py BOARD GROUP..."""
+"""Unlock the tracks and vias of some routing groups (routing.json) or nets: kipy unlock_groups.py BOARD GROUP|NET..."""
 import fnmatch
 import json
 import os
@@ -8,7 +8,7 @@ import sys
 import pcbnew
 
 cfg = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "routing.json")))
-pats = [p for g in sys.argv[2:] for p in cfg["groups"][g]]
+pats = [p for g in sys.argv[2:] for p in (cfg["groups"][g] if g in cfg["groups"] else [g, "*/" + g])]
 b = pcbnew.LoadBoard(sys.argv[1])
 n = 0
 for t in b.GetTracks():

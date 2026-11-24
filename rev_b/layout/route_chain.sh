@@ -69,8 +69,17 @@ fi
 step 13 gnd_tracks GND --power-nets GND --power-nets-widths 0.4 --max-iterations 5000000 --grid-step 0.05
 # the raw rail's pieces that end in a drain pour the fill could not reach
 step 14 bp_raw "*/BP_RAW" --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 3 3 1 --grid-step 0.05 --max-iterations 5000000
-if [ 14 -ge "$FROM" ] && [ 14 -le "$LAST" ]; then
-    out="$R/14_bp_raw.kicad_pcb"
-    source "$S/kenv.sh"; kpy "$S/fill_zones.py" "$out" "$out" >/dev/null 2>&1 || true
+# second pass: the send follower's cathode (K1A, preamp level) kept off the return grid (G1B): G1B on In2,
+# K1A on F only, so they are never on the same or adjacent layers (only crossings)
+if [ 15 -ge "$FROM" ] && [ 15 -le "$LAST" ]; then unlock 15 K1A G1B; fi
+step 15 g1b "*/G1B" --force-reroute --layers F.Cu In2.Cu --layer-costs 6 1 --grid-step 0.05 --max-iterations 20000000
+step 16 k1a "*/K1A" --force-reroute --layers F.Cu --grid-step 0.05 --max-iterations 20000000
+step 17 gnd2 GND --power-nets GND --power-nets-widths 0.3 --via-size 0.6 --via-drill 0.3 --grid-step 0.05 --max-iterations 3000000
+if [ 18 -ge "$FROM" ] && [ 18 -le "$LAST" ]; then
+    echo "== 18 dangling copper, silkscreen"
+    in=$(prev 18); out="$R/18_final.kicad_pcb"; sib "$out"
+    source "$S/kenv.sh"; kpy "$S/fill_zones.py" "$in" "$out" >/dev/null 2>&1 || cp "$in" "$out"
+    $KP "$L/remove_dangling.py" "$out" "$out" 2>&1 | grep "removed" || true
+    $KP "$L/silk_tidy.py" "$out" "$out" 2>&1 | grep "silk:" | cut -c1-120 || true
     cp "$out" "$R/../routed.kicad_pcb"; sib "$R/../routed.kicad_pcb"
 fi

@@ -633,6 +633,22 @@ def write_fp_and_bom():
     return len(rows), len(groups)
 
 
+def mark_dnp(path):
+    """Parts whose value says DNP get the schematic's 'Do not populate' flag (the board and the BOM follow it)."""
+    from p2k.sexpr import load, save, Sym
+    tree = load(path)
+    n = 0
+    for symb in find_all(tree, "symbol"):
+        props = {p[1]: p[2] for p in find_all(symb, "property")}
+        if "DNP" in props.get("Value", "") and not props.get("Reference", "#").startswith("#"):
+            d = find(symb, "dnp")
+            if d is not None:
+                d[1] = Sym("yes")
+                n += 1
+    if n:
+        save(path, tree)
+
+
 def main():
     seen = {}
     for f, fn in SHEETS:
@@ -647,6 +663,7 @@ def main():
         d = Drawer(f, "draw", glob)
         fn(d)
         d.save()
+        mark_dnp(os.path.join(RB, "kicad", f))
     single = sorted(n for n, fs in seen.items() if len(fs) == 1)
     os.makedirs(os.path.join(RB, "build"), exist_ok=True)
     json.dump({f"{r}:{p}": n for (r, p), n in sorted(INTENDED.items())},
