@@ -66,9 +66,11 @@ if [ 12 -ge "$FROM" ] && [ 12 -le "$LAST" ]; then
     $KP "$L/finalize.py" "$out" "$out" 2>&1 | grep -v "memory leak"
 fi
 # GND pads the pours could not reach (parts walled in on B): tracks, then a refill
-step 13 gnd_tracks GND --power-nets GND --power-nets-widths 0.4 --max-iterations 5000000
-if [ 13 -ge "$FROM" ] && [ 13 -le "$LAST" ]; then
-    out="$R/13_gnd_tracks.kicad_pcb"
+step 13 gnd_tracks GND --power-nets GND --power-nets-widths 0.4 --max-iterations 5000000 --grid-step 0.05
+# the raw rail's pieces that end in a drain pour the fill could not reach
+step 14 bp_raw "*/BP_RAW" --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 3 3 1 --grid-step 0.05 --max-iterations 5000000
+if [ 14 -ge "$FROM" ] && [ 14 -le "$LAST" ]; then
+    out="$R/14_bp_raw.kicad_pcb"
     source "$S/kenv.sh"; kpy "$S/fill_zones.py" "$out" "$out" >/dev/null 2>&1 || true
     cp "$out" "$R/../routed.kicad_pcb"; sib "$R/../routed.kicad_pcb"
 fi

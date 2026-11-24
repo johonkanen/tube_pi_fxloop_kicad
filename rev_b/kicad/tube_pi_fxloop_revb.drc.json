@@ -1,0 +1,105 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-24T21:05:44",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error"
+    ],
+    "kicad_version": "10.0.7",
+    "schematic_parity": [],
+    "source": "tube_pi_fxloop_revb.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu, priority 21",
+                    "pos": {
+                        "x": -123.325,
+                        "y": 6.85
+                    },
+                    "uuid": "e59cdb72-298b-4a59-9d73-686bb024e151"
+                },
+                {
+                    "description": "Zone [GND] on B.Cu, priority 21",
+                    "pos": {
+                        "x": -123.325,
+                        "y": 6.85
+                    },
+                    "uuid": "e59cdb72-298b-4a59-9d73-686bb024e151"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu, priority 21",
+                    "pos": {
+                        "x": -123.325,
+                        "y": 6.85
+                    },
+                    "uuid": "e59cdb72-298b-4a59-9d73-686bb024e151"
+                },
+                {
+                    "description": "Zone [GND] on F.Cu, priority 21",
+                    "pos": {
+                        "x": -123.325,
+                        "y": 6.85
+                    },
+                    "uuid": "90456309-39a3-4724-b548-31150b0811f0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of Q101 on F.Cu",
+                    "pos": {
+                        "x": -18.1697,
+                        "y": 35.2836
+                    },
+                    "uuid": "42c86886-2635-4437-a0b5-a9a72328d738"
+                },
+                {
+                    "description": "Pad 2 [GND] of C105 on B.Cu",
+                    "pos": {
+                        "x": -18.0985,
+                        "y": 33.5564
+                    },
+                    "uuid": "95d5f537-bfc2-4a39-b299-37380047cd1f"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": []
+}

@@ -58,6 +58,7 @@ tools/p2k/bin/kipy rev_b/tools/make_pcb.py --force   # board from the netlist: o
 rev_b/layout/place.sh                                 # committed placement (placement_snapshot.json) + fix_place.py; ANNEAL=1 / SEEDS=1,2,.. re-anneals
 rev_b/layout/route_chain.sh 0 13                      # heater, pours, 13 routing steps -> rev_b/layout/build/routed.kicad_pcb (about 25 min)
 cp rev_b/layout/build/routed.kicad_pcb rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb
+tools/p2k/bin/kipy rev_b/layout/drc_exclusions.py      # the 4 explained exclusions (STATUS L3) into the .kicad_pro
 rev_b/layout/drc.sh rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb   # DRC + schematic parity with the project rules
 tools/p2k/bin/kipy rev_b/layout/mech_check.py rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb
 tools/p2k/bin/kipy rev_b/layout/coupling_check.py rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb

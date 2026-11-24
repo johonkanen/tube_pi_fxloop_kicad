@@ -70,7 +70,72 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "hole_clearance|-68097900|19050300|39549208-d6af-489f-bd7d-c081d3b6f1a9|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-68097900|19050300|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7|39549208-d6af-489f-bd7d-c081d3b6f1a9",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-63000000|14000000|39549208-d6af-489f-bd7d-c081d3b6f1a9|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-63000000|14000000|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7|39549208-d6af-489f-bd7d-c081d3b6f1a9",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-68097900|19050300|39549208-d6af-489f-bd7d-c081d3b6f1a9|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-68097900|19050300|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7|39549208-d6af-489f-bd7d-c081d3b6f1a9",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-63000000|14000000|39549208-d6af-489f-bd7d-c081d3b6f1a9|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "hole_clearance|-63000000|14000000|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7|39549208-d6af-489f-bd7d-c081d3b6f1a9",
+          "V2 pin 6 (PI plate DRV_A, 280-390 V) at rev A's socket position is 3.4 mm from H3's hole edge (2.26 mm from an M3 pan head) against 3.65 mm: an insulating (nylon) screw and standoff at H3, or a 0.5 mm insulating washer under the head, needed (STATUS L12, for the user)"
+        ],
+        [
+          "npth_inside_courtyard|-63000000|14000000|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7|82d3bb72-9383-4a8b-a498-b91943aae243",
+          "rev A geometry (as built): standoff H3 sits at the edge of V2's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|-63000000|14000000|82d3bb72-9383-4a8b-a498-b91943aae243|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7",
+          "rev A geometry (as built): standoff H3 sits at the edge of V2's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|-76589900|25215800|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7|82d3bb72-9383-4a8b-a498-b91943aae243",
+          "rev A geometry (as built): standoff H3 sits at the edge of V2's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|-76589900|25215800|82d3bb72-9383-4a8b-a498-b91943aae243|abdefdfd-c593-47ae-9a3b-f1a30bf0a5e7",
+          "rev A geometry (as built): standoff H3 sits at the edge of V2's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|60000000|14000000|058ed069-e748-4e7b-97ae-b9838ea06d05|b0442ebb-5b01-4eff-9037-fd89568ef960",
+          "rev A geometry (as built): standoff H4 sits at the edge of V1's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|60000000|14000000|b0442ebb-5b01-4eff-9037-fd89568ef960|058ed069-e748-4e7b-97ae-b9838ea06d05",
+          "rev A geometry (as built): standoff H4 sits at the edge of V1's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|45956000|24944500|058ed069-e748-4e7b-97ae-b9838ea06d05|b0442ebb-5b01-4eff-9037-fd89568ef960",
+          "rev A geometry (as built): standoff H4 sits at the edge of V1's socket outline; the socket body clears the standoff"
+        ],
+        [
+          "npth_inside_courtyard|45956000|24944500|b0442ebb-5b01-4eff-9037-fd89568ef960|058ed069-e748-4e7b-97ae-b9838ea06d05",
+          "rev A geometry (as built): standoff H4 sits at the edge of V1's socket outline; the socket body clears the standoff"
+        ]
+      ],
       "meta": {
         "version": 2
       },
