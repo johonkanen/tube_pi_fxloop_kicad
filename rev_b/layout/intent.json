@@ -1,7 +1,7 @@
 {
  "assembly": {
   "sides": "both",
-  "why": "observed: 181 pad-bearing part(s) on F and 80 on B, 2 reflow pass(es). every footprint BLOCK (#726): blocks sharing one reference are keyed with an ordinal suffix and counted separately. `pad_bearing` restricts that to blocks carrying at least one pad that is not a paste/mask aperture (#1143), and it is the count the populated-side verdict is taken from -- a zero-pad graphic on the back does not make a board double-sided."
+  "why": "observed: 180 pad-bearing part(s) on F and 81 on B, 2 reflow pass(es). every footprint BLOCK (#726): blocks sharing one reference are keyed with an ordinal suffix and counted separately. `pad_bearing` restricts that to blocks carrying at least one pad that is not a paste/mask aperture (#1143), and it is the count the populated-side verdict is taken from -- a zero-pad graphic on the back does not make a board double-sided."
  },
  "blocks": [
   {
@@ -26,7 +26,6 @@
     "R526",
     "C505",
     "C506",
-    "R522",
     "R527",
     "R528"
    ],
@@ -233,7 +232,7 @@
     "R201"
    ],
    "zone": [
-    -111.13,
+    -123.73000000000002,
     6.480000000000018,
     -35.129999999999995,
     57.08000000000001
@@ -312,7 +311,8 @@
    "name": "reg_b",
    "refs": [
     "D506",
-    "D507"
+    "D507",
+    "R522"
    ],
    "zone": [
     52.870000000000005,
@@ -951,7 +951,6 @@
     "R521",
     "R525",
     "R526",
-    "R522",
     "R527",
     "R528",
     "R501",
@@ -1064,6 +1063,7 @@
     "Q309",
     "D506",
     "D507",
+    "R522",
     "R401",
     "R402",
     "R403",
@@ -1167,7 +1167,6 @@
     "R521",
     "R525",
     "R526",
-    "R522",
     "R527",
     "R528",
     "R501",
@@ -1280,6 +1279,7 @@
     "Q309",
     "D506",
     "D507",
+    "R522",
     "R401",
     "R402",
     "R403",
@@ -1446,7 +1446,6 @@
     "R521",
     "R525",
     "R526",
-    "R522",
     "R527",
     "R528",
     "Q501",
@@ -1578,6 +1577,7 @@
     "U407",
     "D506",
     "D507",
+    "R522",
     "R401",
     "R402",
     "R403",
@@ -2566,7 +2566,6 @@
     "R526",
     "C505",
     "C506",
-    "R522",
     "R527",
     "R528",
     "Q501",
@@ -2742,7 +2741,6 @@
     "R526",
     "C505",
     "C506",
-    "R522",
     "R527",
     "R528",
     "Q501",

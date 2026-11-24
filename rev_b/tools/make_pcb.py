@@ -86,6 +86,12 @@ DRU_HEAD = """(version 1)
 (rule "HV to standoff"
   (condition "A.NetClass == 'HV' && B.Pad_Type == 'NPTH, mechanical'")
   (constraint hole_clearance (min 3.65mm)))
+# Inner layers: the copper is pulled back inside the laminate (no surface path to the screw); IPC-2221B
+# B1 (internal conductors, 301-500 V: 0.25 mm), taken as 1.0 mm.
+(rule "HV to standoff, inner layers"
+  (layer inner)
+  (condition "A.NetClass == 'HV' && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 1.0mm)))
 # High-impedance audio nets: ground pours keep away (stray capacitance; the preamp rule).
 (rule "HIZ to pour"
   (condition "A.NetClass == 'HIZ' && B.Type == 'Zone'")

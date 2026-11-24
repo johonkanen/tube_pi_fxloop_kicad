@@ -1,4 +1,4 @@
-# PI + FX loop rev B: schematic (third-pass draft)
+# PI + FX loop rev B: schematic and layout (first pass)
 
 The next PI + FX loop board of the 3-channel all-tube head, designed from the simulations and
 documents of [tube_amplifier_kicad](https://github.com/johonkanen/tube_amplifier_kicad):
@@ -11,9 +11,9 @@ return) in section "Third pass (2026-11-23)". Rev A (the 2010 board,
 converted) at the repo root is not touched; `rev_b/` is its own p2k board root
 (`p2k_config.py`, PROJECT `tube_pi_fxloop_revb`), the same pattern as tube_preamp_kicad `rev_b/`.
 
-Status and the interface check: [STATUS.md](STATUS.md). **Layout sketch (2026-11-24):** the
-interfaces to the other boards, STATUS.md "Layout sketch: interfaces", drawing
-[docs/layout_sketch.png](docs/layout_sketch.png), scripts in `layout/` (`placement.py` = every figure).
+Status and the interface check: [STATUS.md](STATUS.md). **Layout, first pass (2026-11-24):** STATUS.md
+"Layout, first pass"; board `kicad/tube_pi_fxloop_revb.kicad_pcb`, renders `docs/layout_*.png`. The
+interface sketch it was built on: STATUS.md "Layout sketch: interfaces", [docs/layout_sketch.png](docs/layout_sketch.png).
 
 ## Build
 
@@ -50,6 +50,23 @@ part), the others an MPN or a specification. No stock check run.
 | 03 | J301 FB (W25-b), FB_RTN 0R to AGND (the OT secondary's one reference); per channel: relay at the 8 ohm end (both poles in parallel on the NO contacts), 1M bleed, Rf 100k + Cf 22p, Cres 22n, presence 1k and 22n, the 10-pin pot ribbon J302-J304 (W30-W32-b), NJFET T-switch (series, series, shunt) to the common node; Rbot 4.7k and a DNP step network on the common node |
 | 04 | J401 CONTROL (W13-b, template); MCP23S17 (map of interfaces.md 7.2); 2x 74LVC1G11 (branch enable = FX_x AND FX_UNMUTE AND MUTE_ALL_N); 3x DG412 (10 of 12 switches: series gates pulled to -15 V and switched to GND, shunt gates pulled to GND and switched to -15 V); ULN2803A for the 8 relays; DGND island (GNDD) and its soft tie |
 | 05 | J501 RAW HV (W03-b, no fuse in the feed); B+PI (3x 130 V, about 388 V) and B+FX (150 + 180 V, about 328 V) regulators, preamp_regulator.md rev B reference (STD4N80K5 DPAK, MMBTA42 on its pour = thermal foldback, HV strings in 2512: Rf 3x 330k, R3 3x 270k, bleed 3x 150k); RC decoupling (2.2k / 22u PI; 10k / 22u per FX triode); heater tabs J502 in (W07-b), J503 out (W08-a), floating; tube heaters |
+
+## Layout (scripted; KiCad 10, KiCadRoutingTools in ~/dev/KiCadRoutingTools)
+
+```
+tools/p2k/bin/kipy rev_b/tools/make_pcb.py --force   # board from the netlist: outline / holes / sockets (rev A), connectors, rules
+rev_b/layout/place.sh                                 # committed placement (placement_snapshot.json) + fix_place.py; ANNEAL=1 / SEEDS=1,2,.. re-anneals
+rev_b/layout/route_chain.sh 0 13                      # heater, pours, 13 routing steps -> rev_b/layout/build/routed.kicad_pcb (about 25 min)
+cp rev_b/layout/build/routed.kicad_pcb rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb
+rev_b/layout/drc.sh rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb   # DRC + schematic parity with the project rules
+tools/p2k/bin/kipy rev_b/layout/mech_check.py rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb
+tools/p2k/bin/kipy rev_b/layout/coupling_check.py rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb
+rev_b/layout/docs_renders.sh rev_b/kicad/tube_pi_fxloop_revb.kicad_pcb
+```
+
+`layout/placement.py` holds every mechanical figure (chassis frame, connector pin-1 positions,
+pinned parts, pours); `layout/netclasses.py` the net classes and routing groups; `layout/make_groups.py`
+the placement groups, zones and keep-outs; `layout/sketch_*.py` the interface sketch.
 
 ## Simulations (rev_b/sim, copies of the master repo's sim folders with the rev B changes)
 

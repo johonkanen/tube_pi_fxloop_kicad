@@ -47,5 +47,3 @@ for round in 1 2 3; do
 done
 ( cd "$KRT" && $PY py_placer/place_simple.py "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --groups "$L/groups.json" --intent "$L/intent.json" \
     --seed "$SEED" --halo-coef "$HALO" --legalise-only --json "$B/placed_legal.json" | grep -o '"illegal": \[[^]]*\]' | head -1 ) || true
-# a last class push (small moves; DRC judges the courtyards)
-"$L/../../tools/p2k/bin/kipy" "$L/fix_place.py" "$B/placed.kicad_pcb" "$B/placed.kicad_pcb" --push 2>&1 | grep -v "memory leak\|^$" | tail -1 || true

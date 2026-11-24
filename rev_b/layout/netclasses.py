@@ -12,7 +12,8 @@ HIZ = ["PRE_IN", "CI", "G1A", "SB", "RETURN_SIG", "RC", "NW", "DMX", "WMX", "M",
        "FN_LD", "FX_CL", "FX_CR", "FX_LD", "PRA_CL", "PRA_CR", "PRA_LD", "PRW_CL", "PRW_CR", "PRW_LD"]
 
 # Routing groups (one KRT step each; KRT stamps obstacles at the largest clearance among one step's nets)
-LOGIC = ["SPI_SCK", "SPI_MOSI", "SPI_MISO", "SPI_CS_N", "MUTE_ALL_N", "RESET_N", "FX_DRY", "FX_WET", "FX_UNMUTE",
+# order matters (logic step routes in this order): the expander's GPA0-GPA2 first (boxed in by the ULN2803A)
+LOGIC = ["FX_DRY", "FX_WET", "FX_UNMUTE", "SPI_SCK", "SPI_MOSI", "SPI_MISO", "SPI_CS_N", "MUTE_ALL_N", "RESET_N",
          "FB_J_CL", "FB_J_CR", "FB_J_LD", "FB_RLY_CL", "FB_RLY_CR", "FB_RLY_LD", "ATT_1DB", "ATT_2DB", "ATT_4DB",
          "ATT_8DB", "ATT_16DB", "DRY_EN", "WET_EN"]
 GATE = ["JDRV_DS", "JDRV_DH", "JDRV_WS", "JDRV_WH", "JDRV_FBS_CL", "JDRV_FBH_CL", "JDRV_FBS_CR", "JDRV_FBH_CR",

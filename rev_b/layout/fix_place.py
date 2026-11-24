@@ -11,6 +11,22 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import placement as P  # noqa: E402
 
 FIX = {
+    # PI_REF divider (BPI_P end) next to the B+PI decoupling at the east end: from x 201 its BPI_P had no path
+    # round V2 past H3 and the heater pair
+    "R222": (271.5, 165.0, 0),
+    "R223": (271.5, 171.0, 180),
+    # expander 1.5 mm east: a channel for GPA0-GPA2 (pins 21-23) between it and the ULN2803A
+    "U401": (242.65, 126.79, 0),
+    # LND150 neighbourhoods (class pushes and the legaliser kept trading places here)
+    "Q504": (105.72, 125.5, 0),
+    "R521": (103.5, 131.95, 90),
+    "Q501": (144.22, 112.96, 0),
+    "R505": (140.66, 114.02, 270),
+    "R502": (149.67, 117.53, 180),
+    "C503": (161.3, 126.01, 180),
+    "R514": (181.0, 129.79, 270),
+    # B+FX bleed top: no room left beside J501 (its receptacle envelope); on B under C504's body
+    "R522": (97.6, 129.0, 0, "B"),
     # B+FX zener string: no room left on F in the regulator corner (the anneal had them between the J501 / J502
     # receptacles); on B under C504's body, clear of the B drain pour (HV on the plate side: 13.4 mm to the plate)
     "D506": (80.0, 133.5, 0, "B"),
@@ -79,6 +95,13 @@ def need(a, b):
     return 0.0
 
 
+def box_gap(a, b):
+    """Gap between two pad bounding boxes (mm; exact for rectangular pads, conservative for round ones)."""
+    gx = max(a.GetLeft() - b.GetRight(), b.GetLeft() - a.GetRight(), 0)
+    gy = max(a.GetTop() - b.GetBottom(), b.GetTop() - a.GetBottom(), 0)
+    return pcbnew.ToMM(int(math.hypot(gx, gy)))
+
+
 def class_push(b, margin=0.25):
     """Pads of two different parts closer than their class rule (HV-LV 2.5, HV-MV / MV-LV 1.25, HV-HV
     0.6 mm): move the movable part (not fixed; the low-voltage one first) away by the deficit. The anneal
@@ -99,9 +122,7 @@ def class_push(b, margin=0.25):
             d = math.hypot(pa.x - pq.x, pa.y - pq.y)
             if d > pcbnew.FromMM(r + 6):
                 continue
-            ra = max(a.GetSize().x, a.GetSize().y) / 2
-            rq = max(q.GetSize().x, q.GetSize().y) / 2
-            gap = pcbnew.ToMM(d - ra - rq)
+            gap = box_gap(a.GetBoundingBox(), q.GetBoundingBox())
             if gap >= r:
                 continue
             # move the one that is movable; prefer the part whose pad is not the HV one
@@ -126,7 +147,10 @@ def class_push(b, margin=0.25):
             r = (3.65 if k_ == "HV" else 2.4) + 1.6 + margin
             q = p.GetPosition()
             d = math.hypot(q.x - c.x, q.y - c.y)
-            gap = pcbnew.ToMM(d - max(p.GetSize().x, p.GetSize().y) / 2)
+            bb = p.GetBoundingBox()
+            gx = max(bb.GetLeft() - c.x, 0, c.x - bb.GetRight())
+            gy = max(bb.GetTop() - c.y, 0, c.y - bb.GetBottom())
+            gap = pcbnew.ToMM(int(math.hypot(gx, gy)))
             if gap < r:
                 ux, uy = (q.x - c.x) / max(d, 1), (q.y - c.y) / max(d, 1)
                 k = pcbnew.FromMM(r - gap)

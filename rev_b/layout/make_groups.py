@@ -28,7 +28,7 @@ CTL_B = rng("R", 401, 427) + rng("C", 401, 411)
 # name, refs, chassis zone (x0, y0, x1, y1), near, why
 G = [
     ("reg_fx", "Q504 R515 R516 R523 R524 C504 R517 D508 Q505 D509 R518 Q506 R519 R520 R521 R525 R526 C505 C506 "
-               "R522 R527 R528".split(), (54.0, 104.0, 125.0, 162.0), ["reg_pi"],
+               "R527 R528".split(), (54.0, 104.0, 125.0, 162.0), ["reg_pi"],
      "B+FX regulator (raw from J501): LND150 CCS, zener string, Rf string + 2.2u film, DPAK on its pour, foldback, 47u, bleed"),
     ("reg_pi", "Q501 R501 D501 D502 D503 R502 R509 R510 C501 R503 D504 Q502 D505 R504 Q503 R505 R506 R507 R511 R512 C502 "
                "C503 R508 R513 R514".split(), (120.0, 104.0, 186.0, 143.0), ["reg_fx"],
@@ -46,7 +46,7 @@ G = [
     ("att", rng("K", 201, 205) + rng("R", 202, 212), (140.0, 104.0, 217.0, 171.0), ["fxio", "pi"],
      "PI-4 attenuator: five relays and L-sections, ATT_IN from the return stage to ATT_OUT at the PI"),
     ("pi", "C202 R213 R214 R215 R216 R217 R218 R219 Q201 R220 R221 C203 R222 R223 R224 C204 R529 C507 C201 R201".split(),
-     (190.0, 125.0, 266.0, 175.6), ["att", "fb"], "PI: 10n in, grid stoppers, CCS, plate loads, PI_REF, B+PI decoupling, W24 soft tie"),
+     (190.0, 125.0, 278.6, 175.6), ["att", "fb"], "PI: 10n in, grid stoppers, CCS, plate loads, PI_REF, B+PI decoupling, W24 soft tie"),
     ("fb", rng("K", 301, 303) + [r for r in rng("R", 301, 327) + rng("C", 301, 319) if r not in FB_B] + rng("Q", 301, 309),
      (175.0, 110.0, 262.0, 145.0),
      ["pi"], "three feedback networks between J302-J304 and the second grid; relays near J301"),
@@ -55,7 +55,7 @@ G = [
 ]
 SMALL = []
 B_GROUPS = [
-    ("reg_b", ["D506", "D507"], (60.0, 125.0, 102.0, 143.5), ["reg_fx"], "B+FX zener string on B under C504 (no room on F)"),
+    ("reg_b", ["D506", "D507", "R522"], (60.0, 125.0, 102.0, 143.5), ["reg_fx"], "B+FX zener string on B under C504 (no room on F)"),
     ("ctl_b", CTL_B, (200.0, 110.0, 278.6, 152.0), ["ctl"], "logic passives under the DGND island (B side)"),
     ("mix_b", MIX_B, (60.0, 128.0, 200.0, 171.0), ["mixer", "fxio"], "mixer and pad JFET gate RC networks (B side)"),
     ("fb_b", FB_B, (175.0, 110.0, 262.0, 150.0), ["fb"], "feedback T-switch gate RC networks (B side)"),

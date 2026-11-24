@@ -34,19 +34,20 @@ if [ "$FROM" -le 0 ] && [ "$LAST" -ge 0 ]; then
     out="$R/00_prep.kicad_pcb"; sib "$out"
     $KP "$L/draw_heater.py" "$PLACED" "$out" 2>&1 | grep -v "memory leak"
     $KP "$L/draw_pours.py" "$out" "$out" 2>&1 | grep -v "memory leak"
+    $KP "$L/draw_escapes.py" "$out" "$out" 2>&1 | grep -v "memory leak"
 fi
-step 1 hv hv --via-cost 100 --layers F.Cu B.Cu --layer-costs 1 1.5
+step 1 hv hv --via-cost 100 --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 4 4 1.5
 step 2 mv mv --via-cost 100 --layers F.Cu B.Cu --layer-costs 1 1.5
 step 3 hiz hiz --via-cost 60
 step 4 audio audio
 step 5 supply supply --grid-step 0.05 --power-nets "+5V" "+15V" "-15V" "GNDD" --power-nets-widths 0.5 0.4 0.4 0.5
-step 6 logic logic --grid-step 0.05
+step 6 logic logic --grid-step 0.05 --ordering original
 step 7 coil coil
 step 8 gate gate --grid-step 0.05
 # leftovers: the logic and gate nets unlocked so KRT may rip and re-route them around the last opens
-if [ 9 -ge "$FROM" ] && [ 9 -le "$LAST" ]; then unlock 9 logic gate coil supply; fi
+if [ 9 -ge "$FROM" ] && [ 9 -le "$LAST" ]; then unlock 9 logic gate coil supply audio; fi
 KICAD_RIP_PREEXISTING=1 step 9 leftover logic,gate,coil,supply,hiz,audio --max-iterations 20000000 --layer-costs 1 1 1 1 --grid-step 0.05
-step 10 leftover_hv hv,mv --max-iterations 20000000 --layers F.Cu B.Cu --layer-costs 1 1
+step 10 leftover_hv hv,mv --max-iterations 20000000 --layers F.Cu In1.Cu In2.Cu B.Cu --layer-costs 1 3 3 1
 # GND pours on F and B (KRT route_planes), then repair islands, HIZ cuts, refill (finalize.py)
 if [ 11 -ge "$FROM" ] && [ 11 -le "$LAST" ]; then
     echo "== 11 gnd pours"

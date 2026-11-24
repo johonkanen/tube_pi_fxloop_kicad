@@ -3,7 +3,7 @@
 
 12AX7 x2, 6.3 V parallel (pins 4+5 HTR1, pin 9 HTR2), 0.6 A own; 1.5 A through J502 -> J503 (0.9 A on
 to the preamp). Floating (no reference on this board, interfaces.md 5). As the preamp rev B: a
-broadside pair, HTR1 on F over HTR2 on B, along the rear strip (chassis y 173.3, behind the sockets'
+broadside pair, HTR1 on F over HTR2 on B, along the rear strip (chassis y 174.0, behind the sockets'
 heater pins and behind J102, which sits 8 mm in from the rear edge for it), 15 mm or more from every
 grid pin. At each socket HTR1 (F) stubs to pins 4 and 5; HTR2 (B) leaves between pins 4 and 5 and runs
 through the socket centre to pin 9. J502 -> J503: 2 mm tracks (1.5 A). No vias.
@@ -17,7 +17,7 @@ import pcbnew
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import placement as P  # noqa: E402
 
-Y_RUN = 173.3
+Y_RUN = 174.0      # behind the standoff keep-outs (H4 / H3 at y 168.08, r 5.3) and 1.1 mm from the edge
 W_RUN, W_STUB, W_TAB = 1.2, 0.8, 2.0
 
 
@@ -56,6 +56,9 @@ def main():
     trk("HTR1", [j3h1a, j3h1b], F, W_TAB)
     trk("HTR1", [j3h1b, (j3h1b[0], Y_RUN), (x_end1, Y_RUN)], F, W_RUN)
     trk("HTR2", [j2h2, (j3h2a[0], j3h2a[1] - 0.0)], B, W_TAB)
+    # the two legs of each J502 tab are one pad number: join them in copper (the blade joins them anyway)
+    trk("HTR1", [pad("J502", "1", 0), j2h1], F, W_TAB)
+    trk("HTR2", [pad("J502", "2", 0), j2h2], B, W_TAB)
     trk("HTR2", [j3h2a, j3h2b], B, W_TAB)
     trk("HTR2", [j3h2b, (j3h2b[0], Y_RUN), (x_end2, Y_RUN)], B, W_RUN)
     for v in ("V1", "V2"):

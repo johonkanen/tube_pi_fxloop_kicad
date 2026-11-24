@@ -25,12 +25,13 @@ def mm(v):
     return pcbnew.FromMM(v)
 
 
-def zone(b, net, layer, rect_c, hole=None, prio=10, name=""):
+def zone(b, net, layer, rect_c, hole=None, prio=20, name="", islands=None):   # above the GND pours (11)
     z = pcbnew.ZONE(b)
     z.SetLayer(layer); z.SetNet(net); z.SetAssignedPriority(prio)
     z.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL)
     z.SetMinThickness(mm(0.3)); z.SetLocalClearance(mm(0.3))
-    z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
+    # F: floating pieces removed; B (a heat spreader joined to the tab by vias only): kept
+    z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS if islands is None else islands)
     z.SetZoneName(name)
     o = z.Outline(); o.NewOutline()
     x0, y0, x1, y1 = P.rect_board(*rect_c)
@@ -54,7 +55,7 @@ def main():
         c = fp[t].GetPosition()
         tx, ty = pcbnew.ToMM(c.x), pcbnew.ToMM(c.y)
         zone(b, net, pcbnew.F_Cu, P.POUR_F[q], (tx - CUT, ty - CUT, tx + CUT, ty + CUT), name=f"{q} drain F")
-        zone(b, net, pcbnew.B_Cu, P.POUR_B[q], name=f"{q} drain B")
+        zone(b, net, pcbnew.B_Cu, P.POUR_B[q], name=f"{q} drain B", islands=pcbnew.ISLAND_REMOVAL_MODE_NEVER)
         # thermal vias in the tab pad (0.3 mm, 1.2 mm pitch): F pour -> tab -> B pour; filled and capped
         # (IPC-4761 type VII) on the fab order, or accept some solder wicking
         tab = fp[q].FindPadByNumber("2")
